@@ -5,7 +5,7 @@
     "name": "vben"
   },
   "scripts": {
-    "i": "pnpm install",
+    "bootstrap": "pnpm install",
     "serve": "npm run dev",
     "dev": "vite",
     "build": "cross-env NODE_ENV=production vite build && esno ./build/script/postBuild.ts",

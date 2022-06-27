@@ -24,7 +24,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   const env = loadEnv(mode, root);
 
-  // The boolean type read by loadEnv is a string. This function can be converted to boolean type
+  // loadEnv 读取的布尔类型是一个字符串。 该函数可以转换为布尔类型
   const viteEnv = wrapperEnv(env);
 
   const { VITE_PORT, VITE_PUBLIC_PATH, VITE_PROXY, VITE_DROP_CONSOLE } = viteEnv;
@@ -53,11 +53,12 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ],
     },
     server: {
-      https: true,
-      // Listening on all local IPs
+      // 是否开启https
+      https: false,
+      // 监听所有本地 IP
       host: true,
       port: VITE_PORT,
-      // Load proxy configuration from .env
+      // 从 .env 加载代理配置
       proxy: createProxy(VITE_PROXY),
     },
     esbuild: {
@@ -78,13 +79,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       //     drop_console: VITE_DROP_CONSOLE,
       //   },
       // },
-      // Turning off brotliSize display can slightly reduce packaging time
+      // 关闭 brotliSize 显示可以稍微减少打包时间
       brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
     define: {
       // setting vue-i18-next
-      // Suppress warning
+      // 拦截警告
       __INTLIFY_PROD_DEVTOOLS__: false,
       __APP_INFO__: JSON.stringify(__APP_INFO__),
     },
@@ -98,11 +99,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       },
     },
 
-    // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
+    // 项目使用的vite插件。 量大，单独提取管理
     plugins: createVitePlugins(viteEnv, isBuild),
 
     optimizeDeps: {
-      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
+      // @iconify/iconify: 依赖是由@purge-icons/generated 动态和虚拟加载的，所以需要指定
       include: [
         '@vue/runtime-core',
         '@vue/shared',
