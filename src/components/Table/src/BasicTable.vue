@@ -76,6 +76,7 @@
 
   export default defineComponent({
     components: {
+      // eslint-disable-next-line vue/no-reserved-component-names
       Table,
       BasicForm,
       HeaderCell,
@@ -253,9 +254,9 @@
           footer: unref(getFooterProps),
           ...unref(getExpandOption),
         };
-        if (slots.expandedRowRender) {
-          propsData = omit(propsData, 'scroll');
-        }
+        // if (slots.expandedRowRender) {
+        //   propsData = omit(propsData, 'scroll');
+        // }
 
         propsData = omit(propsData, ['class', 'onChange']);
         return propsData;
