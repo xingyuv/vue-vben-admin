@@ -1,87 +1,87 @@
-import type { PropType } from 'vue';
-import { useI18n } from '/@/hooks/web/useI18n';
+import type { PropType } from 'vue'
+import { useI18n } from '@/hooks/web/useI18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 export const basicProps = {
   value: {
     type: Boolean as PropType<boolean>,
-    default: false,
+    default: false
   },
 
   isSlot: {
     type: Boolean as PropType<boolean>,
-    default: false,
+    default: false
   },
 
   text: {
     type: [String] as PropType<string>,
-    default: t('component.verify.dragText'),
+    default: t('component.verify.dragText')
   },
   successText: {
     type: [String] as PropType<string>,
-    default: t('component.verify.successText'),
+    default: t('component.verify.successText')
   },
   height: {
     type: [Number, String] as PropType<number | string>,
-    default: 40,
+    default: 40
   },
 
   width: {
     type: [Number, String] as PropType<number | string>,
-    default: 220,
+    default: 220
   },
 
   circle: {
     type: Boolean as PropType<boolean>,
-    default: false,
+    default: false
   },
 
   wrapStyle: {
     type: Object as PropType<any>,
-    default: {},
+    default: {}
   },
   contentStyle: {
     type: Object as PropType<any>,
-    default: {},
+    default: {}
   },
   barStyle: {
     type: Object as PropType<any>,
-    default: {},
+    default: {}
   },
   actionStyle: {
     type: Object as PropType<any>,
-    default: {},
-  },
-};
+    default: {}
+  }
+}
 
 export const rotateProps = {
   ...basicProps,
   src: {
-    type: String as PropType<string>,
+    type: String as PropType<string>
   },
 
   imgWidth: {
     type: Number as PropType<number>,
-    default: 260,
+    default: 260
   },
 
   imgWrapStyle: {
     type: Object as PropType<any>,
-    default: {},
+    default: {}
   },
 
   minDegree: {
     type: Number as PropType<number>,
-    default: 90,
+    default: 90
   },
 
   maxDegree: {
     type: Number as PropType<number>,
-    default: 270,
+    default: 270
   },
 
   diffDegree: {
     type: Number as PropType<number>,
-    default: 20,
-  },
-};
+    default: 20
+  }
+}

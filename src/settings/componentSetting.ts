@@ -1,6 +1,6 @@
 // 用于配置某些组件的常规配置，而无需修改组件
 
-import type { SorterResult } from '../components/Table';
+import type { SorterResult } from '../components/Table'
 
 export default {
   // 表格配置
@@ -15,7 +15,7 @@ export default {
       // 接口返回表格数据的字段
       listField: 'items',
       // 接口返回表格总数的字段
-      totalField: 'total',
+      totalField: 'total'
     },
     // 可选的分页选项
     pageSizeOptions: ['10', '50', '80', '100'],
@@ -25,27 +25,27 @@ export default {
     defaultSize: 'middle',
     // 自定义通用排序功能
     defaultSortFn: (sortInfo: SorterResult) => {
-      const { field, order } = sortInfo;
+      const { field, order } = sortInfo
       if (field && order) {
         return {
           // 排序字段
           field,
           // 排序方式 asc/desc
-          order,
-        };
+          order
+        }
       } else {
-        return {};
+        return {}
       }
     },
     // 自定义过滤方法
     defaultFilterFn: (data: Partial<Recordable<string[]>>) => {
-      return data;
-    },
+      return data
+    }
   },
   // 滚动组件配置
   scrollbar: {
     // 是否使用原生滚动样式
     // 开启后，菜单，弹窗，抽屉会使用原生滚动条组件
-    native: false,
-  },
-};
+    native: false
+  }
+}

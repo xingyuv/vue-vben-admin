@@ -15,5 +15,5 @@ export const buttonProps = {
    * @default: 14
    */
   iconSize: { type: Number, default: 14 },
-  onClick: { type: Function as PropType<(...args) => any>, default: null },
-};
+  onClick: { type: Function as PropType<(...args) => any>, default: null }
+}

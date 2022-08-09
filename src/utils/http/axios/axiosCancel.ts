@@ -1,11 +1,11 @@
-import type { AxiosRequestConfig, Canceler } from 'axios';
-import axios from 'axios';
-import { isFunction } from '/@/utils/is';
+import type { AxiosRequestConfig, Canceler } from 'axios'
+import axios from 'axios'
+import { isFunction } from '@/utils/is'
 
 // 用于存储每个请求的识别和取消功能
-let pendingMap = new Map<string, Canceler>();
+let pendingMap = new Map<string, Canceler>()
 
-export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join('&');
+export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join('&')
 
 export class AxiosCanceler {
   /**
@@ -13,16 +13,16 @@ export class AxiosCanceler {
    * @param {Object} config
    */
   addPending(config: AxiosRequestConfig) {
-    this.removePending(config);
-    const url = getPendingUrl(config);
+    this.removePending(config)
+    const url = getPendingUrl(config)
     config.cancelToken =
       config.cancelToken ||
       new axios.CancelToken((cancel) => {
         if (!pendingMap.has(url)) {
           // 如果当前没有待处理的请求，添加它
-          pendingMap.set(url, cancel);
+          pendingMap.set(url, cancel)
         }
-      });
+      })
   }
 
   /**
@@ -30,9 +30,9 @@ export class AxiosCanceler {
    */
   removeAllPending() {
     pendingMap.forEach((cancel) => {
-      cancel && isFunction(cancel) && cancel();
-    });
-    pendingMap.clear();
+      cancel && isFunction(cancel) && cancel()
+    })
+    pendingMap.clear()
   }
 
   /**
@@ -40,13 +40,13 @@ export class AxiosCanceler {
    * @param {Object} config
    */
   removePending(config: AxiosRequestConfig) {
-    const url = getPendingUrl(config);
+    const url = getPendingUrl(config)
 
     if (pendingMap.has(url)) {
       // 如果有当前请求标识符处于pending状态，则需要取消当前请求并移除
-      const cancel = pendingMap.get(url);
-      cancel && cancel(url);
-      pendingMap.delete(url);
+      const cancel = pendingMap.get(url)
+      cancel && cancel(url)
+      pendingMap.delete(url)
     }
   }
 
@@ -54,6 +54,6 @@ export class AxiosCanceler {
    * @description: reset
    */
   reset(): void {
-    pendingMap = new Map<string, Canceler>();
+    pendingMap = new Map<string, Canceler>()
   }
 }
