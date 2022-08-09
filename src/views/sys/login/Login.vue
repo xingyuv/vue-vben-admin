@@ -8,7 +8,6 @@
         v-if="!sessionTimeout && showLocale"
       />
     </div>
-    <AppDarkModeToggle class="absolute top-3 right-7 enter-x" v-if="!sessionTimeout" />
 
     <span class="-enter-x xl:hidden">
       <AppLogo :alwaysShowTitle="true" />

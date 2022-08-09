@@ -42,7 +42,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
         // @/xxxx => src/xxxx
         {
-          find: /\/@\//,
+          find: /\@\//,
           replacement: pathResolve('src') + '/'
         },
         // /#/xxxx => types/xxxx
@@ -80,7 +80,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       //   },
       // },
       // 关闭 brotliSize 显示可以稍微减少打包时间
-      brotliSize: false,
+      // brotliSize: false,
       chunkSizeWarningLimit: 2000
     },
     define: {
