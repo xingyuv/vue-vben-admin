@@ -1,7 +1,16 @@
 <script lang="tsx">
   import type { ContextMenuItem, ItemContentProps, Axis } from './typing';
   import type { FunctionalComponent, CSSProperties } from 'vue';
-  import { defineComponent, nextTick, onMounted, computed, ref, unref, onUnmounted } from 'vue';
+  import {
+    defineComponent,
+    nextTick,
+    onMounted,
+    computed,
+    ref,
+    unref,
+    onUnmounted,
+    PropType,
+  } from 'vue';
   import Icon from '/@/components/Icon';
   import { Menu, Divider } from 'ant-design-vue';
 
