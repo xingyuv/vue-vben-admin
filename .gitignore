@@ -7,7 +7,8 @@ dist
 tests/server/static
 tests/server/static/upload
 
-.local
+*.local
+*-lock.*
 # local env files
 .env.local
 .env.*.local
