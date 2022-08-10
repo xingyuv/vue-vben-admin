@@ -4,10 +4,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import windiCSS from 'vite-plugin-windicss'
 import purgeIcons from 'vite-plugin-purge-icons'
-import PkgConfig from 'vite-plugin-package-config'
 import VitePluginCertificate from 'vite-plugin-mkcert'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
-import OptimizationPersist from 'vite-plugin-optimize-persist'
 import { configHtmlPlugin } from './html'
 import { configPwaConfig } from './pwa'
 import { configMockPlugin } from './mock'
@@ -65,12 +63,6 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
 
   // vite-plugin-theme
   vitePlugins.push(configThemePlugin(isBuild))
-
-  // vite-plugin-package-config
-  vitePlugins.push(PkgConfig())
-
-  // vite-plugin-optimize-persist
-  vitePlugins.push(OptimizationPersist())
 
   // The following plugins only work in the production environment
   if (isBuild) {
