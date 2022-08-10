@@ -105,6 +105,20 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     optimizeDeps: {
       // @iconify/iconify: 依赖是由@purge-icons/generated 动态和虚拟加载的，所以需要指定
       include: [
+        'vue',
+        'vue-i18n',
+        'vue-router',
+        'vue-types',
+        'qs',
+        'dayjs',
+        'axios',
+        'pinia',
+        'crypto-js',
+        'nprogress',
+        'echarts/core',
+        'echarts/charts',
+        'echarts/components',
+        'echarts/renderers',
         '@vue/runtime-core',
         '@vue/shared',
         '@iconify/iconify',
