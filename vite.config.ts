@@ -106,6 +106,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       // @iconify/iconify: 依赖是由@purge-icons/generated 动态和虚拟加载的，所以需要指定
       include: [
         'vue',
+        'less',
         'vue-i18n',
         'vue-router',
         'vue-types',
