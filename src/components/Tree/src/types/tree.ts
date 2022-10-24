@@ -133,7 +133,8 @@ export const treeProps = buildProps({
   loading: {
     type: Boolean,
     default: false
-  }
+  },
+  treeWrapperClassName: String
 })
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>

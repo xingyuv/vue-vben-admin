@@ -122,7 +122,7 @@ export default defineComponent({
       }
 
       const component = unref(getComponent)
-      if (!component.includes('Select')) {
+      if (!component.includes('Select') && !component.includes('Radio')) {
         return value
       }
 

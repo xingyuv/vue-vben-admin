@@ -10,6 +10,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { Button } from 'ant-design-vue'
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false
@@ -17,7 +18,6 @@ export default defineComponent({
 </script>
 <script lang="ts" setup>
 import { computed, unref } from 'vue'
-import { Button } from 'ant-design-vue'
 import Icon from '@/components/Icon/src/Icon.vue'
 import { buttonProps } from './props'
 import { useAttrs } from '@/hooks/core/useAttrs'

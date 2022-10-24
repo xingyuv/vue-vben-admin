@@ -8,7 +8,6 @@ tests/server/static
 tests/server/static/upload
 
 *.local
-*-lock.*
 # local env files
 .env.local
 .env.*.local
@@ -31,3 +30,4 @@ pnpm-debug.log*
 
 package-lock.json
 
+.history

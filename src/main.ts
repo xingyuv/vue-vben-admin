@@ -14,7 +14,11 @@ import { setupStore } from '@/store'
 import { setupGlobDirectives } from '@/directives'
 import { setupI18n } from '@/locales/setupI18n'
 import { registerGlobComp } from '@/components/registerGlobComp'
+import { isDevMode } from './utils/env'
 
+if (isDevMode()) {
+  import('ant-design-vue/es/style')
+}
 async function bootstrap() {
   const app = createApp(App)
 
