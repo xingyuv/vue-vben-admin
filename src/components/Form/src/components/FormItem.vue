@@ -43,6 +43,9 @@ export default defineComponent({
     },
     formActionType: {
       type: Object as PropType<FormActionType>
+    },
+    isAdvanced: {
+      type: Boolean
     }
   },
   setup(props, { slots }) {
@@ -103,8 +106,8 @@ export default defineComponent({
       const { show, ifShow } = props.schema
       const { showAdvancedButton } = props.formProps
       const itemIsAdvanced = showAdvancedButton
-        ? isBoolean(props.schema.isAdvanced)
-          ? props.schema.isAdvanced
+        ? isBoolean(props.isAdvanced)
+          ? props.isAdvanced
           : true
         : true
 

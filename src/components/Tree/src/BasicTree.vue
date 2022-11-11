@@ -90,10 +90,10 @@ export default defineComponent({
         onCheck: (v: CheckKeys, e) => {
           let currentValue = toRaw(state.checkedKeys) as KeyType[]
           if (isArray(currentValue) && searchState.startSearch) {
-            const { key } = unref(getFieldNames)
-            currentValue = difference(currentValue, getChildrenKeys(e.node.$attrs.node[key]))
+            const value = e.node.eventKey
+            currentValue = difference(currentValue, getChildrenKeys(value))
             if (e.checked) {
-              currentValue.push(e.node.$attrs.node[key])
+              currentValue.push(value)
             }
             state.checkedKeys = currentValue
           } else {

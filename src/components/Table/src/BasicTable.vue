@@ -132,6 +132,7 @@ export default defineComponent({
       getRowSelection,
       getRowSelectionRef,
       getSelectRows,
+      setSelectedRows,
       clearSelectedRowKeys,
       getSelectRowKeys,
       deleteSelectRowByKey,
@@ -279,6 +280,7 @@ export default defineComponent({
     const tableAction: TableActionType = {
       reload,
       getSelectRows,
+      setSelectedRows,
       clearSelectedRowKeys,
       getSelectRowKeys,
       deleteSelectRowByKey,
