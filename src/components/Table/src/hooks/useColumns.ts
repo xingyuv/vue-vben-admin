@@ -9,13 +9,14 @@ import { isArray, isBoolean, isFunction, isMap, isString } from '@/utils/is'
 import { cloneDeep, isEqual } from 'lodash-es'
 import { formatToDate } from '@/utils/dateUtil'
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const'
+import { Key } from 'ant-design-vue/lib/table/interface'
 
 function handleItem(item: BasicColumn, ellipsis: boolean) {
   const { key, dataIndex, children } = item
   item.align = item.align || DEFAULT_ALIGN
   if (ellipsis) {
     if (!key) {
-      item.key = dataIndex
+      item.key = dataIndex as unknown as Key
     }
     if (!isBoolean(item.ellipsis)) {
       Object.assign(item, {

@@ -7,9 +7,7 @@ import { useAppStore } from '@/store/modules/app'
 import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum'
 
 const props = {
-  /**
-   * class style prefix
-   */
+  // 类样式前缀
   prefixCls: { type: String, default: prefixCls }
 }
 
@@ -23,7 +21,7 @@ export default defineComponent({
 
     const appStore = useAppStore()
 
-    // Monitor screen breakpoint information changes
+    // 监视屏幕信息更改
     createBreakpointListen(({ screenMap, sizeEnum, width }) => {
       const lgWidth = screenMap.get(sizeEnum.LG)
       if (lgWidth) {
@@ -34,12 +32,10 @@ export default defineComponent({
 
     const { prefixCls } = toRefs(props)
 
-    // Inject variables into the global
+    // 将变量注入全局
     createAppProviderContext({ prefixCls, isMobile })
 
-    /**
-     * Used to maintain the state before the window changes
-     */
+    // 用于保持窗口更改前的状态
     function handleRestoreState() {
       if (unref(isMobile)) {
         if (!unref(isSetState)) {

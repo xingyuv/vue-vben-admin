@@ -1,7 +1,3 @@
-<!--
- * @Author: Vben
- * @Description: logo component
--->
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="goHome">
     <img src="../../../assets/images/logo.png" />
@@ -20,17 +16,11 @@ import { PageEnum } from '@/enums/pageEnum'
 import { useUserStore } from '@/store/modules/user'
 
 const props = defineProps({
-  /**
-   * The theme of the current parent component
-   */
+  // 当前父组件的主题
   theme: { type: String, validator: (v: string) => ['light', 'dark'].includes(v) },
-  /**
-   * Whether to show title
-   */
+  // 是否显示标题
   showTitle: { type: Boolean, default: true },
-  /**
-   * The title is also displayed when the menu is collapsed
-   */
+  // 折叠菜单时也会显示标题
   alwaysShowTitle: { type: Boolean }
 })
 

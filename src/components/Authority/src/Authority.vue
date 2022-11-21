@@ -1,6 +1,4 @@
-<!--
- Access control component for fine-grained access control.
--->
+<!--  用于细粒度访问控制的访问控制组件。-->
 <script lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent } from 'vue'

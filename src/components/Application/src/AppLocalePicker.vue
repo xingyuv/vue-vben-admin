@@ -1,7 +1,3 @@
-<!--
- * @Author: Vben
- * @Description: Multi-language switching component
--->
 <template>
   <Dropdown
     placement="bottom"
@@ -27,13 +23,9 @@ import { useLocale } from '@/locales/useLocale'
 import { localeList } from '@/settings/localeSetting'
 
 const props = defineProps({
-  /**
-   * Whether to display text
-   */
+  // 是否显示文本
   showText: { type: Boolean, default: true },
-  /**
-   * Whether to refresh the interface when changing
-   */
+  // 更改时是否刷新界面
   reload: { type: Boolean }
 })
 

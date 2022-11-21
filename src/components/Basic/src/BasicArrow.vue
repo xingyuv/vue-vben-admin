@@ -1,7 +1,3 @@
-<!--
- * @Author: Vben
- * @Description: Arrow component with animation
--->
 <template>
   <span :class="getClass">
     <Icon icon="ion:chevron-forward" :style="$attrs.iconStyle" />
