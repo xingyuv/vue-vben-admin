@@ -10,7 +10,7 @@ import { checkStatus } from './checkStatus'
 import { useGlobSetting } from '@/hooks/setting'
 import { useMessage } from '@/hooks/web/useMessage'
 import { RequestEnum, ResultEnum, ContentTypeEnum } from '@/enums/httpEnum'
-import { isString } from '@/utils/is'
+import { isEmpty, isNull, isString, isUnDef } from '@/utils/is'
 import { getToken } from '@/utils/auth'
 import { setObjToUrlParams, deepMerge } from '@/utils'
 import { useErrorLogStoreWithOut } from '@/store/modules/errorLog'
@@ -59,6 +59,9 @@ const transform: AxiosTransform = {
       let successMsg = message
       if (successMsg === null || successMsg === undefined || successMsg === '') {
         successMsg = t('sys.api.operationSuccess')
+      }
+      if (isNull(successMsg) || isUnDef(successMsg) || isEmpty(successMsg)) {
+        successMsg = t(`sys.api.operationSuccess`);
       }
       if (options.successMessageMode === 'modal') {
         createSuccessModal({ title: t('sys.api.successTip'), content: successMsg })
