@@ -80,7 +80,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       //   },
       // },
       // 关闭 brotliSize 显示可以稍微减少打包时间
-      // brotliSize: false,
+      reportCompressedSize: false,
       chunkSizeWarningLimit: 2000
     },
     define: {
@@ -126,6 +126,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'echarts/renderers',
         '@vue/runtime-core',
         '@iconify/iconify',
+        'ant-design-vue/es/style',
         'ant-design-vue/es/locale/zh_CN',
         'ant-design-vue/es/locale/en_US'
       ]
