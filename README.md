@@ -9,12 +9,12 @@
 
 Vue Vben Admin 是一个免费开源的中后台模版。
 本项目基于 vben2.8 版本，升级依赖，重构部分组件，重构代码样式，移除示例。
-使用了最新的`Vue3`,`Vite3`,`Antdv3`,`TypeScript`,`Pinia`等主流技术开发，开箱即用的中后台前端解决方案。
+使用了最新的`Vue3`,`Vite4`,`Antdv3`,`TypeScript`,`Pinia`等主流技术开发，开箱即用的中后台前端解决方案。
 下一步封装vxe-table，根据vxe-table搞一些常见的页面
 
 ## 特性
 
-- **最新技术栈**：使用 Vue3/vite3/antdv3 等前端前沿技术开发
+- **最新技术栈**：使用 Vue3/vite4/antdv3 等前端前沿技术开发
 - **TypeScript**: 应用程序级 JavaScript 的语言
 - **主题**：可配置的主题
 - **国际化**：内置完善的国际化方案
@@ -35,7 +35,7 @@ Vue Vben Admin 是一个免费开源的中后台模版。
 ## 准备
 
 - [node](http://nodejs.org/) 和 [git](https://git-scm.com/) -项目开发环境
-- [Vite](https://vitejs.dev/) - 熟悉 vite 特性
+- [Vite4](https://vitejs.dev/) - 熟悉 vite 特性
 - [Vue3](https://v3.vuejs.org/) - 熟悉 Vue 基础语法
 - [TypeScript](https://www.typescriptlang.org/) - 熟悉`TypeScript`基本语法
 - [Es6+](http://es6.ruanyifeng.com/) - 熟悉 es6 基本语法

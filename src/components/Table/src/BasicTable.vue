@@ -70,6 +70,7 @@ import { isFunction } from '@/utils/is'
 import { warn } from '@/utils/log'
 
 export default defineComponent({
+  name: 'BasicTable',
   components: {
     // eslint-disable-next-line vue/no-reserved-component-names
     Table,
