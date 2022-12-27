@@ -307,7 +307,7 @@ const tableAction: TableActionType = {
 }
 createTableContext({ ...tableAction, wrapRef, getBindValues })
 
-defineExpose(tableAction)
+defineExpose({ tableAction })
 
 emit('register', tableAction, formActions)
 </script>

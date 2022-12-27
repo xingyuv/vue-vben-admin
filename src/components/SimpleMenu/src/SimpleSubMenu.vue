@@ -16,7 +16,7 @@
       <SimpleMenuTag :item="item" :collapseParent="getIsCollapseParent" />
     </template>
   </MenuItem>
-  <SubMenuItem
+  <SubMenu
     :name="item.path"
     v-if="menuHasChildren(item) && getShowMenu"
     :class="[getLevelClass, theme]"
@@ -40,7 +40,7 @@
     >
       <SimpleSubMenu v-bind="$props" :item="childrenItem" :parent="false" />
     </template>
-  </SubMenuItem>
+  </SubMenu>
 </template>
 <script setup lang="ts" name="SimpleSubMenu">
 import type { PropType } from 'vue'
@@ -49,7 +49,7 @@ import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import Icon from '@/components/Icon/index'
 import MenuItem from './components/MenuItem.vue'
-import SubMenuItem from './components/SubMenuItem.vue'
+import SubMenu from './components/SubMenuItem.vue'
 import { propTypes } from '@/utils/propTypes'
 import { useI18n } from '@/hooks/web/useI18n'
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'

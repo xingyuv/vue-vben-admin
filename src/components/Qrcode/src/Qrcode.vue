@@ -107,5 +107,5 @@ watch(
   }
 )
 
-defineExpose(download)
+defineExpose({ download })
 </script>

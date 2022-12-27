@@ -54,7 +54,7 @@
     </Popover>
   </li>
 </template>
-<script setup lang="ts" name="SubMenuItem">
+<script setup lang="ts" name="SubMenu">
 import type { CSSProperties, PropType } from 'vue'
 import type { SubMenuProvider } from './types'
 import { computed, unref, getCurrentInstance, reactive, provide, onBeforeMount, inject } from 'vue'

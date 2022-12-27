@@ -146,5 +146,5 @@ async function setModalHeight() {
   }
 }
 
-defineExpose(scrollTop)
+defineExpose({ scrollTop })
 </script>
