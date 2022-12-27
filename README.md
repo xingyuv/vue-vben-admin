@@ -28,9 +28,9 @@ Vue Vben Admin 是一个免费开源的中后台模版。
     <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
 </p>
 
-## 文档
+## 地址
 
-[文档地址](https://doc.vvbin.cn/)
+[地址](http://admin.x-surge.com)
 
 ## 准备
 
