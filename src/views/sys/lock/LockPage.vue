@@ -76,7 +76,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
 import { Input } from 'ant-design-vue'
 import { useUserStore } from '@/store/modules/user'

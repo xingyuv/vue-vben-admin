@@ -9,37 +9,27 @@
     />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType } from 'vue'
-
+<script setup lang="ts" name="InputNumberItem">
+import { PropType } from 'vue'
 import { InputNumber } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { baseHandler } from '../handler'
 import { HandlerEnum } from '../enum'
 
-export default defineComponent({
-  name: 'InputNumberItem',
-  components: { InputNumber },
-  props: {
-    event: {
-      type: Number as PropType<HandlerEnum>
-    },
-    title: {
-      type: String
-    }
+const props = defineProps({
+  event: {
+    type: Number as PropType<HandlerEnum>
   },
-  setup(props) {
-    const { prefixCls } = useDesign('setting-input-number-item')
-
-    function handleChange(e) {
-      props.event && baseHandler(props.event, e)
-    }
-    return {
-      prefixCls,
-      handleChange
-    }
+  title: {
+    type: String
   }
 })
+
+const { prefixCls } = useDesign('setting-input-number-item')
+
+function handleChange(e) {
+  props.event && baseHandler(props.event, e)
+}
 </script>
 <style lang="less" scoped>
 @prefix-cls: ~'@{namespace}-setting-input-number-item';

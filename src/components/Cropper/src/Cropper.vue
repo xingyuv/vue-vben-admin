@@ -10,7 +10,7 @@
     />
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { CSSProperties, useAttrs } from 'vue'
 import { onMounted, ref, unref, computed, onUnmounted } from 'vue'
 import Cropper from 'cropperjs'

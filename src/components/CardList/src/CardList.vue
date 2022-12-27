@@ -10,17 +10,18 @@
         :pagination="paginationProp"
       >
         <template #header>
-          <div class="flex justify-end space-x-2"
-            ><slot name="header"></slot>
+          <div class="flex justify-end space-x-2">
+            <slot name="header"></slot>
             <Tooltip>
               <template #title>
-                <div class="w-50">每行显示数量</div
-                ><Slider
+                <div class="w-50">每行显示数量</div>
+                <Slider
                   id="slider"
                   v-bind="sliderProp"
                   v-model:value="grid"
                   @change="sliderChange"
-              /></template>
+                />
+              </template>
               <Button><TableOutlined /></Button>
             </Tooltip>
             <Tooltip @click="fetch">
@@ -75,7 +76,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { EditOutlined, EllipsisOutlined, RedoOutlined, TableOutlined } from '@ant-design/icons-vue'
 import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from 'ant-design-vue'

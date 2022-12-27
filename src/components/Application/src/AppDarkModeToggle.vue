@@ -5,7 +5,7 @@
     <SvgIcon size="14" name="moon" />
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, unref } from 'vue'
 import { SvgIcon } from '@/components/Icon'
 import { useDesign } from '@/hooks/web/useDesign'

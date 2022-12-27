@@ -6,6 +6,7 @@ import type {
   UseModalInnerReturnType
 } from '../typing'
 import {
+  computed,
   ref,
   onUnmounted,
   unref,
@@ -15,12 +16,11 @@ import {
   nextTick,
   toRaw
 } from 'vue'
+import { error } from '@/utils/log'
 import { isProdMode } from '@/utils/env'
 import { isFunction } from '@/utils/is'
 import { isEqual } from 'lodash-es'
 import { tryOnUnmounted } from '@vueuse/core'
-import { error } from '@/utils/log'
-import { computed } from 'vue'
 
 const dataTransfer = reactive<any>({})
 

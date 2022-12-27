@@ -3,7 +3,7 @@
     <Icon icon="ion:chevron-forward" :style="$attrs.iconStyle" />
   </span>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { Icon } from '@/components/Icon'
 import { useDesign } from '@/hooks/web/useDesign'

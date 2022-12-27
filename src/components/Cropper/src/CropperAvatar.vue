@@ -28,7 +28,7 @@
     />
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, CSSProperties, unref, ref, watchEffect, watch, PropType } from 'vue'
 import CopperModal from './CopperModal.vue'
 import { useDesign } from '@/hooks/web/useDesign'

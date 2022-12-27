@@ -15,41 +15,23 @@
     </template>
   </SubMenu>
 </template>
-<script lang="ts">
+<script setup lang="ts" name="BasicSubMenuItem">
 import type { Menu as MenuType } from '@/router/types'
-import { defineComponent, computed } from 'vue'
-import { Menu } from 'ant-design-vue'
-import { useDesign } from '@/hooks/web/useDesign'
+import { computed } from 'vue'
+import { SubMenu } from 'ant-design-vue'
 import { itemProps } from '../props'
 import BasicMenuItem from './BasicMenuItem.vue'
 import MenuItemContent from './MenuItemContent.vue'
 
-export default defineComponent({
-  name: 'BasicSubMenuItem',
-  isSubMenu: true,
-  components: {
-    BasicMenuItem,
-    SubMenu: Menu.SubMenu,
-    MenuItemContent
-  },
-  props: itemProps,
-  setup(props) {
-    const { prefixCls } = useDesign('basic-menu-item')
+const props = defineProps(itemProps)
 
-    const getShowMenu = computed(() => !props.item.meta?.hideMenu)
-    function menuHasChildren(menuTreeItem: MenuType): boolean {
-      return (
-        !menuTreeItem.meta?.hideChildrenInMenu &&
-        Reflect.has(menuTreeItem, 'children') &&
-        !!menuTreeItem.children &&
-        menuTreeItem.children.length > 0
-      )
-    }
-    return {
-      prefixCls,
-      menuHasChildren,
-      getShowMenu
-    }
-  }
-})
+const getShowMenu = computed(() => !props.item.meta?.hideMenu)
+function menuHasChildren(menuTreeItem: MenuType): boolean {
+  return (
+    !menuTreeItem.meta?.hideChildrenInMenu &&
+    Reflect.has(menuTreeItem, 'children') &&
+    !!menuTreeItem.children &&
+    menuTreeItem.children.length > 0
+  )
+}
 </script>

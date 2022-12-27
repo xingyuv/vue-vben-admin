@@ -14,11 +14,9 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicArrow, BasicTitle } from '@/components/Basic'
-
-const props = {
+defineProps({
   prefixCls: { type: String },
   helpMessage: {
     type: [Array, String] as PropType<string[] | string>,
@@ -27,12 +25,6 @@ const props = {
   title: { type: String },
   show: { type: Boolean },
   canExpan: { type: Boolean }
-}
-
-export default defineComponent({
-  components: { BasicArrow, BasicTitle },
-  inheritAttrs: false,
-  props,
-  emits: ['expand']
 })
+defineEmits(['expand'])
 </script>

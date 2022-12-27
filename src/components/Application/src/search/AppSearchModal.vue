@@ -56,13 +56,11 @@
     </transition>
   </Teleport>
 </template>
-
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, unref, ref, watch, nextTick } from 'vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import AppSearchFooter from './AppSearchFooter.vue'
 import Icon from '@/components/Icon'
-// @ts-ignore
 import vClickOutside from '@/directives/clickOutside'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useRefs } from '@/hooks/core/useRefs'

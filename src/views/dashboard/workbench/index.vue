@@ -10,7 +10,7 @@
         <QuickNav :loading="loading" class="enter-y" />
 
         <Card class="!my-4 enter-y" :loading="loading">
-          <img class="xl:h-50 h-30 mx-auto" src="../../../assets/svg/illustration.svg" />
+          <img class="xl:h-50 h-30 mx-auto" src="@/assets/svg/illustration.svg" />
         </Card>
 
         <SaleRadar :loading="loading" class="enter-y" />
@@ -18,7 +18,7 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { Card } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'

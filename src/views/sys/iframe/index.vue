@@ -10,7 +10,7 @@
     </Spin>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { CSSProperties } from 'vue'
 import { ref, unref, computed } from 'vue'
 import { Spin } from 'ant-design-vue'

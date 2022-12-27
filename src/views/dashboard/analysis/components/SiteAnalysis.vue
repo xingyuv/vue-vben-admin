@@ -13,7 +13,7 @@
     </p>
   </Card>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { Card } from 'ant-design-vue'
 import VisitAnalysis from './VisitAnalysis.vue'

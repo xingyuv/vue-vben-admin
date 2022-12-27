@@ -5,7 +5,7 @@
     </div>
   </transition>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import Login from './Login.vue'
 import { useDesign } from '@/hooks/web/useDesign'

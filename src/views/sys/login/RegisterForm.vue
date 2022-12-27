@@ -65,7 +65,7 @@
     </Form>
   </template>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { reactive, ref, unref, computed } from 'vue'
 import LoginFormTitle from './LoginFormTitle.vue'
 import { Form, Input, Button, Checkbox } from 'ant-design-vue'

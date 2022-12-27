@@ -110,7 +110,7 @@
     </div>
   </BasicModal>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { CropendResult, Cropper } from './typing'
 import { ref } from 'vue'
 import CropperImage from './Cropper.vue'

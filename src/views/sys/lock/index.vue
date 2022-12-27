@@ -3,7 +3,7 @@
     <LockPage v-if="getIsLock" />
   </transition>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import LockPage from './LockPage.vue'
 import { useLockStore } from '@/store/modules/lock'

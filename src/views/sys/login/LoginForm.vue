@@ -81,7 +81,7 @@
     </div>
   </Form>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { reactive, ref, unref, computed } from 'vue'
 
 import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue'

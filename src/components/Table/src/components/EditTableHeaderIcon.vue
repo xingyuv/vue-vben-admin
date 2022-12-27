@@ -5,12 +5,8 @@
     <FormOutlined />
   </span>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts" name="EditTableHeaderIcon">
 import { FormOutlined } from '@ant-design/icons-vue'
-export default defineComponent({
-  name: 'EditTableHeaderIcon',
-  components: { FormOutlined },
-  props: { title: { type: String, default: '' } }
-})
+
+defineProps({ title: { type: String, default: '' } })
 </script>

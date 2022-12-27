@@ -8,7 +8,7 @@
     </CardGrid>
   </Card>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Card, CardGrid } from 'ant-design-vue'
 import { navItems } from './data'
 import { Icon } from '@/components/Icon'

@@ -10,9 +10,8 @@
     <FileList :dataSource="fileListRef" :columns="columns" :actionColumn="actionColumn" />
   </BasicModal>
 </template>
-<script lang="ts">
-import { defineComponent, watch, ref } from 'vue'
-//   import { BasicTable, useTable } from '@/components/Table';
+<script setup lang="ts">
+import { watch, ref } from 'vue'
 import FileList from './FileList.vue'
 import { BasicModal, useModalInner } from '@/components/Modal'
 import { previewProps } from './props'
@@ -22,69 +21,59 @@ import { createPreviewColumns, createPreviewActionColumn } from './data'
 import { useI18n } from '@/hooks/web/useI18n'
 import { isArray } from '@/utils/is'
 
-export default defineComponent({
-  components: { BasicModal, FileList },
-  props: previewProps,
-  emits: ['list-change', 'register', 'delete'],
-  setup(props, { emit }) {
-    const [register, { closeModal }] = useModalInner()
-    const { t } = useI18n()
+const props = defineProps(previewProps)
+const emit = defineEmits(['list-change', 'register', 'delete'])
 
-    const fileListRef = ref<PreviewFileItem[]>([])
-    watch(
-      () => props.value,
-      (value) => {
-        if (!isArray(value)) value = []
-        fileListRef.value = value
-          .filter((item) => !!item)
-          .map((item) => {
-            return {
-              url: item,
-              type: item.split('.').pop() || '',
-              name: item.split('/').pop() || ''
-            }
-          })
-      },
-      { immediate: true }
+const [register] = useModalInner()
+const { t } = useI18n()
+
+const columns = createPreviewColumns() as any[]
+const actionColumn = createPreviewActionColumn({ handleRemove, handleDownload }) as any
+
+const fileListRef = ref<PreviewFileItem[]>([])
+watch(
+  () => props.value,
+  (value) => {
+    if (!isArray(value)) value = []
+    fileListRef.value = value
+      .filter((item) => !!item)
+      .map((item) => {
+        return {
+          url: item,
+          type: item.split('.').pop() || '',
+          name: item.split('/').pop() || ''
+        }
+      })
+  },
+  { immediate: true }
+)
+
+// 删除
+function handleRemove(record: PreviewFileItem) {
+  const index = fileListRef.value.findIndex((item) => item.url === record.url)
+  if (index !== -1) {
+    const removed = fileListRef.value.splice(index, 1)
+    emit('delete', removed[0].url)
+    emit(
+      'list-change',
+      fileListRef.value.map((item) => item.url)
     )
-
-    // 删除
-    function handleRemove(record: PreviewFileItem) {
-      const index = fileListRef.value.findIndex((item) => item.url === record.url)
-      if (index !== -1) {
-        const removed = fileListRef.value.splice(index, 1)
-        emit('delete', removed[0].url)
-        emit(
-          'list-change',
-          fileListRef.value.map((item) => item.url)
-        )
-      }
-    }
-
-    // // 预览
-    // function handlePreview(record: PreviewFileItem) {
-    //   const { url = '' } = record;
-    //   createImgPreview({
-    //     imageList: [url],
-    //   });
-    // }
-
-    // 下载
-    function handleDownload(record: PreviewFileItem) {
-      const { url = '' } = record
-      downloadByUrl({ url })
-    }
-
-    return {
-      t,
-      register,
-      closeModal,
-      fileListRef,
-      columns: createPreviewColumns() as any[],
-      actionColumn: createPreviewActionColumn({ handleRemove, handleDownload }) as any
-    }
   }
-})
+}
+
+// // 预览
+// function handlePreview(record: PreviewFileItem) {
+//   const { url = '' } = record;
+//   createImgPreview({
+//     imageList: [url],
+//   });
+// }
+
+// 下载
+function handleDownload(record: PreviewFileItem) {
+  const { url = '' } = record
+  downloadByUrl({ url })
+}
 </script>
 <style lang="less">
 .upload-preview-modal {

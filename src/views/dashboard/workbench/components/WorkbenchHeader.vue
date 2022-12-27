@@ -22,7 +22,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed } from 'vue'
 import { Avatar } from 'ant-design-vue'
 import { useUserStore } from '@/store/modules/user'

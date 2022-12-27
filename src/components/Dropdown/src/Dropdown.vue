@@ -35,7 +35,7 @@
   </a-dropdown>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, PropType } from 'vue'
 import type { DropMenu } from './typing'
 import { Dropdown, Menu, Popconfirm } from 'ant-design-vue'

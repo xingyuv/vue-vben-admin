@@ -17,24 +17,18 @@
     <slot name="appendFooter"></slot>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script setup lang="ts" name="BasicModalFooter">
 import { basicProps } from '../props'
-export default defineComponent({
-  name: 'BasicModalFooter',
-  props: basicProps,
-  emits: ['ok', 'cancel'],
-  setup(_, { emit }) {
-    function handleOk(e: Event) {
-      emit('ok', e)
-    }
 
-    function handleCancel(e: Event) {
-      emit('cancel', e)
-    }
+defineProps(basicProps)
 
-    return { handleOk, handleCancel }
-  }
-})
+const emit = defineEmits(['ok', 'cancel'])
+
+function handleOk(e: Event) {
+  emit('ok', e)
+}
+
+function handleCancel(e: Event) {
+  emit('cancel', e)
+}
 </script>

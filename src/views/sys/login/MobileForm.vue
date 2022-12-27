@@ -30,7 +30,7 @@
     </Form>
   </template>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { reactive, ref, computed, unref } from 'vue'
 import { Form, Input, Button } from 'ant-design-vue'
 import { CountdownInput } from '@/components/CountDown'

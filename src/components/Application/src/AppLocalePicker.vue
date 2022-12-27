@@ -13,7 +13,7 @@
     </span>
   </Dropdown>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { LocaleType } from '/#/config'
 import type { DropMenu } from '@/components/Dropdown'
 import { ref, watchEffect, unref, computed } from 'vue'

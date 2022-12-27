@@ -11,123 +11,95 @@
       </component>
     </div>
     <template v-if="!native">
-      <bar :move="moveX" :size="sizeWidth" />
-      <bar vertical :move="moveY" :size="sizeHeight" />
+      <Bar :move="moveX" :size="sizeWidth" />
+      <Bar vertical :move="moveY" :size="sizeHeight" />
     </template>
   </div>
 </template>
-<script lang="ts">
+<script setup lang="ts" name="Scrollbar">
 import { addResizeListener, removeResizeListener } from '@/utils/event'
 import componentSetting from '@/settings/componentSetting'
-const { scrollbar } = componentSetting
 import { toObject } from './util'
-import {
-  defineComponent,
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  nextTick,
-  provide,
-  computed,
-  unref
-} from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, provide, computed, unref } from 'vue'
 import Bar from './bar'
 
-export default defineComponent({
-  name: 'Scrollbar',
-  // inheritAttrs: false,
-  components: { Bar },
-  props: {
-    native: {
-      type: Boolean,
-      default: scrollbar?.native ?? false
-    },
-    wrapStyle: {
-      type: [String, Array],
-      default: ''
-    },
-    wrapClass: {
-      type: [String, Array],
-      default: ''
-    },
-    viewClass: {
-      type: [String, Array],
-      default: ''
-    },
-    viewStyle: {
-      type: [String, Array],
-      default: ''
-    },
-    noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
-    tag: {
-      type: String,
-      default: 'div'
-    }
+const props = defineProps({
+  native: {
+    type: Boolean,
+    default: componentSetting.scrollbar?.native ?? false
   },
-  setup(props) {
-    const sizeWidth = ref('0')
-    const sizeHeight = ref('0')
-    const moveX = ref(0)
-    const moveY = ref(0)
-    const wrap = ref()
-    const resize = ref()
+  wrapStyle: {
+    type: [String, Array],
+    default: ''
+  },
+  wrapClass: {
+    type: [String, Array],
+    default: ''
+  },
+  viewClass: {
+    type: [String, Array],
+    default: ''
+  },
+  viewStyle: {
+    type: [String, Array],
+    default: ''
+  },
+  noresize: Boolean, // 如果 container 尺寸不会发生变化，最好设置它可以优化性能
+  tag: {
+    type: String,
+    default: 'div'
+  }
+})
 
-    provide('scroll-bar-wrap', wrap)
+const sizeWidth = ref('0')
+const sizeHeight = ref('0')
+const moveX = ref(0)
+const moveY = ref(0)
+const wrap = ref()
+const resize = ref()
 
-    const style = computed(() => {
-      if (Array.isArray(props.wrapStyle)) {
-        return toObject(props.wrapStyle)
-      }
-      return props.wrapStyle
-    })
+provide('scroll-bar-wrap', wrap)
 
-    const handleScroll = () => {
-      if (!props.native) {
-        moveY.value = (unref(wrap).scrollTop * 100) / unref(wrap).clientHeight
-        moveX.value = (unref(wrap).scrollLeft * 100) / unref(wrap).clientWidth
-      }
-    }
+const style = computed(() => {
+  if (Array.isArray(props.wrapStyle)) {
+    return toObject(props.wrapStyle)
+  }
+  return props.wrapStyle
+})
 
-    const update = () => {
-      if (!unref(wrap)) return
+const handleScroll = () => {
+  if (!props.native) {
+    moveY.value = (unref(wrap).scrollTop * 100) / unref(wrap).clientHeight
+    moveX.value = (unref(wrap).scrollLeft * 100) / unref(wrap).clientWidth
+  }
+}
 
-      const heightPercentage = (unref(wrap).clientHeight * 100) / unref(wrap).scrollHeight
-      const widthPercentage = (unref(wrap).clientWidth * 100) / unref(wrap).scrollWidth
+const update = () => {
+  if (!unref(wrap)) return
 
-      sizeHeight.value = heightPercentage < 100 ? heightPercentage + '%' : ''
-      sizeWidth.value = widthPercentage < 100 ? widthPercentage + '%' : ''
-    }
+  const heightPercentage = (unref(wrap).clientHeight * 100) / unref(wrap).scrollHeight
+  const widthPercentage = (unref(wrap).clientWidth * 100) / unref(wrap).scrollWidth
 
-    onMounted(() => {
-      if (props.native) return
-      nextTick(update)
-      if (!props.noresize) {
-        addResizeListener(unref(resize), update)
-        addResizeListener(unref(wrap), update)
-        addEventListener('resize', update)
-      }
-    })
+  sizeHeight.value = heightPercentage < 100 ? heightPercentage + '%' : ''
+  sizeWidth.value = widthPercentage < 100 ? widthPercentage + '%' : ''
+}
 
-    onBeforeUnmount(() => {
-      if (props.native) return
-      if (!props.noresize) {
-        removeResizeListener(unref(resize), update)
-        removeResizeListener(unref(wrap), update)
-        removeEventListener('resize', update)
-      }
-    })
+onMounted(() => {
+  if (props.native) return
+  nextTick(update)
+  if (!props.noresize) {
+    addResizeListener(unref(resize), update)
+    addResizeListener(unref(wrap), update)
+    addEventListener('resize', update)
+  }
+})
 
-    return {
-      moveX,
-      moveY,
-      sizeWidth,
-      sizeHeight,
-      style,
-      wrap,
-      resize,
-      update,
-      handleScroll
-    }
+onBeforeUnmount(() => {
+  if (props.native) return
+  if (!props.noresize) {
+    removeResizeListener(unref(resize), update)
+    removeResizeListener(unref(wrap), update)
+    removeEventListener('resize', update)
   }
 })
 </script>

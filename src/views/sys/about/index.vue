@@ -14,7 +14,7 @@
     <Description @register="registerDev" class="enter-y" />
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { h } from 'vue'
 import { Tag } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'
