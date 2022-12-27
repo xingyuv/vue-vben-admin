@@ -195,10 +195,10 @@ export default defineComponent({
         value: unref(currentValueRef),
         record: toRaw(props.record)
       })
-      handleSubmiRule()
+      handleSubmitRule()
     }
 
-    async function handleSubmiRule() {
+    async function handleSubmitRule() {
       const { column, record } = props
       const { editRule } = column
       const currentValue = unref(currentValueRef)
@@ -228,7 +228,7 @@ export default defineComponent({
 
     async function handleSubmit(needEmit = true, valid = true) {
       if (valid) {
-        const isPass = await handleSubmiRule()
+        const isPass = await handleSubmitRule()
         if (!isPass) return false
       }
 
@@ -340,7 +340,7 @@ export default defineComponent({
 
     if (props.record) {
       initCbs('submitCbs', handleSubmit)
-      initCbs('validCbs', handleSubmiRule)
+      initCbs('validCbs', handleSubmitRule)
       initCbs('cancelCbs', handleCancel)
 
       if (props.column.dataIndex) {

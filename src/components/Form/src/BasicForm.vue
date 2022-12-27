@@ -50,7 +50,6 @@ import FormAction from './components/FormAction.vue'
 import { dateItemType } from './helper'
 import { dateUtil } from '@/utils/dateUtil'
 
-// import { cloneDeep } from 'lodash-es';
 import { deepMerge } from '@/utils'
 
 import { useFormValues } from './hooks/useFormValues'
@@ -64,7 +63,7 @@ import { useDebounceFn } from '@vueuse/core'
 import { basicProps } from './props'
 import { useDesign } from '@/hooks/web/useDesign'
 import { cloneDeep } from 'lodash-es'
-import { isFunction, isArray } from '/@/utils/is'
+import { isFunction, isArray } from '@/utils/is'
 
 export default defineComponent({
   name: 'BasicForm',

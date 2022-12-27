@@ -113,7 +113,6 @@ export default defineComponent({
           try {
             const data = e.target && e.target.result
             const workbook = XLSX.read(data, { type: 'array', cellDates: true })
-            // console.log(workbook);
             /* DO SOMETHING WITH workbook HERE */
             const excelData = getExcelData(workbook)
             emit('success', excelData)
