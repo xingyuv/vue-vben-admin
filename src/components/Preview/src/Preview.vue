@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <PreviewGroup>
+    <ImagePreviewGroup>
       <slot v-if="!imageList || $slots.default"></slot>
       <template v-else>
         <template v-for="item in getImageList" :key="item.src">
@@ -11,13 +11,13 @@
           </Image>
         </template>
       </template>
-    </PreviewGroup>
+    </ImagePreviewGroup>
   </div>
 </template>
 <script setup lang="ts" name="ImagePreview">
 import type { PropType } from 'vue'
 import { computed } from 'vue'
-import { Image } from 'ant-design-vue'
+import { Image, ImagePreviewGroup } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'
 import { isString } from '@/utils/is'

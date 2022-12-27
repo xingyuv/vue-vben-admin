@@ -7,9 +7,9 @@
   >
     <Badge :count="!showBadge || imgList.length == 1 ? 0 : imgList.length" v-if="simpleShow">
       <div class="img-div">
-        <PreviewGroup>
+        <ImagePreviewGroup>
           <template v-for="(img, index) in imgList" :key="img">
-            <AImage
+            <Image
               :width="size"
               :style="{
                 display: index === 0 ? '' : 'none !important'
@@ -17,7 +17,7 @@
               :src="srcPrefix + img"
             />
           </template>
-        </PreviewGroup>
+        </ImagePreviewGroup>
       </div>
     </Badge>
     <ImagePreviewGroup v-else>
