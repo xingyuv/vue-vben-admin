@@ -105,16 +105,19 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     optimizeDeps: {
       // @iconify/iconify: 依赖是由@purge-icons/generated 动态和虚拟加载的，所以需要指定
       include: [
+        'qs',
+        'url',
         'vue',
         'less',
-        'vue-i18n',
-        'vue-router',
-        'vue-types',
-        'qs',
-        'dayjs',
         'axios',
         'pinia',
+        'dayjs',
+        'qrcode',
+        'vue-router',
+        'vue-types',
+        'vue-i18n',
         'crypto-js',
+        'lodash-es',
         'nprogress',
         'echarts/core',
         'echarts/charts',
@@ -122,9 +125,13 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         'echarts/renderers',
         '@vue/runtime-core',
         '@iconify/iconify',
+        'ant-design-vue',
         'ant-design-vue/es/style',
         'ant-design-vue/es/locale/zh_CN',
-        'ant-design-vue/es/locale/en_US'
+        'ant-design-vue/es/locale/en_US',
+        '@vueuse/core',
+        '@zxcvbn-ts/core',
+        'vite-plugin-windicss'
       ]
     }
   }
