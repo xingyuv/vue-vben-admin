@@ -84,10 +84,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       chunkSizeWarningLimit: 2000
     },
     define: {
-      // vite-plugin-theme
-      __COLOR_PLUGIN_OUTPUT_FILE_NAME__: undefined,
-      __PROD__: true,
-      __COLOR_PLUGIN_OPTIONS__: {},
       // setting vue-i18-next
       // 拦截警告
       __INTLIFY_PROD_DEVTOOLS__: false,
