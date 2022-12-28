@@ -21,7 +21,7 @@
     <Button type="primary" @click="handleSubmit"> 更新基本信息 </Button>
   </CollapseContainer>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Button, Row, Col } from 'ant-design-vue'
 import { computed, onMounted } from 'vue'
 import { BasicForm, useForm } from '@/components/Form/index'

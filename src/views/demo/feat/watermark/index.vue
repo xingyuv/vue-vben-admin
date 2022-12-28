@@ -11,7 +11,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { CollapseContainer } from '@/components/Container/index'
 import { useWatermark } from '@/hooks/web/useWatermark'
 import { PageWrapper } from '@/components/Page'

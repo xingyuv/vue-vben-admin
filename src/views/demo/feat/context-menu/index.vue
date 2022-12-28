@@ -9,7 +9,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useContextMenu } from '@/hooks/web/useContextMenu'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'

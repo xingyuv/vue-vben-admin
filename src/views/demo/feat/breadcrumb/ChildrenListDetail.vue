@@ -3,6 +3,6 @@
     <div>子级详情页内容在此</div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { PageWrapper } from '@/components/Page'
 </script>

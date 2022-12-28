@@ -3,7 +3,7 @@
     <div>{{ index }} - 详情页内容在此</div>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TabDetail">
+<script setup lang="ts" name="TabDetail">
 import { PageWrapper } from '@/components/Page'
 import { useTabs } from '@/hooks/web/useTabs'
 import { useRoute } from 'vue-router'

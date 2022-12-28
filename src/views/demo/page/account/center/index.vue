@@ -53,7 +53,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Tag, Tabs, Row, Col, TabPane } from 'ant-design-vue'
 import { computed } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'

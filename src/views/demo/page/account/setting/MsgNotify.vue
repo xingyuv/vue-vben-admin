@@ -22,7 +22,7 @@
     </List>
   </CollapseContainer>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { List, ListItem, ListItemMeta, Switch } from 'ant-design-vue'
 import { CollapseContainer } from '@/components/Container/index'
 import { msgNotifyList } from './data'

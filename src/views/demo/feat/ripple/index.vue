@@ -3,7 +3,7 @@
     <div class="demo-box" v-ripple-directive>content</div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import vRippleDirective from '@/directives/ripple'
 import { PageWrapper } from '@/components/Page'
 </script>

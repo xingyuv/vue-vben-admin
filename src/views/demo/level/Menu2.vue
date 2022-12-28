@@ -5,6 +5,6 @@
     <Input />
   </div>
 </template>
-<script lang="ts" setup name="Menu2Demo">
+<script setup lang="ts" name="Menu2Demo">
 import { Input } from 'ant-design-vue'
 </script>

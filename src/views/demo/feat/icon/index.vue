@@ -50,7 +50,7 @@
     <a-button type="link" @click="toIconify"> Iconify 图标大全 </a-button>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { CollapseContainer } from '@/components/Container/index'
 import { Alert } from 'ant-design-vue'
 import {

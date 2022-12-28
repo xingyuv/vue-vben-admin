@@ -6,7 +6,7 @@
     <Input />
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TestTab">
+<script setup lang="ts" name="TestTab">
 import { computed, unref } from 'vue'
 import { useRouter } from 'vue-router'
 import { PageWrapper } from '@/components/Page'

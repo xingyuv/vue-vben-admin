@@ -13,7 +13,7 @@
     </ul>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TestMenu">
+<script setup lang="ts" name="TestMenu">
 import { Input } from 'ant-design-vue'
 import { computed, ref, unref } from 'vue'
 import { useRouter } from 'vue-router'

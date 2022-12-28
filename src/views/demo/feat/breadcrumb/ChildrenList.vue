@@ -3,7 +3,7 @@
     <router-link to="/feat/breadcrumb/children/childrenDetail"> 进入子级详情页 </router-link>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { PageWrapper } from '@/components/Page'
 import { RouterLink } from 'vue-router'
 </script>

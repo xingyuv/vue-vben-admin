@@ -15,7 +15,7 @@
     </a-button>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import {
   downloadByUrl,
   downloadByData,

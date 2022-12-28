@@ -7,7 +7,7 @@
     </ClickOutSide>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { ClickOutSide } from '@/components/ClickOutSide'
 import { PageWrapper } from '@/components/Page'

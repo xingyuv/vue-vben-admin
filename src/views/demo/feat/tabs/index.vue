@@ -24,7 +24,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TabsDemo">
+<script setup lang="ts" name="TabsDemo">
 import { ref } from 'vue'
 import { CollapseContainer } from '@/components/Container'
 import { useTabs } from '@/hooks/web/useTabs'

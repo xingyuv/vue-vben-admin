@@ -15,7 +15,7 @@
   </PageWrapper>
 </template>
 
-<script lang="ts" setup name="TestSessionTimeout">
+<script setup lang="ts" name="TestSessionTimeout">
 import { PageWrapper } from '@/components/Page'
 import { useUserStore } from '@/store/modules/user'
 import { sessionTimeoutApi, tokenExpiredApi } from '@/api/demo/account'

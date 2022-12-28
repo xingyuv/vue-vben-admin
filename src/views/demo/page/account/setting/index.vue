@@ -14,7 +14,7 @@
     </div>
   </ScrollContainer>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Tabs, TabPane } from 'ant-design-vue'
 import { ScrollContainer } from '@/components/Container/index'
 import { settingList } from './data'

@@ -19,7 +19,7 @@
     </Row>
   </List>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { List, ListItem, Card, Row, Col } from 'ant-design-vue'
 import demoImg from '@/assets/images/demo.png'
 import { projectList } from './data'

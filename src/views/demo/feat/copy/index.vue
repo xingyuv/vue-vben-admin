@@ -8,7 +8,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="Copy">
+<script setup lang="ts" name="Copy">
 import { unref, ref } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'
 import { useCopyToClipboard } from '@/hooks/web/useCopyToClipboard'

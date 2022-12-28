@@ -24,7 +24,7 @@
     <BasicTable @register="registerTimeTable" />
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { Description } from '@/components/Description/index'
 import { BasicTable, useTable } from '@/components/Table'
 import { PageWrapper } from '@/components/Page'

@@ -27,7 +27,7 @@
     </Row>
   </List>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { List, ListItem, Card, Row, Col } from 'ant-design-vue'
 import Icon from '@/components/Icon/index'
 import { applicationList } from './data'

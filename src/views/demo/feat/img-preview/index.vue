@@ -5,7 +5,7 @@
   </PageWrapper>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { createImgPreview, ImagePreview } from '@/components/Preview/index'
 import { PageWrapper } from '@/components/Page'
 

@@ -52,7 +52,7 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { reactive, watchEffect, computed } from 'vue'
 import { Tag, Input, Textarea } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'

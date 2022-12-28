@@ -39,7 +39,7 @@
     </template>
   </List>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { List, ListItem, ListItemMeta, Tag } from 'ant-design-vue'
 import Icon from '@/components/Icon/index'
 import { actions, articleList } from './data'

@@ -21,7 +21,7 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'
 import { useFullscreen } from '@vueuse/core'

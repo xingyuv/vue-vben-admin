@@ -3,6 +3,6 @@
     <router-link to="/feat/breadcrumb/flatDetail"> 进入平级详情页 </router-link>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { PageWrapper } from '@/components/Page'
 </script>
