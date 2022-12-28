@@ -1,2 +1,2 @@
 <template><span>123</span> </template>
-<script lang="ts"></script>
+<script setup lang="ts"></script>

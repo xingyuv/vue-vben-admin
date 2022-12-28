@@ -17,19 +17,12 @@
     </template> -->
   </BasicDrawer>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicDrawer } from '@/components/Drawer'
-export default defineComponent({
-  components: { BasicDrawer },
-  setup() {
-    return {
-      handleOk: () => {
-        console.log('=====================')
-        console.log('ok')
-        console.log('======================')
-      }
-    }
-  }
-})
+
+const handleOk = () => {
+  console.log('=====================')
+  console.log('ok')
+  console.log('======================')
+}
 </script>

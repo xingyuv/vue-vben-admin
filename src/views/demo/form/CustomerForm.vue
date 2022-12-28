@@ -3,20 +3,22 @@
     <CollapseContainer title="自定义表单">
       <BasicForm @register="register" @submit="handleSubmit">
         <template #f3="{ model, field }">
-          <a-input v-model:value="model[field]" placeholder="自定义slot" />
+          <Input v-model:value="model[field]" placeholder="自定义slot" />
         </template>
       </BasicForm>
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+
+<script setup lang="ts">
+import { h } from 'vue'
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container/index'
 import { useMessage } from '@/hooks/web/useMessage'
 import { Input } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'
 
+const { createMessage } = useMessage()
 const schemas: FormSchema[] = [
   {
     field: 'field1',
@@ -61,25 +63,14 @@ const schemas: FormSchema[] = [
     rules: [{ required: true }]
   }
 ]
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper, [Input.name]: Input },
-  setup() {
-    const { createMessage } = useMessage()
-    const [register, { setProps }] = useForm({
-      labelWidth: 120,
-      schemas,
-      actionColOptions: {
-        span: 24
-      }
-    })
-    return {
-      register,
-      schemas,
-      handleSubmit: (values: any) => {
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      },
-      setProps
-    }
+const [register] = useForm({
+  labelWidth: 120,
+  schemas,
+  actionColOptions: {
+    span: 24
   }
 })
+const handleSubmit = (values: any) => {
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

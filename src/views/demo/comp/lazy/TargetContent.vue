@@ -6,14 +6,6 @@
     <CardMeta title="懒加载组件" />
   </Card>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { Card } from 'ant-design-vue'
-
-export default defineComponent({
-  components: { CardMeta: Card.Meta, Card },
-  setup() {
-    return {}
-  }
-})
+<script setup lang="ts">
+import { Card, CardMeta } from 'ant-design-vue'
 </script>

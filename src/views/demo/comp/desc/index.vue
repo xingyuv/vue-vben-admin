@@ -22,11 +22,9 @@
     <Description @register="register1" class="mt-4" />
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { Description, DescItem, useDescription } from '@/components/Description/index'
 import { PageWrapper } from '@/components/Page'
-
 const mockData: Recordable = {
   username: 'test',
   nickName: 'VB',
@@ -63,23 +61,16 @@ const schema: DescItem[] = [
     label: '地址'
   }
 ]
-export default defineComponent({
-  components: { Description, PageWrapper },
-  setup() {
-    const [register] = useDescription({
-      title: 'useDescription',
-      data: mockData,
-      schema: schema
-    })
+const [register] = useDescription({
+  title: 'useDescription',
+  data: mockData,
+  schema: schema
+})
 
-    const [register1] = useDescription({
-      title: '无边框',
-      bordered: false,
-      data: mockData,
-      schema: schema
-    })
-
-    return { mockData, schema, register, register1 }
-  }
+const [register1] = useDescription({
+  title: '无边框',
+  bordered: false,
+  data: mockData,
+  schema: schema
 })
 </script>

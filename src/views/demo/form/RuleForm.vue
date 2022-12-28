@@ -12,13 +12,14 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
 import { isAccountExist } from '@/api/demo/system'
+
+const { createMessage } = useMessage()
 
 const schemas: FormSchema[] = [
   {
@@ -202,57 +203,39 @@ const schemas: FormSchema[] = [
     ]
   }
 ]
-
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper },
-  setup() {
-    const { createMessage } = useMessage()
-    const [
-      register,
-      { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }
-    ] = useForm({
-      labelWidth: 120,
-      schemas,
-      actionColOptions: {
-        span: 24
-      }
-    })
-    async function validateForm() {
-      try {
-        const res = await validateFields()
-        console.log('passing', res)
-      } catch (error) {
-        console.log('not passing', error)
-      }
+const [register, { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }] =
+  useForm({
+    labelWidth: 120,
+    schemas,
+    actionColOptions: {
+      span: 24
     }
-    async function resetValidate() {
-      clearValidate()
-    }
-    function getFormValues() {
-      const values = getFieldsValue()
-      createMessage.success('values:' + JSON.stringify(values))
-    }
-    function setFormValues() {
-      setFieldsValue({
-        field1: 1111,
-        field5: ['1'],
-        field7: '1',
-        field33: '2020-12-12',
-        field3: '2020-12-12'
-      })
-    }
-    return {
-      register,
-      schemas,
-      handleSubmit: (values: any) => {
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      },
-      getFormValues,
-      setFormValues,
-      validateForm,
-      resetValidate,
-      resetFields
-    }
+  })
+async function validateForm() {
+  try {
+    const res = await validateFields()
+    console.log('passing', res)
+  } catch (error) {
+    console.log('not passing', error)
   }
-})
+}
+async function resetValidate() {
+  clearValidate()
+}
+function getFormValues() {
+  const values = getFieldsValue()
+  createMessage.success('values:' + JSON.stringify(values))
+}
+function setFormValues() {
+  setFieldsValue({
+    field1: 1111,
+    field5: ['1'],
+    field7: '1',
+    field33: '2020-12-12',
+    field3: '2020-12-12'
+  })
+}
+const handleSubmit = (values: any) => {
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

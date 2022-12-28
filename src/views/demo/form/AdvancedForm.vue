@@ -9,8 +9,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container'
 import { PageWrapper } from '@/components/Page'
@@ -111,7 +110,6 @@ const getSchamas = (): FormSchema[] => {
     // },
   ]
 }
-
 function getAppendSchemas(): FormSchema[] {
   return [
     {
@@ -148,48 +146,40 @@ function getAppendSchemas(): FormSchema[] {
     }
   ]
 }
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper },
-  setup() {
-    const [register] = useForm({
-      labelWidth: 120,
-      schemas: getSchamas(),
-      actionColOptions: {
-        span: 24
-      },
-      compact: true,
-      showAdvancedButton: true
-    })
-    const extraSchemas: FormSchema[] = []
-    for (let i = 14; i < 30; i++) {
-      extraSchemas.push({
-        field: 'field' + i,
-        component: 'Input',
-        label: '字段' + i,
-        colProps: {
-          span: 8
-        }
-      })
+
+const [register] = useForm({
+  labelWidth: 120,
+  schemas: getSchamas(),
+  actionColOptions: {
+    span: 24
+  },
+  compact: true,
+  showAdvancedButton: true
+})
+const extraSchemas: FormSchema[] = []
+for (let i = 14; i < 30; i++) {
+  extraSchemas.push({
+    field: 'field' + i,
+    component: 'Input',
+    label: '字段' + i,
+    colProps: {
+      span: 8
     }
-    const [register1] = useForm({
-      labelWidth: 120,
-      schemas: [
-        ...getSchamas(),
-        ...getAppendSchemas(),
-        { field: '', component: 'Divider', label: '更多字段' },
-        ...extraSchemas
-      ],
-      actionColOptions: {
-        span: 24
-      },
-      compact: true,
-      showAdvancedButton: true,
-      alwaysShowLines: 2
-    })
-    return {
-      register,
-      register1
-    }
-  }
+  })
+}
+const [register1] = useForm({
+  labelWidth: 120,
+  schemas: [
+    ...getSchamas(),
+    ...getAppendSchemas(),
+    { field: '', component: 'Divider', label: '更多字段' },
+    ...extraSchemas
+  ],
+  actionColOptions: {
+    span: 24
+  },
+  compact: true,
+  showAdvancedButton: true,
+  alwaysShowLines: 2
 })
 </script>

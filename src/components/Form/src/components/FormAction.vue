@@ -3,7 +3,7 @@
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
       <FormItem>
         <slot name="resetBefore"></slot>
-        <Button
+        <AButton
           type="default"
           class="mr-2"
           v-bind="getResetBtnOptions"
@@ -11,10 +11,10 @@
           v-if="showResetButton"
         >
           {{ getResetBtnOptions.text }}
-        </Button>
+        </AButton>
         <slot name="submitBefore"></slot>
 
-        <Button
+        <AButton
           type="primary"
           class="mr-2"
           v-bind="getSubmitBtnOptions"
@@ -22,10 +22,10 @@
           v-if="showSubmitButton"
         >
           {{ getSubmitBtnOptions.text }}
-        </Button>
+        </AButton>
 
         <slot name="advanceBefore"></slot>
-        <Button
+        <AButton
           type="link"
           size="small"
           @click="toggleAdvanced"
@@ -33,7 +33,7 @@
         >
           {{ isAdvanced ? t('component.form.putAway') : t('component.form.unfold') }}
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
-        </Button>
+        </AButton>
         <slot name="advanceAfter"></slot>
       </FormItem>
     </div>
@@ -56,7 +56,7 @@ export default defineComponent({
   name: 'BasicFormAction',
   components: {
     FormItem: Form.Item,
-    Button,
+    AButton: Button,
     BasicArrow,
     [Col.name]: Col
   },

@@ -9,20 +9,8 @@
     <a-button type="primary" @click="setModalProps"> 从内部修改title </a-button>
   </BasicModal>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicModal, useModalInner } from '@/components/Modal'
-export default defineComponent({
-  components: { BasicModal },
-  setup() {
-    const [register, { closeModal, setModalProps }] = useModalInner()
-    return {
-      register,
-      closeModal,
-      setModalProps: () => {
-        setModalProps({ title: 'Modal New Title' })
-      }
-    }
-  }
-})
+
+const [register, { closeModal, setModalProps }] = useModalInner()
 </script>

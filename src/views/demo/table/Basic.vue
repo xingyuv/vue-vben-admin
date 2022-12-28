@@ -28,53 +28,37 @@
     </BasicTable>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import { BasicTable, ColumnChangeParam } from '@/components/Table'
 import { getBasicColumns, getBasicData } from './tableData'
 
-export default defineComponent({
-  components: { BasicTable },
-  setup() {
-    const canResize = ref(false)
-    const loading = ref(false)
-    const striped = ref(true)
-    const border = ref(true)
-    const pagination = ref<any>(false)
-    function toggleCanResize() {
-      canResize.value = !canResize.value
-    }
-    function toggleStriped() {
-      striped.value = !striped.value
-    }
-    function toggleLoading() {
-      loading.value = true
-      setTimeout(() => {
-        loading.value = false
-        pagination.value = { pageSize: 20 }
-      }, 3000)
-    }
-    function toggleBorder() {
-      border.value = !border.value
-    }
+const columns = getBasicColumns()
+const data = getBasicData()
 
-    function handleColumnChange(data: ColumnChangeParam[]) {
-      console.log('ColumnChanged', data)
-    }
-    return {
-      columns: getBasicColumns(),
-      data: getBasicData(),
-      canResize,
-      loading,
-      striped,
-      border,
-      toggleStriped,
-      toggleCanResize,
-      toggleLoading,
-      toggleBorder,
-      pagination,
-      handleColumnChange
-    }
-  }
-})
+const canResize = ref(false)
+const loading = ref(false)
+const striped = ref(true)
+const border = ref(true)
+const pagination = ref<any>(false)
+function toggleCanResize() {
+  canResize.value = !canResize.value
+}
+function toggleStriped() {
+  striped.value = !striped.value
+}
+function toggleLoading() {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+    pagination.value = { pageSize: 20 }
+  }, 3000)
+}
+function toggleBorder() {
+  border.value = !border.value
+}
+
+function handleColumnChange(data: ColumnChangeParam[]) {
+  console.log('ColumnChanged', data)
+}
 </script>

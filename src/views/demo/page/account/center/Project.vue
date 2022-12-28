@@ -5,7 +5,7 @@
         <Col :span="6">
           <ListItem>
             <Card :hoverable="true" :class="`${prefixCls}__card`">
-              <img :src="demoImg" />
+              <img src="@/assets/images/demo.png" />
               <div :class="`${prefixCls}__card-title`">
                 {{ item.title }}
               </div>
@@ -21,7 +21,6 @@
 </template>
 <script setup lang="ts">
 import { List, ListItem, Card, Row, Col } from 'ant-design-vue'
-import demoImg from '@/assets/images/demo.png'
 import { projectList } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
 

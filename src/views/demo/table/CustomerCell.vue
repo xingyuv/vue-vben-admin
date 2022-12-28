@@ -27,11 +27,11 @@
     </BasicTable>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicTable, useTable, BasicColumn, TableImg } from '@/components/Table'
 import { Tag, Avatar } from 'ant-design-vue'
 import { demoListApi } from '@/api/demo/table'
+
 const columns: BasicColumn[] = [
   {
     title: 'ID',
@@ -88,21 +88,13 @@ const columns: BasicColumn[] = [
     dataIndex: 'endTime'
   }
 ]
-export default defineComponent({
-  components: { BasicTable, TableImg, Tag, Avatar },
-  setup() {
-    const [registerTable] = useTable({
-      title: '自定义列内容',
-      titleHelpMessage: '表格中所有头像、图片均为mock生成，仅用于演示图片占位',
-      api: demoListApi,
-      columns: columns,
-      bordered: true,
-      showTableSetting: true
-    })
 
-    return {
-      registerTable
-    }
-  }
+const [registerTable] = useTable({
+  title: '自定义列内容',
+  titleHelpMessage: '表格中所有头像、图片均为mock生成，仅用于演示图片占位',
+  api: demoListApi,
+  columns: columns,
+  bordered: true,
+  showTableSetting: true
 })
 </script>

@@ -10,7 +10,7 @@
         @reset="handleReset"
       >
         <template #selectA="{ model, field }">
-          <a-select
+          <Select
             :options="optionsA"
             mode="multiple"
             v-model:value="model[field]"
@@ -19,7 +19,7 @@
           />
         </template>
         <template #selectB="{ model, field }">
-          <a-select
+          <Select
             :options="optionsB"
             mode="multiple"
             v-model:value="model[field]"
@@ -55,13 +55,12 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { computed, defineComponent, unref, ref } from 'vue'
+<script setup lang="ts">
+import { computed, unref, ref } from 'vue'
 import { BasicForm, FormSchema, ApiSelect } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
-
 import { optionsListApi } from '@/api/demo/select'
 import { useDebounceFn } from '@vueuse/core'
 import { treeOptionsListApi } from '@/api/demo/tree'
@@ -72,7 +71,6 @@ const valueSelectA = ref<string[]>([])
 const valueSelectB = ref<string[]>([])
 const options = ref<Recordable[]>([])
 for (let i = 1; i < 10; i++) options.value.push({ label: '选项' + i, value: `${i}` })
-
 const optionsA = computed(() => {
   return cloneDeep(unref(options)).map((op) => {
     op.disabled = unref(valueSelectB).indexOf(op.value) !== -1
@@ -85,7 +83,6 @@ const optionsB = computed(() => {
     return op
   })
 })
-
 const provincesOptions = [
   {
     id: 'guangdong',
@@ -136,7 +133,6 @@ const citiesOptionsData = {
     }
   ]
 }
-
 const schemas: FormSchema[] = [
   {
     field: 'divider-basic',
@@ -630,38 +626,22 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper, ApiSelect, ASelect: Select },
-  setup() {
-    const check = ref(null)
-    const { createMessage } = useMessage()
-    const keyword = ref<string>('')
-    const searchParams = computed<Recordable>(() => {
-      return { keyword: unref(keyword) }
-    })
-
-    function onSearch(value: string) {
-      keyword.value = value
-    }
-    return {
-      schemas,
-      optionsListApi,
-      optionsA,
-      optionsB,
-      valueSelectA,
-      valueSelectB,
-      onSearch: useDebounceFn(onSearch, 300),
-      searchParams,
-      handleReset: () => {
-        keyword.value = ''
-      },
-      handleSubmit: (values: any) => {
-        console.log('values', values)
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      },
-      check
-    }
-  }
+const { createMessage } = useMessage()
+const keyword = ref<string>('')
+const searchParams = computed<Recordable>(() => {
+  return { keyword: unref(keyword) }
 })
+
+function search(value: string) {
+  keyword.value = value
+}
+const onSearch = useDebounceFn(search, 300)
+
+const handleReset = () => {
+  keyword.value = ''
+}
+const handleSubmit = (values: any) => {
+  console.log('values', values)
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

@@ -59,8 +59,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container/index'
 import { useMessage } from '@/hooks/web/useMessage'
@@ -212,57 +211,46 @@ const schemas: FormSchema[] = [
   }
 ]
 
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper },
-  setup() {
-    const { createMessage } = useMessage()
+const { createMessage } = useMessage()
 
-    const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
-      labelWidth: 120,
-      schemas,
-      actionColOptions: {
-        span: 24
-      },
-      fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']]
-    })
-
-    async function handleLoad() {
-      const promiseFn = function () {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve({
-              field9: ['430000', '430100', '430102'],
-              province: '湖南省',
-              city: '长沙市',
-              district: '岳麓区'
-            })
-          }, 1000)
-        })
-      }
-
-      const item = await promiseFn()
-
-      const { field9, province, city, district } = item as any
-      await updateSchema({
-        field: 'field9',
-        componentProps: {
-          displayRenderArray: [province, city, district]
-        }
-      })
-      await setFieldsValue({
-        field9
-      })
-    }
-
-    return {
-      register,
-      schemas,
-      handleSubmit: (values: Recordable) => {
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      },
-      setProps,
-      handleLoad
-    }
-  }
+const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
+  labelWidth: 120,
+  schemas,
+  actionColOptions: {
+    span: 24
+  },
+  fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']]
 })
+
+async function handleLoad() {
+  const promiseFn = function () {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          field9: ['430000', '430100', '430102'],
+          province: '湖南省',
+          city: '长沙市',
+          district: '岳麓区'
+        })
+      }, 1000)
+    })
+  }
+
+  const item = await promiseFn()
+
+  const { field9, province, city, district } = item as any
+  await updateSchema({
+    field: 'field9',
+    componentProps: {
+      displayRenderArray: [province, city, district]
+    }
+  })
+  await setFieldsValue({
+    field9
+  })
+}
+
+const handleSubmit = (values: Recordable) => {
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

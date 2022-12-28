@@ -11,13 +11,15 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+<script setup lang="ts">
+import { h } from 'vue'
 import { BasicForm, FormSchema } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container/index'
 import { useMessage } from '@/hooks/web/useMessage'
 import { MarkDown } from '@/components/Markdown'
 import { PageWrapper } from '@/components/Page'
+
+const { createMessage } = useMessage()
 
 const schemas: FormSchema[] = [
   {
@@ -43,17 +45,8 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper },
-  setup() {
-    const { createMessage } = useMessage()
 
-    return {
-      schemas,
-      handleSubmit: (values: any) => {
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      }
-    }
-  }
-})
+const handleSubmit = (values: any) => {
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

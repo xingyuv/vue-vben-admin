@@ -13,9 +13,9 @@
     </Result>
     <div class="result-success__content">
       <Descriptions title="项目名称">
-        <DescriptionItem label="项目 ID"> 111222 </DescriptionItem>
-        <DescriptionItem label="负责人"> Vben </DescriptionItem>
-        <DescriptionItem label="生效时间"> 2016-12-12 ~ 2017-12-12 </DescriptionItem>
+        <DescriptionsItem label="项目 ID"> 111222 </DescriptionsItem>
+        <DescriptionsItem label="负责人"> Vben </DescriptionsItem>
+        <DescriptionsItem label="生效时间"> 2016-12-12 ~ 2017-12-12 </DescriptionsItem>
       </Descriptions>
       <Steps :current="1" progress-dot size="small">
         <Step title="创建项目">
@@ -35,18 +35,8 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { Result, Steps, Descriptions } from 'ant-design-vue'
-export default defineComponent({
-  components: {
-    Result,
-    Steps,
-    Step: Steps.Step,
-    Descriptions,
-    DescriptionItem: Descriptions.Item
-  }
-})
+<script setup lang="ts">
+import { Result, Steps, Step, Descriptions, DescriptionsItem } from 'ant-design-vue'
 </script>
 <style lang="less" scoped>
 .result-success {
