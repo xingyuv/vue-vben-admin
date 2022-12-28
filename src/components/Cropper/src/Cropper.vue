@@ -16,7 +16,7 @@ import { onMounted, ref, unref, computed, onUnmounted } from 'vue'
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
 import { useDesign } from '@/hooks/web/useDesign'
-import { useDebounceFn } from '@vueuse/shared'
+import { useDebounceFn } from '@vueuse/core'
 import src from 'resize-observer-polyfill'
 
 const emit = defineEmits(['cropend', 'ready', 'cropendError'])
