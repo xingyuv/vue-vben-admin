@@ -1,7 +1,7 @@
 <template>
   <PageWrapper v-loading="loadingRef" loading-tip="加载中..." title="Loading组件示例">
     <div ref="wrapEl">
-      <a-alert message="组件方式" />
+      <Alert message="组件方式" />
       <a-button class="my-4 mr-4" type="primary" @click="openCompFullLoading">
         全屏 Loading
       </a-button>

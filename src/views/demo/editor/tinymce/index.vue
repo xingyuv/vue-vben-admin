@@ -1,15 +1,3 @@
 <template>
-  <PageWrapper title="富文本组件示例">
-    <Tinymce v-model="value" @change="handleChange" width="100%" />
-  </PageWrapper>
+  <span>已删除</span>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue'
-import { Tinymce } from '@/components/Tinymce/index'
-import { PageWrapper } from '@/components/Page'
-
-const value = ref('hello world!')
-function handleChange(value: string) {
-  console.log(value)
-}
-</script>

@@ -20,7 +20,7 @@
 </template>
 <script setup lang="ts" name="TabsFormDemo">
 import { ref } from 'vue'
-import { Tabs } from 'ant-design-vue'
+import { Tabs, TabPane } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
