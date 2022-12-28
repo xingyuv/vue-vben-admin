@@ -31,8 +31,7 @@
     </BasicTable>
   </div>
 </template>
-
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { ErrorLogInfo } from '/#/store'
 import { watch, ref, nextTick } from 'vue'
 import DetailModal from './DetailModal.vue'

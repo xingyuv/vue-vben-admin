@@ -4,7 +4,7 @@
     <p>打开浏览器的network面板，可以看到发出了六次请求</p>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { testRetry } from '@/api/sys/user'
 // @ts-ignore
 const handleClick = async () => {

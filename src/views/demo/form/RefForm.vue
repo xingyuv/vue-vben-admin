@@ -169,7 +169,7 @@ const schemas: FormSchema[] = [
 export default defineComponent({
   components: { BasicForm, CollapseContainer, PageWrapper },
   setup() {
-    const formElRef = ref<Nullable<FormActionType>>(null)
+    const formElRef = ref<FormActionType>()
     const { createMessage } = useMessage()
     return {
       formElRef,

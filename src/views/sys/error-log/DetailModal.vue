@@ -3,7 +3,7 @@
     <Description :data="info" @register="register" />
   </BasicModal>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import type { ErrorLogInfo } from '/#/store'
 import { BasicModal } from '@/components/Modal/index'
