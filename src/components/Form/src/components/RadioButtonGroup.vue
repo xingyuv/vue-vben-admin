@@ -12,10 +12,13 @@
 </template>
 <script setup lang="ts" name="RadioButtonGroup">
 import { PropType, computed } from 'vue'
-import { RadioButton, RadioGroup } from 'ant-design-vue'
+import { Radio } from 'ant-design-vue'
 import { isString } from '@/utils/is'
 import { useRuleFormItem } from '@/hooks/component/useFormItem'
 import { useAttrs } from '@/hooks/core/useAttrs'
+
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
 
 type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean }
 type RadioItem = string | OptionsItem

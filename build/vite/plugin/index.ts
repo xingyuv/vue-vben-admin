@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import windiCSS from 'vite-plugin-windicss'
+import progress from 'vite-plugin-progress'
 import purgeIcons from 'vite-plugin-purge-icons'
 import VitePluginCertificate from 'vite-plugin-mkcert'
 import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
@@ -32,6 +33,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     vueJsx(),
     // support name
     vueSetupExtend(),
+    progress(),
     VitePluginCertificate({
       source: 'coding'
     })

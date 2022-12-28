@@ -15,12 +15,14 @@
 </template>
 <script setup lang="ts" name="ApiRadioGroup">
 import { PropType, ref, watchEffect, computed, unref, watch } from 'vue'
-import { Radio, RadioButton, RadioGroup } from 'ant-design-vue'
+import { Radio } from 'ant-design-vue'
 import { isFunction } from '@/utils/is'
 import { useRuleFormItem } from '@/hooks/component/useFormItem'
 import { useAttrs } from '@/hooks/core/useAttrs'
 import { propTypes } from '@/utils/propTypes'
 import { get, omit } from 'lodash-es'
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
 
 type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean }
 
