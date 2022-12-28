@@ -1,16 +1,16 @@
 <template>
   <div :class="prefixCls">
-    <a-row :class="`${prefixCls}-top`">
-      <a-col :span="9" :class="`${prefixCls}-col`">
-        <a-row>
-          <a-col :span="8">
+    <Row :class="`${prefixCls}-top`">
+      <Col :span="9" :class="`${prefixCls}-col`">
+        <Row>
+          <Col :span="8">
             <div :class="`${prefixCls}-top__avatar`">
               <img width="70" :src="avatar" />
               <span>Vben</span>
               <div>海纳百川，有容乃大</div>
             </div>
-          </a-col>
-          <a-col :span="16">
+          </Col>
+          <Col :span="16">
             <div :class="`${prefixCls}-top__detail`">
               <template v-for="detail in details" :key="detail.title">
                 <p>
@@ -19,10 +19,10 @@
                 </p>
               </template>
             </div>
-          </a-col>
-        </a-row>
-      </a-col>
-      <a-col :span="7" :class="`${prefixCls}-col`">
+          </Col>
+        </Row>
+      </Col>
+      <Col :span="7" :class="`${prefixCls}-col`">
         <CollapseContainer title="标签" :canExpan="false">
           <template v-for="tag in tags" :key="tag">
             <Tag class="mb-2">
@@ -30,70 +30,50 @@
             </Tag>
           </template>
         </CollapseContainer>
-      </a-col>
-      <a-col :span="8" :class="`${prefixCls}-col`">
+      </Col>
+      <Col :span="8" :class="`${prefixCls}-col`">
         <CollapseContainer :class="`${prefixCls}-top__team`" title="团队" :canExpan="false">
           <div v-for="(team, index) in teams" :key="index" :class="`${prefixCls}-top__team-item`">
             <Icon :icon="team.icon" :color="team.color" />
             <span>{{ team.title }}</span>
           </div>
         </CollapseContainer>
-      </a-col>
-    </a-row>
+      </Col>
+    </Row>
     <div :class="`${prefixCls}-bottom`">
       <Tabs>
         <template v-for="item in achieveList" :key="item.key">
           <TabPane :tab="item.name">
-            <component :is="item.component" />
+            <Article v-if="item.component == 'Article'" />
+            <Application v-if="item.component == 'Application'" />
+            <Project v-if="item.component == 'Project'" />
           </TabPane>
         </template>
       </Tabs>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { Tag, Tabs, Row, Col } from 'ant-design-vue'
-import { defineComponent, computed } from 'vue'
+<script lang="ts" setup>
+import { Tag, Tabs, Row, Col, TabPane } from 'ant-design-vue'
+import { computed } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'
 import Icon from '@/components/Icon/index'
 import Article from './Article.vue'
 import Application from './Application.vue'
 import Project from './Project.vue'
-
 import headerImg from '@/assets/images/header.jpg'
 import { tags, teams, details, achieveList } from './data'
 import { useUserStore } from '@/store/modules/user'
+import { useDesign } from '@/hooks/web/useDesign'
 
-export default defineComponent({
-  components: {
-    CollapseContainer,
-    Icon,
-    Tag,
-    Tabs,
-    TabPane: Tabs.TabPane,
-    Article,
-    Application,
-    Project,
-    [Row.name]: Row,
-    [Col.name]: Col
-  },
-  setup() {
-    const userStore = useUserStore()
-    const avatar = computed(() => userStore.getUserInfo.avatar || headerImg)
-    return {
-      prefixCls: 'account-center',
-      avatar,
-      tags,
-      teams,
-      details,
-      achieveList
-    }
-  }
-})
+const { prefixCls } = useDesign('account-center')
+const userStore = useUserStore()
+const avatar = computed(() => userStore.getUserInfo.avatar || headerImg)
 </script>
 <style lang="less" scoped>
-.account-center {
+@prefix-cls: ~'@{namespace}-account-center';
+
+.@{prefix-cls} {
   &-col:not(:last-child) {
     padding: 0 10px;
 
