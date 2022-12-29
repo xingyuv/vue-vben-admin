@@ -117,7 +117,7 @@ defineExpose({ openModal: openModal.bind(null, true), closeModal })
     cursor: pointer;
     transition: opacity 0.4s;
 
-    ::v-deep(svg) {
+    :deep(svg) {
       margin: auto;
     }
   }
