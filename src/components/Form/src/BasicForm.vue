@@ -317,6 +317,26 @@ const getFormActionBindProps = computed((): Recordable => ({ ...getProps.value, 
     }
   }
 
+  .ant-form-item-label > label {
+    font-size: 13px;
+  }
+
+  .ant-form-item .ant-select {
+    font-size: 13px;
+  }
+
+  .ant-select-item-option-selected {
+    font-size: 13px;
+  }
+
+  .ant-select-item-option-content {
+    font-size: 13px;
+  }
+
+  .ant-input {
+    font-size: 13px;
+  }
+
   .ant-form-explain {
     font-size: 14px;
   }

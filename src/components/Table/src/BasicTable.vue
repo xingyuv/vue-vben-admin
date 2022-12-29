@@ -21,6 +21,7 @@
       :rowClassName="getRowClassName"
       v-show="getEmptyDataIsShowTable"
       @change="handleTableChange"
+      @resizeColumn="handleResizeColumn"
     >
       <template #[item]="data" v-for="item in Object.keys(slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
@@ -266,6 +267,10 @@ const getEmptyDataIsShowTable = computed(() => {
 
 function setProps(props: Partial<BasicTableProps>) {
   innerPropsRef.value = { ...unref(innerPropsRef), ...props }
+}
+
+const handleResizeColumn = (w, col) => {
+  col.width = w
 }
 
 const tableAction: TableActionType = {
