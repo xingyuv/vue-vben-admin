@@ -30,11 +30,14 @@ import { get, omit } from 'lodash-es'
 import { LoadingOutlined } from '@ant-design/icons-vue'
 import { useI18n } from '@/hooks/web/useI18n'
 import { propTypes } from '@/utils/propTypes'
+import { SelectValue } from 'ant-design-vue/lib/select'
 
 type OptionsItem = { label: string; value: string; disabled?: boolean }
 
 const props = defineProps({
-  value: [Array, Object, String, Number],
+  value: {
+    type: [Array, Object, String, Number] as PropType<SelectValue>
+  },
   numberToString: propTypes.bool,
   api: {
     type: Function as PropType<(arg?: Recordable) => Promise<OptionsItem[]>>,

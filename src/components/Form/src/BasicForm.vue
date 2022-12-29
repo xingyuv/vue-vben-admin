@@ -12,7 +12,7 @@
         <FormItem
           :isAdvanced="fieldsIsAdvancedMap[schema.field]"
           :tableAction="tableAction"
-          :formActionType="formActionType"
+          :formActionType="formActionType as any"
           :schema="schema"
           :formProps="getProps"
           :allDefaultValues="defaultValueRef"
@@ -85,7 +85,11 @@ const { prefixCls } = useDesign('basic-form')
 
 // Get the basic configuration of the form
 const getProps = computed((): FormProps => {
-  return { ...props, ...unref(propsRef) } as FormProps
+  let mergeProps = { ...props, ...unref(propsRef) } as FormProps
+  if (mergeProps.labelWidth) {
+    mergeProps.labelCol = undefined
+  }
+  return mergeProps
 })
 
 const getFormClass = computed(() => {
