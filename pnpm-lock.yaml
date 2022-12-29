@@ -66,6 +66,7 @@ specifiers:
   rimraf: ^3.0.2
   rollup: ^3.8.1
   rollup-plugin-visualizer: ^5.8.3
+  sass: ^1.57.1
   sortablejs: ^1.15.0
   stylelint: ^14.16.0
   stylelint-config-prettier: ^9.0.4
@@ -95,6 +96,8 @@ specifiers:
   vue-router: ^4.1.6
   vue-tsc: ^1.0.18
   vue-types: ^5.0.2
+  vxe-table: ^4.3.7
+  xe-utils: ^3.5.7
   xlsx: ^0.18.5
 
 dependencies:
@@ -124,6 +127,8 @@ dependencies:
   vue-json-pretty: 2.2.3_vue@3.2.45
   vue-router: 4.1.6_vue@3.2.45
   vue-types: 5.0.2_vue@3.2.45
+  vxe-table: 4.3.7_vue@3.2.45+xe-utils@3.5.7
+  xe-utils: 3.5.7
   xlsx: 0.18.5
 
 devDependencies:
@@ -172,6 +177,7 @@ devDependencies:
   rimraf: 3.0.2
   rollup: 3.9.0
   rollup-plugin-visualizer: 5.8.3_rollup@3.9.0
+  sass: 1.57.1
   stylelint: 14.16.0
   stylelint-config-prettier: 9.0.4_stylelint@14.16.0
   stylelint-config-recommended: 9.0.0_stylelint@14.16.0
@@ -181,7 +187,7 @@ devDependencies:
   terser: 5.16.1
   typescript: 4.9.4
   unplugin-vue-setup-extend-plus: 0.4.5
-  vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+  vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
   vite-plugin-compression: 0.5.1_vite@4.0.3
   vite-plugin-html: 3.2.0_vite@4.0.3
   vite-plugin-imagemin: 0.6.1_vite@4.0.3
@@ -1888,7 +1894,7 @@ packages:
       esbuild-plugin-alias: 0.2.1
       picocolors: 1.0.0
       tinycolor2: 1.4.2
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2524,7 +2530,7 @@ packages:
       regenerator-runtime: 0.13.11
       systemjs: 6.13.0
       terser: 5.16.1
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     dev: true
 
   /@vitejs/plugin-vue-jsx/3.0.0_vite@4.0.3+vue@3.2.45:
@@ -2537,7 +2543,7 @@ packages:
       '@babel/core': 7.20.5
       '@babel/plugin-transform-typescript': 7.20.2_@babel+core@7.20.5
       '@vue/babel-plugin-jsx': 1.1.1_@babel+core@7.20.5
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
       vue: registry.npmmirror.com/vue/3.2.45
     transitivePeerDependencies:
       - supports-color
@@ -2550,7 +2556,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
       vue: registry.npmmirror.com/vue/3.2.45
     dev: true
 
@@ -6232,6 +6238,10 @@ packages:
       replace-ext: 1.0.1
     dev: true
 
+  /immutable/4.2.1:
+    resolution: {integrity: sha512-7WYV7Q5BTs0nlQm7tl92rDYYoyELLKHoDMBKhrxEoiV4mrfVdRz8hzPiYOzH7yWjzoVEamxRuAqhxL2PLRwZYQ==}
+    dev: true
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -8614,6 +8624,16 @@ packages:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
     dev: true
 
+  /sass/1.57.1:
+    resolution: {integrity: sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.2.1
+      source-map-js: 1.0.2
+    dev: true
+
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
@@ -9735,7 +9755,7 @@ packages:
       chalk: 4.1.2
       debug: 4.3.4
       fs-extra: registry.npmmirror.com/fs-extra/10.1.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9757,7 +9777,7 @@ packages:
       html-minifier-terser: 6.1.0
       node-html-parser: 5.4.2
       pathe: 0.2.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     dev: true
 
   /vite-plugin-imagemin/0.6.1_vite@4.0.3:
@@ -9788,7 +9808,7 @@ packages:
       imagemin-webp: 6.0.0
       jpegtran-bin: 6.0.1
       pathe: 0.2.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9803,7 +9823,7 @@ packages:
       axios: 0.21.4_debug@4.3.4
       debug: 4.3.4
       picocolors: 1.0.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -9826,7 +9846,7 @@ packages:
       fast-glob: 3.2.12
       mockjs: 1.1.0
       path-to-regexp: 6.2.1
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -9841,7 +9861,7 @@ packages:
       picocolors: 1.0.0
       progress: 2.0.3
       rd: 2.0.1
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     dev: true
 
   /vite-plugin-purge-icons/0.9.2_vite@4.0.3:
@@ -9853,7 +9873,7 @@ packages:
       '@purge-icons/core': 0.9.1
       '@purge-icons/generated': 0.9.0
       rollup-plugin-purge-icons: 0.9.1
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -9869,7 +9889,7 @@ packages:
       fast-glob: 3.2.12
       pretty-bytes: 6.0.0
       rollup: 3.9.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
       workbox-build: 6.5.4
       workbox-window: 6.5.4
     transitivePeerDependencies:
@@ -9889,7 +9909,7 @@ packages:
       fs-extra: registry.npmmirror.com/fs-extra/10.1.0
       magic-string: 0.25.9
       pathe: 0.2.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     dev: true
 
   /vite-plugin-svg-icons/2.0.1_vite@4.0.3:
@@ -9905,7 +9925,7 @@ packages:
       pathe: 0.2.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -9918,13 +9938,13 @@ packages:
       '@windicss/plugin-utils': 1.8.10
       debug: 4.3.4
       kolorist: 1.6.0
-      vite: 4.0.3_25ccpcpgpj6lg6lpj5keiqybuq
+      vite: 4.0.3_iouvmgz26vsjajv67objkpi6qi
       windicss: 3.5.6
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/4.0.3_25ccpcpgpj6lg6lpj5keiqybuq:
+  /vite/4.0.3_iouvmgz26vsjajv67objkpi6qi:
     resolution: {integrity: sha512-HvuNv1RdE7deIfQb8mPk51UKjqptO/4RXZ5yXSAvurd5xOckwS/gg8h9Tky3uSbnjYTgUm0hVCet1cyhKd73ZA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -9955,6 +9975,7 @@ packages:
       postcss: 8.4.20
       resolve: 1.22.1
       rollup: 3.9.0
+      sass: 1.57.1
       terser: 5.16.1
     optionalDependencies:
       fsevents: 2.3.2
@@ -10063,6 +10084,16 @@ packages:
     dependencies:
       is-plain-object: 5.0.0
       vue: registry.npmmirror.com/vue/3.2.45
+    dev: false
+
+  /vxe-table/4.3.7_vue@3.2.45+xe-utils@3.5.7:
+    resolution: {integrity: sha512-v+d7eEQ5uqtVTQCts4xkW0S15LZcIuEukYHGXI53SdoUj2gLFggPYAxQr1y659CM/ESRWPz9LNVHpd97KkjGHw==}
+    peerDependencies:
+      vue: ^3.2.28
+      xe-utils: ^3.5.0
+    dependencies:
+      vue: registry.npmmirror.com/vue/3.2.45
+      xe-utils: 3.5.7
     dev: false
 
   /warning/4.0.3:
@@ -10347,6 +10378,10 @@ packages:
       imurmurhash: 0.1.4
       signal-exit: 3.0.7
     dev: true
+
+  /xe-utils/3.5.7:
+    resolution: {integrity: sha512-3H+fDBKBR2wLJgyA7k9C/w1Xljx6Maml5ukV0WDY06HjYyGs2FEz6XhcwRCLIDXX4pBP3Gu0nX9DbCeuuRA2Ew==}
+    dev: false
 
   /xlsx/0.18.5:
     resolution: {integrity: sha512-dmg3LCjBPHZnQp5/F/+nnTa+miPJxUXB6vtk42YjBBKayDNagxGEeIdWApkYPOf3Z3pm3k62Knjzp7lMeTEtFQ==}
