@@ -15,7 +15,7 @@ import { setupGlobDirectives } from '@/directives'
 import { setupI18n } from '@/locales/setupI18n'
 import { registerGlobComp } from '@/components/registerGlobComp'
 import { isDevMode } from './utils/env'
-import VXETable from 'vxe-table'
+import { setupVxeTable } from '@/components/XTable/src/setupVxeTable'
 
 if (isDevMode()) {
   import('ant-design-vue/dist/antd.less')
@@ -61,7 +61,7 @@ async function bootstrap() {
   // https://next.router.vuejs.org/api/#isready
   await router.isReady()
 
-  app.use(VXETable)
+  setupVxeTable(app)
 
   app.mount('#app')
 }

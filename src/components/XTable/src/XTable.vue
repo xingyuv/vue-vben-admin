@@ -12,7 +12,6 @@
   </div>
 </template>
 <script lang="ts" setup name="XTable">
-import 'xe-utils'
 import type { XTableProps } from './type'
 import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
 import { isBoolean, isFunction } from '@/utils/is'

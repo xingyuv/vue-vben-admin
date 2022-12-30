@@ -2,14 +2,13 @@
  *  Introduces component library styles on demand.
  * https://github.com/anncwb/vite-plugin-style-import
  */
-import { createStyleImportPlugin, VxeTableResolve } from 'vite-plugin-style-import'
+import { createStyleImportPlugin } from 'vite-plugin-style-import'
 
 export function configStyleImportPlugin(_isBuild: boolean) {
   if (!_isBuild) {
     return []
   }
   const styleImportPlugin = createStyleImportPlugin({
-    resolves: [VxeTableResolve()],
     libs: [
       {
         libraryName: 'ant-design-vue',
