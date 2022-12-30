@@ -1,13 +1,20 @@
-import type { VxeGridProps } from 'vxe-table'
-import { VxeGridPropTypes } from 'vxe-table'
+import { VxeCrudSchemas } from '@/hooks/web/useCrudSchemas'
+import type { VxeGridProps, VxeGridPropTypes } from 'vxe-table'
 
 export type XTableProps<D = any> = VxeGridProps<D> & {
+  allSchemas?: VxeCrudSchemas
   getListApi?: Function
   deleteApi?: Function
   exportListApi?: Function
   params?: Object
-  title?: string
   pagination?: boolean | VxeGridPropTypes.PagerConfig
+  toolBar?: boolean | VxeGridPropTypes.ToolbarConfig
   afterFetch?: Function
 }
 export type XColumns = VxeGridPropTypes.Columns
+
+export type VxeTableColumn = {
+  field: string
+  title?: string
+  children?: VxeTableColumn[]
+} & Recordable

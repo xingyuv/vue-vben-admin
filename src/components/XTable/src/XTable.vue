@@ -60,18 +60,23 @@ const props = defineProps({
   }
 })
 const innerProps = ref<Partial<XTableProps>>()
+
 const getProps = computed(() => {
   const options = innerProps.value || props.options
   options.size = currentSize as any
+  getColumnsConfig(options)
   getProxyConfig(options)
   getPageConfig(options)
+  getToolBarConfig(options)
   // console.log(options);
   return {
     ...options,
     ...attrs
   }
 })
+
 const xGrid = ref<VxeGridInstance>() // 列表 Grid Ref
+
 const reload = () => {
   const g = unref(xGrid)
   if (!g) {
@@ -88,11 +93,39 @@ const getSearchData = () => {
   const queryParams = Object.assign({}, JSON.parse(JSON.stringify(g.getProxyInfo()?.form)))
   return queryParams
 }
+
+let proxyForm = false
+
+// columns
+const getColumnsConfig = (options: XTableProps) => {
+  const { allSchemas } = options
+  if (!allSchemas) return
+  if (allSchemas.printSchema) {
+    options.printConfig = {
+      columns: allSchemas.printSchema
+    }
+  }
+  if (allSchemas.formSchema) {
+    proxyForm = true
+    options.formConfig = {
+      enabled: true,
+      titleWidth: 100,
+      titleAlign: 'right',
+      items: allSchemas.searchSchema
+    }
+  }
+  if (allSchemas.tableSchema) {
+    options.columns = allSchemas.tableSchema
+  }
+}
+
+// 动态请求
 const getProxyConfig = (options: XTableProps) => {
   const { getListApi, proxyConfig, data, afterFetch } = options
   if (proxyConfig || data) return
   if (getListApi && isFunction(getListApi)) {
     options.proxyConfig = {
+      form: proxyForm,
       props: {
         result: 'list', // 配置响应结果列表字段
         total: 'total' // 配置响应结果总页数字段
@@ -117,6 +150,8 @@ const getProxyConfig = (options: XTableProps) => {
     }
   }
 }
+
+// 分页
 const getPageConfig = (options: XTableProps) => {
   const { pagination, pagerConfig } = options
   if (pagerConfig) return
@@ -146,6 +181,22 @@ const getPageConfig = (options: XTableProps) => {
     options.pagerConfig = pagination
   }
 }
+
+// tool bar
+const getToolBarConfig = (options: XTableProps) => {
+  const { toolBar, toolbarConfig } = options
+  if (toolbarConfig) return
+  if (toolBar) {
+    if (isBoolean(toolBar)) {
+      options.toolbarConfig = {
+        slots: { buttons: 'toolbar_buttons' }
+      }
+      return
+    }
+    options.toolbarConfig = toolBar
+  }
+}
+
 const setProps = (prop: Partial<XTableProps>) => {
   innerProps.value = { ...unref(innerProps), ...prop }
 }
