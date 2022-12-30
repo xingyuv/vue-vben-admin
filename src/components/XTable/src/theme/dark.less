@@ -1,7 +1,7 @@
 @prefix-cls: ~'@{namespace}-x-vxe-table';
 
 [data-theme='dark'] .@{prefix-cls} {
-  @fontColor: #c9d1d9;
+  @fontColor: #fff;
   @bgColor: #151515;
   @borderColor: #606060;
 
@@ -30,6 +30,15 @@
   .vxe-select {
     background-color: @bgColor;
     border-color: @borderColor;
+  }
+
+  .vxe-button--icon {
+    font-family: Verdana, Arial, Tahoma;
+    // background-color: #e5e7eb;
+  }
+
+  .vxe-button.size--medium.type--button.is--circle {
+    border: 0;
   }
 
   // 外边框
@@ -95,6 +104,18 @@
     color: @fontColor;
   }
 
+  .vxe-grid--form-wrapper,
+  .vxe-form--wrapper,
+  .vxe-form--item-content,
+  .vxe-input--inner,
+  .vxe-header--row {
+    background-color: #1d1d1d;
+  }
+
+  .vxe-form--item-title {
+    color: @fontColor;
+  }
+
   .vxe-table--render-default.border--default .vxe-table--header-wrapper,
   .vxe-table--render-default.border--full .vxe-table--header-wrapper,
   .vxe-table--render-default.border--outer .vxe-table--header-wrapper {
@@ -130,7 +151,10 @@
 
   .vxe-button {
     background-color: @bgColor;
-    border-color: @borderColor;
+  }
+
+  .vxe-button--content {
+    color: @fontColor;
   }
 
   .vxe-button.type--button:not(.is--disabled):active {

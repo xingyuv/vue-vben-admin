@@ -1,61 +1,34 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
-      <template #toolbar>
+    <XTable ref="xGrid" @register="registerTable">
+      <template #toolbar_buttons>
         <a-button type="primary" @click="handleCreate"> 新增角色 </a-button>
       </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                icon: 'clarity:note-edit-line',
-                onClick: handleEdit.bind(null, record)
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: '是否确认删除',
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record)
-                }
-              }
-            ]"
-          />
-        </template>
+      <template #actionbtns_default="{ row }">
+        <a-button type="link" @click="handleEdit(row)">
+          <Icon icon="clarity:note-edit-line" />
+        </a-button>
+        <a-button type="link" @click="handleDelete(row)">
+          <Icon icon="ant-design:delete-outlined" />
+        </a-button>
       </template>
-    </BasicTable>
+    </XTable>
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script setup lang="ts" name="RoleManagement">
-import { BasicTable, useTable, TableAction } from '@/components/Table'
+import { useXTable, XTable } from '@/components/XTable'
 import { getRoleListByPage } from '@/api/demo/system'
 import { useDrawer } from '@/components/Drawer'
 import RoleDrawer from './RoleDrawer.vue'
-import { columns, searchFormSchema } from './role.data'
+import { allSchemas } from './role.data'
+import { Icon } from '@/components/Icon'
 
 const [registerDrawer, { openDrawer }] = useDrawer()
-const [registerTable, { reload }] = useTable({
-  title: '角色列表',
-  api: getRoleListByPage,
-  columns,
-  formConfig: {
-    labelWidth: 120,
-    schemas: searchFormSchema
-  },
-  useSearchForm: true,
-  showTableSetting: true,
-  bordered: true,
-  showIndexColumn: false,
-  actionColumn: {
-    width: 80,
-    title: '操作',
-    dataIndex: 'action',
-    // slots: { customRender: 'action' },
-    fixed: undefined
-  }
+const [registerTable, { reload }] = useXTable({
+  allSchemas: allSchemas,
+  getListApi: getRoleListByPage,
+  pagination: true
 })
 
 function handleCreate() {

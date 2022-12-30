@@ -202,7 +202,7 @@ const filterTableSchema = (crudSchema: VxeCrudSchema): VxeGridPropTypes.Columns 
   // 操作栏插槽
   if (crudSchema.action && crudSchema.action == true) {
     const tableSchemaItem = {
-      title: crudSchema.actionTitle ? crudSchema.actionTitle : t('table.action'),
+      title: crudSchema.actionTitle ? crudSchema.actionTitle : t('common.action'),
       field: 'actionbtns',
       fixed: 'right' as unknown as VxeColumnPropTypes.Fixed,
       width: crudSchema.actionWidth ? crudSchema.actionWidth : '200px',
@@ -222,10 +222,11 @@ const filterFormSchema = (crudSchema: VxeCrudSchema): FormSchema[] => {
   eachTree(crudSchema.columns, (schemaItem: VxeCrudColumns) => {
     // 判断是否显示
     if (schemaItem?.isForm !== false && schemaItem?.form?.show !== false) {
+      console.info(schemaItem.form)
       // 默认为 input
       const formSchemaItem: FormSchema = {
-        component: schemaItem?.form?.component || 'Input',
         ...schemaItem.form,
+        component: schemaItem?.form?.component ? schemaItem.form.component : 'Input',
         field: schemaItem.field,
         label: (schemaItem.form?.label || schemaItem.title) as string
       }

@@ -127,7 +127,7 @@ const getProxyConfig = (options: XTableProps) => {
     options.proxyConfig = {
       form: proxyForm,
       props: {
-        result: 'list', // 配置响应结果列表字段
+        result: 'items', // 配置响应结果列表字段
         total: 'total' // 配置响应结果总页数字段
       },
       ajax: {
@@ -138,7 +138,7 @@ const getProxyConfig = (options: XTableProps) => {
           }
           const { currentPage, pageSize } = page
           queryParams.pageSize = currentPage
-          queryParams.pageNo = pageSize
+          queryParams.page = pageSize
 
           let res = await getListApi({ queryParams })
           if (afterFetch && isFunction(afterFetch)) {

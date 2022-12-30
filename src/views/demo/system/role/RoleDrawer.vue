@@ -24,7 +24,7 @@
 <script setup lang="ts" name="RoleDrawer">
 import { ref, computed, unref } from 'vue'
 import { BasicForm, useForm } from '@/components/Form/index'
-import { formSchema } from './role.data'
+import { allSchemas } from './role.data'
 import { BasicDrawer, useDrawerInner } from '@/components/Drawer'
 import { BasicTree, TreeItem } from '@/components/Tree'
 import { getMenuList } from '@/api/demo/system'
@@ -37,7 +37,7 @@ const treeData = ref<TreeItem[]>([])
 const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
   labelWidth: 90,
   baseColProps: { span: 24 },
-  schemas: formSchema,
+  schemas: allSchemas.formSchema,
   showActionButtonGroup: false
 })
 
