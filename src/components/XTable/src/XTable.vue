@@ -1,51 +1,58 @@
 <template>
-  <div class="m-2 p-2" :style="titleClass">
-    <div v-if="title" class="flex m-2">
-      <div class="ml-2 text-xl">{{ title }}</div>
-    </div>
-
-    <VxeGrid v-bind="getProps" ref="xGrid">
-      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
-        <slot :name="item" v-bind="data || {}"></slot>
-      </template>
-    </VxeGrid>
-  </div>
+  <VxeGrid v-bind="getProps" ref="xGrid" :class="`${prefixCls}`">
+    <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+      <slot :name="item" v-bind="data || {}"></slot>
+    </template>
+  </VxeGrid>
 </template>
 <script lang="ts" setup name="XTable">
 import type { XTableProps } from './type'
 import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
 import { isBoolean, isFunction } from '@/utils/is'
-import { VxeGridInstance } from 'vxe-table'
+import { SizeType, VxeGridInstance } from 'vxe-table'
 import { ThemeEnum } from '@/enums/appEnum'
 import { useAppStore } from '@/store/modules/app'
 import { useFormats, useInterceptor } from './hooks'
+import { useDesign } from '@/hooks/web/useDesign'
 
 useInterceptor()
 useFormats()
 
 const appStore = useAppStore()
-
+const { prefixCls } = useDesign('x-vxe-table')
 watch(
   () => appStore.getDarkMode,
   () => {
     if (appStore.getDarkMode == ThemeEnum.DARK) {
       import('./theme/dark.less')
     }
-    //刷新页面重置SCSS
+    // //刷新页面重置SCSS
     if (appStore.getDarkMode === ThemeEnum.LIGHT) {
-      import('./theme/light.scss')
+      import('./theme/light.less')
       // window.location.reload()
     }
   },
   { immediate: true }
 )
+
+const currentSize = computed(() => {
+  let resSize: SizeType = 'small'
+  const appsize = appStore.getComponentSize
+  switch (appsize) {
+    case 'middle':
+      resSize = 'medium'
+      break
+    case 'small':
+      resSize = 'small'
+      break
+    case 'small':
+      resSize = 'mini'
+      break
+  }
+  return resSize
+})
 const attrs = useAttrs()
 const emit = defineEmits(['register'])
-const titleClass = computed(() => {
-  return {
-    backgroundColor: appStore.getDarkMode === ThemeEnum.DARK ? '#262626' : '#FFF'
-  }
-})
 const props = defineProps({
   options: {
     type: Object as PropType<XTableProps>,
@@ -53,10 +60,9 @@ const props = defineProps({
   }
 })
 const innerProps = ref<Partial<XTableProps>>()
-const title = ref(props.options.title)
 const getProps = computed(() => {
   const options = innerProps.value || props.options
-  delete options?.title
+  options.size = currentSize as any
   getProxyConfig(options)
   getPageConfig(options)
   // console.log(options);
@@ -72,6 +78,15 @@ const reload = () => {
     return
   }
   g.commitProxy('query')
+}
+
+const getSearchData = () => {
+  const g = unref(xGrid)
+  if (!g) {
+    return
+  }
+  const queryParams = Object.assign({}, JSON.parse(JSON.stringify(g.getProxyInfo()?.form)))
+  return queryParams
 }
 const getProxyConfig = (options: XTableProps) => {
   const { getListApi, proxyConfig, data, afterFetch } = options
@@ -134,9 +149,9 @@ const getPageConfig = (options: XTableProps) => {
 const setProps = (prop: Partial<XTableProps>) => {
   innerProps.value = { ...unref(innerProps), ...prop }
 }
-defineExpose({ reload, Ref: xGrid })
-emit('register', { reload, setProps })
+defineExpose({ reload, Ref: xGrid, getSearchData })
+emit('register', { reload, getSearchData, setProps })
 </script>
-<style lang="scss">
-@import './theme/index.scss';
+<style lang="less">
+@import url('./theme/index.less');
 </style>

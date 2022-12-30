@@ -91,7 +91,7 @@ VXETable.setup({
     escClosable: true // 是否允许按 Esc 键关闭窗口
   },
   i18n: (key, args) => {
-    return unref(i18n.global.locale) === 'zh-CN'
+    return unref(i18n.global.locale) === 'zh_CN'
       ? XEUtils.toFormatString(XEUtils.get(zhCN, key), args)
       : XEUtils.toFormatString(XEUtils.get(enUS, key), args)
   }

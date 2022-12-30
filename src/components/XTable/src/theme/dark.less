@@ -1,4 +1,4 @@
-@import url('var');
+@prefix-cls: ~'@{namespace}-x-vxe-table';
 
 [data-theme='dark'] .@{prefix-cls} {
   @fontColor: #c9d1d9;
@@ -19,6 +19,17 @@
   .vxe-table--render-default .vxe-table--body-wrapper,
   .vxe-table--render-default .vxe-table--footer-wrapper {
     background-color: @bgColor;
+  }
+
+  // 输入框
+  .vxe-input {
+    background-color: @bgColor;
+    border-color: @borderColor;
+  }
+
+  .vxe-select {
+    background-color: @bgColor;
+    border-color: @borderColor;
   }
 
   // 外边框
@@ -58,6 +69,30 @@
     &.row--hover {
       background-color: #59524b;
     }
+  }
+
+  // pager
+
+  .vxe-pager,
+  .vxe-pager--perfect,
+  .vxe-pager--jump-prev,
+  .vxe-pager--jump-next,
+  .vxe-pager--sizes,
+  .vxe-pager--goto {
+    background-color: #262727;
+  }
+
+  .vxe-pager--next-btn,
+  .vxe-pager--prev-btn,
+  .vxe-pager--perfect-button {
+    background-color: #a7a3a3;
+  }
+
+  .vxe-table--empty-content,
+  .vxe-pager--jump,
+  .vxe-pager--total,
+  .vxe-pager--goto-text {
+    color: @fontColor;
   }
 
   .vxe-table--render-default.border--default .vxe-table--header-wrapper,
