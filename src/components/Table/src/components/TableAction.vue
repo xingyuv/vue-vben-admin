@@ -90,7 +90,6 @@ const getActions = computed(() => {
       return {
         getPopupContainer: () => unref((table as any)?.wrapRef.value) ?? document.body,
         type: 'link',
-        size: 'small',
         ...action,
         ...(popConfirm || {}),
         onConfirm: popConfirm?.confirm,

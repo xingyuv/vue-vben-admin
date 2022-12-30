@@ -1,28 +1,47 @@
 <template>
-  <div>
+  <PageWrapper>
     <XTable ref="xGrid" @register="registerTable">
       <template #toolbar_buttons>
         <a-button type="primary" @click="handleCreate"> 新增角色 </a-button>
       </template>
       <template #actionbtns_default="{ row }">
-        <a-button type="link" @click="handleEdit(row)">
-          <Icon icon="clarity:note-edit-line" />
-        </a-button>
-        <a-button type="link" @click="handleDelete(row)">
-          <Icon icon="ant-design:delete-outlined" />
-        </a-button>
+        <TableAction
+          :actions="[
+            {
+              icon: 'clarity:note-edit-line',
+              onClick: handleEdit.bind(null, row),
+              tooltip: '编辑'
+            },
+            {
+              icon: 'ep:view',
+              onClick: handleEdit.bind(null, row),
+              tooltip: '详情'
+            },
+            {
+              icon: 'ant-design:delete-outlined',
+              color: 'error',
+              tooltip: '删除',
+              popConfirm: {
+                title: '是否确认删除',
+                placement: 'left',
+                confirm: handleDelete.bind(null, row)
+              }
+            }
+          ]"
+        />
       </template>
     </XTable>
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script setup lang="ts" name="RoleManagement">
+import { TableAction } from '@/components/Table'
 import { useXTable, XTable } from '@/components/XTable'
 import { getRoleListByPage } from '@/api/demo/system'
 import { useDrawer } from '@/components/Drawer'
 import RoleDrawer from './RoleDrawer.vue'
 import { allSchemas } from './role.data'
-import { Icon } from '@/components/Icon'
+import { PageWrapper } from '@/components/Page'
 
 const [registerDrawer, { openDrawer }] = useDrawer()
 const [registerTable, { reload }] = useXTable({

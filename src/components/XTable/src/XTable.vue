@@ -64,6 +64,7 @@ const innerProps = ref<Partial<XTableProps>>()
 const getProps = computed(() => {
   const options = innerProps.value || props.options
   options.size = currentSize as any
+  options.height = 700
   getColumnsConfig(options)
   getProxyConfig(options)
   getPageConfig(options)
