@@ -29,7 +29,7 @@ watch(
   () => appStore.getDarkMode,
   () => {
     if (appStore.getDarkMode == ThemeEnum.DARK) {
-      import('./theme/dark.scss')
+      import('./theme/dark.less')
     }
     //刷新页面重置SCSS
     if (appStore.getDarkMode === ThemeEnum.LIGHT) {
