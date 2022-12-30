@@ -222,7 +222,6 @@ const filterFormSchema = (crudSchema: VxeCrudSchema): FormSchema[] => {
   eachTree(crudSchema.columns, (schemaItem: VxeCrudColumns) => {
     // 判断是否显示
     if (schemaItem?.isForm !== false && schemaItem?.form?.show !== false) {
-      console.info(schemaItem.form)
       // 默认为 input
       const formSchemaItem: FormSchema = {
         ...schemaItem.form,
