@@ -1,7 +1,7 @@
 <template>
-  <div class="p-2">
+  <PageWrapper>
     <XTable ref="xGrid" @register="registerTable" />
-  </div>
+  </PageWrapper>
 </template>
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
