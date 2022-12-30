@@ -96,33 +96,49 @@ const filterSearchSchema = (crudSchema: VxeCrudSchema): VxeFormItemProps[] => {
   const searchSchema: VxeFormItemProps[] = []
   eachTree(crudSchema.columns, (schemaItem: VxeCrudColumns) => {
     // 判断是否显示
-    if (isBoolean(schemaItem.search)) {
-      return
-    } else {
-      const itemRenderName = schemaItem?.search?.itemRender?.name || '$input'
-      let itemRender: FormItemRenderOptions = {}
-
-      if (schemaItem.search?.itemRender) {
-        itemRender = schemaItem.search.itemRender
-      } else {
-        itemRender = {
-          name: itemRenderName,
-          props:
-            itemRenderName == '$input'
-              ? { placeholder: t('common.inputText') }
-              : { placeholder: t('common.chooseText') }
+    if (schemaItem.search) {
+      if (isBoolean(schemaItem.search)) {
+        if (!schemaItem.search) {
+          return
+        } else {
+          const searchSchemaItem = {
+            folding: searchSchema.length > spanLength - 1,
+            field: schemaItem.field,
+            title: schemaItem.title,
+            itemRender: {
+              name: '$input',
+              props: { placeholder: t('common.inputText') }
+            },
+            span: span
+          }
+          searchSchema.push(searchSchemaItem)
         }
+      } else {
+        const itemRenderName = schemaItem?.search?.itemRender?.name || '$input'
+        let itemRender: FormItemRenderOptions = {}
+
+        if (schemaItem.search?.itemRender) {
+          itemRender = schemaItem.search.itemRender
+        } else {
+          itemRender = {
+            name: itemRenderName,
+            props:
+              itemRenderName == '$input'
+                ? { placeholder: t('common.inputText') }
+                : { placeholder: t('common.chooseText') }
+          }
+        }
+        const searchSchemaItem = {
+          // 默认为 input
+          folding: searchSchema.length > spanLength - 1,
+          itemRender: schemaItem.itemRender ? schemaItem.itemRender : itemRender,
+          field: schemaItem.field,
+          title: schemaItem.search?.title || schemaItem.title,
+          slots: schemaItem.search?.slots,
+          span: span
+        }
+        searchSchema.push(searchSchemaItem)
       }
-      const searchSchemaItem = {
-        // 默认为 input
-        folding: searchSchema.length > spanLength - 1,
-        itemRender: schemaItem.itemRender ? schemaItem.itemRender : itemRender,
-        field: schemaItem.field,
-        title: schemaItem.search?.title || schemaItem.title,
-        slots: schemaItem.search?.slots,
-        span: span
-      }
-      searchSchema.push(searchSchemaItem)
     }
   })
   if (searchSchema.length > 0) {
@@ -179,18 +195,6 @@ const filterTableSchema = (crudSchema: VxeCrudSchema): VxeGridPropTypes.Columns 
         minWidth: '80px'
       }
       tableSchemaItem.showOverflow = 'tooltip'
-      if (schemaItem?.formatter) {
-        tableSchemaItem.formatter = schemaItem.formatter
-        tableSchemaItem.width = tableSchemaItem.width ? tableSchemaItem.width : 160
-      }
-      if (schemaItem?.dictType) {
-        tableSchemaItem.cellRender = {
-          name: 'XDict',
-          content: schemaItem.dictType
-        }
-        tableSchemaItem.width = tableSchemaItem.width ? tableSchemaItem.width : 160
-      }
-
       tableSchema.push(tableSchemaItem)
     }
   })

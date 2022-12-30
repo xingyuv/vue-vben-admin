@@ -187,13 +187,14 @@ const getToolBarConfig = (options: XTableProps) => {
   const { toolBar, toolbarConfig } = options
   if (toolbarConfig) return
   if (toolBar) {
-    if (isBoolean(toolBar)) {
-      options.toolbarConfig = {
-        slots: { buttons: 'toolbar_buttons' }
-      }
+    if (!isBoolean(toolBar)) {
+      options.toolbarConfig = toolBar
       return
     }
-    options.toolbarConfig = toolBar
+  } else {
+    options.toolbarConfig = {
+      slots: { buttons: 'toolbar_buttons' }
+    }
   }
 }
 
