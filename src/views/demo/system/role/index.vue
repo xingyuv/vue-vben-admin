@@ -1,26 +1,23 @@
 <template>
   <PageWrapper>
-    <XTable ref="xGrid" @register="registerTable">
+    <XTable @register="registerTable">
       <template #toolbar_buttons>
         <a-button type="primary" @click="handleCreate"> 新增角色 </a-button>
       </template>
       <template #actionbtns_default="{ row }">
-        <TableAction
+        <XTableAction
           :actions="[
             {
               icon: 'clarity:note-edit-line',
-              onClick: handleEdit.bind(null, row),
-              tooltip: '编辑'
+              onClick: handleEdit.bind(null, row)
             },
             {
               icon: 'ep:view',
-              onClick: handleEdit.bind(null, row),
-              tooltip: '详情'
+              onClick: handleEdit.bind(null, row)
             },
             {
               icon: 'ant-design:delete-outlined',
               color: 'error',
-              tooltip: '删除',
               popConfirm: {
                 title: '是否确认删除',
                 placement: 'left',
@@ -35,13 +32,12 @@
   </PageWrapper>
 </template>
 <script setup lang="ts" name="RoleManagement">
-import { TableAction } from '@/components/Table'
-import { useXTable, XTable } from '@/components/XTable'
-import { getRoleListByPage } from '@/api/demo/system'
-import { useDrawer } from '@/components/Drawer'
 import RoleDrawer from './RoleDrawer.vue'
-import { allSchemas } from './role.data'
+import { useDrawer } from '@/components/Drawer'
 import { PageWrapper } from '@/components/Page'
+import { useXTable, XTable, XTableAction } from '@/components/XTable'
+import { allSchemas } from './role.data'
+import { getRoleListByPage } from '@/api/demo/system'
 
 const [registerDrawer, { openDrawer }] = useDrawer()
 const [registerTable, { reload }] = useXTable({
@@ -56,15 +52,15 @@ function handleCreate() {
   })
 }
 
-function handleEdit(record: Recordable) {
+function handleEdit(row: Recordable) {
   openDrawer(true, {
-    record,
+    row,
     isUpdate: true
   })
 }
 
-function handleDelete(record: Recordable) {
-  console.log(record)
+function handleDelete(row: Recordable) {
+  console.log(row)
 }
 
 function handleSuccess() {

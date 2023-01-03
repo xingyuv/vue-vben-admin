@@ -1,8 +1,9 @@
 import { VxeCrudSchemas } from '@/hooks/web/useCrudSchemas'
-import type { VxeGridProps, VxeGridPropTypes } from 'vxe-table'
+import type { VxeGridProps, VxeGridPropTypes, VxeTablePropTypes } from 'vxe-table'
 
 export type XTableProps<D = any> = VxeGridProps<D> & {
   allSchemas?: VxeCrudSchemas
+  treeConfig?: VxeTablePropTypes.TreeConfig // 树形表单配置
   getListApi?: Function
   deleteApi?: Function
   exportListApi?: Function

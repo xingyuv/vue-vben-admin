@@ -7,7 +7,7 @@
 import { ref, computed, unref } from 'vue'
 import { BasicModal, useModalInner } from '@/components/Modal'
 import { BasicForm, useForm } from '@/components/Form/index'
-import { accountFormSchema } from './account.data'
+import { allSchemas } from './account.data'
 import { getDeptList } from '@/api/demo/system'
 
 const emit = defineEmits(['success', 'register'])
@@ -18,7 +18,7 @@ const rowId = ref('')
 const [registerForm, { setFieldsValue, updateSchema, resetFields, validate }] = useForm({
   labelWidth: 100,
   baseColProps: { span: 24 },
-  schemas: accountFormSchema,
+  schemas: allSchemas.formSchema,
   showActionButtonGroup: false,
   actionColOptions: {
     span: 23

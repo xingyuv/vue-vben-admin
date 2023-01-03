@@ -29,7 +29,6 @@ watch(
     // //刷新页面重置SCSS
     if (appStore.getDarkMode === ThemeEnum.LIGHT) {
       import('./theme/light.less')
-      // window.location.reload()
     }
   },
   { immediate: true }
@@ -138,8 +137,10 @@ const getProxyConfig = (options: XTableProps) => {
             queryParams = Object.assign(queryParams, options.params)
           }
           const { currentPage, pageSize } = page
-          queryParams.pageSize = currentPage
-          queryParams.page = pageSize
+          if (!options?.treeConfig) {
+            queryParams.pageSize = currentPage
+            queryParams.page = pageSize
+          }
 
           let res = await getListApi({ queryParams })
           if (afterFetch && isFunction(afterFetch)) {
@@ -154,7 +155,11 @@ const getProxyConfig = (options: XTableProps) => {
 
 // 分页
 const getPageConfig = (options: XTableProps) => {
-  const { pagination, pagerConfig } = options
+  const { pagination, pagerConfig, treeConfig } = options
+  if (treeConfig) {
+    options.treeConfig = options.treeConfig
+    return
+  }
   if (pagerConfig) return
   if (pagination) {
     if (isBoolean(pagination)) {

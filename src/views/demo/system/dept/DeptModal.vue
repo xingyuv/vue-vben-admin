@@ -7,7 +7,7 @@
 import { ref, computed, unref } from 'vue'
 import { BasicModal, useModalInner } from '@/components/Modal'
 import { BasicForm, useForm } from '@/components/Form/index'
-import { formSchema } from './dept.data'
+import { allSchemas } from './dept.data'
 import { getDeptList } from '@/api/demo/system'
 
 const emit = defineEmits(['success', 'register'])
@@ -17,7 +17,7 @@ const isUpdate = ref(true)
 const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
   labelWidth: 100,
   baseColProps: { span: 24 },
-  schemas: formSchema,
+  schemas: allSchemas.formSchema,
   showActionButtonGroup: false
 })
 

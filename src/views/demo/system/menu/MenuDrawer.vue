@@ -13,7 +13,7 @@
 <script setup lang="ts" name="MenuDrawer">
 import { ref, computed, unref } from 'vue'
 import { BasicForm, useForm } from '@/components/Form/index'
-import { formSchema } from './menu.data'
+import { allSchemas } from './menu.data'
 import { BasicDrawer, useDrawerInner } from '@/components/Drawer'
 import { getMenuList } from '@/api/demo/system'
 
@@ -23,7 +23,7 @@ const isUpdate = ref(true)
 
 const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
   labelWidth: 100,
-  schemas: formSchema,
+  schemas: allSchemas.formSchema,
   showActionButtonGroup: false,
   baseColProps: { lg: 12, md: 24 }
 })
