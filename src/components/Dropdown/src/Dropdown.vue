@@ -39,7 +39,6 @@
 import { computed, PropType } from 'vue'
 import type { DropMenu } from './typing'
 import { Dropdown, Menu, Popconfirm } from 'ant-design-vue'
-import { Icon } from '@/components/Icon'
 import { omit } from 'lodash-es'
 import { isFunction } from '@/utils/is'
 

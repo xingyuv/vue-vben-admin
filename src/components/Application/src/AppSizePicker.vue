@@ -18,7 +18,6 @@ import type { AppSizeType } from '/#/config'
 import type { DropMenu } from '@/components/Dropdown'
 import { ref, watchEffect, unref, computed } from 'vue'
 import { Dropdown } from '@/components/Dropdown'
-import { Icon } from '@/components/Icon'
 import { sizeList } from '@/settings/sizeSetting'
 import { useAppStore } from '@/store/modules/app'
 
