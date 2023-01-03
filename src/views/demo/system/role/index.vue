@@ -5,27 +5,9 @@
         <a-button type="primary" @click="handleCreate"> 新增角色 </a-button>
       </template>
       <template #actionbtns_default="{ row }">
-        <XTableAction
-          :actions="[
-            {
-              icon: 'clarity:note-edit-line',
-              onClick: handleEdit.bind(null, row)
-            },
-            {
-              icon: 'ep:view',
-              onClick: handleEdit.bind(null, row)
-            },
-            {
-              icon: 'ant-design:delete-outlined',
-              color: 'error',
-              popConfirm: {
-                title: '是否确认删除',
-                placement: 'left',
-                confirm: handleDelete.bind(null, row)
-              }
-            }
-          ]"
-        />
+        <a-button type="link" preIcon="clarity:note-edit-line" @click="handleEdit(row)" />
+        <a-button type="link" preIcon="ep:view" @click="handleEdit(row)" />
+        <a-button type="link" preIcon="ant-design:delete-outlined" @click="handleDelete(row)" />
       </template>
     </XTable>
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
@@ -35,7 +17,7 @@
 import RoleDrawer from './RoleDrawer.vue'
 import { useDrawer } from '@/components/Drawer'
 import { PageWrapper } from '@/components/Page'
-import { useXTable, XTable, XTableAction } from '@/components/XTable'
+import { useXTable, XTable } from '@/components/XTable'
 import { allSchemas } from './role.data'
 import { getRoleListByPage } from '@/api/demo/system'
 

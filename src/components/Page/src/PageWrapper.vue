@@ -51,7 +51,7 @@ const props = defineProps({
     type: Object as PropType<CSSProperties>
   },
   contentBackground: propTypes.bool,
-  contentFullHeight: propTypes.bool,
+  contentFullHeight: propTypes.bool.def(false),
   contentClass: propTypes.string,
   fixedHeight: propTypes.bool,
   upwardSpace: propTypes.oneOfType([propTypes.number, propTypes.string]).def(0)

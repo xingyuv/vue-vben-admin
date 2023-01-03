@@ -5,23 +5,8 @@
         <a-button type="primary" @click="handleCreate"> 新增部门 </a-button>
       </template>
       <template #actionbtns_default="{ row }">
-        <XTableAction
-          :actions="[
-            {
-              icon: 'clarity:note-edit-line',
-              onClick: handleEdit.bind(null, row)
-            },
-            {
-              icon: 'ant-design:delete-outlined',
-              color: 'error',
-              popConfirm: {
-                title: '是否确认删除',
-                placement: 'left',
-                confirm: handleDelete.bind(null, row)
-              }
-            }
-          ]"
-        />
+        <a-button type="link" preIcon="clarity:note-edit-line" @click="handleEdit(row)" />
+        <a-button type="link" preIcon="ant-design:delete-outlined" @click="handleDelete(row)" />
       </template>
     </XTable>
     <DeptModal @register="registerModal" @success="handleSuccess" />
@@ -31,7 +16,7 @@
 import DeptModal from './DeptModal.vue'
 import { useModal } from '@/components/Modal'
 import { PageWrapper } from '@/components/Page'
-import { useXTable, XTable, XTableAction } from '@/components/XTable'
+import { useXTable, XTable } from '@/components/XTable'
 import { allSchemas } from './dept.data'
 import { getDeptList } from '@/api/demo/system'
 

@@ -6,27 +6,9 @@
         <a-button type="primary" @click="handleCreate">新增账号</a-button>
       </template>
       <template #actionbtns_default="{ row }">
-        <XTableAction
-          :actions="[
-            {
-              icon: 'clarity:info-standard-line',
-              onClick: handleView.bind(null, row)
-            },
-            {
-              icon: 'clarity:note-edit-line',
-              onClick: handleEdit.bind(null, row)
-            },
-            {
-              icon: 'ant-design:delete-outlined',
-              color: 'error',
-              popConfirm: {
-                title: '是否确认删除',
-                placement: 'left',
-                confirm: handleDelete.bind(null, row)
-              }
-            }
-          ]"
-        />
+        <a-button type="link" preIcon="clarity:info-standard-line" @click="handleView(row)" />
+        <a-button type="link" preIcon="clarity:note-edit-line" @click="handleEdit(row)" />
+        <a-button type="link" preIcon="ant-design:delete-outlined" @click="handleDelete(row)" />
       </template>
     </XTable>
     <AccountModal @register="registerModal" @success="handleSuccess" />
@@ -34,7 +16,7 @@
 </template>
 <script setup lang="ts" name="AccountManagement">
 import { reactive } from 'vue'
-import { useXTable, XTable, XTableAction } from '@/components/XTable'
+import { useXTable, XTable } from '@/components/XTable'
 import { getAccountList } from '@/api/demo/system'
 import { PageWrapper } from '@/components/Page'
 import DeptTree from './DeptTree.vue'
