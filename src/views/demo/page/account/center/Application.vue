@@ -28,10 +28,11 @@
   </List>
 </template>
 <script setup lang="ts">
-import { List, ListItem, Card, Row, Col } from 'ant-design-vue'
-import Icon from '@/components/Icon/index'
+import { List, Card, Row, Col } from 'ant-design-vue'
 import { applicationList } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
+
+const ListItem = List.Item
 
 const { prefixCls } = useDesign('account-center-application')
 </script>

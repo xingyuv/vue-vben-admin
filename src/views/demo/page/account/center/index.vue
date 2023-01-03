@@ -57,7 +57,6 @@
 import { Tag, Tabs, Row, Col, TabPane } from 'ant-design-vue'
 import { computed } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'
-import Icon from '@/components/Icon/index'
 import Article from './Article.vue'
 import Application from './Application.vue'
 import Project from './Project.vue'

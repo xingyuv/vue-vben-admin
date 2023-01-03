@@ -20,9 +20,12 @@
   </CollapseContainer>
 </template>
 <script setup lang="ts">
-import { List, ListItem, ListItemMeta } from 'ant-design-vue'
+import { List } from 'ant-design-vue'
 import { CollapseContainer } from '@/components/Container/index'
 import { secureSettingList } from './data'
+
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 </script>
 <style lang="less" scoped>
 .extra {

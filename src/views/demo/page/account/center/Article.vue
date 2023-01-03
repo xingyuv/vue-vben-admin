@@ -40,10 +40,12 @@
   </List>
 </template>
 <script setup lang="ts">
-import { List, ListItem, ListItemMeta, Tag } from 'ant-design-vue'
-import Icon from '@/components/Icon/index'
+import { List, Tag } from 'ant-design-vue'
 import { actions, articleList } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
+
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 
 const { prefixCls } = useDesign('account-center-article')
 </script>

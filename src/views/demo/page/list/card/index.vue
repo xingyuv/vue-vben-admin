@@ -34,10 +34,11 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/Icon/index'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
-import { Card, Row, Col, List, ListItem } from 'ant-design-vue'
+import { Card, Row, Col, List } from 'ant-design-vue'
+
+const ListItem = List.Item
 
 const prefixCls = ref('list-card')
 </script>

@@ -54,11 +54,13 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import Icon from '@/components/Icon/index'
 import { BasicForm } from '@/components/Form/index'
 import { actions, searchList, schemas } from './data'
 import { PageWrapper } from '@/components/Page'
-import { List, ListItem, ListItemMeta, Tag } from 'ant-design-vue'
+import { List, Tag } from 'ant-design-vue'
+
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 
 const prefixCls = ref('list-search')
 </script>

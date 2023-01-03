@@ -51,11 +51,13 @@
   </PageWrapper>
 </template>
 <script setup lang="ts">
-import Icon from '@/components/Icon/index'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
-import { Progress, Row, Col, List, ListItem, ListItemMeta } from 'ant-design-vue'
+import { Progress, Row, Col, List } from 'ant-design-vue'
 import { ref } from 'vue'
+
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
 
 const prefixCls = ref('list-basic')
 

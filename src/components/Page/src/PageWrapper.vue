@@ -33,17 +33,7 @@
   </div>
 </template>
 <script setup lang="ts" name="PageWrapper" inheritAttrs="false">
-import {
-  computed,
-  watch,
-  ref,
-  unref,
-  CSSProperties,
-  PropType,
-  provide,
-  useSlots,
-  useAttrs
-} from 'vue'
+import { computed, watch, ref, unref, CSSProperties, provide, useSlots, useAttrs } from 'vue'
 import PageFooter from './PageFooter.vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'
