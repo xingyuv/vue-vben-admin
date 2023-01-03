@@ -7,7 +7,7 @@
 </template>
 <script lang="ts" setup name="XTable">
 import type { XTableProps } from './type'
-import { computed, PropType, ref, unref, useAttrs, watch } from 'vue'
+import { computed, ref, unref, useAttrs, watch } from 'vue'
 import { isBoolean, isFunction } from '@/utils/is'
 import { SizeType, VxeGridInstance } from 'vxe-table'
 import { ThemeEnum } from '@/enums/appEnum'

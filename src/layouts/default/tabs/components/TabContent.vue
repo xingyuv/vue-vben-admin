@@ -15,7 +15,6 @@
   </Dropdown>
 </template>
 <script setup lang="ts" name="TabContent">
-import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 import { computed, unref } from 'vue'
 import { Dropdown } from '@/components/Dropdown/index'

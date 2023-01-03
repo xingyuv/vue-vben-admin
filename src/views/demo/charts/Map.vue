@@ -2,7 +2,7 @@
   <div ref="chartRef" :style="{ height, width }"></div>
 </template>
 <script setup lang="ts">
-import { PropType, ref, Ref, onMounted } from 'vue'
+import { ref, Ref, onMounted } from 'vue'
 import { useECharts } from '@/hooks/web/useECharts'
 import { mapData } from './data'
 import { registerMap } from 'echarts'

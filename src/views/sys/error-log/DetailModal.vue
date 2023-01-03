@@ -4,7 +4,6 @@
   </BasicModal>
 </template>
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { ErrorLogInfo } from '/#/store'
 import { BasicModal } from '@/components/Modal/index'
 import { Description, useDescription } from '@/components/Description/index'
