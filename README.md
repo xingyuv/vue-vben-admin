@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/xingyu4j/vue-vben-admin.svg)](LICENSE)
 
-<h1>Vue vben admin<更新到2022年12月27日></h1>
+<h1>Vue vben admin<更新到2023年01月01日></h1>
 </div>
 
 ## 简介
@@ -10,7 +10,7 @@
 - Vue Vben Admin 是一个免费开源的中后台模版。
 - 本项目基于 vben2.8 版本，升级依赖，重构部分组件，重构代码样式，重构setup语法糖。
 - 使用了最新的`Vue3`,`Vite4`,`Antdv3`,`TypeScript`,`Pinia`等主流技术开发，开箱即用的中后台前端解决方案。
-- 封装 vxe-table 详见 系统管理-角色管理(views/demo/system/role)
+- 封装 vxe-table 详见 系统管理-角色管理等(views/demo/system/...)
 
 ## 特性
 
