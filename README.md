@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/xingyu4j/vue-vben-admin.svg)](LICENSE)
 
-<h1>Vue vben admin<更新到2023年01月01日></h1>
+<h1>Vue vben admin<更新到2023年01月03日></h1>
 </div>
 
 ## 简介
