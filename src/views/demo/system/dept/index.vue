@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap>
+  <PageWrapper>
     <XTable @register="registerTable">
       <template #toolbar_buttons>
         <a-button type="primary" @click="handleCreate"> 新增部门 </a-button>
@@ -10,12 +10,12 @@
       </template>
     </XTable>
     <DeptModal @register="registerModal" @success="handleSuccess" />
-  </ContentWrap>
+  </PageWrapper>
 </template>
 <script setup lang="ts" name="DeptManagement">
 import DeptModal from './DeptModal.vue'
 import { useModal } from '@/components/Modal'
-import { ContentWrap } from '@/components/Page'
+import { PageWrapper } from '@/components/Page'
 import { useXTable, XTable } from '@/components/XTable'
 import { allSchemas } from './dept.data'
 import { getDeptList } from '@/api/demo/system'

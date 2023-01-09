@@ -1,5 +1,5 @@
 <template>
-  <ContentWrap>
+  <PageWrapper>
     <XTable @register="registerTable" @fetch-success="onFetchSuccess">
       <template #toolbar_buttons>
         <a-button type="primary" @click="handleCreate"> 新增菜单 </a-button>
@@ -10,13 +10,13 @@
       </template>
     </XTable>
     <MenuDrawer @register="registerDrawer" @success="handleSuccess" />
-  </ContentWrap>
+  </PageWrapper>
 </template>
 <script setup lang="ts" name="MenuManagement">
 import { nextTick } from 'vue'
 import MenuDrawer from './MenuDrawer.vue'
 import { useDrawer } from '@/components/Drawer'
-import { ContentWrap } from '@/components/Page'
+import { PageWrapper } from '@/components/Page'
 import { useXTable, XTable } from '@/components/XTable'
 import { allSchemas } from './menu.data'
 import { getMenuList } from '@/api/demo/system'
