@@ -15,7 +15,9 @@
         appear
       >
         <keep-alive v-if="openCache" :include="getCaches">
-          <component :is="Component" :key="route.fullPath" />
+          <div :key="(route.name as string)">
+            <component :is="Component" :key="route.fullPath" />
+          </div>
         </keep-alive>
         <div v-else :key="route.name as unknown as (string | number | symbol)">
           <component :is="Component" :key="route.fullPath" />
