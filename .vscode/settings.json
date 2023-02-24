@@ -4,6 +4,7 @@
   "volar.tsPluginStatus": false,
   "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
+  "prettier.printWidth": 120, // 超过最大值换行
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "search.exclude": {

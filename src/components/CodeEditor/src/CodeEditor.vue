@@ -1,11 +1,6 @@
 <template>
   <div class="h-full">
-    <CodeMirrorEditor
-      :value="getValue"
-      @change="handleValueChange"
-      :mode="mode"
-      :readonly="readonly"
-    />
+    <CodeMirrorEditor :value="getValue" @change="handleValueChange" :mode="mode" :readonly="readonly" />
   </div>
 </template>
 <script lang="ts" setup>

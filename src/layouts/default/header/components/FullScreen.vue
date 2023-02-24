@@ -29,9 +29,7 @@ export default defineComponent({
     )
 
     const getTitle = computed(() => {
-      return unref(isFullscreen)
-        ? t('layout.header.tooltipExitFull')
-        : t('layout.header.tooltipEntryFull')
+      return unref(isFullscreen) ? t('layout.header.tooltipExitFull') : t('layout.header.tooltipEntryFull')
     })
 
     return {

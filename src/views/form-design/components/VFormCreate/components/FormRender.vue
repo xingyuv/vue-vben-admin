@@ -1,12 +1,7 @@
 <template>
   <template v-if="['Grid'].includes(schema.component)">
     <Row class="grid-row">
-      <Col
-        class="grid-col"
-        v-for="(colItem, index) in schema.columns"
-        :key="index"
-        :span="colItem.span"
-      >
+      <Col class="grid-col" v-for="(colItem, index) in schema.columns" :key="index" :span="colItem.span">
         <FormRender
           v-for="(item, k) in colItem.children"
           :key="k"
@@ -28,10 +23,7 @@
     @submit="$emit('submit', schema)"
     @reset="$emit('reset')"
   >
-    <template
-      v-if="schema.componentProps && schema.componentProps.slotName"
-      #[schema.componentProps!.slotName]
-    >
+    <template v-if="schema.componentProps && schema.componentProps.slotName" #[schema.componentProps!.slotName]>
       <slot :name="schema.componentProps!.slotName"></slot>
     </template>
   </VFormItem>

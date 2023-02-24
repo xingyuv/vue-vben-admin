@@ -69,9 +69,7 @@ export default defineComponent({
     })
 
     const noHiddenList = computed(() => {
-      return (
-        props.formConfig.schemas && props.formConfig.schemas.filter((item) => item.hidden !== true)
-      )
+      return props.formConfig.schemas && props.formConfig.schemas.filter((item) => item.hidden !== true)
     })
 
     const fApi = useVModel(props, 'fApi', emit)
@@ -109,9 +107,7 @@ export default defineComponent({
     /**
      * 获取表单属性
      */
-    const formModelProps = computed(
-      () => omit(props.formConfig, ['disabled', 'labelWidth', 'schemas']) as Recordable
-    )
+    const formModelProps = computed(() => omit(props.formConfig, ['disabled', 'labelWidth', 'schemas']) as Recordable)
 
     const handleSubmit = () => {
       submit()

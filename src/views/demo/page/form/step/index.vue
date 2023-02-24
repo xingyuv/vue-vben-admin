@@ -14,12 +14,7 @@
     </div>
     <div class="mt-5">
       <Step1 @next="handleStep1Next" v-show="current === 0" />
-      <Step2
-        @prev="handleStepPrev"
-        @next="handleStep2Next"
-        v-show="current === 1"
-        v-if="initSetp2"
-      />
+      <Step2 @prev="handleStepPrev" @next="handleStep2Next" v-show="current === 1" v-if="initSetp2" />
       <Step3 v-show="current === 2" @redo="handleRedo" v-if="initSetp3" />
     </div>
   </PageWrapper>

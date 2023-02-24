@@ -37,13 +37,9 @@
     </Authority>
 
     <Divider>函数方式方式判断权限(适用于函数内部过滤)</Divider>
-    <a-button v-if="hasPermission(RoleEnum.SUPER)" type="primary" class="mx-4">
-      拥有super角色权限可见
-    </a-button>
+    <a-button v-if="hasPermission(RoleEnum.SUPER)" type="primary" class="mx-4"> 拥有super角色权限可见 </a-button>
 
-    <a-button v-if="hasPermission(RoleEnum.TEST)" color="success" class="mx-4">
-      拥有test角色权限可见
-    </a-button>
+    <a-button v-if="hasPermission(RoleEnum.TEST)" color="success" class="mx-4"> 拥有test角色权限可见 </a-button>
 
     <a-button v-if="hasPermission([RoleEnum.TEST, RoleEnum.SUPER])" color="error" class="mx-4">
       拥有[test,super]角色权限可见

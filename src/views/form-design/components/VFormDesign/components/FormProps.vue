@@ -9,36 +9,21 @@
       <FormItem label="表单布局">
         <RadioGroup button-style="solid" v-model:value="formConfig.layout">
           <RadioButton value="horizontal">水平</RadioButton>
-          <RadioButton value="vertical" :disabled="formConfig.labelLayout === 'Grid'">
-            垂直
-          </RadioButton>
-          <RadioButton value="inline" :disabled="formConfig.labelLayout === 'Grid'">
-            行内
-          </RadioButton>
+          <RadioButton value="vertical" :disabled="formConfig.labelLayout === 'Grid'"> 垂直 </RadioButton>
+          <RadioButton value="inline" :disabled="formConfig.labelLayout === 'Grid'"> 行内 </RadioButton>
         </RadioGroup>
       </FormItem>
 
       <!-- <Row> -->
       <FormItem label="标签布局">
-        <RadioGroup
-          buttonStyle="solid"
-          v-model:value="formConfig.labelLayout"
-          @change="lableLayoutChange"
-        >
+        <RadioGroup buttonStyle="solid" v-model:value="formConfig.labelLayout" @change="lableLayoutChange">
           <RadioButton value="flex">固定</RadioButton>
-          <RadioButton value="Grid" :disabled="formConfig.layout !== 'horizontal'">
-            栅格
-          </RadioButton>
+          <RadioButton value="Grid" :disabled="formConfig.layout !== 'horizontal'"> 栅格 </RadioButton>
         </RadioGroup>
       </FormItem>
       <!-- </Row> -->
       <FormItem label="标签宽度（px）" v-show="formConfig.labelLayout === 'flex'">
-        <InputNumber
-          :style="{ width: '100%' }"
-          v-model:value="formConfig.labelWidth"
-          :min="0"
-          :step="1"
-        />
+        <InputNumber :style="{ width: '100%' }" v-model:value="formConfig.labelWidth" :min="0" :step="1" />
       </FormItem>
       <div v-if="formConfig.labelLayout === 'Grid'">
         <FormItem label="labelCol">

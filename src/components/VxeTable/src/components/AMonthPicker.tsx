@@ -1,10 +1,5 @@
 import { getDatePickerCellValue } from './ADatePicker'
-import {
-  createCellRender,
-  createEditRender,
-  createExportMethod,
-  createFormItemRender
-} from './common'
+import { createCellRender, createEditRender, createExportMethod, createFormItemRender } from './common'
 
 export default {
   renderEdit: createEditRender(),

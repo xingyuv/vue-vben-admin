@@ -70,18 +70,7 @@ import {
   advanceFormItemColProps
 } from '../../VFormDesign/config/formItemPropsConfig'
 
-import {
-  Empty,
-  Input,
-  Form,
-  FormItem,
-  Switch,
-  Checkbox,
-  Select,
-  Slider,
-  Col,
-  RadioGroup
-} from 'ant-design-vue'
+import { Empty, Input, Form, FormItem, Switch, Checkbox, Select, Slider, Col, RadioGroup } from 'ant-design-vue'
 import RuleProps from './RuleProps.vue'
 import { useFormDesignState } from '../../../hooks/useFormDesignState'
 import { isArray } from 'lodash-es'
@@ -111,10 +100,8 @@ export default defineComponent({
       () => {
         if (formConfig.value.currentItem) {
           formConfig.value.currentItem.itemProps = formConfig.value.currentItem.itemProps || {}
-          formConfig.value.currentItem.itemProps.labelCol =
-            formConfig.value.currentItem.itemProps.labelCol || {}
-          formConfig.value.currentItem.itemProps.wrapperCol =
-            formConfig.value.currentItem.itemProps.wrapperCol || {}
+          formConfig.value.currentItem.itemProps.labelCol = formConfig.value.currentItem.itemProps.labelCol || {}
+          formConfig.value.currentItem.itemProps.wrapperCol = formConfig.value.currentItem.itemProps.wrapperCol || {}
         }
       },
       { deep: true, immediate: true }

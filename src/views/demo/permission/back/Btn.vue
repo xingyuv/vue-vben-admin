@@ -34,13 +34,9 @@
       </Authority>
 
       <Divider>函数方式方式判断权限</Divider>
-      <a-button v-if="hasPermission('1000')" type="primary" class="mx-4">
-        拥有code ['1000']权限可见
-      </a-button>
+      <a-button v-if="hasPermission('1000')" type="primary" class="mx-4"> 拥有code ['1000']权限可见 </a-button>
 
-      <a-button v-if="hasPermission('2000')" color="success" class="mx-4">
-        拥有code ['2000']权限可见
-      </a-button>
+      <a-button v-if="hasPermission('2000')" color="success" class="mx-4"> 拥有code ['2000']权限可见 </a-button>
 
       <a-button v-if="hasPermission(['1000', '2000'])" color="error" class="mx-4">
         拥有code ['1000','2000']角色权限可见
@@ -51,9 +47,7 @@
 
       <a-button v-auth="'2000'" color="success" class="mx-4"> 拥有code ['2000']权限可见 </a-button>
 
-      <a-button v-auth="['1000', '2000']" color="error" class="mx-4">
-        拥有code ['1000','2000']角色权限可见
-      </a-button>
+      <a-button v-auth="['1000', '2000']" color="error" class="mx-4"> 拥有code ['1000','2000']角色权限可见 </a-button>
     </template>
   </PageWrapper>
 </template>
@@ -77,9 +71,7 @@ export default defineComponent({
     const appStore = useAppStore()
     const userStore = useUserStore()
 
-    const isBackPermissionMode = computed(
-      () => appStore.getProjectConfig.permissionMode === PermissionModeEnum.BACK
-    )
+    const isBackPermissionMode = computed(() => appStore.getProjectConfig.permissionMode === PermissionModeEnum.BACK)
 
     async function switchToken(userId: number) {
       // 本函数切换用户登录Token的部分仅用于演示，实际生产时切换身份应当重新登录

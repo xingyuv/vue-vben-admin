@@ -10,9 +10,7 @@
         :style="getLogoWidth"
       />
       <LayoutTrigger
-        v-if="
-          (getShowContent && getShowHeaderTrigger && !getSplit && !getIsMixSidebar) || getIsMobile
-        "
+        v-if="(getShowContent && getShowHeaderTrigger && !getSplit && !getIsMixSidebar) || getIsMobile"
         :theme="getHeaderTheme"
         :sider="false"
       />
@@ -22,12 +20,7 @@
 
     <!-- menu start -->
     <div :class="`${prefixCls}-menu`" v-if="getShowTopMenu && !getIsMobile">
-      <LayoutMenu
-        :isHorizontal="true"
-        :theme="getHeaderTheme"
-        :splitType="getSplitType"
-        :menuMode="getMenuMode"
-      />
+      <LayoutMenu :isHorizontal="true" :theme="getHeaderTheme" :splitType="getSplitType" :menuMode="getMenuMode" />
     </div>
     <!-- menu-end -->
 
@@ -104,14 +97,8 @@ export default defineComponent({
   },
   setup(props) {
     const { prefixCls } = useDesign('layout-header')
-    const {
-      getShowTopMenu,
-      getShowHeaderTrigger,
-      getSplit,
-      getIsMixMode,
-      getMenuWidth,
-      getIsMixSidebar
-    } = useMenuSetting()
+    const { getShowTopMenu, getShowHeaderTrigger, getSplit, getIsMixMode, getMenuWidth, getIsMixSidebar } =
+      useMenuSetting()
     const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } = useRootSetting()
 
     const {

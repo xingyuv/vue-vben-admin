@@ -26,9 +26,7 @@
           allowClear
         />
 
-        <a-button type="primary" block class="mt-4" :disabled="!getIsOpen" @click="handlerSend">
-          发送
-        </a-button>
+        <a-button type="primary" block class="mt-4" :disabled="!getIsOpen" @click="handlerSend"> 发送 </a-button>
       </div>
 
       <div class="w-2/3 bg-white ml-4 p-4">

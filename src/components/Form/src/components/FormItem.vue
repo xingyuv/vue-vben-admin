@@ -105,11 +105,7 @@ export default defineComponent({
     function getShow(): { isShow: boolean; isIfShow: boolean } {
       const { show, ifShow } = props.schema
       const { showAdvancedButton } = props.formProps
-      const itemIsAdvanced = showAdvancedButton
-        ? isBoolean(props.isAdvanced)
-          ? props.isAdvanced
-          : true
-        : true
+      const itemIsAdvanced = showAdvancedButton ? (isBoolean(props.isAdvanced) ? props.isAdvanced : true) : true
 
       let isShow = true
       let isIfShow = true
@@ -131,14 +127,7 @@ export default defineComponent({
     }
 
     function handleRules(): ValidationRule[] {
-      const {
-        rules: defRules = [],
-        component,
-        rulesMessageJoinLabel,
-        label,
-        dynamicRules,
-        required
-      } = props.schema
+      const { rules: defRules = [], component, rulesMessageJoinLabel, label, dynamicRules, required } = props.schema
 
       if (isFunction(dynamicRules)) {
         return dynamicRules(unref(getValues)) as ValidationRule[]
@@ -226,20 +215,13 @@ export default defineComponent({
       const characterInx = rules.findIndex((val) => val.max)
       if (characterInx !== -1 && !rules[characterInx].validator) {
         rules[characterInx].message =
-          rules[characterInx].message ||
-          t('component.form.maxTip', [rules[characterInx].max] as Recordable)
+          rules[characterInx].message || t('component.form.maxTip', [rules[characterInx].max] as Recordable)
       }
       return rules
     }
 
     function renderComponent() {
-      const {
-        renderComponentContent,
-        component,
-        field,
-        changeEvent = 'change',
-        valueField
-      } = props.schema
+      const { renderComponentContent, component, field, changeEvent = 'change', valueField } = props.schema
 
       const isCheck = component && ['Switch', 'Checkbox'].includes(component)
 
@@ -270,8 +252,7 @@ export default defineComponent({
       const isCreatePlaceholder = !propsData.disabled && autoSetPlaceHolder
       // RangePicker place is an array
       if (isCreatePlaceholder && component !== 'RangePicker' && component) {
-        propsData.placeholder =
-          unref(getComponentsProps)?.placeholder || createPlaceholderMessage(component)
+        propsData.placeholder = unref(getComponentsProps)?.placeholder || createPlaceholderMessage(component)
       }
       propsData.codeField = field
       propsData.formValues = unref(getValues)
@@ -331,11 +312,7 @@ export default defineComponent({
         )
       } else {
         const getContent = () => {
-          return slot
-            ? getSlot(slots, slot, unref(getValues))
-            : render
-            ? render(unref(getValues))
-            : renderComponent()
+          return slot ? getSlot(slots, slot, unref(getValues)) : render ? render(unref(getValues)) : renderComponent()
         }
 
         const showSuffix = !!suffix
@@ -373,11 +350,7 @@ export default defineComponent({
       const values = unref(getValues)
 
       const getContent = () => {
-        return colSlot
-          ? getSlot(slots, colSlot, values)
-          : renderColContent
-          ? renderColContent(values)
-          : renderItem()
+        return colSlot ? getSlot(slots, colSlot, values) : renderColContent ? renderColContent(values) : renderItem()
       }
 
       return (

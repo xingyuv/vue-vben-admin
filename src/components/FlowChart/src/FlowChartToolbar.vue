@@ -4,10 +4,7 @@
       <Tooltip placement="bottom" v-bind="item.disabled ? { visible: false } : {}">
         <template #title>{{ item.tooltip }}</template>
         <span :class="`${prefixCls}-toolbar__icon`" v-if="item.icon" @click="onControl(item)">
-          <Icon
-            :icon="item.icon"
-            :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'"
-          />
+          <Icon :icon="item.icon" :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'" />
         </span>
       </Tooltip>
       <Divider v-if="item.separate" type="vertical" />

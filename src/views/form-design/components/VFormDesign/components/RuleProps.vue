@@ -4,22 +4,10 @@
 <template>
   <div class="rule-props-content">
     <Form v-if="formConfig.currentItem && formConfig.currentItem['rules']">
-      <div
-        v-for="(item, index) of formConfig.currentItem['rules']"
-        :key="index"
-        class="rule-props-item"
-      >
-        <Icon
-          icon="ant-design:close-circle-filled"
-          class="rule-props-item-close"
-          @click="removeRule(index)"
-        />
+      <div v-for="(item, index) of formConfig.currentItem['rules']" :key="index" class="rule-props-item">
+        <Icon icon="ant-design:close-circle-filled" class="rule-props-item-close" @click="removeRule(index)" />
         <FormItem label="正则" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
-          <AutoComplete
-            v-model:value="item.pattern"
-            placeholder="请输入正则表达式"
-            :dataSource="patternDataSource"
-          />
+          <AutoComplete v-model:value="item.pattern" placeholder="请输入正则表达式" :dataSource="patternDataSource" />
         </FormItem>
         <FormItem label="文案" :labelCol="{ span: 6 }" :wrapperCol="{ span: 16 }">
           <Input v-model:value="item.message" placeholder="请输入提示文案" />
@@ -66,8 +54,7 @@ export default defineComponent({
      */
     const removeRule = (index: number) => {
       remove(formConfig.value.currentItem!.rules as Array<any>, index)
-      if (formConfig.value.currentItem!.rules?.length === 0)
-        delete formConfig.value.currentItem!['rules']
+      if (formConfig.value.currentItem!.rules?.length === 0) delete formConfig.value.currentItem!['rules']
     }
 
     const patternDataSource = ref([
@@ -80,8 +67,7 @@ export default defineComponent({
         text: '网址带端口号'
       },
       {
-        value:
-          '/^(((ht|f)tps?):\\/\\/)?[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&:/~+#-\\(\\)]*[\\w@?^=%&/~+#-\\(\\)])?$/',
+        value: '/^(((ht|f)tps?):\\/\\/)?[\\w-]+(\\.[\\w-]+)+([\\w.,@?^=%&:/~+#-\\(\\)]*[\\w@?^=%&/~+#-\\(\\)])?$/',
         text: '网址带参数'
       },
       {
@@ -157,13 +143,11 @@ export default defineComponent({
         text: '座机'
       },
       {
-        value:
-          '/^[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\\d|30|31)\\d{3}[\\dXx]$/',
+        value: '/^[1-9]\\d{5}(?:18|19|20)\\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\\d|30|31)\\d{3}[\\dXx]$/',
         text: '身份证号'
       },
       {
-        value:
-          '/(^[EeKkGgDdSsPpHh]\\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\\d{7}$)/',
+        value: '/(^[EeKkGgDdSsPpHh]\\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\\d{7}$)/',
         text: '护照'
       },
       {

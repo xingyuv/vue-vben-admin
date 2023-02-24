@@ -4,11 +4,7 @@
 -->
 <template>
   <div class="form-panel v-form-container">
-    <Empty
-      class="empty-text"
-      v-show="formConfig.schemas.length === 0"
-      description="从左侧选择控件添加"
-    />
+    <Empty class="empty-text" v-show="formConfig.schemas.length === 0" description="从左侧选择控件添加" />
     <Form v-bind="formConfig">
       <div class="draggable-box">
         <draggable

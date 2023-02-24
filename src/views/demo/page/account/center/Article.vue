@@ -24,12 +24,7 @@
         <div>
           <template v-for="action in actions" :key="action.text">
             <div :class="`${prefixCls}__action`">
-              <Icon
-                v-if="action.icon"
-                :class="`${prefixCls}__action-icon`"
-                :icon="action.icon"
-                :color="action.color"
-              />
+              <Icon v-if="action.icon" :class="`${prefixCls}__action-icon`" :icon="action.icon" :color="action.color" />
               {{ action.text }}
             </div>
           </template>

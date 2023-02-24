@@ -130,11 +130,7 @@ export default defineComponent({
       if (!unref(getIsShowLogo) && !unref(getIsMobile)) return null
 
       return (
-        <AppLogo
-          showTitle={!unref(getCollapsed)}
-          class={unref(getLogoClass)}
-          theme={unref(getComputedMenuTheme)}
-        />
+        <AppLogo showTitle={!unref(getCollapsed)} class={unref(getLogoClass)} theme={unref(getComputedMenuTheme)} />
       )
     }
 

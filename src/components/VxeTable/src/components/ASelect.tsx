@@ -30,10 +30,7 @@ function renderOptions(options: any[], optionProps: VxeGlobalRendererHandles.Ren
 }
 
 function createEditRender() {
-  return function (
-    renderOpts: VxeColumnPropTypes.EditRender,
-    params: VxeGlobalRendererHandles.RenderEditParams
-  ) {
+  return function (renderOpts: VxeColumnPropTypes.EditRender, params: VxeGlobalRendererHandles.RenderEditParams) {
     const { options = [], optionGroups, optionProps = {}, optionGroupProps = {} } = renderOpts
     const { row, column, $table } = params
     const { attrs } = renderOpts
@@ -103,13 +100,7 @@ function getSelectCellValue(
   renderOpts: VxeGlobalRendererHandles.RenderCellOptions,
   params: VxeGlobalRendererHandles.RenderCellParams
 ) {
-  const {
-    options = [],
-    optionGroups,
-    props = {},
-    optionProps = {},
-    optionGroupProps = {}
-  } = renderOpts
+  const { options = [], optionGroups, props = {}, optionProps = {}, optionGroupProps = {} } = renderOpts
   const { row, column } = params
   const labelProp = optionProps.label || 'label'
   const valueProp = optionProps.value || 'value'
@@ -122,10 +113,7 @@ function getSelectCellValue(
         ? (value) => {
             let selectItem
             for (let index = 0; index < optionGroups.length; index++) {
-              selectItem = XEUtils.find(
-                optionGroups[index][groupOptions],
-                (item) => item[valueProp] === value
-              )
+              selectItem = XEUtils.find(optionGroups[index][groupOptions], (item) => item[valueProp] === value)
               if (selectItem) {
                 break
               }
@@ -142,10 +130,7 @@ function getSelectCellValue(
 }
 
 function createFilterRender() {
-  return function (
-    renderOpts: VxeColumnPropTypes.FilterRender,
-    params: VxeGlobalRendererHandles.RenderFilterParams
-  ) {
+  return function (renderOpts: VxeColumnPropTypes.FilterRender, params: VxeGlobalRendererHandles.RenderFilterParams) {
     const { options = [], optionGroups, optionProps = {}, optionGroupProps = {} } = renderOpts
     const groupOptions = optionGroupProps.options || 'options'
     const groupLabel = optionGroupProps.label || 'label'

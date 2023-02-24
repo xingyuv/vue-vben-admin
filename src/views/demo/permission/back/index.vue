@@ -12,12 +12,8 @@
     <div class="mt-4">
       权限切换(请先切换权限模式为后台权限模式):
       <Space>
-        <a-button @click="switchToken(1)" :disabled="!isBackPermissionMode">
-          获取用户id为1的菜单
-        </a-button>
-        <a-button @click="switchToken(2)" :disabled="!isBackPermissionMode">
-          获取用户id为2的菜单
-        </a-button>
+        <a-button @click="switchToken(1)" :disabled="!isBackPermissionMode"> 获取用户id为1的菜单 </a-button>
+        <a-button @click="switchToken(2)" :disabled="!isBackPermissionMode"> 获取用户id为2的菜单 </a-button>
       </Space>
     </div>
   </PageWrapper>
@@ -40,9 +36,7 @@ export default defineComponent({
     const userStore = useUserStore()
     const appStore = useAppStore()
 
-    const isBackPermissionMode = computed(
-      () => appStore.getProjectConfig.permissionMode === PermissionModeEnum.BACK
-    )
+    const isBackPermissionMode = computed(() => appStore.getProjectConfig.permissionMode === PermissionModeEnum.BACK)
 
     async function switchToken(userId: number) {
       // 本函数切换用户登录Token的部分仅用于演示，实际生产时切换身份应当重新登录

@@ -140,9 +140,7 @@ export default defineComponent({
             />
             {state.showTip && (
               <span class={[`ir-dv-img__tip`, state.isPassing ? 'success' : 'error']}>
-                {state.isPassing
-                  ? t('component.verify.time', { time: time.toFixed(1) })
-                  : t('component.verify.error')}
+                {state.isPassing ? t('component.verify.time', { time: time.toFixed(1) }) : t('component.verify.error')}
               </span>
             )}
             {!state.showTip && !state.draged && (

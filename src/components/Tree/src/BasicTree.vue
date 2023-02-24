@@ -1,25 +1,8 @@
 <script lang="tsx">
 import type { CSSProperties } from 'vue'
-import type {
-  FieldNames,
-  TreeState,
-  TreeItem,
-  KeyType,
-  CheckKeys,
-  TreeActionType
-} from './types/tree'
+import type { FieldNames, TreeState, TreeItem, KeyType, CheckKeys, TreeActionType } from './types/tree'
 
-import {
-  defineComponent,
-  reactive,
-  computed,
-  unref,
-  ref,
-  watchEffect,
-  toRaw,
-  watch,
-  onMounted
-} from 'vue'
+import { defineComponent, reactive, computed, unref, ref, watchEffect, toRaw, watch, onMounted } from 'vue'
 import TreeHeader from './components/TreeHeader.vue'
 import { Tree, Spin, Empty } from 'ant-design-vue'
 import { TreeIcon } from './TreeIcon'
@@ -374,8 +357,7 @@ export default defineComponent({
         const title = get(item, titleField)
 
         const searchIdx = searchText ? title.indexOf(searchText) : -1
-        const isHighlight =
-          searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1
+        const isHighlight = searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1
         const highlightStyle = `color: ${isBoolean(highlight) ? '#f50' : highlight}`
 
         const titleDom = isHighlight ? (
@@ -432,11 +414,7 @@ export default defineComponent({
               {extendSlots(slots)}
             </TreeHeader>
           )}
-          <Spin
-            wrapperClassName={unref(props.treeWrapperClassName)}
-            spinning={unref(props.loading)}
-            tip="加载中..."
-          >
+          <Spin wrapperClassName={unref(props.treeWrapperClassName)} spinning={unref(props.loading)} tip="加载中...">
             <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
               <Tree {...unref(getBindValues)} showIcon={false} treeData={treeData.value} />
             </ScrollContainer>
