@@ -11,62 +11,67 @@
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import TargetContent from './TargetContent.vue'
-import { LazyContainer } from '@/components/Container/index'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import TargetContent from './TargetContent.vue';
+  import { LazyContainer } from '/@/components/Container/index';
+  import { PageWrapper } from '/@/components/Page';
+
+  export default defineComponent({
+    components: { LazyContainer, TargetContent, PageWrapper },
+  });
 </script>
 <style lang="less">
-.lazy-base-demo {
-  &-wrap {
-    display: flex;
-    width: 50%;
-    height: 2000px;
-    margin: 20px auto;
-    text-align: center;
-    background-color: @component-background;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+  .lazy-base-demo {
+    &-wrap {
+      display: flex;
+      width: 50%;
+      height: 2000px;
+      margin: 20px auto;
+      text-align: center;
+      background-color: @component-background;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-box {
+      width: 300px;
+      height: 300px;
+    }
+
+    h1 {
+      height: 1300px;
+      margin: 20px 0;
+    }
   }
 
-  &-box {
-    width: 300px;
-    height: 300px;
+  .custom-enter {
+    opacity: 0%;
+    transform: scale(0.4) translate(100%);
   }
 
-  h1 {
-    height: 1300px;
-    margin: 20px 0;
+  .custom-enter-to {
+    opacity: 100%;
   }
-}
 
-.custom-enter {
-  opacity: 0%;
-  transform: scale(0.4) translate(100%);
-}
+  .custom-enter-active {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: all 0.5s;
+  }
 
-.custom-enter-to {
-  opacity: 100%;
-}
+  .custom-leave {
+    opacity: 100%;
+  }
 
-.custom-enter-active {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  transition: all 0.5s;
-}
+  .custom-leave-to {
+    opacity: 0%;
+    transform: scale(0.4) translate(-100%);
+  }
 
-.custom-leave {
-  opacity: 100%;
-}
-
-.custom-leave-to {
-  opacity: 0%;
-  transform: scale(0.4) translate(-100%);
-}
-
-.custom-leave-active {
-  transition: all 0.5s;
-}
+  .custom-leave-active {
+    transition: all 0.5s;
+  }
 </style>

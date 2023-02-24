@@ -34,120 +34,144 @@
   </Dropdown>
   <LockAction @register="register" />
 </template>
-<script setup lang="ts" name="UserDropdown">
-import { Dropdown, Menu, MenuDivider } from 'ant-design-vue'
-import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface'
-import { computed } from 'vue'
-import { DOC_URL } from '@/settings/siteSetting'
-import { useUserStore } from '@/store/modules/user'
-import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useModal } from '@/components/Modal'
-import headerImg from '@/assets/images/header.jpg'
-import { propTypes } from '@/utils/propTypes'
-import { openWindow } from '@/utils'
-import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
+<script lang="ts">
+  // components
+  import { Dropdown, Menu } from 'ant-design-vue';
+  import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
-type MenuEvent = 'logout' | 'doc' | 'lock'
+  import { defineComponent, computed } from 'vue';
 
-const MenuItem = createAsyncComponent(() => import('./DropMenuItem.vue'))
-const LockAction = createAsyncComponent(() => import('../lock/LockModal.vue'))
+  import { DOC_URL } from '/@/settings/siteSetting';
 
-defineProps({
-  theme: propTypes.oneOf(['dark', 'light'])
-})
+  import { useUserStore } from '/@/store/modules/user';
+  import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useModal } from '/@/components/Modal';
 
-const { prefixCls } = useDesign('header-user-dropdown')
-const { t } = useI18n()
-const { getShowDoc, getUseLockPage } = useHeaderSetting()
-const userStore = useUserStore()
+  import headerImg from '/@/assets/images/header.jpg';
+  import { propTypes } from '/@/utils/propTypes';
+  import { openWindow } from '/@/utils';
 
-const getUserInfo = computed(() => {
-  const { realName = '', avatar, desc } = userStore.getUserInfo || {}
-  return { realName, avatar: avatar || headerImg, desc }
-})
+  import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 
-const [register, { openModal }] = useModal()
+  type MenuEvent = 'logout' | 'doc' | 'lock';
 
-function handleLock() {
-  openModal(true)
-}
+  export default defineComponent({
+    name: 'UserDropdown',
+    components: {
+      Dropdown,
+      Menu,
+      MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
+      MenuDivider: Menu.Divider,
+      LockAction: createAsyncComponent(() => import('../lock/LockModal.vue')),
+    },
+    props: {
+      theme: propTypes.oneOf(['dark', 'light']),
+    },
+    setup() {
+      const { prefixCls } = useDesign('header-user-dropdown');
+      const { t } = useI18n();
+      const { getShowDoc, getUseLockPage } = useHeaderSetting();
+      const userStore = useUserStore();
 
-//  login out
-function handleLoginOut() {
-  userStore.confirmLoginOut()
-}
+      const getUserInfo = computed(() => {
+        const { realName = '', avatar, desc } = userStore.getUserInfo || {};
+        return { realName, avatar: avatar || headerImg, desc };
+      });
 
-// open doc
-function openDoc() {
-  openWindow(DOC_URL)
-}
+      const [register, { openModal }] = useModal();
 
-function handleMenuClick(e: MenuInfo) {
-  switch (e.key as MenuEvent) {
-    case 'logout':
-      handleLoginOut()
-      break
-    case 'doc':
-      openDoc()
-      break
-    case 'lock':
-      handleLock()
-      break
-  }
-}
+      function handleLock() {
+        openModal(true);
+      }
+
+      //  login out
+      function handleLoginOut() {
+        userStore.confirmLoginOut();
+      }
+
+      // open doc
+      function openDoc() {
+        openWindow(DOC_URL);
+      }
+
+      function handleMenuClick(e: MenuInfo) {
+        switch (e.key as MenuEvent) {
+          case 'logout':
+            handleLoginOut();
+            break;
+          case 'doc':
+            openDoc();
+            break;
+          case 'lock':
+            handleLock();
+            break;
+        }
+      }
+
+      return {
+        prefixCls,
+        t,
+        getUserInfo,
+        handleMenuClick,
+        getShowDoc,
+        register,
+        getUseLockPage,
+      };
+    },
+  });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-header-user-dropdown';
+  @prefix-cls: ~'@{namespace}-header-user-dropdown';
 
-.@{prefix-cls} {
-  height: @header-height;
-  padding: 0 0 0 10px;
-  padding-right: 10px;
-  overflow: hidden;
-  font-size: 12px;
-  cursor: pointer;
-  align-items: center;
+  .@{prefix-cls} {
+    height: @header-height;
+    padding: 0 0 0 10px;
+    padding-right: 10px;
+    overflow: hidden;
+    font-size: 12px;
+    cursor: pointer;
+    align-items: center;
 
-  img {
-    width: 24px;
-    height: 24px;
-    margin-right: 12px;
-  }
-
-  &__header {
-    border-radius: 50%;
-  }
-
-  &__name {
-    font-size: 14px;
-  }
-
-  &--dark {
-    &:hover {
-      background-color: @header-dark-bg-hover-color;
-    }
-  }
-
-  &--light {
-    &:hover {
-      background-color: @header-light-bg-hover-color;
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 12px;
     }
 
-    .@{prefix-cls}__name {
-      color: @text-color-base;
+    &__header {
+      border-radius: 50%;
     }
 
-    .@{prefix-cls}__desc {
-      color: @header-light-desc-color;
+    &__name {
+      font-size: 14px;
     }
-  }
 
-  &-dropdown-overlay {
-    .ant-dropdown-menu-item {
-      min-width: 160px;
+    &--dark {
+      &:hover {
+        background-color: @header-dark-bg-hover-color;
+      }
+    }
+
+    &--light {
+      &:hover {
+        background-color: @header-light-bg-hover-color;
+      }
+
+      .@{prefix-cls}__name {
+        color: @text-color-base;
+      }
+
+      .@{prefix-cls}__desc {
+        color: @header-light-desc-color;
+      }
+    }
+
+    &-dropdown-overlay {
+      .ant-dropdown-menu-item {
+        min-width: 160px;
+      }
     }
   }
-}
 </style>

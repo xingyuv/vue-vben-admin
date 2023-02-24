@@ -7,25 +7,35 @@
     </template>
   </Button>
 </template>
-<script setup lang="ts" name="AButton" inheritAttrs="false">
-import { computed, unref } from 'vue'
-import { Button } from 'ant-design-vue'
-import { buttonProps } from './props'
-import { useAttrs } from '@/hooks/core/useAttrs'
 
-const props = defineProps(buttonProps)
-// get component class
-const attrs = useAttrs({ excludeDefaultKeys: false })
-const getButtonClass = computed(() => {
-  const { color, disabled } = props
-  return [
-    {
-      [`ant-btn-${color}`]: !!color,
-      [`is-disabled`]: disabled
-    }
-  ]
-})
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { Button } from 'ant-design-vue';
+  export default defineComponent({
+    name: 'AButton',
+    extends: Button,
+    inheritAttrs: false,
+  });
+</script>
+<script lang="ts" setup>
+  import { computed, unref } from 'vue';
+  import Icon from '/@/components/Icon/src/Icon.vue';
+  import { buttonProps } from './props';
+  import { useAttrs } from '/@/hooks/core/useAttrs';
 
-// get inherit binding value
-const getBindValue = computed(() => ({ ...unref(attrs), ...props }))
+  const props = defineProps(buttonProps);
+  // get component class
+  const attrs = useAttrs({ excludeDefaultKeys: false });
+  const getButtonClass = computed(() => {
+    const { color, disabled } = props;
+    return [
+      {
+        [`ant-btn-${color}`]: !!color,
+        [`is-disabled`]: disabled,
+      },
+    ];
+  });
+
+  // get inherit binding value
+  const getBindValue = computed(() => ({ ...unref(attrs), ...props }));
 </script>

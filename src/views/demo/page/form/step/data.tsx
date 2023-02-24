@@ -1,4 +1,4 @@
-import { FormSchema } from '@/components/Form'
+import { FormSchema } from '/@/components/Form';
 
 export const step1Schemas: FormSchema[] = [
   {
@@ -11,13 +11,13 @@ export const step1Schemas: FormSchema[] = [
       options: [
         {
           label: 'anncwb@126.com',
-          value: '1'
-        }
-      ]
+          value: '1',
+        },
+      ],
     },
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'fac',
@@ -27,15 +27,15 @@ export const step1Schemas: FormSchema[] = [
     defaultValue: 'test@example.com',
     slot: 'fac',
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'pay',
     component: 'Input',
     label: '',
     defaultValue: 'zfb',
-    show: false
+    show: false,
   },
   {
     field: 'payeeName',
@@ -44,8 +44,8 @@ export const step1Schemas: FormSchema[] = [
     defaultValue: 'Vben',
     required: true,
     colProps: {
-      span: 24
-    }
+      span: 24,
+    },
   },
   {
     field: 'money',
@@ -55,14 +55,14 @@ export const step1Schemas: FormSchema[] = [
     required: true,
     renderComponentContent: () => {
       return {
-        prefix: () => '￥'
-      }
+        prefix: () => '￥',
+      };
     },
     colProps: {
-      span: 24
-    }
-  }
-]
+      span: 24,
+    },
+  },
+];
 
 export const step2Schemas: FormSchema[] = [
   {
@@ -72,7 +72,7 @@ export const step2Schemas: FormSchema[] = [
     required: true,
     defaultValue: '123456',
     colProps: {
-      span: 24
-    }
-  }
-]
+      span: 24,
+    },
+  },
+];

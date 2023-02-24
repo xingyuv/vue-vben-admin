@@ -57,19 +57,19 @@
   "stylelint.enable": true,
   "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"],
   "path-intellisense.mappings": {
-    "@/": "${workspaceRoot}/src"
+    "/@/": "${workspaceRoot}/src"
   },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -108,6 +108,7 @@
     "tailwindcss",
     "esnext",
     "antv",
+    "tinymce",
     "qrcode",
     "sider",
     "pinia",
@@ -119,10 +120,13 @@
     "vitejs",
     "sortablejs",
     "mockjs",
+    "codemirror",
     "iconify",
     "commitlint",
+    "vditor",
     "echarts",
     "cropperjs",
+    "logicflow",
     "vueuse",
     "zxcvbn",
     "lintstagedrc",
@@ -135,7 +139,22 @@
   "vetur.format.scriptInitialIndent": true,
   "vetur.format.styleInitialIndent": true,
   "vetur.validation.script": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-  }
+  "MicroPython.executeButton": [
+    {
+      "text": "▶",
+      "tooltip": "运行",
+      "alignment": "left",
+      "command": "extension.executeFile",
+      "priority": 3.5
+    }
+  ],
+  "MicroPython.syncButton": [
+    {
+      "text": "$(sync)",
+      "tooltip": "同步",
+      "alignment": "left",
+      "command": "extension.execute",
+      "priority": 4
+    }
+  ]
 }

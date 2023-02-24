@@ -14,18 +14,18 @@
     </div>
   </template>
 </template>
-<script setup lang="ts">
-import { computed, unref } from 'vue'
-import LoginFormTitle from './LoginFormTitle.vue'
-import { Button, Divider } from 'ant-design-vue'
-import { QrCode } from '@/components/Qrcode/index'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useLoginState, LoginStateEnum } from './useLogin'
+<script lang="ts" setup>
+  import { computed, unref } from 'vue';
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { Button, Divider } from 'ant-design-vue';
+  import { QrCode } from '/@/components/Qrcode/index';
+  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useLoginState, LoginStateEnum } from './useLogin';
 
-const qrCodeUrl = 'https://gitee.com/xingyu4j'
+  const qrCodeUrl = 'https://vben.vvbin.cn/login';
 
-const { t } = useI18n()
-const { handleBackLogin, getLoginState } = useLoginState()
+  const { t } = useI18n();
+  const { handleBackLogin, getLoginState } = useLoginState();
 
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE)
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE);
 </script>

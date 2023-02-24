@@ -1,6 +1,4 @@
 export default {
-  index: '序号',
-  action: '操作',
   okText: '确认',
   closeText: '关闭',
   cancelText: '取消',
@@ -18,5 +16,5 @@ export default {
   back: '返回',
 
   light: '亮色主题',
-  dark: '黑暗主题'
-}
+  dark: '黑暗主题',
+};

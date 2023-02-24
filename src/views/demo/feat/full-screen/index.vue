@@ -1,7 +1,9 @@
 <template>
   <PageWrapper title="全屏示例">
     <CollapseContainer class="w-full h-32 bg-white rounded-md" title="Window Full Screen">
-      <a-button type="primary" @click="enter" class="mr-2"> Enter Window Full Screen </a-button>
+      <a-button type="primary" :disabled="isFullscreen" @click="enter" class="mr-2">
+        Enter Window Full Screen
+      </a-button>
       <a-button color="success" @click="toggle" class="mr-2"> Toggle Window Full Screen </a-button>
 
       <a-button color="error" @click="exit" class="mr-2"> Exit Window Full Screen </a-button>
@@ -21,14 +23,28 @@
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue'
-import { CollapseContainer } from '@/components/Container/index'
-import { useFullscreen } from '@vueuse/core'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent, ref } from 'vue';
+  import { CollapseContainer } from '/@/components/Container/index';
+  import { useFullscreen } from '@vueuse/core';
 
-const domRef = ref<Nullable<HTMLElement>>(null)
-const { enter, toggle, exit, isFullscreen } = useFullscreen()
+  import { PageWrapper } from '/@/components/Page';
 
-const { toggle: toggleDom } = useFullscreen(domRef)
+  export default defineComponent({
+    components: { CollapseContainer, PageWrapper },
+    setup() {
+      const domRef = ref<Nullable<HTMLElement>>(null);
+      const { enter, toggle, exit, isFullscreen } = useFullscreen();
+
+      const { toggle: toggleDom } = useFullscreen(domRef);
+      return {
+        enter,
+        toggleDom,
+        toggle,
+        isFullscreen,
+        exit,
+        domRef,
+      };
+    },
+  });
 </script>

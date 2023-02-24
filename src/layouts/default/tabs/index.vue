@@ -26,88 +26,119 @@
     </Tabs>
   </div>
 </template>
-<script setup lang="ts" name="MultipleTabs">
-import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
-import { computed, unref, ref } from 'vue'
-import { TabPane, Tabs } from 'ant-design-vue'
-import TabContent from './components/TabContent.vue'
-import FoldButton from './components/FoldButton.vue'
-import TabRedo from './components/TabRedo.vue'
-import { useGo } from '@/hooks/web/usePage'
-import { useMultipleTabStore } from '@/store/modules/multipleTab'
-import { useUserStore } from '@/store/modules/user'
-import { initAffixTabs, useTabsDrag } from './useMultipleTabs'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting'
-import { REDIRECT_NAME } from '@/router/constant'
-import { listenerRouteChange } from '@/logics/mitt/routeChange'
-import { useRouter } from 'vue-router'
+<script lang="ts">
+  import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
 
-const affixTextList = initAffixTabs()
-const activeKeyRef = ref('')
+  import { defineComponent, computed, unref, ref } from 'vue';
 
-useTabsDrag(affixTextList)
-const tabStore = useMultipleTabStore()
-const userStore = useUserStore()
-const router = useRouter()
+  import { Tabs } from 'ant-design-vue';
+  import TabContent from './components/TabContent.vue';
+  import FoldButton from './components/FoldButton.vue';
+  import TabRedo from './components/TabRedo.vue';
 
-const { prefixCls } = useDesign('multiple-tabs')
-const go = useGo()
-const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
+  import { useGo } from '/@/hooks/web/usePage';
 
-const getTabsState = computed(() => {
-  return tabStore.getTabList.filter((item) => !item.meta?.hideTab)
-})
+  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
+  import { useUserStore } from '/@/store/modules/user';
 
-const unClose = computed(() => unref(getTabsState).length === 1)
+  import { initAffixTabs, useTabsDrag } from './useMultipleTabs';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting';
 
-const getWrapClass = computed(() => {
-  return [
-    prefixCls,
-    {
-      [`${prefixCls}--hide-close`]: unref(unClose)
-    }
-  ]
-})
+  import { REDIRECT_NAME } from '/@/router/constant';
+  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
 
-listenerRouteChange((route) => {
-  const { name } = route
-  if (name === REDIRECT_NAME || !route || !userStore.getToken) {
-    return
-  }
+  import { useRouter } from 'vue-router';
 
-  const { path, fullPath, meta = {} } = route
-  const { currentActiveMenu, hideTab } = meta as RouteMeta
-  const isHide = !hideTab ? null : currentActiveMenu
-  const p = isHide || fullPath || path
-  if (activeKeyRef.value !== p) {
-    activeKeyRef.value = p as string
-  }
+  export default defineComponent({
+    name: 'MultipleTabs',
+    components: {
+      TabRedo,
+      FoldButton,
+      Tabs,
+      TabPane: Tabs.TabPane,
+      TabContent,
+    },
+    setup() {
+      const affixTextList = initAffixTabs();
+      const activeKeyRef = ref('');
 
-  if (isHide) {
-    const findParentRoute = router.getRoutes().find((item) => item.path === currentActiveMenu)
+      useTabsDrag(affixTextList);
+      const tabStore = useMultipleTabStore();
+      const userStore = useUserStore();
+      const router = useRouter();
 
-    findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized)
-  } else {
-    tabStore.addTab(unref(route))
-  }
-})
+      const { prefixCls } = useDesign('multiple-tabs');
+      const go = useGo();
+      const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
 
-function handleChange(activeKey: any) {
-  activeKeyRef.value = activeKey
-  go(activeKey, false)
-}
+      const getTabsState = computed(() => {
+        return tabStore.getTabList.filter((item) => !item.meta?.hideTab);
+      });
 
-// Close the current tab
-function handleEdit(targetKey: string) {
-  // Added operation to hide, currently only use delete operation
-  if (unref(unClose)) {
-    return
-  }
+      const unClose = computed(() => unref(getTabsState).length === 1);
 
-  tabStore.closeTabByKey(targetKey, router)
-}
+      const getWrapClass = computed(() => {
+        return [
+          prefixCls,
+          {
+            [`${prefixCls}--hide-close`]: unref(unClose),
+          },
+        ];
+      });
+
+      listenerRouteChange((route) => {
+        const { name } = route;
+        if (name === REDIRECT_NAME || !route || !userStore.getToken) {
+          return;
+        }
+
+        const { path, fullPath, meta = {} } = route;
+        const { currentActiveMenu, hideTab } = meta as RouteMeta;
+        const isHide = !hideTab ? null : currentActiveMenu;
+        const p = isHide || fullPath || path;
+        if (activeKeyRef.value !== p) {
+          activeKeyRef.value = p as string;
+        }
+
+        if (isHide) {
+          const findParentRoute = router
+            .getRoutes()
+            .find((item) => item.path === currentActiveMenu);
+
+          findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized);
+        } else {
+          tabStore.addTab(unref(route));
+        }
+      });
+
+      function handleChange(activeKey: any) {
+        activeKeyRef.value = activeKey;
+        go(activeKey, false);
+      }
+
+      // Close the current tab
+      function handleEdit(targetKey: string) {
+        // Added operation to hide, currently only use delete operation
+        if (unref(unClose)) {
+          return;
+        }
+
+        tabStore.closeTabByKey(targetKey, router);
+      }
+      return {
+        getWrapClass,
+        handleEdit,
+        handleChange,
+        activeKeyRef,
+        getTabsState,
+        getShowQuick,
+        getShowRedo,
+        getShowFold,
+      };
+    },
+  });
 </script>
 <style lang="less">
-@import './index.less';
+  @import './index.less';
 </style>

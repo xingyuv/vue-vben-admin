@@ -1,7 +1,7 @@
 <template>
   <CollapseContainer title="安全设置" :canExpan="false">
     <List>
-      <template v-for="item in secureSettingList" :key="item.key">
+      <template v-for="item in list" :key="item.key">
         <ListItem>
           <ListItemMeta>
             <template #title>
@@ -19,21 +19,29 @@
     </List>
   </CollapseContainer>
 </template>
-<script setup lang="ts">
-import { List } from 'ant-design-vue'
-import { CollapseContainer } from '@/components/Container/index'
-import { secureSettingList } from './data'
+<script lang="ts">
+  import { List } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
+  import { CollapseContainer } from '/@/components/Container/index';
 
-const ListItem = List.Item
-const ListItemMeta = List.Item.Meta
+  import { secureSettingList } from './data';
+
+  export default defineComponent({
+    components: { CollapseContainer, List, ListItem: List.Item, ListItemMeta: List.Item.Meta },
+    setup() {
+      return {
+        list: secureSettingList,
+      };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.extra {
-  float: right;
-  margin-top: 10px;
-  margin-right: 30px;
-  font-weight: normal;
-  color: #1890ff;
-  cursor: pointer;
-}
+  .extra {
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+    font-weight: normal;
+    color: #1890ff;
+    cursor: pointer;
+  }
 </style>

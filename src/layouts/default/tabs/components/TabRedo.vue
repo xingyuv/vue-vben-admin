@@ -3,23 +3,31 @@
     <RedoOutlined :spin="loading" />
   </span>
 </template>
-<script setup lang="ts" name="TabRedo">
-import { ref } from 'vue'
-import { RedoOutlined } from '@ant-design/icons-vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useTabs } from '@/hooks/web/useTabs'
+<script lang="ts">
+  import { defineComponent, ref } from 'vue';
+  import { RedoOutlined } from '@ant-design/icons-vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useTabs } from '/@/hooks/web/useTabs';
 
-const loading = ref(false)
+  export default defineComponent({
+    name: 'TabRedo',
+    components: { RedoOutlined },
 
-const { prefixCls } = useDesign('multiple-tabs-content')
-const { refreshPage } = useTabs()
+    setup() {
+      const loading = ref(false);
 
-async function handleRedo() {
-  loading.value = true
-  await refreshPage()
-  setTimeout(() => {
-    loading.value = false
-    // Animation execution time
-  }, 1200)
-}
+      const { prefixCls } = useDesign('multiple-tabs-content');
+      const { refreshPage } = useTabs();
+
+      async function handleRedo() {
+        loading.value = true;
+        await refreshPage();
+        setTimeout(() => {
+          loading.value = false;
+          // Animation execution time
+        }, 1200);
+      }
+      return { prefixCls, handleRedo, loading };
+    },
+  });
 </script>

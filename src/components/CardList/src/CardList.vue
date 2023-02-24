@@ -10,18 +10,17 @@
         :pagination="paginationProp"
       >
         <template #header>
-          <div class="flex justify-end space-x-2">
-            <slot name="header"></slot>
+          <div class="flex justify-end space-x-2"
+            ><slot name="header"></slot>
             <Tooltip>
               <template #title>
-                <div class="w-50">每行显示数量</div>
-                <Slider
+                <div class="w-50">每行显示数量</div
+                ><Slider
                   id="slider"
                   v-bind="sliderProp"
                   v-model:value="grid"
                   @change="sliderChange"
-                />
-              </template>
+              /></template>
               <Button><TableOutlined /></Button>
             </Tooltip>
             <Tooltip @click="fetch">
@@ -50,9 +49,9 @@
                       event: '1',
                       popConfirm: {
                         title: '是否确认删除',
-                        confirm: handleDelete.bind(null, item.id)
-                      }
-                    }
+                        confirm: handleDelete.bind(null, item.id),
+                      },
+                    },
                   ]"
                   popconfirm
                 >
@@ -76,98 +75,103 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
-import { EditOutlined, EllipsisOutlined, RedoOutlined, TableOutlined } from '@ant-design/icons-vue'
-import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from 'ant-design-vue'
-import { Dropdown } from '@/components/Dropdown'
-import { BasicForm, useForm } from '@/components/Form'
-import { propTypes } from '@/utils/propTypes'
-import { Button } from '@/components/Button'
-import { isFunction } from '@/utils/is'
-import { useSlider, grid } from './data'
-const ListItem = List.Item
-const CardMeta = Card.Meta
-const TypographyText = Typography.Text
-// 获取slider属性
-const sliderProp = computed(() => useSlider(4))
-// 组件接收参数
-const props = defineProps({
-  // 请求API的参数
-  params: propTypes.object.def({}),
-  //api
-  api: propTypes.func
-})
-//暴露内部方法
-const emit = defineEmits(['getMethod', 'delete'])
-//数据
-const data = ref([])
-// 切换每行个数
-// cover图片自适应高度
-//修改pageSize并重新请求数据
+<script lang="ts" setup>
+  import { computed, onMounted, ref } from 'vue';
+  import {
+    EditOutlined,
+    EllipsisOutlined,
+    RedoOutlined,
+    TableOutlined,
+  } from '@ant-design/icons-vue';
+  import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from 'ant-design-vue';
+  import { Dropdown } from '/@/components/Dropdown';
+  import { BasicForm, useForm } from '/@/components/Form';
+  import { propTypes } from '/@/utils/propTypes';
+  import { Button } from '/@/components/Button';
+  import { isFunction } from '/@/utils/is';
+  import { useSlider, grid } from './data';
+  const ListItem = List.Item;
+  const CardMeta = Card.Meta;
+  const TypographyText = Typography.Text;
+  // 获取slider属性
+  const sliderProp = computed(() => useSlider(4));
+  // 组件接收参数
+  const props = defineProps({
+    // 请求API的参数
+    params: propTypes.object.def({}),
+    //api
+    api: propTypes.func,
+  });
+  //暴露内部方法
+  const emit = defineEmits(['getMethod', 'delete']);
+  //数据
+  const data = ref([]);
+  // 切换每行个数
+  // cover图片自适应高度
+  //修改pageSize并重新请求数据
 
-const height = computed(() => {
-  return `h-${120 - grid.value * 6}`
-})
-//表单
-const [registerForm, { validate }] = useForm({
-  schemas: [{ field: 'type', component: 'Input', label: '类型' }],
-  labelWidth: 80,
-  baseColProps: { span: 6 },
-  actionColOptions: { span: 24 },
-  autoSubmitOnEnter: true,
-  submitFunc: handleSubmit
-})
-//表单提交
-async function handleSubmit() {
-  const data = await validate()
-  await fetch(data)
-}
-function sliderChange(n) {
-  pageSize.value = n * 4
-  fetch()
-}
-
-// 自动请求并暴露内部方法
-onMounted(() => {
-  fetch()
-  emit('getMethod', fetch)
-})
-
-async function fetch(p = {}) {
-  const { api, params } = props
-  if (api && isFunction(api)) {
-    const res = await api({ ...params, page: page.value, pageSize: pageSize.value, ...p })
-    data.value = res.items
-    total.value = res.total
+  const height = computed(() => {
+    return `h-${120 - grid.value * 6}`;
+  });
+  //表单
+  const [registerForm, { validate }] = useForm({
+    schemas: [{ field: 'type', component: 'Input', label: '类型' }],
+    labelWidth: 80,
+    baseColProps: { span: 6 },
+    actionColOptions: { span: 24 },
+    autoSubmitOnEnter: true,
+    submitFunc: handleSubmit,
+  });
+  //表单提交
+  async function handleSubmit() {
+    const data = await validate();
+    await fetch(data);
   }
-}
-//分页相关
-const page = ref(1)
-const pageSize = ref(36)
-const total = ref(0)
-const paginationProp = ref({
-  showSizeChanger: false,
-  showQuickJumper: true,
-  pageSize,
-  current: page,
-  total,
-  showTotal: (total: number) => `总 ${total} 条`,
-  onChange: pageChange,
-  onShowSizeChange: pageSizeChange
-})
+  function sliderChange(n) {
+    pageSize.value = n * 4;
+    fetch();
+  }
 
-function pageChange(p: number, pz: number) {
-  page.value = p
-  pageSize.value = pz
-  fetch()
-}
-function pageSizeChange(_current: number, size: number) {
-  pageSize.value = size
-  fetch()
-}
+  // 自动请求并暴露内部方法
+  onMounted(() => {
+    fetch();
+    emit('getMethod', fetch);
+  });
 
-async function handleDelete(id) {
-  emit('delete', id)
-}
+  async function fetch(p = {}) {
+    const { api, params } = props;
+    if (api && isFunction(api)) {
+      const res = await api({ ...params, page: page.value, pageSize: pageSize.value, ...p });
+      data.value = res.items;
+      total.value = res.total;
+    }
+  }
+  //分页相关
+  const page = ref(1);
+  const pageSize = ref(36);
+  const total = ref(0);
+  const paginationProp = ref({
+    showSizeChanger: false,
+    showQuickJumper: true,
+    pageSize,
+    current: page,
+    total,
+    showTotal: (total) => `总 ${total} 条`,
+    onChange: pageChange,
+    onShowSizeChange: pageSizeChange,
+  });
+
+  function pageChange(p, pz) {
+    page.value = p;
+    pageSize.value = pz;
+    fetch();
+  }
+  function pageSizeChange(_current, size) {
+    pageSize.value = size;
+    fetch();
+  }
+
+  async function handleDelete(id) {
+    emit('delete', id);
+  }
 </script>

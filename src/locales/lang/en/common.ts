@@ -1,6 +1,4 @@
 export default {
-  index: 'Index',
-  action: 'Action',
   okText: 'OK',
   closeText: 'Close',
   cancelText: 'Cancel',
@@ -18,5 +16,5 @@ export default {
   back: 'Back',
 
   light: 'Light',
-  dark: 'Dark'
-}
+  dark: 'Dark',
+};

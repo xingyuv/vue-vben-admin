@@ -1,7 +1,7 @@
 <template>
   <CollapseContainer title="账号绑定" :canExpan="false">
     <List>
-      <template v-for="item in accountBindList" :key="item.key">
+      <template v-for="item in list" :key="item.key">
         <ListItem>
           <ListItemMeta>
             <template #avatar>
@@ -22,23 +22,38 @@
     </List>
   </CollapseContainer>
 </template>
-<script setup lang="ts">
-import { List } from 'ant-design-vue'
-import { CollapseContainer } from '@/components/Container/index'
-import { accountBindList } from './data'
+<script lang="ts">
+  import { List } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
+  import { CollapseContainer } from '/@/components/Container/index';
+  import Icon from '/@/components/Icon/index';
 
-const ListItem = List.Item
-const ListItemMeta = List.Item.Meta
+  import { accountBindList } from './data';
+
+  export default defineComponent({
+    components: {
+      CollapseContainer,
+      List,
+      ListItem: List.Item,
+      ListItemMeta: List.Item.Meta,
+      Icon,
+    },
+    setup() {
+      return {
+        list: accountBindList,
+      };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.avatar {
-  font-size: 40px !important;
-}
+  .avatar {
+    font-size: 40px !important;
+  }
 
-.extra {
-  float: right;
-  margin-top: 10px;
-  margin-right: 30px;
-  cursor: pointer;
-}
+  .extra {
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+    cursor: pointer;
+  }
 </style>

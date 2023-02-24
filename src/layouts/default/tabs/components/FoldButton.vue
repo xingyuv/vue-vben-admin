@@ -3,30 +3,40 @@
     <Icon :icon="getIcon" />
   </span>
 </template>
-<script setup lang="ts" name="FoldButton">
-import { unref, computed } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
-import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
-import { triggerWindowResize } from '@/utils/event'
+<script lang="ts">
+  import { defineComponent, unref, computed } from 'vue';
+  import { Icon } from '/@/components/Icon';
 
-const { prefixCls } = useDesign('multiple-tabs-content')
-const { getShowMenu, setMenuSetting } = useMenuSetting()
-const { getShowHeader, setHeaderSetting } = useHeaderSetting()
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
+  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { triggerWindowResize } from '/@/utils/event';
 
-const getIsUnFold = computed(() => !unref(getShowMenu) && !unref(getShowHeader))
+  export default defineComponent({
+    name: 'FoldButton',
+    components: { Icon },
+    setup() {
+      const { prefixCls } = useDesign('multiple-tabs-content');
+      const { getShowMenu, setMenuSetting } = useMenuSetting();
+      const { getShowHeader, setHeaderSetting } = useHeaderSetting();
 
-const getIcon = computed(() =>
-  unref(getIsUnFold) ? 'codicon:screen-normal' : 'codicon:screen-full'
-)
+      const getIsUnFold = computed(() => !unref(getShowMenu) && !unref(getShowHeader));
 
-function handleFold() {
-  const isUnFold = unref(getIsUnFold)
-  setMenuSetting({
-    show: isUnFold,
-    hidden: !isUnFold
-  })
-  setHeaderSetting({ show: isUnFold })
-  triggerWindowResize()
-}
+      const getIcon = computed(() =>
+        unref(getIsUnFold) ? 'codicon:screen-normal' : 'codicon:screen-full',
+      );
+
+      function handleFold() {
+        const isUnFold = unref(getIsUnFold);
+        setMenuSetting({
+          show: isUnFold,
+          hidden: !isUnFold,
+        });
+        setHeaderSetting({ show: isUnFold });
+        triggerWindowResize();
+      }
+
+      return { prefixCls, getIcon, handleFold };
+    },
+  });
 </script>

@@ -9,9 +9,9 @@
         <hr class="my-4" />
 
         <div class="flex">
-          <Input v-model:value="state.server" disabled>
+          <a-input v-model:value="server" disabled>
             <template #addonBefore> 服务地址 </template>
-          </Input>
+          </a-input>
           <a-button :type="getIsOpen ? 'danger' : 'primary'" @click="toggle">
             {{ getIsOpen ? '关闭连接' : '开启连接' }}
           </a-button>
@@ -19,10 +19,10 @@
         <p class="text-lg font-medium mt-4">设置</p>
         <hr class="my-4" />
 
-        <Textarea
+        <InputTextArea
           placeholder="需要发送到服务器的内容"
           :disabled="!getIsOpen"
-          v-model:value="state.sendValue"
+          v-model:value="sendValue"
           allowClear
         />
 
@@ -52,56 +52,76 @@
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { reactive, watchEffect, computed } from 'vue'
-import { Tag, Input, Textarea } from 'ant-design-vue'
-import { PageWrapper } from '@/components/Page'
-import { useWebSocket } from '@vueuse/core'
-import { formatToDateTime } from '@/utils/dateUtil'
+<script lang="ts">
+  import { defineComponent, reactive, watchEffect, computed, toRefs } from 'vue';
+  import { Tag, Input } from 'ant-design-vue';
+  import { PageWrapper } from '/@/components/Page';
+  import { useWebSocket } from '@vueuse/core';
+  import { formatToDateTime } from '/@/utils/dateUtil';
 
-const state = reactive({
-  server: 'ws://localhost:3300/test',
-  sendValue: '',
-  recordList: [] as { id: number; time: number; res: string }[]
-})
+  export default defineComponent({
+    components: {
+      PageWrapper,
+      [Input.name]: Input,
+      InputTextArea: Input.TextArea,
+      Tag,
+    },
+    setup() {
+      const state = reactive({
+        server: 'ws://localhost:3300/test',
+        sendValue: '',
+        recordList: [] as { id: number; time: number; res: string }[],
+      });
 
-const { status, data, send, close, open } = useWebSocket(state.server, {
-  autoReconnect: false,
-  heartbeat: true
-})
+      const { status, data, send, close, open } = useWebSocket(state.server, {
+        autoReconnect: false,
+        heartbeat: true,
+      });
 
-watchEffect(() => {
-  if (data.value) {
-    try {
-      const res = JSON.parse(data.value)
-      state.recordList.push(res)
-    } catch (error) {
-      state.recordList.push({
-        res: data.value,
-        id: Math.ceil(Math.random() * 1000),
-        time: new Date().getTime()
-      })
-    }
-  }
-})
+      watchEffect(() => {
+        if (data.value) {
+          try {
+            const res = JSON.parse(data.value);
+            state.recordList.push(res);
+          } catch (error) {
+            state.recordList.push({
+              res: data.value,
+              id: Math.ceil(Math.random() * 1000),
+              time: new Date().getTime(),
+            });
+          }
+        }
+      });
 
-const getIsOpen = computed(() => status.value === 'OPEN')
-const getTagColor = computed(() => (getIsOpen.value ? 'success' : 'red'))
+      const getIsOpen = computed(() => status.value === 'OPEN');
+      const getTagColor = computed(() => (getIsOpen.value ? 'success' : 'red'));
 
-const getList = computed(() => {
-  return [...state.recordList].reverse()
-})
+      const getList = computed(() => {
+        return [...state.recordList].reverse();
+      });
 
-function handlerSend() {
-  send(state.sendValue)
-  state.sendValue = ''
-}
+      function handlerSend() {
+        send(state.sendValue);
+        state.sendValue = '';
+      }
 
-function toggle() {
-  if (getIsOpen.value) {
-    close()
-  } else {
-    open()
-  }
-}
+      function toggle() {
+        if (getIsOpen.value) {
+          close();
+        } else {
+          open();
+        }
+      }
+      return {
+        status,
+        formatToDateTime,
+        ...toRefs(state),
+        handlerSend,
+        getList,
+        toggle,
+        getIsOpen,
+        getTagColor,
+      };
+    },
+  });
 </script>

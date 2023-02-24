@@ -1,23 +1,31 @@
 <template>
   <PageWrapper title="Ripple示例">
-    <div class="demo-box" v-ripple-directive>content</div>
+    <div class="demo-box" v-ripple>content</div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import vRippleDirective from '@/directives/ripple'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import RippleDirective from '/@/directives/ripple';
+  import { PageWrapper } from '/@/components/Page';
+
+  export default defineComponent({
+    components: { PageWrapper },
+    directives: {
+      Ripple: RippleDirective,
+    },
+  });
 </script>
 
 <style lang="less" scoped>
-.demo-box {
-  display: flex;
-  width: 300px;
-  height: 300px;
-  font-size: 24px;
-  color: #fff;
-  background-color: #408ede;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-}
+  .demo-box {
+    display: flex;
+    width: 300px;
+    height: 300px;
+    font-size: 24px;
+    color: #fff;
+    background-color: #408ede;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+  }
 </style>

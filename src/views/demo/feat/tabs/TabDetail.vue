@@ -3,15 +3,26 @@
     <div>{{ index }} - 详情页内容在此</div>
   </PageWrapper>
 </template>
-<script setup lang="ts" name="TabDetail">
-import { PageWrapper } from '@/components/Page'
-import { useTabs } from '@/hooks/web/useTabs'
-import { useRoute } from 'vue-router'
 
-const route = useRoute()
-const index = route.params?.id ?? -1
-const { setTitle } = useTabs()
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { PageWrapper } from '/@/components/Page';
+  import { useTabs } from '/@/hooks/web/useTabs';
+  import { useRoute } from 'vue-router';
 
-// 设置标识
-setTitle(`No.${index} - 详情信息`)
+  export default defineComponent({
+    name: 'TabDetail',
+    components: { PageWrapper },
+    setup() {
+      const route = useRoute();
+      const index = route.params?.id ?? -1;
+      const { setTitle } = useTabs();
+
+      // 设置标识
+      setTitle(`No.${index} - 详情信息`);
+      return {
+        index,
+      };
+    },
+  });
 </script>
