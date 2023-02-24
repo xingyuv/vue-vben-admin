@@ -42,7 +42,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         },
         // @/xxxx => src/xxxx
         {
-          find: /\/@\//,
+          find: /\@\//,
           replacement: pathResolve('src') + '/'
         }
       ]
@@ -91,7 +91,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     },
 
     // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
-    plugins: createVitePlugins(viteEnv, isBuild),
+    plugins: createVitePlugins(mode, viteEnv, isBuild),
 
     optimizeDeps: {
       // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly

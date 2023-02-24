@@ -15,15 +15,11 @@ import { configVisualizerConfig } from './visualizer'
 import { configThemePlugin } from './theme'
 import { configImageminPlugin } from './imagemin'
 import { configSvgIconsPlugin } from './svgSprite'
+import { isDevFn } from '../../utils'
 
-export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
-  const {
-    VITE_USE_IMAGEMIN,
-    VITE_USE_MOCK,
-    VITE_LEGACY,
-    VITE_BUILD_COMPRESS,
-    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
-  } = viteEnv
+export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boolean) {
+  const { VITE_USE_IMAGEMIN, VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } =
+    viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
@@ -56,7 +52,9 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
   vitePlugins.push(purgeIcons())
 
   // vite-plugin-style-import
-  vitePlugins.push(configStyleImportPlugin(isBuild))
+  if (isDevFn(mode)) {
+    vitePlugins.push(configStyleImportPlugin(isBuild))
+  }
 
   // rollup-plugin-visualizer
   vitePlugins.push(configVisualizerConfig())
@@ -70,9 +68,7 @@ export function createVitePlugins(viteEnv: ViteEnv, isBuild: boolean) {
     VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin())
 
     // rollup-plugin-gzip
-    vitePlugins.push(
-      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE)
-    )
+    vitePlugins.push(configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE))
 
     // vite-plugin-pwa
     vitePlugins.push(configPwaConfig(viteEnv))
