@@ -1,4 +1,4 @@
-import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer';
+import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 
 // 问题描述
 // 1. `import.meta.globEager` 已被弃用, 需要升级vite版本,有兼容问题
@@ -16,19 +16,19 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer';
 //   return pre;
 // }, [] as any[]);
 
-const modules = import.meta.globEager('./**/*.ts');
+const modules = import.meta.globEager('./**/*.ts')
 
-const mockModules: any[] = [];
+const mockModules: any[] = []
 Object.keys(modules).forEach((key) => {
   if (key.includes('/_')) {
-    return;
+    return
   }
-  mockModules.push(...modules[key].default);
-});
+  mockModules.push(...modules[key].default)
+})
 
 /**
  * Used in a production environment. Need to manually import all modules
  */
 export function setupProdMockServer() {
-  createProdMockServer(mockModules);
+  createProdMockServer(mockModules)
 }

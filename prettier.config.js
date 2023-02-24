@@ -33,5 +33,5 @@ module.exports = {
   endOfLine: 'auto',
   // range是format执行的范围，可以选执行一个文件的一部分，默认的设置是整个文件
   rangeStart: 0,
-  rangeEnd: Infinity,
-};
+  rangeEnd: Infinity
+}

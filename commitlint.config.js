@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
+const fs = require('fs')
+const path = require('path')
+const { execSync } = require('child_process')
 
 const scopes = fs
   .readdirSync(path.resolve(__dirname, 'src'), { withFileTypes: true })
   .filter((dirent) => dirent.isDirectory())
-  .map((dirent) => dirent.name.replace(/s$/, ''));
+  .map((dirent) => dirent.name.replace(/s$/, ''))
 
 // precomputed scope
 const scopeComplete = execSync('git status --porcelain || true')
@@ -15,7 +15,7 @@ const scopeComplete = execSync('git status --porcelain || true')
   .find((r) => ~r.indexOf('M  src'))
   ?.replace(/(\/)/g, '%%')
   ?.match(/src%%((\w|-)*)/)?.[1]
-  ?.replace(/s$/, '');
+  ?.replace(/s$/, '')
 
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
@@ -46,9 +46,9 @@ module.exports = {
         'wip',
         'workflow',
         'types',
-        'release',
-      ],
-    ],
+        'release'
+      ]
+    ]
   },
   prompt: {
     /** @use `yarn commit :f` */
@@ -57,7 +57,7 @@ module.exports = {
       r: 'docs: update README',
       s: 'style: update code format',
       b: 'build: bump dependencies',
-      c: 'chore: update config',
+      c: 'chore: update config'
     },
     customScopesAlign: !scopeComplete ? 'top' : 'bottom',
     defaultScope: scopeComplete,
@@ -69,8 +69,8 @@ module.exports = {
     typesAppend: [
       { value: 'wip', name: 'wip:      work in process' },
       { value: 'workflow', name: 'workflow: workflow improvements' },
-      { value: 'types', name: 'types:    type definition file changes' },
-    ],
+      { value: 'types', name: 'types:    type definition file changes' }
+    ]
 
     // 中英文对照版
     // messages: {
@@ -103,5 +103,5 @@ module.exports = {
     // ],
     // emptyScopesAlias: 'empty:      不填写',
     // customScopesAlias: 'custom:     自定义',
-  },
-};
+  }
+}

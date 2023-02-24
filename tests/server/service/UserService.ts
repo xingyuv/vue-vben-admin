@@ -1,4 +1,4 @@
-import { Result } from '../utils';
+import { Result } from '../utils'
 
 const fakeUserInfo = {
   userId: '1',
@@ -10,16 +10,16 @@ const fakeUserInfo = {
   roles: [
     {
       roleName: 'Super Admin',
-      value: 'super',
-    },
-  ],
-};
+      value: 'super'
+    }
+  ]
+}
 export default class UserService {
   async login() {
-    return Result.success(fakeUserInfo);
+    return Result.success(fakeUserInfo)
   }
 
   async getUserInfoById() {
-    return Result.success(fakeUserInfo);
+    return Result.success(fakeUserInfo)
   }
 }
