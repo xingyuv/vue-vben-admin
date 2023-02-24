@@ -1,4 +1,4 @@
-<div align="center"> <a href="https://github.com/anncwb/vue-vben-admin"> <img alt="VbenAdmin Logo" width="200" height="200" src="https://anncwb.github.io/anncwb/images/logo.png"> </a> <br> <br>
+<div align="center"> <a href="https://gitee.com/xingyuv"> <img alt="VbenAdmin Logo" width="200" height="200" src="https://anncwb.github.io/anncwb/images/logo.png"> </a> <br> <br>
 
 [![license](https://img.shields.io/github/license/anncwb/vue-vben-admin.svg)](LICENSE)
 
@@ -40,7 +40,7 @@ Vue Vben Admin 是一个免费开源的中后台模版。使用了最新的`vue3
 
 在 Gitpod（适用于 GitHub 的免费在线开发环境）中打开项目，并立即开始编码.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/anncwb/vue-vben-admin)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://gitee.com/xingyuv)
 
 ## 文档
 
@@ -62,7 +62,7 @@ Vue Vben Admin 是一个免费开源的中后台模版。使用了最新的`vue3
 - 获取项目代码
 
 ```bash
-git clone https://github.com/anncwb/vue-vben-admin.git
+git clone https://gitee.com/xingyuv.git
 ```
 
 - 安装依赖
@@ -92,12 +92,12 @@ pnpm build
 
 ## 项目地址
 
-- [vue-vben-admin](https://github.com/anncwb/vue-vben-admin) - 完整版
+- [vue-vben-admin](https://gitee.com/xingyuv) - 完整版
 - [vue-vben-admin-thin-next](https://github.com/anncwb/vben-admin-thin-next) - 简化版
 
 ## 如何贡献
 
-非常欢迎你的加入！[提一个 Issue](https://github.com/anncwb/vue-vben-admin/issues/new/choose) 或者提交一个 Pull Request。
+非常欢迎你的加入！[提一个 Issue](https://gitee.com/xingyuv/issues/new/choose) 或者提交一个 Pull Request。
 
 **Pull Request:**
 

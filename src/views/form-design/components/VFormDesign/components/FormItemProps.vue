@@ -62,15 +62,34 @@
   </div>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, watch } from 'vue';
-  import {
-    baseFormItemControlAttrs,
-    baseFormItemProps,
-    advanceFormItemProps,
-    advanceFormItemColProps,
-  } from '../../VFormDesign/config/formItemPropsConfig';
+import { computed, defineComponent, watch } from 'vue'
+import {
+  baseFormItemControlAttrs,
+  baseFormItemProps,
+  advanceFormItemProps,
+  advanceFormItemColProps
+} from '../../VFormDesign/config/formItemPropsConfig'
 
-  import {
+import {
+  Empty,
+  Input,
+  Form,
+  FormItem,
+  Switch,
+  Checkbox,
+  Select,
+  Slider,
+  Col,
+  RadioGroup
+} from 'ant-design-vue'
+import RuleProps from './RuleProps.vue'
+import { useFormDesignState } from '../../../hooks/useFormDesignState'
+import { isArray } from 'lodash-es'
+
+export default defineComponent({
+  name: 'FormItemProps',
+  components: {
+    RuleProps,
     Empty,
     Input,
     Form,
@@ -80,66 +99,47 @@
     Select,
     Slider,
     Col,
-    RadioGroup,
-  } from 'ant-design-vue';
-  import RuleProps from './RuleProps.vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import { isArray } from 'lodash-es';
+    RadioGroup
+  },
+  // props: {} as PropsOptions,
 
-  export default defineComponent({
-    name: 'FormItemProps',
-    components: {
-      RuleProps,
-      Empty,
-      Input,
-      Form,
-      FormItem,
-      Switch,
-      Checkbox,
-      Select,
-      Slider,
-      Col,
-      RadioGroup,
-    },
-    // props: {} as PropsOptions,
+  setup() {
+    const { formConfig } = useFormDesignState()
 
-    setup() {
-      const { formConfig } = useFormDesignState();
-
-      watch(
-        () => formConfig.value,
-        () => {
-          if (formConfig.value.currentItem) {
-            formConfig.value.currentItem.itemProps = formConfig.value.currentItem.itemProps || {};
-            formConfig.value.currentItem.itemProps.labelCol =
-              formConfig.value.currentItem.itemProps.labelCol || {};
-            formConfig.value.currentItem.itemProps.wrapperCol =
-              formConfig.value.currentItem.itemProps.wrapperCol || {};
-          }
-        },
-        { deep: true, immediate: true },
-      );
-      const showProps = (exclude: string[] | undefined) => {
-        if (!exclude) {
-          return true;
+    watch(
+      () => formConfig.value,
+      () => {
+        if (formConfig.value.currentItem) {
+          formConfig.value.currentItem.itemProps = formConfig.value.currentItem.itemProps || {}
+          formConfig.value.currentItem.itemProps.labelCol =
+            formConfig.value.currentItem.itemProps.labelCol || {}
+          formConfig.value.currentItem.itemProps.wrapperCol =
+            formConfig.value.currentItem.itemProps.wrapperCol || {}
         }
-        return isArray(exclude) ? !exclude.includes(formConfig.value.currentItem!.component) : true;
-      };
+      },
+      { deep: true, immediate: true }
+    )
+    const showProps = (exclude: string[] | undefined) => {
+      if (!exclude) {
+        return true
+      }
+      return isArray(exclude) ? !exclude.includes(formConfig.value.currentItem!.component) : true
+    }
 
-      const controlPropsList = computed(() => {
-        return baseFormItemControlAttrs.filter((item) => {
-          return showProps(item.exclude);
-        });
-      });
+    const controlPropsList = computed(() => {
+      return baseFormItemControlAttrs.filter((item) => {
+        return showProps(item.exclude)
+      })
+    })
 
-      return {
-        baseFormItemProps,
-        advanceFormItemProps,
-        advanceFormItemColProps,
-        formConfig,
-        controlPropsList,
-        showProps,
-      };
-    },
-  });
+    return {
+      baseFormItemProps,
+      advanceFormItemProps,
+      advanceFormItemColProps,
+      formConfig,
+      controlPropsList,
+      showProps
+    }
+  }
+})
 </script>

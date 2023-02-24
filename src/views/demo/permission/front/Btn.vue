@@ -60,34 +60,34 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { computed, defineComponent } from 'vue';
-  import { Alert, Divider, Space } from 'ant-design-vue';
-  import CurrentPermissionMode from '../CurrentPermissionMode.vue';
-  import { useUserStore } from '/@/store/modules/user';
-  import { RoleEnum } from '/@/enums/roleEnum';
-  import { usePermission } from '/@/hooks/web/usePermission';
-  import { Authority } from '/@/components/Authority';
-  import { PageWrapper } from '/@/components/Page';
+import { computed, defineComponent } from 'vue'
+import { Alert, Divider, Space } from 'ant-design-vue'
+import CurrentPermissionMode from '../CurrentPermissionMode.vue'
+import { useUserStore } from '@/store/modules/user'
+import { RoleEnum } from '@/enums/roleEnum'
+import { usePermission } from '@/hooks/web/usePermission'
+import { Authority } from '@/components/Authority'
+import { PageWrapper } from '@/components/Page'
 
-  export default defineComponent({
-    components: { Alert, PageWrapper, Space, CurrentPermissionMode, Divider, Authority },
-    setup() {
-      const { changeRole, hasPermission } = usePermission();
-      const userStore = useUserStore();
+export default defineComponent({
+  components: { Alert, PageWrapper, Space, CurrentPermissionMode, Divider, Authority },
+  setup() {
+    const { changeRole, hasPermission } = usePermission()
+    const userStore = useUserStore()
 
-      return {
-        userStore,
-        RoleEnum,
-        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
-        isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
-        changeRole,
-        hasPermission,
-      };
-    },
-  });
+    return {
+      userStore,
+      RoleEnum,
+      isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
+      isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
+      changeRole,
+      hasPermission
+    }
+  }
+})
 </script>
 <style lang="less" scoped>
-  .demo {
-    background-color: @component-background;
-  }
+.demo {
+  background-color: @component-background;
+}
 </style>

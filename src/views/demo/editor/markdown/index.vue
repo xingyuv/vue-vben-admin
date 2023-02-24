@@ -18,16 +18,16 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
-  import { MarkDown, MarkDownActionType, MarkdownViewer } from '/@/components/Markdown';
-  import { PageWrapper } from '/@/components/Page';
-  import { Card } from 'ant-design-vue';
+import { defineComponent, ref, unref } from 'vue'
+import { MarkDown, MarkDownActionType, MarkdownViewer } from '@/components/Markdown'
+import { PageWrapper } from '@/components/Page'
+import { Card } from 'ant-design-vue'
 
-  export default defineComponent({
-    components: { MarkDown, PageWrapper, MarkdownViewer, ACard: Card },
-    setup() {
-      const markDownRef = ref<Nullable<MarkDownActionType>>(null);
-      const valueRef = ref(`
+export default defineComponent({
+  components: { MarkDown, PageWrapper, MarkdownViewer, ACard: Card },
+  setup() {
+    const markDownRef = ref<Nullable<MarkDownActionType>>(null)
+    const valueRef = ref(`
 # 标题h1
 
 ##### 标题h5
@@ -68,30 +68,30 @@
 | --- | --- | --- |
 | 1 | 2 | 3 |
 | 4 | 5 | 6 |
-`);
+`)
 
-      function toggleTheme() {
-        const markDown = unref(markDownRef);
-        if (!markDown) return;
-        const vditor = markDown.getVditor();
-        vditor.setTheme('dark', 'dark', 'dracula');
-      }
+    function toggleTheme() {
+      const markDown = unref(markDownRef)
+      if (!markDown) return
+      const vditor = markDown.getVditor()
+      vditor.setTheme('dark', 'dark', 'dracula')
+    }
 
-      function handleChange(v: string) {
-        valueRef.value = v;
-      }
+    function handleChange(v: string) {
+      valueRef.value = v
+    }
 
-      function clearValue() {
-        valueRef.value = '';
-      }
+    function clearValue() {
+      valueRef.value = ''
+    }
 
-      return {
-        value: valueRef,
-        toggleTheme,
-        markDownRef,
-        handleChange,
-        clearValue,
-      };
-    },
-  });
+    return {
+      value: valueRef,
+      toggleTheme,
+      markDownRef,
+      handleChange,
+      clearValue
+    }
+  }
+})
 </script>

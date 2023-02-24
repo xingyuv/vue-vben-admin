@@ -4,8 +4,8 @@ import {
   createFilterRender,
   createDefaultFilterRender,
   createFormItemRender,
-  createToolbarToolRender,
-} from './common';
+  createToolbarToolRender
+} from './common'
 
 export default {
   renderDefault: createDefaultRender(),
@@ -13,5 +13,5 @@ export default {
   renderFilter: createFilterRender(),
   defaultFilterMethod: createDefaultFilterRender(),
   renderItemContent: createFormItemRender(),
-  renderToolbarTool: createToolbarToolRender(),
-};
+  renderToolbarTool: createToolbarToolRender()
+}

@@ -4,12 +4,12 @@
   </BasicModal>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { BasicModal } from '/@/components/Modal';
-  export default defineComponent({
-    components: { BasicModal },
-    setup() {
-      return {};
-    },
-  });
+import { defineComponent } from 'vue'
+import { BasicModal } from '@/components/Modal'
+export default defineComponent({
+  components: { BasicModal },
+  setup() {
+    return {}
+  }
+})
 </script>

@@ -36,26 +36,26 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { Result, Steps, Descriptions } from 'ant-design-vue';
-  export default defineComponent({
-    components: {
-      Result,
-      Steps,
-      Step: Steps.Step,
-      Descriptions,
-      DescriptionItem: Descriptions.Item,
-    },
-  });
+import { defineComponent } from 'vue'
+import { Result, Steps, Descriptions } from 'ant-design-vue'
+export default defineComponent({
+  components: {
+    Result,
+    Steps,
+    Step: Steps.Step,
+    Descriptions,
+    DescriptionItem: Descriptions.Item
+  }
+})
 </script>
 <style lang="less" scoped>
-  .result-success {
-    padding: 48px 32px;
-    background-color: @component-background;
+.result-success {
+  padding: 48px 32px;
+  background-color: @component-background;
 
-    &__content {
-      padding: 24px 40px;
-      background-color: @background-color-light;
-    }
+  &__content {
+    padding: 24px 40px;
+    background-color: @background-color-light;
   }
+}
 </style>

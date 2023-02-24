@@ -37,43 +37,43 @@
   </VFormItem>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType } from 'vue';
-  import { IVFormComponent, IFormConfig } from '../../../typings/v-form-component';
-  import VFormItem from '../../VFormItem/index.vue';
-  import { Row, Col } from 'ant-design-vue';
+import { defineComponent, PropType } from 'vue'
+import { IVFormComponent, IFormConfig } from '../../../typings/v-form-component'
+import VFormItem from '../../VFormItem/index.vue'
+import { Row, Col } from 'ant-design-vue'
 
-  export default defineComponent({
-    name: 'FormRender',
-    components: {
-      VFormItem,
-      Row,
-      Col,
+export default defineComponent({
+  name: 'FormRender',
+  components: {
+    VFormItem,
+    Row,
+    Col
+  },
+  props: {
+    formData: {
+      type: Object,
+      default: () => ({})
     },
-    props: {
-      formData: {
-        type: Object,
-        default: () => ({}),
-      },
-      schema: {
-        type: Object as PropType<IVFormComponent>,
-        default: () => ({}),
-      },
-      formConfig: {
-        type: Object as PropType<IFormConfig>,
-        default: () => [] as IFormConfig[],
-      },
-      setFormModel: {
-        type: Function as PropType<(key: string, value: any) => void>,
-        default: null,
-      },
+    schema: {
+      type: Object as PropType<IVFormComponent>,
+      default: () => ({})
     },
-    emits: ['change', 'submit', 'reset'],
-    setup(_props) {},
-  });
+    formConfig: {
+      type: Object as PropType<IFormConfig>,
+      default: () => [] as IFormConfig[]
+    },
+    setFormModel: {
+      type: Function as PropType<(key: string, value: any) => void>,
+      default: null
+    }
+  },
+  emits: ['change', 'submit', 'reset'],
+  setup(_props) {}
+})
 </script>
 
 <style>
-  .v-form-render-item {
-    overflow: hidden;
-  }
+.v-form-render-item {
+  overflow: hidden;
+}
 </style>

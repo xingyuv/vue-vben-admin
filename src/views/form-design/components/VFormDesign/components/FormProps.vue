@@ -76,38 +76,38 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import { InputNumber, Slider, Checkbox, Col, RadioChangeEvent } from 'ant-design-vue';
-  // import RadioButtonGroup from '/@/components/RadioButtonGroup.vue';
-  import { Form, FormItem, Radio } from 'ant-design-vue';
-  export default defineComponent({
-    name: 'FormProps',
-    components: {
-      InputNumber,
-      Slider,
-      Checkbox,
-      RadioGroup: Radio.Group,
-      RadioButton: Radio.Button,
-      Form,
-      FormItem,
-      Col,
-    },
-    setup() {
-      const { formConfig } = useFormDesignState();
+import { defineComponent } from 'vue'
+import { useFormDesignState } from '../../../hooks/useFormDesignState'
+import { InputNumber, Slider, Checkbox, Col, RadioChangeEvent } from 'ant-design-vue'
+// import RadioButtonGroup from '@/components/RadioButtonGroup.vue';
+import { Form, FormItem, Radio } from 'ant-design-vue'
+export default defineComponent({
+  name: 'FormProps',
+  components: {
+    InputNumber,
+    Slider,
+    Checkbox,
+    RadioGroup: Radio.Group,
+    RadioButton: Radio.Button,
+    Form,
+    FormItem,
+    Col
+  },
+  setup() {
+    const { formConfig } = useFormDesignState()
 
-      formConfig.value = formConfig.value || {
-        labelCol: { span: 24 },
-        wrapperCol: { span: 24 },
-      };
+    formConfig.value = formConfig.value || {
+      labelCol: { span: 24 },
+      wrapperCol: { span: 24 }
+    }
 
-      const lableLayoutChange = (e: RadioChangeEvent) => {
-        if (e.target.value === 'Grid') {
-          formConfig.value.layout = 'horizontal';
-        }
-      };
+    const lableLayoutChange = (e: RadioChangeEvent) => {
+      if (e.target.value === 'Grid') {
+        formConfig.value.layout = 'horizontal'
+      }
+    }
 
-      return { formConfig, lableLayoutChange };
-    },
-  });
+    return { formConfig, lableLayoutChange }
+  }
+})
 </script>

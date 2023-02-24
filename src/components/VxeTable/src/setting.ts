@@ -1,4 +1,4 @@
-import { VXETable } from '..';
-import componentSetting from '/@/settings/componentSetting';
+import { VXETable } from '..'
+import componentSetting from '@/settings/componentSetting'
 
-VXETable.setup(componentSetting.vxeTable);
+VXETable.setup(componentSetting.vxeTable)

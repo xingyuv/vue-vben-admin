@@ -5,19 +5,19 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { testRetry } from '/@/api/sys/user';
-  // @ts-ignore
-  const handleClick = async () => {
-    await testRetry();
-  };
+import { testRetry } from '@/api/sys/user'
+// @ts-ignore
+const handleClick = async () => {
+  await testRetry()
+}
 </script>
 
 <style lang="less">
-  .request-box {
-    margin: 50px;
-  }
+.request-box {
+  margin: 50px;
+}
 
-  p {
-    margin-top: 10px;
-  }
+p {
+  margin-top: 10px;
+}
 </style>

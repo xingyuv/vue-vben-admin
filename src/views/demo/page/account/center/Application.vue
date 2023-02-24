@@ -28,65 +28,65 @@
   </List>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { List, Card, Row, Col } from 'ant-design-vue';
-  import Icon from '/@/components/Icon/index';
-  import { applicationList } from './data';
+import { defineComponent } from 'vue'
+import { List, Card, Row, Col } from 'ant-design-vue'
+import Icon from '@/components/Icon/index'
+import { applicationList } from './data'
 
-  export default defineComponent({
-    components: {
-      List,
-      ListItem: List.Item,
-      Card,
-      Icon,
-      [Row.name]: Row,
-      [Col.name]: Col,
-    },
-    setup() {
-      return {
-        prefixCls: 'account-center-application',
-        list: applicationList,
-      };
-    },
-  });
-</script>
-<style lang="less">
-  .account-center-application {
-    &__card {
-      width: 100%;
-      margin-bottom: -12px;
-
-      .ant-card-body {
-        padding: 16px;
-      }
-
-      &-title {
-        margin-bottom: 5px;
-        font-size: 16px;
-        font-weight: 500;
-
-        .icon {
-          margin-top: -5px;
-          font-size: 22px;
-        }
-      }
-
-      &-num {
-        margin-left: 24px;
-        line-height: 36px;
-        color: @text-color-secondary;
-
-        span {
-          margin-left: 5px;
-          font-size: 18px;
-        }
-      }
-
-      &-download {
-        float: right;
-        font-size: 20px !important;
-        color: @primary-color;
-      }
+export default defineComponent({
+  components: {
+    List,
+    ListItem: List.Item,
+    Card,
+    Icon,
+    [Row.name]: Row,
+    [Col.name]: Col
+  },
+  setup() {
+    return {
+      prefixCls: 'account-center-application',
+      list: applicationList
     }
   }
+})
+</script>
+<style lang="less">
+.account-center-application {
+  &__card {
+    width: 100%;
+    margin-bottom: -12px;
+
+    .ant-card-body {
+      padding: 16px;
+    }
+
+    &-title {
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: 500;
+
+      .icon {
+        margin-top: -5px;
+        font-size: 22px;
+      }
+    }
+
+    &-num {
+      margin-left: 24px;
+      line-height: 36px;
+      color: @text-color-secondary;
+
+      span {
+        margin-left: 5px;
+        font-size: 18px;
+      }
+    }
+
+    &-download {
+      float: right;
+      font-size: 20px !important;
+      color: @primary-color;
+    }
+  }
+}
 </style>

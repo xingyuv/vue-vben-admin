@@ -3,8 +3,8 @@ import {
   createFilterRender,
   createFormItemRender,
   createDefaultFilterRender,
-  createDefaultRender,
-} from './common';
+  createDefaultRender
+} from './common'
 
 export default {
   autofocus: 'input.ant-input-number-input',
@@ -12,5 +12,5 @@ export default {
   renderEdit: createEditRender(),
   renderFilter: createFilterRender(),
   defaultFilterMethod: createDefaultFilterRender(),
-  renderItemContent: createFormItemRender(),
-};
+  renderItemContent: createFormItemRender()
+}

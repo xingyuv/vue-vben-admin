@@ -17,37 +17,37 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, PropType } from 'vue';
-  import { IVFormComponent } from '../../../typings/v-form-component';
-  import FormNodeOperate from './FormNodeOperate.vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import VFormItem from '../../VFormItem/index.vue';
-  // import VFormItem from '../../VFormItem/vFormItem.vue';
-  export default defineComponent({
-    name: 'FormNode',
-    components: {
-      VFormItem,
-      FormNodeOperate,
-    },
-    props: {
-      schema: {
-        type: Object as PropType<IVFormComponent>,
-        required: true,
-      },
-    },
-    setup(props) {
-      const { formConfig, formDesignMethods } = useFormDesignState();
-      const state = reactive({});
-      // 获取 formDesignMethods
-      const handleSelectItem = () => {
-        // 调用 formDesignMethods
-        formDesignMethods.handleSetSelectItem(props.schema);
-      };
-      return {
-        ...toRefs(state),
-        handleSelectItem,
-        formConfig,
-      };
-    },
-  });
+import { defineComponent, reactive, toRefs, PropType } from 'vue'
+import { IVFormComponent } from '../../../typings/v-form-component'
+import FormNodeOperate from './FormNodeOperate.vue'
+import { useFormDesignState } from '../../../hooks/useFormDesignState'
+import VFormItem from '../../VFormItem/index.vue'
+// import VFormItem from '../../VFormItem/vFormItem.vue';
+export default defineComponent({
+  name: 'FormNode',
+  components: {
+    VFormItem,
+    FormNodeOperate
+  },
+  props: {
+    schema: {
+      type: Object as PropType<IVFormComponent>,
+      required: true
+    }
+  },
+  setup(props) {
+    const { formConfig, formDesignMethods } = useFormDesignState()
+    const state = reactive({})
+    // 获取 formDesignMethods
+    const handleSelectItem = () => {
+      // 调用 formDesignMethods
+      formDesignMethods.handleSetSelectItem(props.schema)
+    }
+    return {
+      ...toRefs(state),
+      handleSelectItem,
+      formConfig
+    }
+  }
+})
 </script>

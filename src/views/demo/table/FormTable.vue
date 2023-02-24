@@ -20,64 +20,64 @@
   </BasicTable>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { BasicTable, useTable } from '/@/components/Table';
-  import { getBasicColumns, getFormConfig } from './tableData';
-  import { Alert } from 'ant-design-vue';
+import { defineComponent, ref } from 'vue'
+import { BasicTable, useTable } from '@/components/Table'
+import { getBasicColumns, getFormConfig } from './tableData'
+import { Alert } from 'ant-design-vue'
 
-  import { demoListApi } from '/@/api/demo/table';
+import { demoListApi } from '@/api/demo/table'
 
-  export default defineComponent({
-    components: { BasicTable, AAlert: Alert },
-    setup() {
-      const checkedKeys = ref<Array<string | number>>([]);
-      const [registerTable, { getForm }] = useTable({
-        title: '开启搜索区域',
-        api: demoListApi,
-        columns: getBasicColumns(),
-        useSearchForm: true,
-        formConfig: getFormConfig(),
-        showTableSetting: true,
-        tableSetting: { fullScreen: true },
-        showIndexColumn: false,
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          selectedRowKeys: checkedKeys,
-          onSelect: onSelect,
-          onSelectAll: onSelectAll,
-        },
-      });
-
-      function getFormValues() {
-        console.log(getForm().getFieldsValue());
+export default defineComponent({
+  components: { BasicTable, AAlert: Alert },
+  setup() {
+    const checkedKeys = ref<Array<string | number>>([])
+    const [registerTable, { getForm }] = useTable({
+      title: '开启搜索区域',
+      api: demoListApi,
+      columns: getBasicColumns(),
+      useSearchForm: true,
+      formConfig: getFormConfig(),
+      showTableSetting: true,
+      tableSetting: { fullScreen: true },
+      showIndexColumn: false,
+      rowKey: 'id',
+      rowSelection: {
+        type: 'checkbox',
+        selectedRowKeys: checkedKeys,
+        onSelect: onSelect,
+        onSelectAll: onSelectAll
       }
+    })
 
-      function onSelect(record, selected) {
-        if (selected) {
-          checkedKeys.value = [...checkedKeys.value, record.id];
-        } else {
-          checkedKeys.value = checkedKeys.value.filter((id) => id !== record.id);
-        }
-      }
-      function onSelectAll(selected, selectedRows, changeRows) {
-        const changeIds = changeRows.map((item) => item.id);
-        if (selected) {
-          checkedKeys.value = [...checkedKeys.value, ...changeIds];
-        } else {
-          checkedKeys.value = checkedKeys.value.filter((id) => {
-            return !changeIds.includes(id);
-          });
-        }
-      }
+    function getFormValues() {
+      console.log(getForm().getFieldsValue())
+    }
 
-      return {
-        registerTable,
-        getFormValues,
-        checkedKeys,
-        onSelect,
-        onSelectAll,
-      };
-    },
-  });
+    function onSelect(record, selected) {
+      if (selected) {
+        checkedKeys.value = [...checkedKeys.value, record.id]
+      } else {
+        checkedKeys.value = checkedKeys.value.filter((id) => id !== record.id)
+      }
+    }
+    function onSelectAll(selected, selectedRows, changeRows) {
+      const changeIds = changeRows.map((item) => item.id)
+      if (selected) {
+        checkedKeys.value = [...checkedKeys.value, ...changeIds]
+      } else {
+        checkedKeys.value = checkedKeys.value.filter((id) => {
+          return !changeIds.includes(id)
+        })
+      }
+    }
+
+    return {
+      registerTable,
+      getFormValues,
+      checkedKeys,
+      onSelect,
+      onSelectAll
+    }
+  }
+})
 </script>

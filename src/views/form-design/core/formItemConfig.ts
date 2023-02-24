@@ -1,31 +1,31 @@
 /**
  * @description：表单配置
  */
-import { IVFormComponent } from '../typings/v-form-component';
-import { isArray } from 'lodash-es';
-import { componentMap as VbenCmp, add } from '/@/components/Form/src/componentMap';
-import { ComponentType } from '/@/components/Form/src/types';
+import { IVFormComponent } from '../typings/v-form-component'
+import { isArray } from 'lodash-es'
+import { componentMap as VbenCmp, add } from '@/components/Form/src/componentMap'
+import { ComponentType } from '@/components/Form/src/types'
 
-import { componentMap as Cmp } from '../components';
-import { Component } from 'vue';
+import { componentMap as Cmp } from '../components'
+import { Component } from 'vue'
 
-const componentMap = new Map<string, Component>();
+const componentMap = new Map<string, Component>()
 
 //如果有其它控件，可以在这里初始化
 
 //注册Ant控件库
 Cmp.forEach((value, key) => {
-  componentMap.set(key, value);
+  componentMap.set(key, value)
   if (VbenCmp[key] == null) {
-    add(key as ComponentType, value);
+    add(key as ComponentType, value)
   }
-});
+})
 //注册vben控件库
 VbenCmp.forEach((value, key) => {
-  componentMap.set(key, value);
-});
+  componentMap.set(key, value)
+})
 
-export { componentMap };
+export { componentMap }
 
 /**
  * 设置自定义表单控件
@@ -34,19 +34,19 @@ export { componentMap };
 export function setFormDesignComponents(config: IVFormComponent | IVFormComponent[]) {
   if (isArray(config)) {
     config.forEach((item) => {
-      const { componentInstance: component, ...rest } = item;
-      componentMap[item.component] = component;
-      customComponents.push(Object.assign({ props: {} }, rest));
-    });
+      const { componentInstance: component, ...rest } = item
+      componentMap[item.component] = component
+      customComponents.push(Object.assign({ props: {} }, rest))
+    })
   } else {
-    const { componentInstance: component, ...rest } = config;
-    componentMap[config.component] = component;
-    customComponents.push(Object.assign({ props: {} }, rest));
+    const { componentInstance: component, ...rest } = config
+    componentMap[config.component] = component
+    customComponents.push(Object.assign({ props: {} }, rest))
   }
 }
 
 //外部设置的自定义控件
-export const customComponents: IVFormComponent[] = [];
+export const customComponents: IVFormComponent[] = []
 
 // 左侧控件列表与初始化的控件属性
 // props.slotName,会在formitem级别生成一个slot,并绑定当前record值
@@ -58,7 +58,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'line-md:iconify2',
     colProps: { span: 24 },
     field: '',
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'IconPicker',
@@ -66,7 +66,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'line-md:iconify2',
     colProps: { span: 24 },
     field: '',
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'StrengthMeter',
@@ -74,7 +74,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'wpf:password1',
     colProps: { span: 24 },
     field: '',
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'AutoComplete',
@@ -87,14 +87,14 @@ export const baseComponents: IVFormComponent[] = [
       options: [
         {
           value: '/^(?:(?:\\+|00)86)?1[3-9]\\d{9}$/',
-          label: '手机号码',
+          label: '手机号码'
         },
         {
           value: '/^((ht|f)tps?:\\/\\/)?[\\w-]+(\\.[\\w-]+)+:\\d{1,5}\\/?$/',
-          label: '网址带端口号',
-        },
-      ],
-    },
+          label: '网址带端口号'
+        }
+      ]
+    }
   },
   {
     component: 'Divider',
@@ -104,15 +104,15 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     componentProps: {
       orientation: 'center',
-      dashed: true,
-    },
+      dashed: true
+    }
   },
   {
     component: 'Checkbox',
     label: '复选框',
     icon: 'ant-design:check-circle-outlined',
     colProps: { span: 24 },
-    field: '',
+    field: ''
   },
   {
     component: 'CheckboxGroup',
@@ -124,14 +124,14 @@ export const baseComponents: IVFormComponent[] = [
       options: [
         {
           label: '选项1',
-          value: '1',
+          value: '1'
         },
         {
           label: '选项2',
-          value: '2',
-        },
-      ],
-    },
+          value: '2'
+        }
+      ]
+    }
   },
   {
     component: 'Input',
@@ -140,8 +140,8 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     colProps: { span: 24 },
     componentProps: {
-      type: 'text',
-    },
+      type: 'text'
+    }
   },
   {
     component: 'InputNumber',
@@ -149,7 +149,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'ant-design:field-number-outlined',
     field: '',
     colProps: { span: 24 },
-    componentProps: { style: 'width:200px' },
+    componentProps: { style: 'width:200px' }
   },
   {
     component: 'InputTextArea',
@@ -157,7 +157,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'ant-design:file-text-filled',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'Select',
@@ -169,14 +169,14 @@ export const baseComponents: IVFormComponent[] = [
       options: [
         {
           label: '选项1',
-          value: '1',
+          value: '1'
         },
         {
           label: '选项2',
-          value: '2',
-        },
-      ],
-    },
+          value: '2'
+        }
+      ]
+    }
   },
 
   {
@@ -185,7 +185,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'ant-design:check-circle-outlined',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'RadioGroup',
@@ -197,14 +197,14 @@ export const baseComponents: IVFormComponent[] = [
       options: [
         {
           label: '选项1',
-          value: '1',
+          value: '1'
         },
         {
           label: '选项2',
-          value: '2',
-        },
-      ],
-    },
+          value: '2'
+        }
+      ]
+    }
   },
   {
     component: 'DatePicker',
@@ -212,7 +212,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'healthicons:i-schedule-school-date-time-outline',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'RangePicker',
@@ -221,8 +221,8 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     colProps: { span: 24 },
     componentProps: {
-      placeholder: ['开始日期', '结束日期'],
-    },
+      placeholder: ['开始日期', '结束日期']
+    }
   },
   {
     component: 'MonthPicker',
@@ -231,8 +231,8 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     colProps: { span: 24 },
     componentProps: {
-      placeholder: '请选择月份',
-    },
+      placeholder: '请选择月份'
+    }
   },
   {
     component: 'TimePicker',
@@ -240,7 +240,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'healthicons:i-schedule-school-date-time',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'Slider',
@@ -248,7 +248,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'vaadin:slider',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'Rate',
@@ -256,7 +256,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'ic:outline-star-rate',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'Switch',
@@ -264,7 +264,7 @@ export const baseComponents: IVFormComponent[] = [
     icon: 'entypo:switch',
     field: '',
     colProps: { span: 24 },
-    componentProps: {},
+    componentProps: {}
   },
   {
     component: 'TreeSelect',
@@ -280,16 +280,16 @@ export const baseComponents: IVFormComponent[] = [
           children: [
             {
               label: '选项三',
-              value: '1-1',
-            },
-          ],
+              value: '1-1'
+            }
+          ]
         },
         {
           label: '选项2',
-          value: '2',
-        },
-      ],
-    },
+          value: '2'
+        }
+      ]
+    }
   },
   {
     component: 'Upload',
@@ -298,8 +298,8 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     colProps: { span: 24 },
     componentProps: {
-      api: () => 1,
-    },
+      api: () => 1
+    }
   },
   {
     component: 'Cascader',
@@ -315,16 +315,16 @@ export const baseComponents: IVFormComponent[] = [
           children: [
             {
               label: '选项三',
-              value: '1-1',
-            },
-          ],
+              value: '1-1'
+            }
+          ]
         },
         {
           label: '选项2',
-          value: '2',
-        },
-      ],
-    },
+          value: '2'
+        }
+      ]
+    }
   },
   // {
   //   component: 'Button',
@@ -354,10 +354,10 @@ export const baseComponents: IVFormComponent[] = [
     field: '',
     colProps: { span: 24 },
     componentProps: {
-      slotName: 'slotName',
-    },
-  },
-];
+      slotName: 'slotName'
+    }
+  }
+]
 
 // https://next.antdv.com/components/transfer-cn
 const transferControl = {
@@ -374,26 +374,26 @@ const transferControl = {
         title: '标题1',
         description: '描述',
         disabled: false,
-        chosen: true,
+        chosen: true
       },
       {
         key: 'key-2',
         title: 'title2',
         description: 'description2',
-        disabled: true,
+        disabled: true
       },
       {
         key: 'key-3',
         title: '标题3',
         description: '描述3',
         disabled: false,
-        chosen: true,
-      },
-    ],
-  },
-};
+        chosen: true
+      }
+    ]
+  }
+}
 
-baseComponents.push(transferControl);
+baseComponents.push(transferControl)
 
 export const layoutComponents: IVFormComponent[] = [
   {
@@ -405,16 +405,16 @@ export const layoutComponents: IVFormComponent[] = [
     columns: [
       {
         span: 12,
-        children: [],
+        children: []
       },
       {
         span: 12,
-        children: [],
-      },
+        children: []
+      }
     ],
     colProps: { span: 24 },
     options: {
-      gutter: 0,
-    },
-  },
-];
+      gutter: 0
+    }
+  }
+]

@@ -33,80 +33,80 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import { remove } from '../../../utils';
-  import message from '../../../utils/message';
-  import { Input } from 'ant-design-vue';
-  import Icon from '/@/components/Icon/index';
-  export default defineComponent({
-    name: 'FormOptions',
-    components: { Input, Icon },
-    // props: {},
-    setup() {
-      const state = reactive({});
-      const { formConfig } = useFormDesignState();
-      const key = formConfig.value.currentItem?.component === 'TreeSelect' ? 'treeData' : 'options';
-      const addOptions = () => {
-        if (!formConfig.value.currentItem?.componentProps?.[key])
-          formConfig.value.currentItem!.componentProps![key] = [];
-        const len = formConfig.value.currentItem?.componentProps?.[key].length + 1;
-        formConfig.value.currentItem!.componentProps![key].push({
-          label: `选项${len}`,
-          value: '' + len,
-        });
-      };
-      const deleteOptions = (index: number) => {
-        remove(formConfig.value.currentItem?.componentProps?.[key], index);
-      };
+import { defineComponent, reactive, toRefs } from 'vue'
+import { useFormDesignState } from '../../../hooks/useFormDesignState'
+import { remove } from '../../../utils'
+import message from '../../../utils/message'
+import { Input } from 'ant-design-vue'
+import Icon from '@/components/Icon/index'
+export default defineComponent({
+  name: 'FormOptions',
+  components: { Input, Icon },
+  // props: {},
+  setup() {
+    const state = reactive({})
+    const { formConfig } = useFormDesignState()
+    const key = formConfig.value.currentItem?.component === 'TreeSelect' ? 'treeData' : 'options'
+    const addOptions = () => {
+      if (!formConfig.value.currentItem?.componentProps?.[key])
+        formConfig.value.currentItem!.componentProps![key] = []
+      const len = formConfig.value.currentItem?.componentProps?.[key].length + 1
+      formConfig.value.currentItem!.componentProps![key].push({
+        label: `选项${len}`,
+        value: '' + len
+      })
+    }
+    const deleteOptions = (index: number) => {
+      remove(formConfig.value.currentItem?.componentProps?.[key], index)
+    }
 
-      const addGridOptions = () => {
-        formConfig.value.currentItem?.['columns']?.push({
-          span: 12,
-          children: [],
-        });
-      };
-      const deleteGridOptions = (index: number) => {
-        if (index === 0) return message.warning('请至少保留一个栅格');
+    const addGridOptions = () => {
+      formConfig.value.currentItem?.['columns']?.push({
+        span: 12,
+        children: []
+      })
+    }
+    const deleteGridOptions = (index: number) => {
+      if (index === 0) return message.warning('请至少保留一个栅格')
 
-        remove(formConfig.value.currentItem!['columns']!, index);
-      };
-      return {
-        ...toRefs(state),
-        formConfig,
-        addOptions,
-        deleteOptions,
-        key,
-        deleteGridOptions,
-        addGridOptions,
-      };
-    },
-  });
+      remove(formConfig.value.currentItem!['columns']!, index)
+    }
+    return {
+      ...toRefs(state),
+      formConfig,
+      addOptions,
+      deleteOptions,
+      key,
+      deleteGridOptions,
+      addGridOptions
+    }
+  }
+})
 </script>
 
 <style lang="less" scoped>
-  .options-box {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
+.options-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 
-    .options-value {
-      margin: 0 8px;
-    }
+  .options-value {
+    margin: 0 8px;
+  }
 
-    .options-delete {
-      width: 30px;
-      height: 30px;
-      flex-shrink: 0;
-      line-height: 30px;
-      text-align: center;
-      border-radius: 50%;
-      background: #f5f5f5;
-      color: #666;
+  .options-delete {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background: #f5f5f5;
+    color: #666;
 
-      &:hover {
-        background: #ff4d4f;
-      }
+    &:hover {
+      background: #ff4d4f;
     }
   }
+}
 </style>

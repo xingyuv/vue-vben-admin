@@ -18,18 +18,18 @@
   </BasicDrawer>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { BasicDrawer } from '/@/components/Drawer';
-  export default defineComponent({
-    components: { BasicDrawer },
-    setup() {
-      return {
-        handleOk: () => {
-          console.log('=====================');
-          console.log('ok');
-          console.log('======================');
-        },
-      };
-    },
-  });
+import { defineComponent } from 'vue'
+import { BasicDrawer } from '@/components/Drawer'
+export default defineComponent({
+  components: { BasicDrawer },
+  setup() {
+    return {
+      handleOk: () => {
+        console.log('=====================')
+        console.log('ok')
+        console.log('======================')
+      }
+    }
+  }
+})
 </script>

@@ -1,39 +1,39 @@
-import { h } from 'vue';
+import { h } from 'vue'
 import {
   FormItemContentRenderParams,
   FormItemRenderOptions,
-  VxeGlobalRendererHandles,
-} from 'vxe-table';
-import XEUtils from 'xe-utils';
-import { cellText, createEvents, createProps, getComponent } from './common';
+  VxeGlobalRendererHandles
+} from 'vxe-table'
+import XEUtils from 'xe-utils'
+import { cellText, createEvents, createProps, getComponent } from './common'
 
-const COMPONENT_NAME = 'AButton';
+const COMPONENT_NAME = 'AButton'
 
 export function createEditRender() {
   return function (
     renderOpts: VxeGlobalRendererHandles.RenderEditOptions,
-    params: VxeGlobalRendererHandles.RenderEditParams,
+    params: VxeGlobalRendererHandles.RenderEditParams
   ) {
-    const { attrs } = renderOpts;
-    const Component = getComponent(COMPONENT_NAME);
+    const { attrs } = renderOpts
+    const Component = getComponent(COMPONENT_NAME)
 
     return [
       h(Component, {
         ...attrs,
         ...createProps(renderOpts, null),
-        ...createEvents(renderOpts, params),
-      }),
-    ];
-  };
+        ...createEvents(renderOpts, params)
+      })
+    ]
+  }
 }
 
 export function createDefaultRender() {
   return function (
     renderOpts: VxeGlobalRendererHandles.RenderEditOptions,
-    params: VxeGlobalRendererHandles.RenderEditParams,
+    params: VxeGlobalRendererHandles.RenderEditParams
   ) {
-    const { attrs } = renderOpts;
-    const Component = getComponent(COMPONENT_NAME);
+    const { attrs } = renderOpts
+    const Component = getComponent(COMPONENT_NAME)
 
     return [
       h(
@@ -41,20 +41,20 @@ export function createDefaultRender() {
         {
           ...attrs,
           ...createProps(renderOpts, null),
-          ...createEvents(renderOpts, params),
+          ...createEvents(renderOpts, params)
         },
-        cellText(renderOpts.content),
-      ),
-    ];
-  };
+        cellText(renderOpts.content)
+      )
+    ]
+  }
 }
 
 export function createFormItemRender() {
   return function (renderOpts: FormItemRenderOptions, params: FormItemContentRenderParams) {
-    const { attrs, content } = renderOpts;
-    const { property, $form, data } = params;
-    const props = createProps(renderOpts, null);
-    const Component = getComponent(COMPONENT_NAME);
+    const { attrs, content } = renderOpts
+    const { property, $form, data } = params
+    const props = createProps(renderOpts, null)
+    const Component = getComponent(COMPONENT_NAME)
 
     return [
       h(
@@ -67,34 +67,34 @@ export function createFormItemRender() {
             params,
             (value: any) => {
               // 处理 model 值双向绑定
-              XEUtils.set(data, property, value);
+              XEUtils.set(data, property, value)
             },
             () => {
               // 处理 change 事件相关逻辑
               $form.updateStatus({
                 ...params,
-                field: property,
-              });
-            },
-          ),
+                field: property
+              })
+            }
+          )
         },
         {
-          default: () => cellText(content || props.content),
-        },
-      ),
-    ];
-  };
+          default: () => cellText(content || props.content)
+        }
+      )
+    ]
+  }
 }
 
 function createToolbarButtonRender() {
   return function (
     renderOpts: VxeGlobalRendererHandles.RenderToolOptions,
-    params: VxeGlobalRendererHandles.RenderButtonParams,
+    params: VxeGlobalRendererHandles.RenderButtonParams
   ) {
-    const { attrs } = renderOpts;
-    const { button } = params;
-    const props = createProps(renderOpts, null);
-    const Component = getComponent(COMPONENT_NAME);
+    const { attrs } = renderOpts
+    const { button } = params
+    const props = createProps(renderOpts, null)
+    const Component = getComponent(COMPONENT_NAME)
 
     return [
       h(
@@ -102,19 +102,19 @@ function createToolbarButtonRender() {
         {
           ...attrs,
           ...props,
-          ...createEvents(renderOpts, params),
+          ...createEvents(renderOpts, params)
         },
         {
-          default: () => cellText(button?.content || props.content),
-        },
-      ),
-    ];
-  };
+          default: () => cellText(button?.content || props.content)
+        }
+      )
+    ]
+  }
 }
 
 export default {
   renderEdit: createEditRender(),
   renderDefault: createDefaultRender(),
   renderItemContent: createFormItemRender(),
-  renderToolbarButton: createToolbarButtonRender(),
-};
+  renderToolbarButton: createToolbarButtonRender()
+}
