@@ -104,6 +104,7 @@ specifiers:
   vite-plugin-imagemin: ^0.6.1
   vite-plugin-mkcert: ^1.13.2
   vite-plugin-mock: ^2.9.6
+  vite-plugin-progress: ^0.0.6
   vite-plugin-purge-icons: ^0.9.2
   vite-plugin-pwa: ^0.14.4
   vite-plugin-style-import: ^2.0.0
@@ -231,6 +232,7 @@ devDependencies:
   vite-plugin-imagemin: 0.6.1_vite@4.1.4
   vite-plugin-mkcert: 1.13.2_vite@4.1.4
   vite-plugin-mock: 2.9.6_srfwvdzpkmutd7dlgxqotruvdm
+  vite-plugin-progress: 0.0.6_vite@4.1.4
   vite-plugin-purge-icons: 0.9.2_vite@4.1.4
   vite-plugin-pwa: 0.14.4_vite@4.1.4
   vite-plugin-style-import: 2.0.0_vite@4.1.4
@@ -2769,6 +2771,10 @@ packages:
   /@types/mousetrap/1.6.11:
     resolution: {integrity: sha512-F0oAily9Q9QQpv9JKxKn0zMKfOo36KHCW7myYsmUyf2t0g+sBTbG3UleTPoguHdE1z3GLFr3p7/wiOio52QFjQ==}
     dev: false
+
+  /@types/node/10.17.60:
+    resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
+    dev: true
 
   /@types/node/14.18.36:
     resolution: {integrity: sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==}
@@ -9201,6 +9207,11 @@ packages:
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
 
+  /progress/2.0.3:
+    resolution: {integrity: sha512-7PiHtLll5LdnKIMw100I+8xJXR5gW2QwWYkT6iJva0bXitZKa/XMrSbdmg3r2Xnaidz9Qumd0VPaMrZlF9V9sA==}
+    engines: {node: '>=0.4.0'}
+    dev: true
+
   /proto-list/1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
     dev: true
@@ -9282,6 +9293,12 @@ packages:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
       safe-buffer: 5.2.1
+    dev: true
+
+  /rd/2.0.1:
+    resolution: {integrity: sha512-/XdKU4UazUZTXFmI0dpABt8jSXPWcEyaGdk340KdHnsEOdkTctlX23aAK7ChQDn39YGNlAJr1M5uvaKt4QnpNw==}
+    dependencies:
+      '@types/node': 10.17.60
     dev: true
 
   /read-pkg-up/1.0.1:
@@ -11078,6 +11095,18 @@ packages:
     transitivePeerDependencies:
       - rollup
       - supports-color
+    dev: true
+
+  /vite-plugin-progress/0.0.6_vite@4.1.4:
+    resolution: {integrity: sha512-pIK2TVEY4XFGrz10CQDdEufBBCDaV0geRHfXV3abGTBr+OF9O0Zmd3ZDrHJXDv4Rl3qAQP4BTCuPYQ3XqstmqA==}
+    engines: {node: '>=14', pnpm: '>=7.0.0'}
+    peerDependencies:
+      vite: '>2.0.0-0'
+    dependencies:
+      picocolors: 1.0.0
+      progress: 2.0.3
+      rd: 2.0.1
+      vite: 4.1.4_lhxj2e4gspwfmoxpttnr2tyhre
     dev: true
 
   /vite-plugin-purge-icons/0.9.2_vite@4.1.4:

@@ -2,8 +2,9 @@ import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
-import purgeIcons from 'vite-plugin-purge-icons'
+import progress from 'vite-plugin-progress'
 import windiCSS from 'vite-plugin-windicss'
+import purgeIcons from 'vite-plugin-purge-icons'
 import VitePluginCertificate from 'vite-plugin-mkcert'
 import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
 import { configHtmlPlugin } from './html'
@@ -31,6 +32,8 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
     vue(),
     // have to
     vueJsx(),
+    // 打包进度条
+    progress(),
     // support name
     vueSetupExtend({}),
     VitePluginCertificate({
