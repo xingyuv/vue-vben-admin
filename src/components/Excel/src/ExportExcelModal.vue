@@ -13,7 +13,7 @@
     />
   </BasicModal>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { ExportModalResult } from './typing'
 import { BasicModal, useModalInner } from '@/components/Modal'
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'

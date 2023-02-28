@@ -108,7 +108,7 @@ const props = defineProps({
   width: propTypes.string.def('100%'),
   pageSize: propTypes.number.def(140),
   copy: propTypes.bool.def(false),
-  mode: propTypes.oneOf<('svg' | 'iconify')[]>(['svg', 'iconify']).def('iconify')
+  mode: propTypes.oneOf(['svg', 'iconify']).def('iconify')
 })
 
 const emit = defineEmits(['change', 'update:value'])

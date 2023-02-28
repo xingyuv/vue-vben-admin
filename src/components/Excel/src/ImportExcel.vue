@@ -12,7 +12,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="ImportExcel">
+<script lang="ts" setup name="ImportExcel">
 import { ref, unref } from 'vue'
 import * as XLSX from 'xlsx'
 import { dateUtil } from '@/utils/dateUtil'
