@@ -42,11 +42,9 @@
     </template>
   </SubMenu>
 </template>
-<script lang="ts">
-import type { PropType } from 'vue'
+<script setup lang="ts" name="SimpleSubMenu">
 import type { Menu } from '@/router/types'
-
-import { defineComponent, computed } from 'vue'
+import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import Icon from '@/components/Icon/index'
 
@@ -56,61 +54,42 @@ import { propTypes } from '@/utils/propTypes'
 import { useI18n } from '@/hooks/web/useI18n'
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
 
-export default defineComponent({
-  name: 'SimpleSubMenu',
-  components: {
-    SubMenu,
-    MenuItem,
-    SimpleMenuTag: createAsyncComponent(() => import('./SimpleMenuTag.vue')),
-    Icon
+const SimpleMenuTag = createAsyncComponent(() => import('./SimpleMenuTag.vue'))
+
+const props = defineProps({
+  item: {
+    type: Object as PropType<Menu>,
+    default: () => ({})
   },
-  props: {
-    item: {
-      type: Object as PropType<Menu>,
-      default: () => ({})
-    },
-    parent: propTypes.bool,
-    collapsedShowTitle: propTypes.bool,
-    collapse: propTypes.bool,
-    theme: propTypes.oneOf(['dark', 'light'])
-  },
-  setup(props) {
-    const { t } = useI18n()
-    const { prefixCls } = useDesign('simple-menu')
-
-    const getShowMenu = computed(() => !props.item?.meta?.hideMenu)
-    const getIcon = computed(() => props.item?.icon)
-    const getI18nName = computed(() => t(props.item?.name))
-    const getShowSubTitle = computed(() => !props.collapse || !props.parent)
-    const getIsCollapseParent = computed(() => !!props.collapse && !!props.parent)
-    const getLevelClass = computed(() => {
-      return [
-        {
-          [`${prefixCls}__parent`]: props.parent,
-          [`${prefixCls}__children`]: !props.parent
-        }
-      ]
-    })
-
-    function menuHasChildren(menuTreeItem: Menu): boolean {
-      return (
-        !menuTreeItem.meta?.hideChildrenInMenu &&
-        Reflect.has(menuTreeItem, 'children') &&
-        !!menuTreeItem.children &&
-        menuTreeItem.children.length > 0
-      )
-    }
-
-    return {
-      prefixCls,
-      menuHasChildren,
-      getShowMenu,
-      getIcon,
-      getI18nName,
-      getShowSubTitle,
-      getLevelClass,
-      getIsCollapseParent
-    }
-  }
+  parent: propTypes.bool,
+  collapsedShowTitle: propTypes.bool,
+  collapse: propTypes.bool,
+  theme: propTypes.oneOf(['dark', 'light'])
 })
+
+const { t } = useI18n()
+const { prefixCls } = useDesign('simple-menu')
+
+const getShowMenu = computed(() => !props.item?.meta?.hideMenu)
+const getIcon = computed(() => props.item?.icon)
+const getI18nName = computed(() => t(props.item?.name))
+const getShowSubTitle = computed(() => !props.collapse || !props.parent)
+const getIsCollapseParent = computed(() => !!props.collapse && !!props.parent)
+const getLevelClass = computed(() => {
+  return [
+    {
+      [`${prefixCls}__parent`]: props.parent,
+      [`${prefixCls}__children`]: !props.parent
+    }
+  ]
+})
+
+function menuHasChildren(menuTreeItem: Menu): boolean {
+  return (
+    !menuTreeItem.meta?.hideChildrenInMenu &&
+    Reflect.has(menuTreeItem, 'children') &&
+    !!menuTreeItem.children &&
+    menuTreeItem.children.length > 0
+  )
+}
 </script>

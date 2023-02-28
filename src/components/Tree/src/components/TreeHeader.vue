@@ -32,7 +32,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup lang="ts">
 import { computed, ref, watch, useSlots } from 'vue'
 import { Dropdown, Menu, MenuItem, MenuDivider, InputSearch } from 'ant-design-vue'
 import { Icon } from '@/components/Icon'
@@ -122,7 +122,7 @@ const toolbarList = computed(() => {
     : defaultToolbarList
 })
 
-function handleMenuClick(e: { key: ToolbarEnum }) {
+function handleMenuClick(e) {
   const { key } = e
   switch (key) {
     case ToolbarEnum.SELECT_ALL:

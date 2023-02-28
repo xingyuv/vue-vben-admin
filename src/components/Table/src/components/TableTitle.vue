@@ -3,43 +3,36 @@
     {{ getTitle }}
   </BasicTitle>
 </template>
-<script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+<script setup lang="ts" name="BasicTableTitle">
+import { computed, PropType } from 'vue'
 import { BasicTitle } from '@/components/Basic/index'
 import { useDesign } from '@/hooks/web/useDesign'
 import { isFunction } from '@/utils/is'
 
-export default defineComponent({
-  name: 'BasicTableTitle',
-  components: { BasicTitle },
-  props: {
-    title: {
-      type: [Function, String] as PropType<string | ((data: Recordable) => string)>
-    },
-    getSelectRows: {
-      type: Function as PropType<() => Recordable[]>
-    },
-    helpMessage: {
-      type: [String, Array] as PropType<string | string[]>
-    }
+const props = defineProps({
+  title: {
+    type: [Function, String] as PropType<string | ((data: Recordable) => string)>
   },
-  setup(props) {
-    const { prefixCls } = useDesign('basic-table-title')
-
-    const getTitle = computed(() => {
-      const { title, getSelectRows = () => {} } = props
-      let tit = title
-
-      if (isFunction(title)) {
-        tit = title({
-          selectRows: getSelectRows()
-        })
-      }
-      return tit
-    })
-
-    return { getTitle, prefixCls }
+  getSelectRows: {
+    type: Function as PropType<() => Recordable[]>
+  },
+  helpMessage: {
+    type: [String, Array] as PropType<string | string[]>
   }
+})
+
+const { prefixCls } = useDesign('basic-table-title')
+
+const getTitle = computed(() => {
+  const { title, getSelectRows = () => {} } = props
+  let tit = title
+
+  if (isFunction(title)) {
+    tit = title({
+      selectRows: getSelectRows()
+    })
+  }
+  return tit
 })
 </script>
 <style lang="less">
