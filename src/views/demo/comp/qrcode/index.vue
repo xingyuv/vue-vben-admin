@@ -1,7 +1,11 @@
 <template>
   <PageWrapper title="二维码组件使用示例">
     <div class="flex flex-wrap">
-      <CollapseContainer title="基础示例" :canExpan="true" class="text-center mb-6 qrcode-demo-item">
+      <CollapseContainer
+        title="基础示例"
+        :canExpan="true"
+        class="text-center mb-6 qrcode-demo-item"
+      >
         <QrCode :value="qrCodeUrl" />
       </CollapseContainer>
 

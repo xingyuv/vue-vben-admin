@@ -44,15 +44,24 @@
           </FormItem>
         </div>
         <FormItem label="关联字段">
-          <Select mode="multiple" v-model:value="formConfig.currentItem['link']" :options="linkOptions" />
+          <Select
+            mode="multiple"
+            v-model:value="formConfig.currentItem['link']"
+            :options="linkOptions"
+          />
         </FormItem>
 
         <FormItem
           label="选项"
           v-if="
-            ['Select', 'CheckboxGroup', 'RadioGroup', 'TreeSelect', 'Cascader', 'AutoComplete'].includes(
-              formConfig.currentItem.component
-            )
+            [
+              'Select',
+              'CheckboxGroup',
+              'RadioGroup',
+              'TreeSelect',
+              'Cascader',
+              'AutoComplete'
+            ].includes(formConfig.currentItem.component)
           "
         >
           <FormOptions />
@@ -66,7 +75,17 @@
   </div>
 </template>
 <script lang="ts">
-import { Empty, Input, Form, FormItem, Switch, Checkbox, Select, InputNumber, RadioGroup } from 'ant-design-vue'
+import {
+  Empty,
+  Input,
+  Form,
+  FormItem,
+  Switch,
+  Checkbox,
+  Select,
+  InputNumber,
+  RadioGroup
+} from 'ant-design-vue'
 import RadioButtonGroup from '@/components/Form/src/components/RadioButtonGroup.vue'
 import { Col, Row } from 'ant-design-vue'
 import { computed, defineComponent, ref, watch } from 'vue'
@@ -110,7 +129,8 @@ export default defineComponent({
     const { formConfig } = useFormDesignState()
 
     if (formConfig.value.currentItem) {
-      formConfig.value.currentItem.componentProps = formConfig.value.currentItem.componentProps || {}
+      formConfig.value.currentItem.componentProps =
+        formConfig.value.currentItem.componentProps || {}
     }
 
     watch(

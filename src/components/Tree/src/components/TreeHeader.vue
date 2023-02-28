@@ -4,9 +4,17 @@
     <BasicTitle :helpMessage="helpMessage" v-if="!slots.headerTitle && title">
       {{ title }}
     </BasicTitle>
-    <div class="flex items-center flex-1 cursor-pointer justify-self-stretch" v-if="search || toolbar">
+    <div
+      class="flex items-center flex-1 cursor-pointer justify-self-stretch"
+      v-if="search || toolbar"
+    >
       <div :class="getInputSearchCls" v-if="search">
-        <InputSearch :placeholder="t('common.searchText')" size="small" allowClear v-model:value="searchValue" />
+        <InputSearch
+          :placeholder="t('common.searchText')"
+          size="small"
+          allowClear
+          v-model:value="searchValue"
+        />
       </div>
       <Dropdown @click.prevent v-if="toolbar">
         <Icon icon="ion:ellipsis-vertical" />

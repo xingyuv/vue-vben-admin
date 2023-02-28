@@ -13,7 +13,12 @@
     :destroyOnClose="true"
     :width="900"
   >
-    <VFormCreate :form-config="formConfig" v-model:fApi="fApi" v-model:formModel="formModel" @submit="onSubmit">
+    <VFormCreate
+      :form-config="formConfig"
+      v-model:fApi="fApi"
+      v-model:formModel="formModel"
+      @submit="onSubmit"
+    >
       <template #slotName="{ formModel, field }">
         <a-input v-model:value="formModel[field]" placeholder="我是插槽传递的输入框" />
       </template>

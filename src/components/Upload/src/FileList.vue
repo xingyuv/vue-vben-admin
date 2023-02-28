@@ -53,7 +53,9 @@ export default defineComponent({
                     const render = customRender && isFunction(customRender)
                     return (
                       <td class={['file-table-td', align]} key={dataIndex}>
-                        {render ? customRender?.({ text: record[dataIndex], record }) : record[dataIndex]}
+                        {render
+                          ? customRender?.({ text: record[dataIndex], record })
+                          : record[dataIndex]}
                       </td>
                     )
                   })}

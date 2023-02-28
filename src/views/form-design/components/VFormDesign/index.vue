@@ -62,7 +62,10 @@
     >
       <PropsPanel ref="propsPanel" :activeKey="formConfig.activeKey">
         <template v-for="item of formConfig.schemas" #[`${item.component}Props`]="data">
-          <slot :name="`${item.component}Props`" v-bind="{ formItem: data, props: data.componentProps }"></slot>
+          <slot
+            :name="`${item.component}Props`"
+            v-bind="{ formItem: data, props: data.componentProps }"
+          ></slot>
         </template>
       </PropsPanel>
     </LayoutSider>
@@ -170,7 +173,9 @@ const historyReturn = useRefHistory(formConfig, {
  */
 const handleSetSelectItem = (schema: IVFormComponent) => {
   formConfig.value.currentItem = schema
-  handleChangePropsTabs(schema.key ? (formConfig.value.activeKey! === 1 ? 2 : formConfig.value.activeKey!) : 1)
+  handleChangePropsTabs(
+    schema.key ? (formConfig.value.activeKey! === 1 ? 2 : formConfig.value.activeKey!) : 1
+  )
 }
 
 const setGlobalConfigState = (formItem: IVFormComponent) => {
@@ -230,7 +235,10 @@ const copyFormItem = (formItem: IVFormComponent) => {
  * @param item {IVFormComponent} 当前点击的组件
  * @param isCopy {boolean} 是否复制
  */
-const handleCopy = (item: IVFormComponent = formConfig.value.currentItem as IVFormComponent, isCopy = true) => {
+const handleCopy = (
+  item: IVFormComponent = formConfig.value.currentItem as IVFormComponent,
+  isCopy = true
+) => {
   const key = formConfig.value.currentItem?.key
   /**
    * 遍历当表单项配置，如果是复制，则复制一份表单项，如果不是复制，则直接添加到表单项中
@@ -241,7 +249,9 @@ const handleCopy = (item: IVFormComponent = formConfig.value.currentItem as IVFo
     schemas.some((formItem: IVFormComponent, index: number) => {
       if (formItem.key === key) {
         // 判断是不是复制
-        isCopy ? schemas.splice(index, 0, copyFormItem(formItem)) : schemas.splice(index + 1, 0, item)
+        isCopy
+          ? schemas.splice(index, 0, copyFormItem(formItem))
+          : schemas.splice(index + 1, 0, item)
         const event = {
           newIndex: index + 1
         }

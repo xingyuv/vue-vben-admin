@@ -25,7 +25,12 @@
         />
       </Col>
       <Col :span="8">
-        <BasicTree title="懒加载异步树" ref="asyncTreeRef" :treeData="tree" :load-data="onLoadData" />
+        <BasicTree
+          title="懒加载异步树"
+          ref="asyncTreeRef"
+          :treeData="tree"
+          :load-data="onLoadData"
+        />
       </Col>
       <Col :span="8">
         <Card title="异步数据，默认展开">
@@ -115,7 +120,9 @@ export default defineComponent({
               { title: `Child Node ${treeNode.eventKey}-1`, key: `${treeNode.eventKey}-1` }
             ]
             asyncTreeAction.updateNodeByKey(treeNode.eventKey, { children: nodeChildren })
-            asyncTreeAction.setExpandedKeys(uniq([treeNode.eventKey, ...asyncTreeAction.getExpandedKeys()]))
+            asyncTreeAction.setExpandedKeys(
+              uniq([treeNode.eventKey, ...asyncTreeAction.getExpandedKeys()])
+            )
           }
 
           resolve()

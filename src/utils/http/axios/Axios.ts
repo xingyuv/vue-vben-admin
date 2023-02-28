@@ -1,4 +1,10 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios'
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
+  AxiosRequestConfig
+} from 'axios'
 import type { RequestOptions, Result, UploadFileParams } from '@/types/axios'
 import type { CreateAxiosOptions } from './axiosTransform'
 import axios from 'axios'
@@ -78,7 +84,7 @@ export class VAxios {
     const axiosCanceler = new AxiosCanceler()
 
     // Request interceptor configuration processing
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
+    this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       // If cancel repeat request is turned on, then cancel repeat request is prohibited
       // @ts-ignore
       const { ignoreCancelToken } = config.requestOptions
@@ -120,7 +126,7 @@ export class VAxios {
   /**
    * @description:  File Upload
    */
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
+  uploadFile<T = any>(config: InternalAxiosRequestConfig, params: UploadFileParams) {
     const formData = new window.FormData()
     const customFilename = params.name || 'file'
 

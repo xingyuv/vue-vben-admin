@@ -17,7 +17,13 @@
     <CollapseContainer title="圆形裁剪">
       <div class="container p-4">
         <div class="cropper-container mr-10">
-          <CropperImage ref="refCropper" :src="img" @cropend="handleCircleCropend" style="width: 40vw" circled />
+          <CropperImage
+            ref="refCropper"
+            :src="img"
+            @cropend="handleCircleCropend"
+            style="width: 40vw"
+            circled
+          />
         </div>
         <img :src="circleImg" class="croppered" v-if="circleImg" />
       </div>

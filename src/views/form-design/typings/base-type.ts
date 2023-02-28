@@ -1,10 +1,10 @@
 export interface IAnyObject<T = any> {
-  [key: string]: T;
+  [key: string]: T
 }
 
 export interface IInputEvent {
   target: {
-    value: any;
-    checked: boolean;
-  };
+    value: any
+    checked: boolean
+  }
 }

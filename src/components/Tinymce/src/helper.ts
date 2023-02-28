@@ -60,22 +60,22 @@ const validEvents = [
   'onShow',
   'onSubmit',
   'onUndo',
-  'onVisualAid',
-];
+  'onVisualAid'
+]
 
-const isValidKey = (key: string) => validEvents.indexOf(key) !== -1;
+const isValidKey = (key: string) => validEvents.indexOf(key) !== -1
 
 export const bindHandlers = (initEvent: Event, listeners: any, editor: any): void => {
   Object.keys(listeners)
     .filter(isValidKey)
     .forEach((key: string) => {
-      const handler = listeners[key];
+      const handler = listeners[key]
       if (typeof handler === 'function') {
         if (key === 'onInit') {
-          handler(initEvent, editor);
+          handler(initEvent, editor)
         } else {
-          editor.on(key.substring(2), (e: any) => handler(e, editor));
+          editor.on(key.substring(2), (e: any) => handler(e, editor))
         }
       }
-    });
-};
+    })
+}

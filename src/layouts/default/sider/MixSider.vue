@@ -62,9 +62,18 @@
         />
       </div>
       <ScrollContainer :class="`${prefixCls}-menu-list__content`">
-        <SimpleMenu :items="childrenMenus" :theme="getMenuTheme" mixSider @menu-click="handleMenuClick" />
+        <SimpleMenu
+          :items="childrenMenus"
+          :theme="getMenuTheme"
+          mixSider
+          @menu-click="handleMenuClick"
+        />
       </ScrollContainer>
-      <div v-show="getShowDragBar && openMenu" :class="`${prefixCls}-drag-bar`" ref="dragBarRef"></div>
+      <div
+        v-show="getShowDragBar && openMenu"
+        :class="`${prefixCls}-drag-bar`"
+        ref="dragBarRef"
+      ></div>
     </div>
   </div>
 </template>

@@ -48,7 +48,8 @@ export default defineComponent({
     const { formConfig } = useFormDesignState()
     const key = formConfig.value.currentItem?.component === 'TreeSelect' ? 'treeData' : 'options'
     const addOptions = () => {
-      if (!formConfig.value.currentItem?.componentProps?.[key]) formConfig.value.currentItem!.componentProps![key] = []
+      if (!formConfig.value.currentItem?.componentProps?.[key])
+        formConfig.value.currentItem!.componentProps![key] = []
       const len = formConfig.value.currentItem?.componentProps?.[key].length + 1
       formConfig.value.currentItem!.componentProps![key].push({
         label: `选项${len}`,

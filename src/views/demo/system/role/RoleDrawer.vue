@@ -1,5 +1,12 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="registerDrawer" showFooter :title="getTitle" width="500px" @ok="handleSubmit">
+  <BasicDrawer
+    v-bind="$attrs"
+    @register="registerDrawer"
+    showFooter
+    :title="getTitle"
+    width="500px"
+    @ok="handleSubmit"
+  >
     <BasicForm @register="registerForm">
       <template #menu="{ model, field }">
         <BasicTree

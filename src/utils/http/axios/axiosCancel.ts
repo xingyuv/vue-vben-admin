@@ -1,18 +1,19 @@
-import type { AxiosRequestConfig, Canceler } from 'axios'
+import type { InternalAxiosRequestConfig, Canceler } from 'axios'
 import axios from 'axios'
 import { isFunction } from '@/utils/is'
 
 // Used to store the identification and cancellation function of each request
 let pendingMap = new Map<string, Canceler>()
 
-export const getPendingUrl = (config: AxiosRequestConfig) => [config.method, config.url].join('&')
+export const getPendingUrl = (config: InternalAxiosRequestConfig) =>
+  [config.method, config.url].join('&')
 
 export class AxiosCanceler {
   /**
    * Add request
    * @param {Object} config
    */
-  addPending(config: AxiosRequestConfig) {
+  addPending(config: InternalAxiosRequestConfig) {
     this.removePending(config)
     const url = getPendingUrl(config)
     config.cancelToken =
@@ -39,7 +40,7 @@ export class AxiosCanceler {
    * Removal request
    * @param {Object} config
    */
-  removePending(config: AxiosRequestConfig) {
+  removePending(config: InternalAxiosRequestConfig) {
     const url = getPendingUrl(config)
 
     if (pendingMap.has(url)) {

@@ -47,7 +47,8 @@ export default defineComponent({
         schemas.some((formItem, index) => {
           const { component, key } = formItem
           // 处理栅格和标签页布局
-          ;['Grid', 'Tabs'].includes(component) && formItem.columns?.forEach((item) => traverse(item.children))
+          ;['Grid', 'Tabs'].includes(component) &&
+            formItem.columns?.forEach((item) => traverse(item.children))
           if (key === props.currentItem.key) {
             let params: IVFormComponent =
               schemas.length === 1

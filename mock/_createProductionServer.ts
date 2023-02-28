@@ -11,7 +11,7 @@ import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
 
 // const mockModules = Object.keys(modules).reduce((pre, key) => {
 //   if (!key.includes("/_")) {
-//     pre.push(...modules[key]);
+//     pre.push(...(modules as Recordable)[key]);
 //   }
 //   return pre;
 // }, [] as any[]);
@@ -23,7 +23,7 @@ Object.keys(modules).forEach((key) => {
   if (key.includes('/_')) {
     return
   }
-  mockModules.push(...modules[key].default)
+  mockModules.push(...(modules as Recordable)[key].default)
 })
 
 /**

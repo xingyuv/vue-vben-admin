@@ -59,7 +59,7 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
   // rollup-plugin-visualizer
   vitePlugins.push(configVisualizerConfig())
 
-  // vite-plugin-theme
+  // vite-plugin-vben-theme
   vitePlugins.push(configThemePlugin(isBuild))
 
   // The following plugins only work in the production environment

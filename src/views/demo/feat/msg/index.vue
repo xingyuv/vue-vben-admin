@@ -2,8 +2,12 @@
   <PageWrapper title="消息示例">
     <CollapseContainer class="w-full h-32 bg-white rounded-md" title="Message">
       <a-button @click="infoMsg('Info message')" class="mr-2"> Info </a-button>
-      <a-button @click="successMsg('Success message')" class="mr-2" color="success"> Success </a-button>
-      <a-button @click="warningMsg('Warning message')" class="mr-2" color="warning"> Warning </a-button>
+      <a-button @click="successMsg('Success message')" class="mr-2" color="success">
+        Success
+      </a-button>
+      <a-button @click="warningMsg('Warning message')" class="mr-2" color="warning">
+        Warning
+      </a-button>
       <a-button @click="errorMsg('Error message')" class="mr-2" color="error"> Error </a-button>
       <a-button @click="handleLoading" class="mr-2" type="primary"> Loading </a-button>
     </CollapseContainer>
@@ -22,7 +26,10 @@
       <a-button @click="handleWarningModal" color="warning" class="mr-2"> Warning </a-button>
     </CollapseContainer>
 
-    <CollapseContainer class="w-full h-32 mt-5 bg-white rounded-md" title="Notification 用法与上面一致">
+    <CollapseContainer
+      class="w-full h-32 mt-5 bg-white rounded-md"
+      title="Notification 用法与上面一致"
+    >
       <a-button @click="handleNotify" color="success" class="mr-2"> Success </a-button>
     </CollapseContainer>
   </PageWrapper>

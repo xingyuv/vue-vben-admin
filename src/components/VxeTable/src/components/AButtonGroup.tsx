@@ -1,4 +1,8 @@
-import { FormItemContentRenderParams, FormItemRenderOptions, VxeGlobalRendererHandles } from 'vxe-table'
+import {
+  FormItemContentRenderParams,
+  FormItemRenderOptions,
+  VxeGlobalRendererHandles
+} from 'vxe-table'
 import { createDefaultRender, createEditRender, createFormItemRender } from './AButton'
 
 function createEditButtonRender() {
@@ -10,7 +14,8 @@ function createEditButtonRender() {
     const { children } = renderOpts
     if (children) {
       return children.map(
-        (childRenderOpts: VxeGlobalRendererHandles.RenderEditOptions) => buttonEditRender(childRenderOpts, params)[0]
+        (childRenderOpts: VxeGlobalRendererHandles.RenderEditOptions) =>
+          buttonEditRender(childRenderOpts, params)[0]
       )
     }
     return []
@@ -39,7 +44,9 @@ function createButtonItemRender() {
     const buttonItemRender = createFormItemRender()
     const { children } = renderOpts
     if (children) {
-      return children.map((childRenderOpts: FormItemRenderOptions) => buttonItemRender(childRenderOpts, params)[0])
+      return children.map(
+        (childRenderOpts: FormItemRenderOptions) => buttonItemRender(childRenderOpts, params)[0]
+      )
     }
     return []
   }

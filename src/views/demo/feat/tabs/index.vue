@@ -18,7 +18,9 @@
     </CollapseContainer>
 
     <CollapseContainer class="mt-4" title="标签页复用超出限制自动关闭(使用场景: 动态路由)">
-      <a-button v-for="index in 6" :key="index" class="mr-2" @click="toDetail(index)"> 打开{{ index }}详情页 </a-button>
+      <a-button v-for="index in 6" :key="index" class="mr-2" @click="toDetail(index)">
+        打开{{ index }}详情页
+      </a-button>
     </CollapseContainer>
   </PageWrapper>
 </template>
@@ -37,7 +39,8 @@ export default defineComponent({
   setup() {
     const go = useGo()
     const title = ref<string>('')
-    const { closeAll, closeLeft, closeRight, closeOther, closeCurrent, refreshPage, setTitle } = useTabs()
+    const { closeAll, closeLeft, closeRight, closeOther, closeCurrent, refreshPage, setTitle } =
+      useTabs()
     const { createMessage } = useMessage()
     function setTabTitle() {
       if (title.value) {

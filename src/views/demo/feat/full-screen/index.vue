@@ -15,7 +15,10 @@
       <a-button type="primary" @click="toggleDom" class="mr-2"> Enter Dom Full Screen </a-button>
     </CollapseContainer>
 
-    <div ref="domRef" class="flex items-center justify-center w-1/2 h-64 mx-auto mt-10 bg-white rounded-md">
+    <div
+      ref="domRef"
+      class="flex items-center justify-center w-1/2 h-64 mx-auto mt-10 bg-white rounded-md"
+    >
       <a-button type="primary" @click="toggleDom" class="mr-2"> Exit Dom Full Screen </a-button>
     </div>
   </PageWrapper>

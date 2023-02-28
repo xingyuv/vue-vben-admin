@@ -539,7 +539,9 @@ const schemas: FormSchema[] = [
         onChange: (e: any) => {
           // console.log(e)
           let citiesOptions =
-            e == 1 ? citiesOptionsData[provincesOptions[0].id] : citiesOptionsData[provincesOptions[1].id]
+            e == 1
+              ? citiesOptionsData[provincesOptions[0].id]
+              : citiesOptionsData[provincesOptions[1].id]
           // console.log(citiesOptions)
           if (e === undefined) {
             citiesOptions = []

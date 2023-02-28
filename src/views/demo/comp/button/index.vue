@@ -55,7 +55,9 @@
             <h3>primary</h3>
             <a-button type="primary" preIcon="mdi:page-next-outline"> 主按钮 </a-button>
             <a-button type="primary" class="ml-2" disabled> 禁用 </a-button>
-            <a-button type="primary" class="ml-2" danger preIcon="mdi:page-next-outline"> 危险 </a-button>
+            <a-button type="primary" class="ml-2" danger preIcon="mdi:page-next-outline">
+              危险
+            </a-button>
             <a-button type="primary" class="ml-2" loading> loading </a-button>
             <a-button type="link" class="ml-2"> link </a-button>
             <a-button type="link" class="ml-2" loading> loading link </a-button>

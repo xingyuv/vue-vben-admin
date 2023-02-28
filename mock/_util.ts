@@ -10,7 +10,12 @@ export function resultSuccess<T = Recordable>(result: T, { message = 'ok' } = {}
   }
 }
 
-export function resultPageSuccess<T = any>(page: number, pageSize: number, list: T[], { message = 'ok' } = {}) {
+export function resultPageSuccess<T = any>(
+  page: number,
+  pageSize: number,
+  list: T[],
+  { message = 'ok' } = {}
+) {
   const pageData = pagination(page, pageSize, list)
 
   return {
@@ -22,7 +27,10 @@ export function resultPageSuccess<T = any>(page: number, pageSize: number, list:
   }
 }
 
-export function resultError(message = 'Request failed', { code = ResultEnum.ERROR, result = null } = {}) {
+export function resultError(
+  message = 'Request failed',
+  { code = ResultEnum.ERROR, result = null } = {}
+) {
   return {
     code,
     result,

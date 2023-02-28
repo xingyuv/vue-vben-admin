@@ -47,12 +47,12 @@ export default defineComponent({
 }
 
 .custom-enter {
-  opacity: 0%;
+  opacity: 0;
   transform: scale(0.4) translate(100%);
 }
 
 .custom-enter-to {
-  opacity: 100%;
+  opacity: 100;
 }
 
 .custom-enter-active {
@@ -63,11 +63,11 @@ export default defineComponent({
 }
 
 .custom-leave {
-  opacity: 100%;
+  opacity: 100;
 }
 
 .custom-leave-to {
-  opacity: 0%;
+  opacity: 0;
   transform: scale(0.4) translate(-100%);
 }
 

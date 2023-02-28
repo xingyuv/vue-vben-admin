@@ -65,7 +65,7 @@ export default defineComponent({
     const modeValue = ref<MODE>(MODE.JSON)
     const value = ref(jsonData)
 
-    function handleModeChange(e: ChangeEvent) {
+    function handleModeChange(e) {
       const mode = e.target.value
       if (mode === MODE.JSON) {
         value.value = jsonData

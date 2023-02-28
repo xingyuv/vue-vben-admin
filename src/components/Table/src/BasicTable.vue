@@ -114,12 +114,19 @@ export default defineComponent({
     watchEffect(() => {
       unref(isFixedHeightPage) &&
         props.canResize &&
-        warn("'canResize' of BasicTable may not work in PageWrapper with 'fixedHeight' (especially in hot updates)")
+        warn(
+          "'canResize' of BasicTable may not work in PageWrapper with 'fixedHeight' (especially in hot updates)"
+        )
     })
 
     const { getLoading, setLoading } = useLoading(getProps)
-    const { getPaginationInfo, getPagination, setPagination, setShowPagination, getShowPagination } =
-      usePagination(getProps)
+    const {
+      getPaginationInfo,
+      getPagination,
+      setPagination,
+      setShowPagination,
+      getShowPagination
+    } = usePagination(getProps)
 
     const {
       getRowSelection,
@@ -168,8 +175,14 @@ export default defineComponent({
       onChange && isFunction(onChange) && onChange.call(undefined, ...args)
     }
 
-    const { getViewColumns, getColumns, setCacheColumnsByField, setColumns, getColumnsRef, getCacheColumns } =
-      useColumns(getProps, getPaginationInfo)
+    const {
+      getViewColumns,
+      getColumns,
+      setCacheColumnsByField,
+      setColumns,
+      getColumnsRef,
+      getCacheColumns
+    } = useColumns(getProps, getPaginationInfo)
 
     const { getScrollRef, redoHeight } = useTableScroll(
       getProps,
@@ -193,7 +206,11 @@ export default defineComponent({
 
     const { getRowClassName } = useTableStyle(getProps, prefixCls)
 
-    const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(getProps, tableData, emit)
+    const { getExpandOption, expandAll, expandRows, collapseAll } = useTableExpand(
+      getProps,
+      tableData,
+      emit
+    )
 
     const handlers: InnerHandlers = {
       onColumnsChange: (data: ColumnChangeParam[]) => {
@@ -207,12 +224,8 @@ export default defineComponent({
 
     const { getFooterProps } = useTableFooter(getProps, getScrollRef, tableElRef, getDataSourceRef)
 
-    const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } = useTableForm(
-      getProps,
-      slots,
-      fetch,
-      getLoading
-    )
+    const { getFormProps, replaceFormSlotKey, getFormSlotKeys, handleSearchInfoChange } =
+      useTableForm(getProps, slots, fetch, getLoading)
 
     const getBindValues = computed(() => {
       const dataSource = unref(getDataSourceRef)

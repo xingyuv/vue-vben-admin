@@ -210,7 +210,10 @@ export default defineComponent({
   components: { BasicForm, CollapseContainer, PageWrapper },
   setup() {
     const { createMessage } = useMessage()
-    const [register, { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }] = useForm({
+    const [
+      register,
+      { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }
+    ] = useForm({
       labelWidth: 120,
       schemas,
       actionColOptions: {

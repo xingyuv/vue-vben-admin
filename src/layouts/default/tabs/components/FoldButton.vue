@@ -22,7 +22,9 @@ export default defineComponent({
 
     const getIsUnFold = computed(() => !unref(getShowMenu) && !unref(getShowHeader))
 
-    const getIcon = computed(() => (unref(getIsUnFold) ? 'codicon:screen-normal' : 'codicon:screen-full'))
+    const getIcon = computed(() =>
+      unref(getIsUnFold) ? 'codicon:screen-normal' : 'codicon:screen-full'
+    )
 
     function handleFold() {
       const isUnFold = unref(getIsUnFold)

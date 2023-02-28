@@ -26,7 +26,10 @@
       </template>
 
       <FormAction v-bind="getFormActionBindProps" @toggle-advanced="handleToggleAdvanced">
-        <template #[item]="data" v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']">
+        <template
+          #[item]="data"
+          v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']"
+        >
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
       </FormAction>
@@ -89,6 +92,7 @@ export default defineComponent({
 
     // Get the basic configuration of the form
     const getProps = computed((): FormProps => {
+      // @ts-ignore
       return { ...props, ...unref(propsRef) } as FormProps
     })
 

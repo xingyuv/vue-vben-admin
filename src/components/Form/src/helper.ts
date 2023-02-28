@@ -52,7 +52,7 @@ export function setComponentRuleType(
 export function processDateValue(attr: Recordable, component: string) {
   const { valueFormat, value } = attr
   if (valueFormat) {
-    attr.value = isObject(value) ? dateUtil(value).format(valueFormat) : value
+    attr.value = isObject(value) ? dateUtil(value as any).format(valueFormat) : value
   } else if (DATE_TYPE.includes(component) && value) {
     attr.value = dateUtil(attr.value)
   }

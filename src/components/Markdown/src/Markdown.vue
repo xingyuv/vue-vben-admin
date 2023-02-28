@@ -3,7 +3,16 @@
 </template>
 <script lang="ts">
 import type { Ref } from 'vue'
-import { defineComponent, ref, unref, nextTick, computed, watch, onBeforeUnmount, onDeactivated } from 'vue'
+import {
+  defineComponent,
+  ref,
+  unref,
+  nextTick,
+  computed,
+  watch,
+  onBeforeUnmount,
+  onDeactivated
+} from 'vue'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import { useLocale } from '@/locales/useLocale'
@@ -38,7 +47,9 @@ export default defineComponent({
         if (!inited) {
           return
         }
-        instance.getVditor()?.setTheme(getTheme(val) as any, getTheme(val, 'content'), getTheme(val, 'code'))
+        instance
+          .getVditor()
+          ?.setTheme(getTheme(val) as any, getTheme(val, 'content'), getTheme(val, 'code'))
       },
       {
         immediate: true,

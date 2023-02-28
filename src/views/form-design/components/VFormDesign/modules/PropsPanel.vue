@@ -46,7 +46,9 @@ export default defineComponent({
   setup() {
     const { formConfig } = useFormDesignState()
     const slotProps = computed(() => {
-      return customComponents.find((item) => item.component === formConfig.value.currentItem?.component)
+      return customComponents.find(
+        (item) => item.component === formConfig.value.currentItem?.component
+      )
     })
     return { formConfig, customComponents, slotProps }
   }

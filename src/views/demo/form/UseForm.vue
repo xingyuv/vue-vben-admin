@@ -2,8 +2,12 @@
   <PageWrapper title="UseForm操作示例">
     <Space class="mb-4">
       <a-button type="primary" @click="showDrawer"> 更改设置 </a-button>
-      <a-button @click="setProps({ resetButtonOptions: { disabled: true, text: '重置New' } })"> 修改重置按钮 </a-button>
-      <a-button @click="setProps({ submitButtonOptions: { disabled: true, loading: true } })"> 修改查询按钮 </a-button>
+      <a-button @click="setProps({ resetButtonOptions: { disabled: true, text: '重置New' } })">
+        修改重置按钮
+      </a-button>
+      <a-button @click="setProps({ submitButtonOptions: { disabled: true, loading: true } })">
+        修改查询按钮
+      </a-button>
       <a-button @click="handleLoad" class="mr-2"> 联动回显 </a-button>
     </Space>
 

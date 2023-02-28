@@ -20,7 +20,12 @@
 
     <template #footer>
       <a-button @click="handleCancel">取消</a-button>
-      <Upload class="upload-button" :beforeUpload="beforeUpload" :showUploadList="false" accept="application/json">
+      <Upload
+        class="upload-button"
+        :beforeUpload="beforeUpload"
+        :showUploadList="false"
+        accept="application/json"
+      >
         <a-button type="primary">导入json文件</a-button>
       </Upload>
       <a-button type="primary" @click="handleImportJson">确定</a-button>

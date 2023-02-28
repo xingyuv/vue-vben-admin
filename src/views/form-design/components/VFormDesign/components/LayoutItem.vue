@@ -12,7 +12,12 @@
         @click.stop="handleSetSelectItem(schema)"
       >
         <Row class="grid-row" v-bind="schema.componentProps">
-          <Col class="grid-col" v-for="(colItem, index) in schema.columns" :key="index" :span="colItem.span">
+          <Col
+            class="grid-col"
+            v-for="(colItem, index) in schema.columns"
+            :key="index"
+            :span="colItem.span"
+          >
             <draggable
               class="list-main draggable-box"
               :component-data="{ name: 'list', tag: 'div', type: 'transition-group' }"

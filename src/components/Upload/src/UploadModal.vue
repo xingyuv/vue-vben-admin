@@ -14,7 +14,12 @@
     :cancelButtonProps="{ disabled: isUploadingRef }"
   >
     <template #centerFooter>
-      <a-button @click="handleStartUpload" color="success" :disabled="!getIsSelectFile" :loading="isUploadingRef">
+      <a-button
+        @click="handleStartUpload"
+        color="success"
+        :disabled="!getIsSelectFile"
+        :loading="isUploadingRef"
+      >
         {{ getUploadBtnText }}
       </a-button>
     </template>
@@ -91,12 +96,15 @@ export default defineComponent({
 
     const getIsSelectFile = computed(() => {
       return (
-        fileListRef.value.length > 0 && !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
+        fileListRef.value.length > 0 &&
+        !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
       )
     })
 
     const getOkButtonProps = computed(() => {
-      const someSuccess = fileListRef.value.some((item) => item.status === UploadResultStatus.SUCCESS)
+      const someSuccess = fileListRef.value.some(
+        (item) => item.status === UploadResultStatus.SUCCESS
+      )
       return {
         disabled: isUploadingRef.value || fileListRef.value.length === 0 || !someSuccess
       }
@@ -209,7 +217,8 @@ export default defineComponent({
       try {
         isUploadingRef.value = true
         // 只上传不是成功状态的
-        const uploadFileList = fileListRef.value.filter((item) => item.status !== UploadResultStatus.SUCCESS) || []
+        const uploadFileList =
+          fileListRef.value.filter((item) => item.status !== UploadResultStatus.SUCCESS) || []
         const data = await Promise.all(
           uploadFileList.map((item) => {
             return uploadApiByItem(item)

@@ -22,12 +22,12 @@ export default {
     errMsg502: 'Network Error!',
     errMsg503: 'The service is unavailable, the server is temporarily overloaded or maintained!',
     errMsg504: 'Network timeout!',
-    errMsg505: 'The http version does not support the request!',
+    errMsg505: 'The http version does not support the request!'
   },
   app: {
     logoutTip: 'Reminder',
     logoutMessage: 'Confirm to exit the system?',
-    menuLoading: 'Menu loading...',
+    menuLoading: 'Menu loading...'
   },
   errorLog: {
     tableTitle: 'Error log list',
@@ -45,7 +45,7 @@ export default {
     fireResourceError: 'Fire resource error',
     fireAjaxError: 'Fire ajax error',
 
-    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.',
+    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.'
   },
   exception: {
     backLogin: 'Back Login',
@@ -56,14 +56,14 @@ export default {
     noDataTitle: 'No data on the current page.',
     networkErrorTitle: 'Network Error',
     networkErrorSubTitle:
-      'Sorry，Your network connection has been disconnected, please check your network!',
+      'Sorry，Your network connection has been disconnected, please check your network!'
   },
   lock: {
     unlock: 'Click to unlock',
     alert: 'Lock screen password error',
     backToLogin: 'Back to login',
     entry: 'Enter the system',
-    placeholder: 'Please enter the lock screen password or user password',
+    placeholder: 'Please enter the lock screen password or user password'
   },
   login: {
     backSignIn: 'Back sign in',
@@ -101,6 +101,6 @@ export default {
     confirmPassword: 'Confirm Password',
     email: 'Email',
     smsCode: 'SMS code',
-    mobile: 'Mobile',
-  },
-};
+    mobile: 'Mobile'
+  }
+}

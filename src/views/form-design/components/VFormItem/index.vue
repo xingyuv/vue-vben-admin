@@ -19,9 +19,10 @@
         :name="schema.componentProps.slotName"
         v-bind="schema"
       ></slot>
-      <Divider v-else-if="schema.component == 'Divider' && schema.label && !formItemProps.hiddenLabel">{{
-        schema.label
-      }}</Divider>
+      <Divider
+        v-else-if="schema.component == 'Divider' && schema.label && !formItemProps.hiddenLabel"
+        >{{ schema.label }}</Divider
+      >
       <!-- 部分控件需要一个空div -->
       <div
         ><component
@@ -110,7 +111,10 @@ export default defineComponent({
           : formConfig.wrapperCol
         : {}
 
-      const style = formConfig.layout === 'horizontal' && formConfig.labelLayout === 'flex' ? { display: 'flex' } : {}
+      const style =
+        formConfig.layout === 'horizontal' && formConfig.labelLayout === 'flex'
+          ? { display: 'flex' }
+          : {}
 
       /**
        * 将字符串正则格式化成正则表达式
@@ -145,7 +149,8 @@ export default defineComponent({
 
     // console.log('component change:', props.schema.component, componentItem.value);
     const handleClick = (schema: IVFormComponent) => {
-      if (schema.component === 'Button' && schema.componentProps?.handle) emit(schema.componentProps?.handle)
+      if (schema.component === 'Button' && schema.componentProps?.handle)
+        emit(schema.componentProps?.handle)
     }
     /**
      * 处理异步属性，异步属性会导致一些属性渲染错误，如defaultValue异步加载会导致渲染不出来，故而此处只处理options，treeData，同步属性在cmpProps中处理
@@ -164,7 +169,8 @@ export default defineComponent({
      * 处理同步属性
      */
     const cmpProps = computed(() => {
-      const isCheck = props.schema && ['Switch', 'Checkbox', 'Radio'].includes(props.schema.component)
+      const isCheck =
+        props.schema && ['Switch', 'Checkbox', 'Radio'].includes(props.schema.component)
       let { field } = props.schema
 
       let { disabled, ...attrs } = omit(props.schema.componentProps, ['options', 'treeData']) ?? {}

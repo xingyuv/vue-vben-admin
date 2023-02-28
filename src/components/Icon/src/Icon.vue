@@ -1,5 +1,11 @@
 <template>
-  <SvgIcon :size="size" :name="getSvgIcon" v-if="isSvgIcon" :class="[$attrs.class, 'anticon']" :spin="spin" />
+  <SvgIcon
+    :size="size"
+    :name="getSvgIcon"
+    v-if="isSvgIcon"
+    :class="[$attrs.class, 'anticon']"
+    :spin="spin"
+  />
   <span
     v-else
     ref="elRef"
@@ -9,7 +15,16 @@
 </template>
 <script lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref, watch, onMounted, nextTick, unref, computed, CSSProperties } from 'vue'
+import {
+  defineComponent,
+  ref,
+  watch,
+  onMounted,
+  nextTick,
+  unref,
+  computed,
+  CSSProperties
+} from 'vue'
 import SvgIcon from './SvgIcon.vue'
 import Iconify from '@purge-icons/generated'
 import { isString } from '@/utils/is'

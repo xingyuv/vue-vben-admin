@@ -31,7 +31,11 @@ const props = {
 const ItemContent: FunctionalComponent<ItemContentProps> = (props) => {
   const { item } = props
   return (
-    <span style="display: inline-block; width: 100%; " class="px-4" onClick={props.handler.bind(null, item)}>
+    <span
+      style="display: inline-block; width: 100%; "
+      class="px-4"
+      onClick={props.handler.bind(null, item)}
+    >
       {props.showIcon && item.icon && <Icon class="mr-2" icon={item.icon} />}
       <span>{item.label}</span>
     </span>
@@ -175,7 +179,8 @@ export default defineComponent({
   background-color: @component-background;
   border: 1px solid rgb(0 0 0 / 8%);
   border-radius: 0.25rem;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 10%),
+    0 1px 5px 0 rgb(0 0 0 / 6%);
   background-clip: padding-box;
   user-select: none;
 

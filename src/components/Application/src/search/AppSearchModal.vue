@@ -84,11 +84,8 @@ const { prefixCls } = useDesign('app-search-modal')
 const [refs, setRefs] = useRefs()
 const { getIsMobile } = useAppInject()
 
-const { handleSearch, searchResult, keyword, activeIndex, handleEnter, handleMouseenter } = useMenuSearch(
-  refs,
-  scrollWrap,
-  emit
-)
+const { handleSearch, searchResult, keyword, activeIndex, handleEnter, handleMouseenter } =
+  useMenuSearch(refs, scrollWrap, emit)
 
 const getIsNotData = computed(() => !keyword || unref(searchResult).length === 0)
 
@@ -162,7 +159,7 @@ function handleClose() {
 
       &__item {
         &-enter {
-          opacity: 0% !important;
+          opacity: 0 !important;
         }
       }
     }
@@ -248,7 +245,7 @@ function handleClose() {
         background-color: @primary-color;
 
         .@{prefix-cls}-list__item-enter {
-          opacity: 100%;
+          opacity: 1;
         }
       }
 
@@ -262,7 +259,7 @@ function handleClose() {
 
       &-enter {
         width: 30px;
-        opacity: 0%;
+        opacity: 0;
       }
     }
   }

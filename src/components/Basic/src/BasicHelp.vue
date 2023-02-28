@@ -46,7 +46,9 @@ export default defineComponent({
   setup(props, { slots }) {
     const { prefixCls } = useDesign('basic-help')
 
-    const getTooltipStyle = computed((): CSSProperties => ({ color: props.color, fontSize: props.fontSize }))
+    const getTooltipStyle = computed(
+      (): CSSProperties => ({ color: props.color, fontSize: props.fontSize })
+    )
 
     const getOverlayStyle = computed((): CSSProperties => ({ maxWidth: props.maxWidth }))
 

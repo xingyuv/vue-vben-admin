@@ -11,7 +11,14 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { BasicTable, useTable, TableAction, BasicColumn, ActionItem, EditRecordRow } from '@/components/Table'
+import {
+  BasicTable,
+  useTable,
+  TableAction,
+  BasicColumn,
+  ActionItem,
+  EditRecordRow
+} from '@/components/Table'
 import { optionsListApi } from '@/api/demo/select'
 
 import { demoListApi } from '@/api/demo/table'
@@ -221,7 +228,9 @@ export default defineComponent({
     const currentEditKeyRef = ref('')
     const [registerTable] = useTable({
       title: '可编辑行示例',
-      titleHelpMessage: ['本例中修改[数字输入框]这一列时，同一行的[远程下拉]列的当前编辑数据也会同步发生改变'],
+      titleHelpMessage: [
+        '本例中修改[数字输入框]这一列时，同一行的[远程下拉]列的当前编辑数据也会同步发生改变'
+      ],
       api: demoListApi,
       columns: columns,
       showIndexColumn: false,

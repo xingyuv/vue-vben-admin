@@ -7,10 +7,19 @@
     v-model:value="currentSelect"
   >
     <template #addonAfter>
-      <a-popover placement="bottomLeft" trigger="click" v-model="visible" :overlayClassName="`${prefixCls}-popover`">
+      <a-popover
+        placement="bottomLeft"
+        trigger="click"
+        v-model="visible"
+        :overlayClassName="`${prefixCls}-popover`"
+      >
         <template #title>
           <div class="flex justify-between">
-            <a-input :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allowClear />
+            <a-input
+              :placeholder="t('component.icon.search')"
+              @change="debounceHandleSearchChange"
+              allowClear
+            />
           </div>
         </template>
 

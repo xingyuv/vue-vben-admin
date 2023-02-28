@@ -10,12 +10,19 @@
     <a-button type="primary" class="my-4" @click="handleDownloadByBase64"> base64流下载 </a-button>
 
     <a-alert message="图片Url下载,如果有跨域问题，需要处理图片跨域" />
-    <a-button type="primary" class="my-4" @click="handleDownloadByOnlineUrl"> 图片Url下载 </a-button>
+    <a-button type="primary" class="my-4" @click="handleDownloadByOnlineUrl">
+      图片Url下载
+    </a-button>
   </PageWrapper>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { downloadByUrl, downloadByData, downloadByBase64, downloadByOnlineUrl } from '@/utils/file/download'
+import {
+  downloadByUrl,
+  downloadByData,
+  downloadByBase64,
+  downloadByOnlineUrl
+} from '@/utils/file/download'
 import imgBase64 from './imgBase64'
 import { PageWrapper } from '@/components/Page'
 import { Alert } from 'ant-design-vue'

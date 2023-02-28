@@ -1,7 +1,12 @@
 <template>
   <Drawer :class="prefixCls" @close="onClose" v-bind="getBindValues">
     <template #title v-if="!$slots.title">
-      <DrawerHeader :title="getMergeProps.title" :isDetail="isDetail" :showDetailBack="showDetailBack" @close="onClose">
+      <DrawerHeader
+        :title="getMergeProps.title"
+        :isDetail="isDetail"
+        :showDetailBack="showDetailBack"
+        @close="onClose"
+      >
         <template #titleToolbar>
           <slot name="titleToolbar"></slot>
         </template>
@@ -28,7 +33,16 @@
 <script lang="ts">
 import type { DrawerInstance, DrawerProps } from './typing'
 import type { CSSProperties } from 'vue'
-import { defineComponent, ref, computed, watch, unref, nextTick, toRaw, getCurrentInstance } from 'vue'
+import {
+  defineComponent,
+  ref,
+  computed,
+  watch,
+  unref,
+  nextTick,
+  toRaw,
+  getCurrentInstance
+} from 'vue'
 import { Drawer } from 'ant-design-vue'
 import { useI18n } from '@/hooks/web/useI18n'
 import { isFunction, isNumber } from '@/utils/is'

@@ -1,6 +1,6 @@
 module.exports = {
   // 一行代码的最大字符数，默认是80
-  printWidth: 120,
+  printWidth: 100,
   // tab宽度为2空格
   tabWidth: 2,
   // 使用tab缩进，默认false

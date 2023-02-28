@@ -1,5 +1,9 @@
 import { ComponentOptions, h } from 'vue'
-import { FormItemContentRenderParams, FormItemRenderOptions, VxeGlobalRendererHandles } from 'vxe-table'
+import {
+  FormItemContentRenderParams,
+  FormItemRenderOptions,
+  VxeGlobalRendererHandles
+} from 'vxe-table'
 import XEUtils from 'xe-utils'
 import { componentMap } from '../componentMap'
 import { ComponentType } from '../componentType'
@@ -296,7 +300,10 @@ export function createDefaultFilterRender() {
  */
 export function createFormItemRender(
   defaultProps?: { [key: string]: any },
-  callBack?: (renderOpts: FormItemRenderOptions, params: FormItemContentRenderParams) => Record<string, any>
+  callBack?: (
+    renderOpts: FormItemRenderOptions,
+    params: FormItemContentRenderParams
+  ) => Record<string, any>
 ) {
   return function (renderOpts: FormItemRenderOptions, params: FormItemContentRenderParams) {
     const args = (callBack && callBack(renderOpts, params)) ?? {}

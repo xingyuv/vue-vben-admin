@@ -1,5 +1,9 @@
 import { h } from 'vue'
-import { FormItemContentRenderParams, FormItemRenderOptions, VxeGlobalRendererHandles } from 'vxe-table'
+import {
+  FormItemContentRenderParams,
+  FormItemRenderOptions,
+  VxeGlobalRendererHandles
+} from 'vxe-table'
 import XEUtils from 'xe-utils'
 import { cellText, createEvents, createProps, getComponent } from './common'
 

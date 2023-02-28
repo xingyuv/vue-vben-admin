@@ -12,7 +12,14 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { BasicTable, useTable, TableAction, BasicColumn, ActionItem, EditRecordRow } from '@/components/Table'
+import {
+  BasicTable,
+  useTable,
+  TableAction,
+  BasicColumn,
+  ActionItem,
+  EditRecordRow
+} from '@/components/Table'
 
 const columns: BasicColumn[] = [
   {

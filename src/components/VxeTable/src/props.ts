@@ -1,6 +1,6 @@
-import { VxeGridPropTypes, VxeTablePropTypes } from 'vxe-table';
-import tableProps from 'vxe-table/es/table/src/props';
-import { CSSProperties } from 'vue';
+import { VxeGridPropTypes, VxeTablePropTypes } from 'vxe-table'
+import tableProps from 'vxe-table/es/table/src/props'
+import { CSSProperties } from 'vue'
 
 /**
  * @description: table二次开发需要后，需要接受的所有prop属性
@@ -10,43 +10,43 @@ export const basicProps = {
   columns: Array as PropType<VxeGridPropTypes.Columns>,
   pagerConfig: {
     type: Object as PropType<VxeGridPropTypes.PagerConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   proxyConfig: {
     type: Object as PropType<VxeGridPropTypes.ProxyConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   toolbarConfig: {
     type: Object as PropType<VxeGridPropTypes.ToolbarConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   formConfig: {
     type: Object as PropType<VxeGridPropTypes.FormConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   zoomConfig: {
     type: Object as PropType<VxeGridPropTypes.ZoomConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   printConfig: {
     type: Object as PropType<VxeTablePropTypes.PrintConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   exportConfig: {
     type: Object as PropType<VxeTablePropTypes.ExportConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   importConfig: {
     type: Object as PropType<VxeTablePropTypes.ImportConfig>,
-    default: () => ({}),
+    default: () => ({})
   },
   size: String as PropType<VxeGridPropTypes.Size>,
   tableClass: {
     type: String,
-    default: '',
+    default: ''
   },
   tableStyle: {
     type: Object as PropType<CSSProperties>,
-    default: () => ({}),
-  },
-};
+    default: () => ({})
+  }
+}
