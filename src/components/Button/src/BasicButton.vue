@@ -7,17 +7,8 @@
     </template>
   </Button>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup name="AButton" extends="Button" indeterminate="false">
 import { Button } from 'ant-design-vue'
-export default defineComponent({
-  name: 'AButton',
-  extends: Button,
-  inheritAttrs: false
-})
-</script>
-<script lang="ts" setup>
 import { computed, unref } from 'vue'
 import Icon from '@/components/Icon/src/Icon.vue'
 import { buttonProps } from './props'

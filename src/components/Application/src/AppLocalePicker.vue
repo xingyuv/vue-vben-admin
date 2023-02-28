@@ -1,7 +1,3 @@
-<!--
- * @Author: Vben
- * @Description: Multi-language switching component
--->
 <template>
   <Dropdown
     placement="bottom"
