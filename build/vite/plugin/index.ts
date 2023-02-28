@@ -5,7 +5,7 @@ import legacy from '@vitejs/plugin-legacy'
 import purgeIcons from 'vite-plugin-purge-icons'
 import windiCSS from 'vite-plugin-windicss'
 import VitePluginCertificate from 'vite-plugin-mkcert'
-//import vueSetupExtend from 'vite-plugin-vue-setup-extend';
+import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
 import { configHtmlPlugin } from './html'
 import { configPwaConfig } from './pwa'
 import { configMockPlugin } from './mock'
@@ -18,8 +18,13 @@ import { configSvgIconsPlugin } from './svgSprite'
 import { isDevFn } from '../../utils'
 
 export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_IMAGEMIN, VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } =
-    viteEnv
+  const {
+    VITE_USE_IMAGEMIN,
+    VITE_USE_MOCK,
+    VITE_LEGACY,
+    VITE_BUILD_COMPRESS,
+    VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE
+  } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
@@ -27,7 +32,7 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
     // have to
     vueJsx(),
     // support name
-    //vueSetupExtend(),
+    vueSetupExtend({}),
     VitePluginCertificate({
       source: 'coding'
     })
@@ -68,7 +73,9 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
     VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin())
 
     // rollup-plugin-gzip
-    vitePlugins.push(configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE))
+    vitePlugins.push(
+      configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE)
+    )
 
     // vite-plugin-pwa
     vitePlugins.push(configPwaConfig(viteEnv))

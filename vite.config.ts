@@ -8,6 +8,7 @@ import { createProxy } from './build/vite/proxy'
 import { wrapperEnv } from './build/utils'
 import { createVitePlugins } from './build/vite/plugin'
 import { OUTPUT_DIR } from './build/constant'
+import { include, exclude } from './build/vite/optimize'
 
 function pathResolve(dir: string) {
   return resolve(process.cwd(), '.', dir)
@@ -34,6 +35,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   return {
     base: VITE_PUBLIC_PATH,
     root,
+    server: {
+      https: false,
+      // Listening on all local IPs
+      host: true,
+      port: VITE_PORT,
+      // Load proxy configuration from .env
+      proxy: createProxy(VITE_PROXY)
+    },
     resolve: {
       alias: [
         {
@@ -46,14 +55,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           replacement: pathResolve('src') + '/'
         }
       ]
-    },
-    server: {
-      https: false,
-      // Listening on all local IPs
-      host: true,
-      port: VITE_PORT,
-      // Load proxy configuration from .env
-      proxy: createProxy(VITE_PROXY)
     },
     esbuild: {
       drop: VITE_DROP_CONSOLE ? ['console', 'debugger'] : []
@@ -93,42 +94,6 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     // The vite plugin used by the project. The quantity is large, so it is separately extracted and managed
     plugins: createVitePlugins(mode, viteEnv, isBuild),
 
-    optimizeDeps: {
-      // @iconify/iconify: The dependency is dynamically and virtually loaded by @purge-icons/generated, so it needs to be specified explicitly
-      include: [
-        'qs',
-        'url',
-        'vue',
-        'less',
-        'axios',
-        'pinia',
-        'dayjs',
-        'qrcode',
-        'echarts',
-        'intro.js',
-        'cropperjs',
-        'crypto-js',
-        'lodash-es',
-        'nprogress',
-        'vue-i18n',
-        'vue-types',
-        'vue-router',
-        'xe-utils',
-        'vxe-table',
-        'sortablejs',
-        'echarts/core',
-        'echarts/charts',
-        'echarts/components',
-        'echarts/renderers',
-        '@vueuse/core',
-        '@zxcvbn-ts/core',
-        '@iconify/iconify',
-        'ant-design-vue',
-        'ant-design-vue/es/style',
-        'ant-design-vue/es/locale/zh_CN',
-        'ant-design-vue/es/locale/en_US',
-        'vite-plugin-windicss'
-      ]
-    }
+    optimizeDeps: { include, exclude }
   }
 }
