@@ -138,9 +138,9 @@ export default defineComponent({
       const attr = {
         ...attrs,
         ...unref(getMergeProps),
-        visible: unref(visibleRef),
-        wrapClassName: unref(getWrapClassName)
+        visible: unref(visibleRef)
       }
+      attr['wrapClassName'] = `${attr?.['wrapClassName'] || ''} ${unref(getWrapClassName)}`
       if (unref(fullScreenRef)) {
         return omit(attr, ['height', 'title'])
       }
