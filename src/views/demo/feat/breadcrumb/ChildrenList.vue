@@ -3,7 +3,11 @@
     <router-link to="/feat/breadcrumb/children/childrenDetail"> 进入子级详情页 </router-link>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { PageWrapper } from '@/components/Page'
-import { RouterLink } from 'vue-router'
+
+export default defineComponent({
+  components: { PageWrapper }
+})
 </script>

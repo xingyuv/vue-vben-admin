@@ -15,7 +15,8 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container/index'
 import { PageWrapper } from '@/components/Page'
@@ -124,6 +125,7 @@ const schemas: FormSchema[] = [
     labelWidth: 200
   }
 ]
+
 const schemas1: FormSchema[] = [
   {
     field: 'f1',
@@ -176,53 +178,69 @@ const schemas1: FormSchema[] = [
   }
 ]
 
-const [register, { updateSchema, appendSchemaByField, removeSchemaByField }] = useForm({
-  labelWidth: 120,
-  schemas,
-  actionColOptions: {
-    span: 24
-  }
-})
-const [register1] = useForm({
-  labelWidth: 120,
-  schemas: schemas1,
-  actionColOptions: {
-    span: 24
-  }
-})
-function changeLabel3() {
-  updateSchema({
-    field: 'field3',
-    label: '字段3 New'
-  })
-}
-function changeLabel34() {
-  updateSchema([
-    {
-      field: 'field3',
-      label: '字段3 New++'
-    },
-    {
-      field: 'field4',
-      label: '字段4 New++'
-    }
-  ])
-}
-
-function appendField() {
-  appendSchemaByField(
-    {
-      field: 'field10',
-      label: '字段10',
-      component: 'Input',
-      colProps: {
-        span: 8
+export default defineComponent({
+  components: { BasicForm, CollapseContainer, PageWrapper },
+  setup() {
+    const [register, { setProps, updateSchema, appendSchemaByField, removeSchemaByField }] =
+      useForm({
+        labelWidth: 120,
+        schemas,
+        actionColOptions: {
+          span: 24
+        }
+      })
+    const [register1] = useForm({
+      labelWidth: 120,
+      schemas: schemas1,
+      actionColOptions: {
+        span: 24
       }
-    },
-    'field3'
-  )
-}
-function deleteField() {
-  removeSchemaByField('field11')
-}
+    })
+    function changeLabel3() {
+      updateSchema({
+        field: 'field3',
+        label: '字段3 New'
+      })
+    }
+    function changeLabel34() {
+      updateSchema([
+        {
+          field: 'field3',
+          label: '字段3 New++'
+        },
+        {
+          field: 'field4',
+          label: '字段4 New++'
+        }
+      ])
+    }
+
+    function appendField() {
+      appendSchemaByField(
+        {
+          field: 'field10',
+          label: '字段10',
+          component: 'Input',
+          colProps: {
+            span: 8
+          }
+        },
+        'field3'
+      )
+    }
+    function deleteField() {
+      removeSchemaByField('field11')
+    }
+    return {
+      register,
+      register1,
+      schemas,
+      setProps,
+      changeLabel3,
+      changeLabel34,
+      appendField,
+      deleteField
+    }
+  }
+})
 </script>

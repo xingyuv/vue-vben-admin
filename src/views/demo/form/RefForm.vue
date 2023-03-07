@@ -64,14 +64,12 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { BasicForm, FormSchema, FormActionType, FormProps } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container/index'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
-
-const formElRef = ref<FormActionType>()
 
 const schemas: FormSchema[] = [
   {
@@ -167,14 +165,24 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-const { createMessage } = useMessage()
 
-const handleSubmit = (values: any) => {
-  createMessage.success('click search,values:' + JSON.stringify(values))
-}
-function setProps(props: FormProps) {
-  const formEl = formElRef.value
-  if (!formEl) return
-  formEl.setProps(props)
-}
+export default defineComponent({
+  components: { BasicForm, CollapseContainer, PageWrapper },
+  setup() {
+    const formElRef = ref<Nullable<FormActionType>>(null)
+    const { createMessage } = useMessage()
+    return {
+      formElRef,
+      schemas,
+      handleSubmit: (values: any) => {
+        createMessage.success('click search,values:' + JSON.stringify(values))
+      },
+      setProps(props: FormProps) {
+        const formEl = formElRef.value
+        if (!formEl) return
+        formEl.setProps(props)
+      }
+    }
+  }
+})
 </script>

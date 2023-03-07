@@ -3,7 +3,7 @@
     <div style="width: 100%" :style="{ textAlign: actionColOpt.style.textAlign }">
       <FormItem>
         <slot name="resetBefore"></slot>
-        <a-button
+        <Button
           type="default"
           class="mr-2"
           v-bind="getResetBtnOptions"
@@ -11,10 +11,10 @@
           v-if="showResetButton"
         >
           {{ getResetBtnOptions.text }}
-        </a-button>
+        </Button>
         <slot name="submitBefore"></slot>
 
-        <a-button
+        <Button
           type="primary"
           class="mr-2"
           v-bind="getSubmitBtnOptions"
@@ -22,10 +22,10 @@
           v-if="showSubmitButton"
         >
           {{ getSubmitBtnOptions.text }}
-        </a-button>
+        </Button>
 
         <slot name="advanceBefore"></slot>
-        <a-button
+        <Button
           type="link"
           size="small"
           @click="toggleAdvanced"
@@ -33,7 +33,7 @@
         >
           {{ isAdvanced ? t('component.form.putAway') : t('component.form.unfold') }}
           <BasicArrow class="ml-1" :expand="!isAdvanced" up />
-        </a-button>
+        </Button>
         <slot name="advanceAfter"></slot>
       </FormItem>
     </div>
@@ -41,9 +41,10 @@
 </template>
 <script lang="ts">
 import type { ColEx } from '../types/index'
+//import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
 import { defineComponent, computed } from 'vue'
 import { Form, Col } from 'ant-design-vue'
-import { ButtonProps } from '@/components/Button'
+import { Button, ButtonProps } from '@/components/Button'
 import { BasicArrow } from '@/components/Basic'
 import { useFormContext } from '../hooks/useFormContext'
 import { useI18n } from '@/hooks/web/useI18n'
@@ -55,6 +56,7 @@ export default defineComponent({
   name: 'BasicFormAction',
   components: {
     FormItem: Form.Item,
+    Button,
     BasicArrow,
     [Col.name]: Col
   },

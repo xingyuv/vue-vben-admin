@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
         display: none;
         width: 0;
         height: 0;
-        opacity: 0%;
+        opacity: 0;
       }
     }
   }
@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
     bottom: 2px;
     z-index: 1;
     border-radius: 4px;
-    opacity: 0%;
+    opacity: 0;
     transition: opacity 80ms ease;
 
     &.is-vertical {
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
 .scrollbar:active > .scrollbar__bar,
 .scrollbar:focus > .scrollbar__bar,
 .scrollbar:hover > .scrollbar__bar {
-  opacity: 100%;
+  opacity: 1;
   transition: opacity 340ms ease-out;
 }
 </style>

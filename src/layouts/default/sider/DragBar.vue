@@ -1,32 +1,43 @@
 <template>
   <div :class="getClass" :style="getDragBarStyle"></div>
 </template>
-<script setup lang="ts" name="DargBar">
-import { computed, unref } from 'vue'
+<script lang="ts">
+import { defineComponent, computed, unref } from 'vue'
+
 import { useDesign } from '@/hooks/web/useDesign'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 
-const props = defineProps({
-  mobile: Boolean
-})
+export default defineComponent({
+  name: 'DargBar',
+  props: {
+    mobile: Boolean
+  },
+  setup(props) {
+    const { getMiniWidthNumber, getCollapsed, getCanDrag } = useMenuSetting()
 
-const { getMiniWidthNumber, getCollapsed, getCanDrag } = useMenuSetting()
+    const { prefixCls } = useDesign('darg-bar')
+    const getDragBarStyle = computed(() => {
+      if (unref(getCollapsed)) {
+        return { left: `${unref(getMiniWidthNumber)}px` }
+      }
+      return {}
+    })
 
-const { prefixCls } = useDesign('darg-bar')
-const getDragBarStyle = computed(() => {
-  if (unref(getCollapsed)) {
-    return { left: `${unref(getMiniWidthNumber)}px` }
-  }
-  return {}
-})
+    const getClass = computed(() => {
+      return [
+        prefixCls,
+        {
+          [`${prefixCls}--hide`]: !unref(getCanDrag) || props.mobile
+        }
+      ]
+    })
 
-const getClass = computed(() => {
-  return [
-    prefixCls,
-    {
-      [`${prefixCls}--hide`]: !unref(getCanDrag) || props.mobile
+    return {
+      prefixCls,
+      getDragBarStyle,
+      getClass
     }
-  ]
+  }
 })
 </script>
 <style lang="less" scoped>

@@ -34,69 +34,93 @@
   </Dropdown>
   <LockAction @register="register" />
 </template>
-<script setup lang="ts" name="UserDropdown">
-import { Dropdown, Menu, MenuDivider } from 'ant-design-vue'
+<script lang="ts">
+// components
+import { Dropdown, Menu } from 'ant-design-vue'
 import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface'
-import { computed } from 'vue'
+
+import { defineComponent, computed } from 'vue'
+
 import { DOC_URL } from '@/settings/siteSetting'
+
 import { useUserStore } from '@/store/modules/user'
 import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting'
 import { useI18n } from '@/hooks/web/useI18n'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useModal } from '@/components/Modal'
+
 import headerImg from '@/assets/images/header.jpg'
 import { propTypes } from '@/utils/propTypes'
 import { openWindow } from '@/utils'
+
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
 
 type MenuEvent = 'logout' | 'doc' | 'lock'
 
-const MenuItem = createAsyncComponent(() => import('./DropMenuItem.vue'))
-const LockAction = createAsyncComponent(() => import('../lock/LockModal.vue'))
+export default defineComponent({
+  name: 'UserDropdown',
+  components: {
+    Dropdown,
+    Menu,
+    MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
+    MenuDivider: Menu.Divider,
+    LockAction: createAsyncComponent(() => import('../lock/LockModal.vue'))
+  },
+  props: {
+    theme: propTypes.oneOf(['dark', 'light'])
+  },
+  setup() {
+    const { prefixCls } = useDesign('header-user-dropdown')
+    const { t } = useI18n()
+    const { getShowDoc, getUseLockPage } = useHeaderSetting()
+    const userStore = useUserStore()
 
-defineProps({
-  theme: propTypes.oneOf(['dark', 'light'])
-})
+    const getUserInfo = computed(() => {
+      const { realName = '', avatar, desc } = userStore.getUserInfo || {}
+      return { realName, avatar: avatar || headerImg, desc }
+    })
 
-const { prefixCls } = useDesign('header-user-dropdown')
-const { t } = useI18n()
-const { getShowDoc, getUseLockPage } = useHeaderSetting()
-const userStore = useUserStore()
+    const [register, { openModal }] = useModal()
 
-const getUserInfo = computed(() => {
-  const { realName = '', avatar, desc } = userStore.getUserInfo || {}
-  return { realName, avatar: avatar || headerImg, desc }
-})
+    function handleLock() {
+      openModal(true)
+    }
 
-const [register, { openModal }] = useModal()
+    //  login out
+    function handleLoginOut() {
+      userStore.confirmLoginOut()
+    }
 
-function handleLock() {
-  openModal(true)
-}
+    // open doc
+    function openDoc() {
+      openWindow(DOC_URL)
+    }
 
-//  login out
-function handleLoginOut() {
-  userStore.confirmLoginOut()
-}
+    function handleMenuClick(e: MenuInfo) {
+      switch (e.key as MenuEvent) {
+        case 'logout':
+          handleLoginOut()
+          break
+        case 'doc':
+          openDoc()
+          break
+        case 'lock':
+          handleLock()
+          break
+      }
+    }
 
-// open doc
-function openDoc() {
-  openWindow(DOC_URL)
-}
-
-function handleMenuClick(e: MenuInfo) {
-  switch (e.key as MenuEvent) {
-    case 'logout':
-      handleLoginOut()
-      break
-    case 'doc':
-      openDoc()
-      break
-    case 'lock':
-      handleLock()
-      break
+    return {
+      prefixCls,
+      t,
+      getUserInfo,
+      handleMenuClick,
+      getShowDoc,
+      register,
+      getUseLockPage
+    }
   }
-}
+})
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-header-user-dropdown';

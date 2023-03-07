@@ -7,7 +7,7 @@
     <use :xlink:href="symbolId" />
   </svg>
 </template>
-<script setup lang="ts" name="SvgIcon">
+<script lang="ts" setup name="SvgIcon">
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -51,7 +51,7 @@ const getStyle = computed((): CSSProperties => {
   display: inline-block;
   overflow: hidden;
   vertical-align: -0.15em;
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 .svg-icon-spin {

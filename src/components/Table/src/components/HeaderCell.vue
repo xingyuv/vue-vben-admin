@@ -6,8 +6,8 @@
   <BasicHelp v-if="getHelpMessage" :text="getHelpMessage" :class="`${prefixCls}__help`" />
 </template>
 <script setup lang="ts" name="TableHeaderCell">
-import type { BasicColumn } from '../types/table'
 import { computed } from 'vue'
+import type { BasicColumn } from '../types/table'
 import BasicHelp from '@/components/Basic/src/BasicHelp.vue'
 import EditTableHeaderCell from './EditTableHeaderIcon.vue'
 import { useDesign } from '@/hooks/web/useDesign'

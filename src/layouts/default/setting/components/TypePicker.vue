@@ -18,27 +18,38 @@
     </template>
   </div>
 </template>
-<script setup lang="ts" name="MenuTypePicker">
+<script lang="ts">
+import { defineComponent } from 'vue'
+
 import { Tooltip } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'
-import { menuTypeList } from '../enum'
 
-defineProps({
-  menuTypeList: {
-    type: Array as PropType<typeof menuTypeList>,
-    default: () => []
+import { menuTypeList } from '../enum'
+export default defineComponent({
+  name: 'MenuTypePicker',
+  components: { Tooltip },
+  props: {
+    menuTypeList: {
+      type: Array as PropType<typeof menuTypeList>,
+      default: () => []
+    },
+    handler: {
+      type: Function as PropType<Fn>,
+      default: () => ({})
+    },
+    def: {
+      type: String,
+      default: ''
+    }
   },
-  handler: {
-    type: Function as PropType<Fn>,
-    default: () => ({})
-  },
-  def: {
-    type: String,
-    default: ''
+  setup() {
+    const { prefixCls } = useDesign('setting-menu-type-picker')
+
+    return {
+      prefixCls
+    }
   }
 })
-
-const { prefixCls } = useDesign('setting-menu-type-picker')
 </script>
 <style lang="less" scoped>
 @prefix-cls: ~'@{namespace}-setting-menu-type-picker';

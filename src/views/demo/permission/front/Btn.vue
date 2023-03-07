@@ -59,8 +59,8 @@
     </a-button>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { computed } from 'vue'
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
 import { Alert, Divider, Space } from 'ant-design-vue'
 import CurrentPermissionMode from '../CurrentPermissionMode.vue'
 import { useUserStore } from '@/store/modules/user'
@@ -69,10 +69,22 @@ import { usePermission } from '@/hooks/web/usePermission'
 import { Authority } from '@/components/Authority'
 import { PageWrapper } from '@/components/Page'
 
-const { changeRole, hasPermission } = usePermission()
-const userStore = useUserStore()
-const isSuper = computed(() => userStore.getRoleList.includes(RoleEnum.SUPER))
-const isTest = computed(() => userStore.getRoleList.includes(RoleEnum.TEST))
+export default defineComponent({
+  components: { Alert, PageWrapper, Space, CurrentPermissionMode, Divider, Authority },
+  setup() {
+    const { changeRole, hasPermission } = usePermission()
+    const userStore = useUserStore()
+
+    return {
+      userStore,
+      RoleEnum,
+      isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
+      isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
+      changeRole,
+      hasPermission
+    }
+  }
+})
 </script>
 <style lang="less" scoped>
 .demo {

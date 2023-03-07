@@ -5,8 +5,8 @@ import type {
   TransitionSetting,
   MultiTabsSetting,
   AppSizeType
-} from '/#/config'
-import type { BeforeMiniState } from '/#/store'
+} from '@/types/config'
+import type { BeforeMiniState } from '@/types/store'
 
 import { defineStore } from 'pinia'
 import { store } from '@/store'
@@ -84,6 +84,10 @@ export const useAppStore = defineStore({
       this.beforeMiniInfo = state
     },
 
+    setComponentSize(size: AppSizeType): void {
+      this.componentSize = size
+    },
+    
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config)
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig)
@@ -104,9 +108,6 @@ export const useAppStore = defineStore({
         this.setPageLoading(loading)
         clearTimeout(timeId)
       }
-    },
-    setComponentSize(size: AppSizeType): void {
-      this.componentSize = size
     }
   }
 })

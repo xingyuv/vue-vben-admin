@@ -10,7 +10,7 @@
         @reset="handleReset"
       >
         <template #selectA="{ model, field }">
-          <Select
+          <a-select
             :options="optionsA"
             mode="multiple"
             v-model:value="model[field]"
@@ -19,7 +19,7 @@
           />
         </template>
         <template #selectB="{ model, field }">
-          <Select
+          <a-select
             :options="optionsB"
             mode="multiple"
             v-model:value="model[field]"
@@ -55,22 +55,25 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { computed, unref, ref } from 'vue'
+<script lang="ts">
+import { computed, defineComponent, unref, ref } from 'vue'
 import { BasicForm, FormSchema, ApiSelect } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
+
 import { optionsListApi } from '@/api/demo/select'
 import { useDebounceFn } from '@vueuse/core'
 import { treeOptionsListApi } from '@/api/demo/tree'
 import { Select } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'
+import { areaRecord } from '@/api/demo/cascader'
 
 const valueSelectA = ref<string[]>([])
 const valueSelectB = ref<string[]>([])
 const options = ref<Recordable[]>([])
 for (let i = 1; i < 10; i++) options.value.push({ label: '选项' + i, value: `${i}` })
+
 const optionsA = computed(() => {
   return cloneDeep(unref(options)).map((op) => {
     op.disabled = unref(valueSelectB).indexOf(op.value) !== -1
@@ -83,6 +86,7 @@ const optionsB = computed(() => {
     return op
   })
 })
+
 const provincesOptions = [
   {
     id: 'guangdong',
@@ -133,6 +137,7 @@ const citiesOptionsData = {
     }
   ]
 }
+
 const schemas: FormSchema[] = [
   {
     field: 'divider-basic',
@@ -288,7 +293,10 @@ const schemas: FormSchema[] = [
           label: '选项2',
           value: '2'
         }
-      ]
+      ],
+      onChange: (e, v) => {
+        console.log('RadioButtonGroup====>:', e, v)
+      }
     }
   },
   {
@@ -354,15 +362,16 @@ const schemas: FormSchema[] = [
       params: {
         id: 1
       },
+
       resultField: 'list',
       // use name as label
       labelField: 'name',
       // use id as value
       valueField: 'id',
       // not request untill to select
-      immediate: false,
-      onChange: (e) => {
-        console.log('selected:', e)
+      immediate: true,
+      onChange: (e, v) => {
+        console.log('ApiSelect====>:', e, v)
       },
       // atfer request callback
       onOptionsChange: (options) => {
@@ -373,6 +382,31 @@ const schemas: FormSchema[] = [
       span: 8
     },
     defaultValue: '0'
+  },
+  {
+    field: 'field8',
+    component: 'ApiCascader',
+    label: '联动ApiCascader',
+    required: true,
+    colProps: {
+      span: 8
+    },
+    componentProps: {
+      api: areaRecord,
+      apiParamKey: 'parentCode',
+      dataField: 'data',
+      labelField: 'name',
+      valueField: 'code',
+      initFetchParams: {
+        parentCode: ''
+      },
+      isLeaf: (record) => {
+        return !(record.levelType < 3)
+      },
+      onChange: (e, ...v) => {
+        console.log('ApiCascader====>:', e, v)
+      }
+    }
   },
   {
     field: 'field31',
@@ -406,7 +440,10 @@ const schemas: FormSchema[] = [
     required: true,
     componentProps: {
       api: treeOptionsListApi,
-      resultField: 'list'
+      resultField: 'list',
+      onChange: (e, v) => {
+        console.log('ApiTreeSelect====>:', e, v)
+      }
     },
     colProps: {
       span: 8
@@ -450,7 +487,10 @@ const schemas: FormSchema[] = [
       labelField: 'name',
       // use id as value
       valueField: 'id',
-      isBtn: true
+      isBtn: true,
+      onChange: (e, v) => {
+        console.log('ApiRadioGroup====>:', e, v)
+      }
     },
     colProps: {
       span: 8
@@ -626,22 +666,38 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-const { createMessage } = useMessage()
-const keyword = ref<string>('')
-const searchParams = computed<Recordable>(() => {
-  return { keyword: unref(keyword) }
+
+export default defineComponent({
+  components: { BasicForm, CollapseContainer, PageWrapper, ApiSelect, ASelect: Select },
+  setup() {
+    const check = ref(null)
+    const { createMessage } = useMessage()
+    const keyword = ref<string>('')
+    const searchParams = computed<Recordable>(() => {
+      return { keyword: unref(keyword) }
+    })
+
+    function onSearch(value: string) {
+      keyword.value = value
+    }
+    return {
+      schemas,
+      optionsListApi,
+      optionsA,
+      optionsB,
+      valueSelectA,
+      valueSelectB,
+      onSearch: useDebounceFn(onSearch, 300),
+      searchParams,
+      handleReset: () => {
+        keyword.value = ''
+      },
+      handleSubmit: (values: any) => {
+        console.log('values', values)
+        createMessage.success('click search,values:' + JSON.stringify(values))
+      },
+      check
+    }
+  }
 })
-
-function search(value: string) {
-  keyword.value = value
-}
-const onSearch = useDebounceFn(search, 300)
-
-const handleReset = () => {
-  keyword.value = ''
-}
-const handleSubmit = (values: any) => {
-  console.log('values', values)
-  createMessage.success('click search,values:' + JSON.stringify(values))
-}
 </script>

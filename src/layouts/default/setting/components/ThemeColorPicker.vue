@@ -16,30 +16,42 @@
     </template>
   </div>
 </template>
-<script setup lang="ts" name="ThemeColorPicker">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { CheckOutlined } from '@ant-design/icons-vue'
+
 import { useDesign } from '@/hooks/web/useDesign'
+
 import { baseHandler } from '../handler'
 import { HandlerEnum } from '../enum'
 
-const props = defineProps({
-  colorList: {
-    type: Array as PropType<string[]>,
-    default: () => []
+export default defineComponent({
+  name: 'ThemeColorPicker',
+  components: { CheckOutlined },
+  props: {
+    colorList: {
+      type: Array as PropType<string[]>,
+      default: () => []
+    },
+    event: {
+      type: Number as PropType<HandlerEnum>
+    },
+    def: {
+      type: String
+    }
   },
-  event: {
-    type: Number as PropType<HandlerEnum>
-  },
-  def: {
-    type: String
+  setup(props) {
+    const { prefixCls } = useDesign('setting-theme-picker')
+
+    function handleClick(color: string) {
+      props.event && baseHandler(props.event, color)
+    }
+    return {
+      prefixCls,
+      handleClick
+    }
   }
 })
-
-const { prefixCls } = useDesign('setting-theme-picker')
-
-function handleClick(color: string) {
-  props.event && baseHandler(props.event, color)
-}
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-setting-theme-picker';

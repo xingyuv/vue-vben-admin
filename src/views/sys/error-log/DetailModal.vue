@@ -3,8 +3,8 @@
     <Description :data="info" @register="register" />
   </BasicModal>
 </template>
-<script setup lang="ts">
-import type { ErrorLogInfo } from '/#/store'
+<script lang="ts" setup>
+import type { ErrorLogInfo } from '@/types/store'
 import { BasicModal } from '@/components/Modal/index'
 import { Description, useDescription } from '@/components/Description/index'
 import { useI18n } from '@/hooks/web/useI18n'

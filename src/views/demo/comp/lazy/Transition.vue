@@ -11,10 +11,15 @@
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import TargetContent from './TargetContent.vue'
 import { LazyContainer } from '@/components/Container/index'
 import { PageWrapper } from '@/components/Page'
+
+export default defineComponent({
+  components: { LazyContainer, TargetContent, PageWrapper }
+})
 </script>
 <style lang="less">
 .lazy-base-demo {
@@ -42,12 +47,12 @@ import { PageWrapper } from '@/components/Page'
 }
 
 .custom-enter {
-  opacity: 0%;
+  opacity: 0;
   transform: scale(0.4) translate(100%);
 }
 
 .custom-enter-to {
-  opacity: 100%;
+  opacity: 100;
 }
 
 .custom-enter-active {
@@ -58,11 +63,11 @@ import { PageWrapper } from '@/components/Page'
 }
 
 .custom-leave {
-  opacity: 100%;
+  opacity: 100;
 }
 
 .custom-leave-to {
-  opacity: 0%;
+  opacity: 0;
   transform: scale(0.4) translate(-100%);
 }
 

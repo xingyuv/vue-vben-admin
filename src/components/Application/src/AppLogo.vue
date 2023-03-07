@@ -6,7 +6,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, unref } from 'vue'
 import { useGlobSetting } from '@/hooks/setting'
 import { useGo } from '@/hooks/web/usePage'
@@ -16,11 +16,17 @@ import { PageEnum } from '@/enums/pageEnum'
 import { useUserStore } from '@/store/modules/user'
 
 const props = defineProps({
-  // 当前父组件的主题
+  /**
+   * The theme of the current parent component
+   */
   theme: { type: String, validator: (v: string) => ['light', 'dark'].includes(v) },
-  // 是否显示标题
+  /**
+   * Whether to show title
+   */
   showTitle: { type: Boolean, default: true },
-  // 折叠菜单时也会显示标题
+  /**
+   * The title is also displayed when the menu is collapsed
+   */
   alwaysShowTitle: { type: Boolean }
 })
 

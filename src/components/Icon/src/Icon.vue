@@ -3,18 +3,17 @@
     :size="size"
     :name="getSvgIcon"
     v-if="isSvgIcon"
-    :class="[attrs.class, 'anticon']"
+    :class="[$attrs.class, 'anticon']"
     :spin="spin"
   />
   <span
     v-else
     ref="elRef"
-    :class="[attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']"
+    :class="[$attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']"
     :style="getWrapStyle"
   ></span>
 </template>
-<script setup lang="ts" name="Icon">
-import { useAttrs } from 'vue'
+<script lang="ts" setup name="Icon">
 import { ref, watch, onMounted, nextTick, unref, computed, CSSProperties } from 'vue'
 import SvgIcon from './SvgIcon.vue'
 import Iconify from '@purge-icons/generated'
@@ -36,7 +35,6 @@ const props = defineProps({
   spin: propTypes.bool.def(false),
   prefix: propTypes.string.def('')
 })
-const attrs = useAttrs()
 
 const elRef = ref<ElRef>(null)
 

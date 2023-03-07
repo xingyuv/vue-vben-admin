@@ -1,4 +1,4 @@
-export interface ListItemType {
+export interface ListItem {
   id: string
   avatar: string
   // 通知的标题内容
@@ -17,8 +17,8 @@ export interface ListItemType {
 export interface TabItem {
   key: string
   name: string
-  list: ListItemType[]
-  unreadlist?: ListItemType[]
+  list: ListItem[]
+  unreadlist?: ListItem[]
 }
 
 export const tabListData: TabItem[] = [

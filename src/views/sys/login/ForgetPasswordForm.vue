@@ -32,7 +32,7 @@
     </Form>
   </template>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref, computed, unref } from 'vue'
 import LoginFormTitle from './LoginFormTitle.vue'
 import { Form, Input, Button } from 'ant-design-vue'

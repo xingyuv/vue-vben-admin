@@ -15,6 +15,7 @@
                 display: index === 0 ? '' : 'none !important'
               }"
               :src="srcPrefix + img"
+              :fallback="fallback"
             />
           </template>
         </ImagePreviewGroup>
@@ -26,12 +27,13 @@
           :width="size"
           :style="{ marginLeft: index === 0 ? 0 : margin + 'px' }"
           :src="srcPrefix + img"
+          :fallback="fallback"
         />
       </template>
     </ImagePreviewGroup>
   </div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="TableImage">
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'

@@ -1,5 +1,6 @@
 const validColors = ['error', 'warning', 'success', ''] as const
 type ButtonColorType = (typeof validColors)[number]
+
 export const buttonProps = {
   color: {
     type: String as PropType<ButtonColorType>,

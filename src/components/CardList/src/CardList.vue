@@ -10,8 +10,8 @@
         :pagination="paginationProp"
       >
         <template #header>
-          <div class="flex justify-end space-x-2">
-            <slot name="header"></slot>
+          <div class="flex justify-end space-x-2"
+            ><slot name="header"></slot>
             <Tooltip>
               <template #title>
                 <div class="w-50">每行显示数量</div>
@@ -76,7 +76,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, onMounted, ref } from 'vue'
 import { EditOutlined, EllipsisOutlined, RedoOutlined, TableOutlined } from '@ant-design/icons-vue'
 import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from 'ant-design-vue'
@@ -152,17 +152,17 @@ const paginationProp = ref({
   pageSize,
   current: page,
   total,
-  showTotal: (total: number) => `总 ${total} 条`,
+  showTotal: (total) => `总 ${total} 条`,
   onChange: pageChange,
   onShowSizeChange: pageSizeChange
 })
 
-function pageChange(p: number, pz: number) {
+function pageChange(p, pz) {
   page.value = p
   pageSize.value = pz
   fetch()
 }
-function pageSizeChange(_current: number, size: number) {
+function pageSizeChange(_current, size) {
   pageSize.value = size
   fetch()
 }

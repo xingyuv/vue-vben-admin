@@ -11,13 +11,14 @@
     @change="handleChange"
   />
 </template>
-<script setup lang="ts" name="ApiTransfer">
-import { computed, watch, ref, unref, watchEffect, useAttrs } from 'vue'
+<script lang="ts" setup name="ApiTransfer">
+import { computed, watch, ref, unref, watchEffect } from 'vue'
 import { Transfer } from 'ant-design-vue'
 import { isFunction } from '@/utils/is'
 import { get, omit } from 'lodash-es'
 import { propTypes } from '@/utils/propTypes'
 import { TransferDirection, TransferItem } from 'ant-design-vue/lib/transfer'
+import { useAttrs } from '@/hooks/core/useAttrs'
 
 const props = defineProps({
   value: { type: Array as PropType<Array<string>> },

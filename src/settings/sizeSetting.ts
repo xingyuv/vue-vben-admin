@@ -1,5 +1,5 @@
 import type { DropMenu } from '../components/Dropdown'
-import type { SizeSetting, AppSizeType } from '/#/config'
+import type { SizeSetting, AppSizeType } from '@/types/config'
 // 'small' | 'middle' | 'large'
 export const APPSIZE: { [key: string]: AppSizeType } = {
   SMALL: 'small',

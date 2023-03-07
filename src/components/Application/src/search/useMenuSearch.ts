@@ -14,7 +14,7 @@ export interface SearchResult {
   icon?: string
 }
 
-// 翻译特殊字符
+// Translate special characters
 function transform(c: string) {
   const code: string[] = ['$', '(', ')', '*', '+', '.', '[', ']', '?', '\\', '^', '{', '}', '|']
   return code.includes(c) ? `\\${c}` : c
@@ -79,13 +79,13 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     return ret
   }
 
-  // 当鼠标移动到某一行时激活
+  // Activate when the mouse moves to a certain line
   function handleMouseenter(e: any) {
     const index = e.target.dataset.index
     activeIndex.value = Number(index)
   }
 
-  // 向上箭头键
+  // Arrow key up
   function handleUp() {
     if (!searchResult.value.length) return
     activeIndex.value--
@@ -95,7 +95,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     handleScroll()
   }
 
-  // 向下箭头键
+  // Arrow key down
   function handleDown() {
     if (!searchResult.value.length) return
     activeIndex.value++
@@ -105,7 +105,8 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     handleScroll()
   }
 
-  // 当键盘上下键移动到不可见的位置时，滚动条需要自动滚动
+  // When the keyboard up and down keys move to an invisible place
+  // the scroll bar needs to scroll automatically
   function handleScroll() {
     const refList = unref(refs)
     if (!refList || !Array.isArray(refList) || refList.length === 0 || !unref(scrollWrap)) {
@@ -131,7 +132,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     start()
   }
 
-  // 输入键盘事件
+  // enter keyboard event
   async function handleEnter() {
     if (!searchResult.value.length) {
       return
@@ -147,18 +148,18 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref<ElRef>, 
     go(to.path)
   }
 
-  // 近距离搜索模式
+  // close search modal
   function handleClose() {
     searchResult.value = []
     emit('close')
   }
 
-  // 回车搜索
+  // enter search
   onKeyStroke('Enter', handleEnter)
-  // 监控键盘箭头键
+  // Monitor keyboard arrow keys
   onKeyStroke('ArrowUp', handleUp)
   onKeyStroke('ArrowDown', handleDown)
-  // ESC 关闭
+  // esc close
   onKeyStroke('Escape', handleClose)
 
   return { handleSearch, searchResult, keyword, activeIndex, handleMouseenter, handleEnter }

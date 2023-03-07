@@ -8,7 +8,7 @@
     </CardList>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { CardList } from '@/components/CardList'
 import { Button } from '@/components/Button'
 import { PageWrapper } from '@/components/Page'

@@ -1,4 +1,4 @@
-import type { ErrorMessageMode } from '/#/axios'
+import type { ErrorMessageMode } from '@/types/axios'
 import { useMessage } from '@/hooks/web/useMessage'
 import { useI18n } from '@/hooks/web/useI18n'
 // import router from '@/router';

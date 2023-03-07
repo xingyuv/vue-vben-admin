@@ -3,6 +3,11 @@
     <router-link to="/feat/breadcrumb/flatDetail"> 进入平级详情页 </router-link>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { PageWrapper } from '@/components/Page'
+
+export default defineComponent({
+  components: { PageWrapper }
+})
 </script>

@@ -13,11 +13,12 @@
     </span>
   </Dropdown>
 </template>
-<script setup lang="ts">
-import type { AppSizeType } from '/#/config'
+<script lang="ts" setup>
+import type { AppSizeType } from '@/types/config'
 import type { DropMenu } from '@/components/Dropdown'
 import { ref, watchEffect, unref, computed } from 'vue'
 import { Dropdown } from '@/components/Dropdown'
+import { Icon } from '@/components/Icon'
 import { sizeList } from '@/settings/sizeSetting'
 import { useAppStore } from '@/store/modules/app'
 

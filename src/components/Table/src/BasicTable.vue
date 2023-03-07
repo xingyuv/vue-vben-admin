@@ -21,9 +21,9 @@
       :rowClassName="getRowClassName"
       v-show="getEmptyDataIsShowTable"
       @change="handleTableChange"
-      @resizeColumn="handleResizeColumn"
+      @resize-column="handleResizeColumn"
     >
-      <template #[item]="data" v-for="item in Object.keys(slots)" :key="item">
+      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
       <template #headerCell="{ column }">

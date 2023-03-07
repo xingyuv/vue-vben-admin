@@ -83,6 +83,6 @@ const getColumns = computed(() => {
       customRender: ({ record }) => record[SUMMARY_ROW_KEY]
     })
   }
-  return columns
+  return columns as any
 })
 </script>

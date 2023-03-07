@@ -1,6 +1,4 @@
 export default {
-  index: 'Index',
-  action: 'Action',
   okText: 'OK',
   closeText: 'Close',
   cancelText: 'Cancel',

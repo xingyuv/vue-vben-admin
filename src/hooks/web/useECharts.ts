@@ -15,7 +15,6 @@ export function useECharts(
   theme: 'light' | 'dark' | 'default' = 'default'
 ) {
   const { getDarkMode: getSysDarkMode } = useRootSetting()
-
   const { getCollapsed } = useMenuSetting()
 
   const getDarkMode = computed(() => {

@@ -77,6 +77,7 @@ export default defineComponent({
       if (isFunction(compProps)) {
         compProps = compProps({ text: val, record, column, index }) ?? {}
       }
+
       // 用临时变量存储 onChange方法 用于 handleChange方法 获取，并删除原始onChange, 防止存在两个 onChange
       compProps.onChangeTemp = compProps.onChange
       delete compProps.onChange
@@ -157,7 +158,7 @@ export default defineComponent({
     })
 
     watchEffect(() => {
-      // defaultValueRef.value = props.value
+      // defaultValueRef.value = props.value;
       currentValueRef.value = props.value
     })
 

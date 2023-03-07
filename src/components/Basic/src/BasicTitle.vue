@@ -4,7 +4,7 @@
     <BasicHelp :class="`${prefixCls}-help`" v-if="helpMessage" :text="helpMessage" />
   </span>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { useSlots, computed } from 'vue'
 import BasicHelp from './BasicHelp.vue'
 import { useDesign } from '@/hooks/web/useDesign'

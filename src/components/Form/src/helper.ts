@@ -1,4 +1,4 @@
-import type { Rule } from 'ant-design-vue/es/form'
+import type { ValidationRule } from 'ant-design-vue/lib/form/Form'
 import type { ComponentType } from './types/index'
 import { useI18n } from '@/hooks/web/useI18n'
 import { dateUtil } from '@/utils/dateUtil'
@@ -35,7 +35,11 @@ function genType() {
   return [...DATE_TYPE, 'RangePicker']
 }
 
-export function setComponentRuleType(rule: Rule, component: ComponentType, valueFormat: string) {
+export function setComponentRuleType(
+  rule: ValidationRule,
+  component: ComponentType,
+  valueFormat: string
+) {
   if (['DatePicker', 'MonthPicker', 'WeekPicker', 'TimePicker'].includes(component)) {
     rule.type = valueFormat ? 'string' : 'object'
   } else if (['RangePicker', 'Upload', 'CheckboxGroup', 'TimePicker'].includes(component)) {
@@ -48,7 +52,7 @@ export function setComponentRuleType(rule: Rule, component: ComponentType, value
 export function processDateValue(attr: Recordable, component: string) {
   const { valueFormat, value } = attr
   if (valueFormat) {
-    attr.value = isObject(value) ? dateUtil(value as unknown as Date).format(valueFormat) : value
+    attr.value = isObject(value) ? dateUtil(value as any).format(valueFormat) : value
   } else if (DATE_TYPE.includes(component) && value) {
     attr.value = dateUtil(attr.value)
   }

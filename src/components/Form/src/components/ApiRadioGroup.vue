@@ -13,7 +13,7 @@
     </template>
   </RadioGroup>
 </template>
-<script setup lang="ts" name="ApiRadioGroup">
+<script lang="ts" setup name="ApiRadioGroup">
 import { ref, watchEffect, computed, unref, watch } from 'vue'
 import { Radio } from 'ant-design-vue'
 import { isFunction } from '@/utils/is'

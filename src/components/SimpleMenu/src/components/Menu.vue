@@ -146,5 +146,5 @@ onMounted(() => {
 })
 </script>
 <style lang="less">
-@import './menu.less';
+@import url('./menu.less');
 </style>

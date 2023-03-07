@@ -65,7 +65,7 @@
     </Form>
   </template>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref, unref, computed } from 'vue'
 import LoginFormTitle from './LoginFormTitle.vue'
 import { Form, Input, Button, Checkbox } from 'ant-design-vue'
@@ -99,5 +99,6 @@ const getShow = computed(() => unref(getLoginState) === LoginStateEnum.REGISTER)
 async function handleRegister() {
   const data = await validForm()
   if (!data) return
+  console.log(data)
 }
 </script>

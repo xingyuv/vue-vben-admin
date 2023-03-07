@@ -3,7 +3,7 @@
     <PageHeader
       :ghost="ghost"
       :title="title"
-      v-bind="omit(attrs, 'class')"
+      v-bind="omit($attrs, 'class')"
       ref="headerRef"
       v-if="getShowHeader"
     >
@@ -13,7 +13,7 @@
         </template>
         <slot name="headerContent" v-else></slot>
       </template>
-      <template #[item]="data" v-for="item in getHeaderSlots">
+      <template v-for="(item, index) in getHeaderSlots" #[item]="data" :key="index">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </PageHeader>
@@ -33,7 +33,8 @@
   </div>
 </template>
 <script setup lang="ts" name="PageWrapper" inheritAttrs="false">
-import { computed, watch, ref, unref, CSSProperties, provide, useSlots, useAttrs } from 'vue'
+import { CSSProperties, PropType, provide } from 'vue'
+import { computed, watch, ref, unref, useAttrs, useSlots } from 'vue'
 import PageFooter from './PageFooter.vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'

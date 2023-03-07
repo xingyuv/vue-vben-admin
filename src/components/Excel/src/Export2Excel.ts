@@ -42,9 +42,7 @@ export function jsonToSheetXlsx<T = any>({
   }
 
   const worksheet = utils.json_to_sheet(arrData, json2sheetOpts)
-
   setColumnWidth(arrData, worksheet)
-
   /* add worksheet to workbook */
   const workbook: WorkBook = {
     SheetNames: [filename],

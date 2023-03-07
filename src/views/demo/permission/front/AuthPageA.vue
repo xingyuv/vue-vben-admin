@@ -1,6 +1,10 @@
 <template>
   <div class="m-10 auth-page">Super 角色可见</div>
 </template>
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({})
+</script>
 <style lang="less" scoped>
 .auth-page {
   display: flex;

@@ -8,13 +8,14 @@
     </template>
   </Tree>
 </template>
-<script setup lang="ts" name="ApiTree">
-import { computed, watch, ref, onMounted, unref, useAttrs, useSlots } from 'vue'
+<script lang="ts" setup name="ApiTree">
+import { computed, watch, ref, onMounted, unref, useSlots } from 'vue'
 import { Tree } from 'ant-design-vue'
 import { isArray, isFunction } from '@/utils/is'
 import { get } from 'lodash-es'
 import { propTypes } from '@/utils/propTypes'
 import { LoadingOutlined } from '@ant-design/icons-vue'
+import { useAttrs } from '@/hooks/core/useAttrs'
 
 const props = defineProps({
   api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },

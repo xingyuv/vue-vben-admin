@@ -10,9 +10,18 @@
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { StrengthMeter } from '@/components/StrengthMeter'
 import { PageWrapper } from '@/components/Page'
+
+export default defineComponent({
+  components: {
+    StrengthMeter,
+    PageWrapper
+  }
+})
 </script>
 <style lang="less" scoped>
 .demo-wrap {

@@ -5,7 +5,7 @@
     </div>
   </transition>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import Login from './Login.vue'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -27,6 +27,7 @@ const isBackMode = () => {
 onMounted(() => {
   // 记录当前的UserId
   userId.value = userStore.getUserInfo?.userId
+  console.log('Mounted', userStore.getUserInfo)
 })
 
 onBeforeUnmount(() => {

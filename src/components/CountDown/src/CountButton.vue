@@ -3,7 +3,7 @@
     {{ getButtonText }}
   </Button>
 </template>
-<script setup lang="ts" name="CountButton">
+<script lang="ts" setup name="CountButton">
 import { ref, watchEffect, computed, unref } from 'vue'
 import { Button } from 'ant-design-vue'
 import { useCountdown } from './useCountdown'

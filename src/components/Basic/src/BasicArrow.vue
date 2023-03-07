@@ -3,8 +3,9 @@
     <Icon icon="ion:chevron-forward" :style="$attrs.iconStyle" />
   </span>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed } from 'vue'
+import { Icon } from '@/components/Icon'
 import { useDesign } from '@/hooks/web/useDesign'
 
 const props = defineProps({

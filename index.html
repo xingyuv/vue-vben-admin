@@ -13,14 +13,14 @@
   </head>
   <body>
     <script>
-      ;(() => {
-        var htmlRoot = document.getElementById('htmlRoot')
-        var theme = window.localStorage.getItem('__APP__DARK__MODE__')
+      (() => {
+        var htmlRoot = document.getElementById('htmlRoot');
+        var theme = window.localStorage.getItem('__APP__DARK__MODE__');
         if (htmlRoot && theme) {
-          htmlRoot.setAttribute('data-theme', theme)
-          theme = htmlRoot = null
+          htmlRoot.setAttribute('data-theme', theme);
+          theme = htmlRoot = null;
         }
-      })()
+      })();
     </script>
     <div id="app">
       <style>

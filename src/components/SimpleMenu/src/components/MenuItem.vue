@@ -17,8 +17,7 @@
 </template>
 
 <script setup lang="ts" name="MenuItem">
-import { useSlots } from 'vue'
-import { ref, computed, unref, getCurrentInstance, watch } from 'vue'
+import { ref, PropType, useSlots, computed, unref, getCurrentInstance, watch } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'
 import { useMenuItem } from './useMenu'

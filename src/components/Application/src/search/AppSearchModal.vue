@@ -56,10 +56,13 @@
     </transition>
   </Teleport>
 </template>
-<script setup lang="ts">
+
+<script lang="ts" setup>
 import { computed, unref, ref, watch, nextTick } from 'vue'
 import { SearchOutlined } from '@ant-design/icons-vue'
 import AppSearchFooter from './AppSearchFooter.vue'
+import Icon from '@/components/Icon'
+// @ts-ignore
 import vClickOutside from '@/directives/clickOutside'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useRefs } from '@/hooks/core/useRefs'
@@ -156,7 +159,7 @@ function handleClose() {
 
       &__item {
         &-enter {
-          opacity: 0% !important;
+          opacity: 0 !important;
         }
       }
     }
@@ -242,7 +245,7 @@ function handleClose() {
         background-color: @primary-color;
 
         .@{prefix-cls}-list__item-enter {
-          opacity: 100%;
+          opacity: 1;
         }
       }
 
@@ -256,7 +259,7 @@ function handleClose() {
 
       &-enter {
         width: 30px;
-        opacity: 0%;
+        opacity: 0;
       }
     }
   }

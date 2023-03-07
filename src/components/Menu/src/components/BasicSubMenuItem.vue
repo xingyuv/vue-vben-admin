@@ -1,5 +1,5 @@
 <template>
-  <BasicMenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" />
+  <BasicMenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" :class="prefixCls" />
   <SubMenu
     v-if="menuHasChildren(item) && getShowMenu"
     :class="[theme]"
@@ -18,12 +18,16 @@
 <script setup lang="ts" name="BasicSubMenuItem">
 import type { Menu as MenuType } from '@/router/types'
 import { computed } from 'vue'
-import { SubMenu } from 'ant-design-vue'
+import { Menu } from 'ant-design-vue'
+import { useDesign } from '@/hooks/web/useDesign'
 import { itemProps } from '../props'
 import BasicMenuItem from './BasicMenuItem.vue'
 import MenuItemContent from './MenuItemContent.vue'
 
+const SubMenu = Menu.SubMenu
 const props = defineProps(itemProps)
+
+const { prefixCls } = useDesign('basic-menu-item')
 
 const getShowMenu = computed(() => !props.item.meta?.hideMenu)
 function menuHasChildren(menuTreeItem: MenuType): boolean {

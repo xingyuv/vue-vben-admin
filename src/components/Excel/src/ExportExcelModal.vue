@@ -1,6 +1,6 @@
 <template>
   <BasicModal
-    v-bind="attrs"
+    v-bind="$attrs"
     :title="t('component.excel.exportModalTitle')"
     @ok="handleOk"
     @register="registerModal"
@@ -13,13 +13,12 @@
     />
   </BasicModal>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { ExportModalResult } from './typing'
 import { BasicModal, useModalInner } from '@/components/Modal'
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { useI18n } from '@/hooks/web/useI18n'
-import { useAttrs } from 'vue'
-const attrs = useAttrs()
+
 const emit = defineEmits(['success', 'register'])
 const { t } = useI18n()
 const schemas: FormSchema[] = [

@@ -22,45 +22,58 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { BasicTable, useTable } from '@/components/Table'
 import { getBasicColumns, getFormConfig } from './tableData'
+
 import { demoListApi } from '@/api/demo/table'
 
-const [registerTable] = useTable({
-  api: demoListApi,
-  columns: getBasicColumns(),
-  useSearchForm: false,
-  formConfig: getFormConfig(),
-  showTableSetting: false,
-  tableSetting: { fullScreen: true },
-  showIndexColumn: false,
-  isCanResizeParent: true,
-  rowKey: 'id'
-})
+export default defineComponent({
+  components: { BasicTable },
+  setup(_) {
+    const [registerTable] = useTable({
+      api: demoListApi,
+      columns: getBasicColumns(),
+      useSearchForm: false,
+      formConfig: getFormConfig(),
+      showTableSetting: false,
+      tableSetting: { fullScreen: true },
+      showIndexColumn: false,
+      isCanResizeParent: true,
+      rowKey: 'id'
+    })
 
-const [registerTable1] = useTable({
-  api: demoListApi,
-  columns: getBasicColumns(),
-  formConfig: getFormConfig(),
-  showTableSetting: false,
-  tableSetting: { fullScreen: true },
-  showIndexColumn: false,
-  isCanResizeParent: true,
-  useSearchForm: false,
-  rowKey: 'id'
-})
+    const [registerTable1] = useTable({
+      api: demoListApi,
+      columns: getBasicColumns(),
+      formConfig: getFormConfig(),
+      showTableSetting: false,
+      tableSetting: { fullScreen: true },
+      showIndexColumn: false,
+      isCanResizeParent: true,
+      useSearchForm: false,
+      rowKey: 'id'
+    })
 
-const [registerTable2] = useTable({
-  api: demoListApi,
-  columns: getBasicColumns(),
-  formConfig: getFormConfig(),
-  showTableSetting: false,
-  tableSetting: { fullScreen: true },
-  showIndexColumn: false,
-  isCanResizeParent: true,
-  useSearchForm: false,
-  pagination: false,
-  rowKey: 'id'
+    const [registerTable2] = useTable({
+      api: demoListApi,
+      columns: getBasicColumns(),
+      formConfig: getFormConfig(),
+      showTableSetting: false,
+      tableSetting: { fullScreen: true },
+      showIndexColumn: false,
+      isCanResizeParent: true,
+      useSearchForm: false,
+      pagination: false,
+      rowKey: 'id'
+    })
+
+    return {
+      registerTable,
+      registerTable1,
+      registerTable2
+    }
+  }
 })
 </script>

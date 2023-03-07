@@ -24,7 +24,7 @@
     </template>
   </div>
 </template>
-<script setup lang="ts" name="BasicDrawerFooter">
+<script lang="ts" setup name="BasicDrawerFooter">
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'

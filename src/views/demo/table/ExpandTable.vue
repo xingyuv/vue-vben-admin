@@ -33,32 +33,45 @@
     </BasicTable>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { BasicTable, useTable, TableAction } from '@/components/Table'
 import { PageWrapper } from '@/components/Page'
 import { getBasicColumns } from './tableData'
+
 import { demoListApi } from '@/api/demo/table'
 
-const [registerTable] = useTable({
-  api: demoListApi,
-  title: '可展开表格演示',
-  titleHelpMessage: ['已启用expandRowByClick', '已启用stopButtonPropagation'],
-  columns: getBasicColumns(),
-  rowKey: 'id',
-  canResize: false,
-  expandRowByClick: true,
-  actionColumn: {
-    width: 160,
-    title: 'Action',
-    dataIndex: 'action',
-    fixed: 'right'
-    // slots: { customRender: 'action' },
+export default defineComponent({
+  components: { BasicTable, TableAction, PageWrapper },
+  setup() {
+    const [registerTable] = useTable({
+      api: demoListApi,
+      title: '可展开表格演示',
+      titleHelpMessage: ['已启用expandRowByClick', '已启用stopButtonPropagation'],
+      columns: getBasicColumns(),
+      rowKey: 'id',
+      canResize: false,
+      expandRowByClick: true,
+      actionColumn: {
+        width: 160,
+        title: 'Action',
+        dataIndex: 'action',
+        fixed: 'right'
+        // slots: { customRender: 'action' },
+      }
+    })
+    function handleDelete(record: Recordable) {
+      console.log('点击了删除', record)
+    }
+    function handleOpen(record: Recordable) {
+      console.log('点击了启用', record)
+    }
+
+    return {
+      registerTable,
+      handleDelete,
+      handleOpen
+    }
   }
 })
-function handleDelete(record: Recordable) {
-  console.log('点击了删除', record)
-}
-function handleOpen(record: Recordable) {
-  console.log('点击了启用', record)
-}
 </script>

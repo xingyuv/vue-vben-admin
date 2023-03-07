@@ -7,18 +7,31 @@
     </BasicTable>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { BasicTable } from '@/components/Table'
 import { aoaToSheetXlsx } from '@/components/Excel'
 import { arrHeader, arrData, columns, data } from './data'
 import { PageWrapper } from '@/components/Page'
 
-function aoaToExcel() {
-  // 保证data顺序与header一致
-  aoaToSheetXlsx({
-    data: arrData,
-    header: arrHeader,
-    filename: '二维数组方式导出excel.xlsx'
-  })
-}
+export default defineComponent({
+  components: { BasicTable, PageWrapper },
+  setup() {
+    function aoaToExcel() {
+      // 保证data顺序与header一致
+      aoaToSheetXlsx({
+        data: arrData,
+        header: arrHeader,
+        filename: '二维数组方式导出excel.xlsx'
+      })
+    }
+
+    return {
+      aoaToExcel,
+      columns,
+      data
+    }
+  }
+})
 </script>

@@ -10,12 +10,12 @@
     </template>
 
     <div :class="`${prefixCls}__content`">
-      <List>
-        <Row :gutter="16">
-          <template v-for="item in cardList" :key="item.title">
-            <Col :span="6">
-              <ListItem>
-                <Card :hoverable="true" :class="`${prefixCls}__card`">
+      <a-list>
+        <a-row :gutter="16">
+          <template v-for="item in list" :key="item.title">
+            <a-col :span="6">
+              <a-list-item>
+                <a-card :hoverable="true" :class="`${prefixCls}__card`">
                   <div :class="`${prefixCls}__card-title`">
                     <Icon class="icon" v-if="item.icon" :icon="item.icon" :color="item.color" />
                     {{ item.title }}
@@ -23,24 +23,39 @@
                   <div :class="`${prefixCls}__card-detail`">
                     基于Vue Next, TypeScript, Ant Design Vue实现的一套完整的企业级后台管理系统
                   </div>
-                </Card>
-              </ListItem>
-            </Col>
+                </a-card>
+              </a-list-item>
+            </a-col>
           </template>
-        </Row>
-      </List>
+        </a-row>
+      </a-list>
     </div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import Icon from '@/components/Icon/index'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
 import { Card, Row, Col, List } from 'ant-design-vue'
 
-const ListItem = List.Item
-
-const prefixCls = ref('list-card')
+export default defineComponent({
+  components: {
+    Icon,
+    PageWrapper,
+    [Card.name]: Card,
+    [List.name]: List,
+    [List.Item.name]: List.Item,
+    [Row.name]: Row,
+    [Col.name]: Col
+  },
+  setup() {
+    return {
+      prefixCls: 'list-card',
+      list: cardList
+    }
+  }
+})
 </script>
 <style lang="less" scoped>
 .list-card {

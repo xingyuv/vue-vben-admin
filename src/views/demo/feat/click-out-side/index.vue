@@ -7,19 +7,25 @@
     </ClickOutSide>
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { ClickOutSide } from '@/components/ClickOutSide'
 import { PageWrapper } from '@/components/Page'
 
-const text = ref('Click')
-function handleClickOutside() {
-  text.value = 'Click Out Side'
-}
+export default defineComponent({
+  components: { ClickOutSide, PageWrapper },
+  setup() {
+    const text = ref('Click')
+    function handleClickOutside() {
+      text.value = 'Click Out Side'
+    }
 
-function innerClick() {
-  text.value = 'Click Inner'
-}
+    function innerClick() {
+      text.value = 'Click Inner'
+    }
+    return { innerClick, handleClickOutside, text }
+  }
+})
 </script>
 
 <style lang="less" scoped>

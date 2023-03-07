@@ -1,11 +1,11 @@
 <template>
   <List :class="prefixCls">
-    <Row :gutter="16">
-      <template v-for="item in projectList" :key="item.title">
-        <Col :span="6">
+    <a-row :gutter="16">
+      <template v-for="item in list" :key="item.title">
+        <a-col :span="6">
           <ListItem>
             <Card :hoverable="true" :class="`${prefixCls}__card`">
-              <img src="@/assets/images/demo.png" />
+              <img :src="demoImg" />
               <div :class="`${prefixCls}__card-title`">
                 {{ item.title }}
               </div>
@@ -14,22 +14,36 @@
               </div>
             </Card>
           </ListItem>
-        </Col>
+        </a-col>
       </template>
-    </Row>
+    </a-row>
   </List>
 </template>
-<script setup lang="ts">
-import { List, ListItem, Card, Row, Col } from 'ant-design-vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import { List, Card, Row, Col } from 'ant-design-vue'
+import demoImg from '@/assets/images/demo.png'
 import { projectList } from './data'
-import { useDesign } from '@/hooks/web/useDesign'
 
-const { prefixCls } = useDesign('account-center-project')
+export default defineComponent({
+  components: {
+    List,
+    ListItem: List.Item,
+    Card,
+    [Row.name]: Row,
+    [Col.name]: Col
+  },
+  setup() {
+    return {
+      prefixCls: 'account-center-project',
+      list: projectList,
+      demoImg
+    }
+  }
+})
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-account-center-project';
-
-.@{prefix-cls} {
+.account-center-project {
   &__card {
     width: 100%;
 

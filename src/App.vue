@@ -6,7 +6,8 @@
   </ConfigProvider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { ConfigProvider } from 'ant-design-vue'
 import { AppProvider } from '@/components/Application'
 import { useTitle } from '@/hooks/web/useTitle'
@@ -14,7 +15,6 @@ import { useLocale } from '@/locales/useLocale'
 import { useAppStore } from '@/store/modules/app'
 
 import 'dayjs/locale/zh-cn'
-import { computed } from 'vue'
 // support Multi-language
 const { getAntdLocale } = useLocale()
 

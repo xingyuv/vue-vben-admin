@@ -149,7 +149,7 @@ export function useDataSource(
   function updateTableDataRecord(
     rowKey: string | number,
     record: Recordable
-  ): Recordable[] | undefined {
+  ): Recordable | undefined {
     const row = findTableDataRecord(rowKey)
 
     if (row) {
@@ -165,6 +165,7 @@ export function useDataSource(
     const rowKeyName = unref(getRowKey)
     if (!rowKeyName) return
     const rowKeys = !Array.isArray(rowKey) ? [rowKey] : rowKey
+
     function deleteRow(data, key) {
       const row: { index: number; data: [] } = findRow(data, key)
       if (row === null || row.index === -1) {
@@ -348,7 +349,7 @@ export function useDataSource(
   }
 
   function setTableData<T = Recordable>(values: T[]) {
-    dataSourceRef.value = values as Recordable<any>[]
+    dataSourceRef.value = values
   }
 
   function getDataSource<T = Recordable>() {

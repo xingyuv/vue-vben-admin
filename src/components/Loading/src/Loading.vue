@@ -8,7 +8,7 @@
     <Spin v-bind="$attrs" :tip="tip" :size="size" :spinning="loading" />
   </section>
 </template>
-<script setup lang="ts" name="Loading">
+<script lang="ts" setup name="Loading">
 import { Spin } from 'ant-design-vue'
 import { SizeEnum } from '@/enums/sizeEnum'
 

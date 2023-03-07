@@ -1,5 +1,5 @@
 <script lang="tsx">
-import type { CSSProperties } from 'vue'
+import type { PropType, CSSProperties } from 'vue'
 
 import { computed, defineComponent, unref, toRef } from 'vue'
 import { BasicMenu } from '@/components/Menu'
@@ -140,6 +140,7 @@ export default defineComponent({
 
     function renderMenu() {
       const { menus, ...menuProps } = unref(getCommonProps)
+      // console.log(menus);
       if (!menus || !menus.length) return null
       return !props.isHorizontal ? (
         <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />

@@ -3,12 +3,13 @@
     {{ value }}
   </span>
 </template>
-<script setup lang="ts" name="CountTo">
+<script lang="ts" setup name="CountTo">
 import { ref, computed, watchEffect, unref, onMounted, watch } from 'vue'
 import { useTransition, TransitionPresets } from '@vueuse/core'
 import { isNumber } from '@/utils/is'
 
 const emit = defineEmits(['onStarted', 'onFinished'])
+
 const props = defineProps({
   startVal: { type: Number, default: 0 },
   endVal: { type: Number, default: 2021 },
@@ -99,5 +100,6 @@ function formatNumber(num: number | string) {
   }
   return prefix + x1 + x2 + suffix
 }
+
 defineExpose({ reset })
 </script>

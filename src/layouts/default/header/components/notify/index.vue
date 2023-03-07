@@ -22,34 +22,45 @@
     </Popover>
   </div>
 </template>
-<script setup lang="ts">
-import { computed, ref } from 'vue'
-import { Popover, Tabs, Badge, TabPane } from 'ant-design-vue'
+<script lang="ts">
+import { computed, defineComponent, ref } from 'vue'
+import { Popover, Tabs, Badge } from 'ant-design-vue'
 import { BellOutlined } from '@ant-design/icons-vue'
-import { tabListData, ListItemType } from './data'
+import { tabListData, ListItem } from './data'
 import NoticeList from './NoticeList.vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { useMessage } from '@/hooks/web/useMessage'
 
-const { prefixCls } = useDesign('header-notify')
-const { createMessage } = useMessage()
-const listData = ref(tabListData)
+export default defineComponent({
+  components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },
+  setup() {
+    const { prefixCls } = useDesign('header-notify')
+    const { createMessage } = useMessage()
+    const listData = ref(tabListData)
 
-const numberStyle = {}
+    const count = computed(() => {
+      let count = 0
+      for (let i = 0; i < tabListData.length; i++) {
+        count += tabListData[i].list.length
+      }
+      return count
+    })
 
-const count = computed(() => {
-  let count = 0
-  for (let i = 0; i < tabListData.length; i++) {
-    count += tabListData[i].list.length
+    function onNoticeClick(record: ListItem) {
+      createMessage.success('你点击了通知，ID=' + record.id)
+      // 可以直接将其标记为已读（为标题添加删除线）,此处演示的代码会切换删除线状态
+      record.titleDelete = !record.titleDelete
+    }
+
+    return {
+      prefixCls,
+      listData,
+      count,
+      onNoticeClick,
+      numberStyle: {}
+    }
   }
-  return count
 })
-
-function onNoticeClick(record: ListItemType) {
-  createMessage.success('你点击了通知，ID=' + record.id)
-  // 可以直接将其标记为已读（为标题添加删除线）,此处演示的代码会切换删除线状态
-  record.titleDelete = !record.titleDelete
-}
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-header-notify';

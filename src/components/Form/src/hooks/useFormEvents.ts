@@ -126,7 +126,7 @@ export function useFormEvents({
       fieldList = [fields]
     }
     for (const field of fieldList) {
-      _removeSchemaByField(field, schemaList)
+      _removeSchemaByFeild(field, schemaList)
     }
     schemaRef.value = schemaList
   }
@@ -134,7 +134,7 @@ export function useFormEvents({
   /**
    * @description: Delete based on field name
    */
-  function _removeSchemaByField(field: string, schemaList: FormSchema[]): void {
+  function _removeSchemaByFeild(field: string, schemaList: FormSchema[]): void {
     if (isString(field)) {
       const index = schemaList.findIndex((schema) => schema.field === field)
       if (index !== -1) {
@@ -155,9 +155,7 @@ export function useFormEvents({
     const schemaList: FormSchema[] = cloneDeep(unref(getSchema))
 
     const index = schemaList.findIndex((schema) => schema.field === prefixField)
-
     const _schemaList = isObject(schema) ? [schema as FormSchema] : (schema as FormSchema[])
-
     if (!prefixField || index === -1 || first) {
       first ? schemaList.unshift(..._schemaList) : schemaList.push(..._schemaList)
       schemaRef.value = schemaList
@@ -217,7 +215,9 @@ export function useFormEvents({
     unref(getSchema).forEach((val) => {
       let _val
       updateData.forEach((item) => {
-        _val = item
+        if (val.field === item.field) {
+          _val = item
+        }
       })
       if (_val !== undefined && val.field === _val.field) {
         const newSchema = deepMerge(val, _val)
@@ -269,7 +269,7 @@ export function useFormEvents({
    */
   function itemIsDateType(key: string) {
     return unref(getSchema).some((item) => {
-      return item.field === key ? dateItemType.includes(item.component as unknown as string) : false
+      return item.field === key ? dateItemType.includes(item.component) : false
     })
   }
 
@@ -306,6 +306,9 @@ export function useFormEvents({
       const res = handleFormValues(values)
       emit('submit', res)
     } catch (error: any) {
+      if (error?.outOfDate === false && error?.errorFields) {
+        return
+      }
       throw new Error(error)
     }
   }

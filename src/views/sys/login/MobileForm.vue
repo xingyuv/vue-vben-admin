@@ -30,7 +30,7 @@
     </Form>
   </template>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { reactive, ref, computed, unref } from 'vue'
 import { Form, Input, Button } from 'ant-design-vue'
 import { CountdownInput } from '@/components/CountDown'
@@ -58,5 +58,6 @@ const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE)
 async function handleLogin() {
   const data = await validForm()
   if (!data) return
+  console.log(data)
 }
 </script>

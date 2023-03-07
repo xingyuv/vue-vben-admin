@@ -3,11 +3,11 @@
     <slot></slot>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { onClickOutside } from '@vueuse/core'
 const emit = defineEmits(['mounted', 'clickOutside'])
-const wrap = ref()
+const wrap = ref<ElRef>(null)
 
 onClickOutside(wrap, () => {
   emit('clickOutside')

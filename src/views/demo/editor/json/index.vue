@@ -1,46 +1,98 @@
 <template>
-  <PageWrapper>
-    <XTable ref="xGrid" @register="registerTable" />
+  <PageWrapper title="代码编辑器组件示例" contentFullHeight fixedHeight contentBackground>
+    <template #extra>
+      <a-space>
+        <a-button @click="showData" type="primary">获取数据</a-button>
+        <RadioGroup button-style="solid" v-model:value="modeValue" @change="handleModeChange">
+          <RadioButton value="application/json"> json数据 </RadioButton>
+          <RadioButton value="htmlmixed"> html代码 </RadioButton>
+          <RadioButton value="javascript"> javascript代码 </RadioButton>
+        </RadioGroup>
+      </a-space>
+    </template>
+    <CodeEditor v-model:value="value" :mode="modeValue" />
   </PageWrapper>
 </template>
-<script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { useXTable, XTable } from '@/components/XTable'
-import { useCrudSchemas, VxeCrudSchema } from '@/hooks/web/useCrudSchemas'
+<script lang="ts">
+import { defineComponent, ref, unref, h } from 'vue'
+import { CodeEditor, JsonPreview, MODE } from '@/components/CodeEditor'
+import { PageWrapper } from '@/components/Page'
+import { Radio, Space, Modal } from 'ant-design-vue'
 
-const xGrid = ref()
+const jsonData =
+  '{"name":"BeJson","url":"http://www.xxx.com","page":88,"isNonProfit":true,"address":{"street":"科技园路.","city":"江苏苏州","country":"中国"},"links":[{"name":"Google","url":"http://www.xxx.com"},{"name":"Baidu","url":"http://www.xxx.com"},{"name":"SoSo","url":"http://www.xxx.com"}]}'
 
-const crudSchema = reactive<VxeCrudSchema>({
-  columns: [
-    { field: 'id', title: 'userId' },
-    { field: 'name', title: '名称', search: true },
-    {
-      field: 'desc',
-      title: '备注'
+const jsData = `
+      (() => {
+        var htmlRoot = document.getElementById('htmlRoot');
+        var theme = window.localStorage.getItem('__APP__DARK__MODE__');
+        if (htmlRoot && theme) {
+          htmlRoot.setAttribute('data-theme', theme);
+          theme = htmlRoot = null;
+        }
+      })();
+  `
+
+const htmlData = `
+     <!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
+    />
+    <title><%= title %></title>
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div id="app">
+    </div>
+  </body>
+</html>
+  `
+export default defineComponent({
+  components: {
+    CodeEditor,
+    PageWrapper,
+    RadioButton: Radio.Button,
+    RadioGroup: Radio.Group,
+    ASpace: Space
+  },
+  setup() {
+    const modeValue = ref<MODE>(MODE.JSON)
+    const value = ref(jsonData)
+
+    function handleModeChange(e) {
+      const mode = e.target.value
+      if (mode === MODE.JSON) {
+        value.value = jsonData
+        return
+      }
+      if (mode === MODE.HTML) {
+        value.value = htmlData
+        return
+      }
+      if (mode === MODE.JS) {
+        value.value = jsData
+        return
+      }
     }
-  ]
-})
-const data = [
-  { id: 10001, name: 'Test1', desc: 'T1' },
-  { id: 10002, name: 'Test2', desc: 'T11' },
-  { id: 10003, name: 'Test3', desc: 'T111' },
-  { id: 10004, name: 'Test4', desc: 'T1111' },
-  { id: 10005, name: 'Test5', desc: 'T11112' },
-  { id: 10006, name: 'Test6', desc: 'T111123' },
-  { id: 10007, name: 'Test7', desc: 'T1111234' },
-  { id: 10008, name: 'Test8', desc: 'T11112345' },
-  { id: 10009, name: 'Test9', desc: 'T111123456' },
-  { id: 10010, name: 'Test10', desc: 'T1111234567' },
-  { id: 10011, name: 'Test11', desc: 'T11112345678' },
-  { id: 10012, name: 'Test12', desc: 'T111123456789' },
-  { id: 10013, name: 'Test13', desc: 'T1111234567890' },
-  { id: 10014, name: 'Test14', desc: 'T11112345678901' }
-]
 
-const { allSchemas } = useCrudSchemas(crudSchema)
+    function showData() {
+      if (unref(modeValue) === 'application/json') {
+        Modal.info({
+          title: '编辑器当前值',
+          content: h(JsonPreview, { data: JSON.parse(value.value) })
+        })
+      } else {
+        Modal.info({ title: '编辑器当前值', content: value.value })
+      }
+    }
 
-const [registerTable] = useXTable({
-  allSchemas: allSchemas,
-  data: data
+    return { value, modeValue, handleModeChange, showData }
+  }
 })
 </script>

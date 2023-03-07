@@ -4,14 +4,14 @@
 <template>
   <RadioGroup v-bind="attrs" v-model:value="state" button-style="solid">
     <template v-for="item in getOptions" :key="`${item.value}`">
-      <RadioButton :value="item.value" :disabled="item.disabled">
+      <RadioButton :value="item.value" :disabled="item.disabled" @click="handleClick(item)">
         {{ item.label }}
       </RadioButton>
     </template>
   </RadioGroup>
 </template>
-<script setup lang="ts" name="RadioButtonGroup">
-import { computed } from 'vue'
+<script lang="ts" setup name="RadioButtonGroup">
+import { PropType, computed, ref } from 'vue'
 import { Radio } from 'ant-design-vue'
 import { isString } from '@/utils/is'
 import { useRuleFormItem } from '@/hooks/component/useFormItem'
@@ -22,6 +22,8 @@ const RadioGroup = Radio.Group
 
 type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean }
 type RadioItem = string | OptionsItem
+
+const emits = defineEmits(['change'])
 
 const props = defineProps({
   value: {
@@ -34,8 +36,10 @@ const props = defineProps({
 })
 
 const attrs = useAttrs()
+
+const emitData = ref<any[]>([])
 // Embedded in the form, just use the hook binding to perform form verification
-const [state] = useRuleFormItem(props)
+const [state] = useRuleFormItem(props, 'value', 'change', emitData)
 
 // Processing options value
 const getOptions = computed((): OptionsItem[] => {
@@ -47,4 +51,9 @@ const getOptions = computed((): OptionsItem[] => {
 
   return options.map((item) => ({ label: item, value: item })) as OptionsItem[]
 })
+
+function handleClick(...args) {
+  emitData.value = args
+  emits('change', emitData.value)
+}
 </script>

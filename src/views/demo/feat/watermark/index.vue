@@ -11,10 +11,22 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import { CollapseContainer } from '@/components/Container/index'
 import { useWatermark } from '@/hooks/web/useWatermark'
 import { PageWrapper } from '@/components/Page'
 
-const { setWatermark, clear } = useWatermark()
+export default defineComponent({
+  components: { CollapseContainer, PageWrapper },
+  setup() {
+    const areaRef = ref<Nullable<HTMLElement>>(null)
+    const { setWatermark, clear } = useWatermark()
+    return {
+      setWatermark,
+      clear,
+      areaRef
+    }
+  }
+})
 </script>

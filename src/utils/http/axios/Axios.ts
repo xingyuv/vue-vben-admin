@@ -1,5 +1,11 @@
-import type { AxiosRequestConfig, AxiosInstance, AxiosResponse, AxiosError } from 'axios'
-import type { RequestOptions, Result, UploadFileParams } from '/#/axios'
+import type {
+  AxiosInstance,
+  AxiosResponse,
+  AxiosError,
+  InternalAxiosRequestConfig,
+  AxiosRequestConfig
+} from 'axios'
+import type { RequestOptions, Result, UploadFileParams } from '@/types/axios'
 import type { CreateAxiosOptions } from './axiosTransform'
 import axios from 'axios'
 import qs from 'qs'
@@ -12,7 +18,7 @@ import { RequestEnum } from '@/enums/httpEnum'
 export * from './axiosTransform'
 
 /**
- * @description:  axios 模块
+ * @description:  axios module
  */
 export class VAxios {
   private axiosInstance: AxiosInstance
@@ -25,7 +31,7 @@ export class VAxios {
   }
 
   /**
-   * @description:  创建 axios 实例
+   * @description:  Create axios instance
    */
   private createAxios(config: CreateAxiosOptions): void {
     this.axiosInstance = axios.create(config)
@@ -41,7 +47,7 @@ export class VAxios {
   }
 
   /**
-   * @description: 重新配置 axios
+   * @description: Reconfigure axios
    */
   configAxios(config: CreateAxiosOptions) {
     if (!this.axiosInstance) {
@@ -51,7 +57,7 @@ export class VAxios {
   }
 
   /**
-   * @description: 设置通用标题
+   * @description: Set general header
    */
   setHeader(headers: any): void {
     if (!this.axiosInstance) {
@@ -77,9 +83,9 @@ export class VAxios {
 
     const axiosCanceler = new AxiosCanceler()
 
-    // 请求拦截器配置处理
-    this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-      // 如果开启取消重复请求，则禁止取消重复请求
+    // Request interceptor configuration processing
+    this.axiosInstance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+      // If cancel repeat request is turned on, then cancel repeat request is prohibited
       // @ts-ignore
       const { ignoreCancelToken } = config.requestOptions
       const ignoreCancel =
@@ -94,12 +100,12 @@ export class VAxios {
       return config
     }, undefined)
 
-    // 请求拦截器错误捕获
+    // Request interceptor error capture
     requestInterceptorsCatch &&
       isFunction(requestInterceptorsCatch) &&
       this.axiosInstance.interceptors.request.use(undefined, requestInterceptorsCatch)
 
-    // 响应结果拦截器处理
+    // Response result interceptor processing
     this.axiosInstance.interceptors.response.use((res: AxiosResponse<any>) => {
       res && axiosCanceler.removePending(res.config)
       if (responseInterceptors && isFunction(responseInterceptors)) {
@@ -108,7 +114,7 @@ export class VAxios {
       return res
     }, undefined)
 
-    // 响应结果拦截器错误捕获
+    // Response result interceptor error capture
     responseInterceptorsCatch &&
       isFunction(responseInterceptorsCatch) &&
       this.axiosInstance.interceptors.response.use(undefined, (error) => {
@@ -118,9 +124,9 @@ export class VAxios {
   }
 
   /**
-   * @description:  文件上传
+   * @description:  File Upload
    */
-  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
+  uploadFile<T = any>(config: InternalAxiosRequestConfig, params: UploadFileParams) {
     const formData = new window.FormData()
     const customFilename = params.name || 'file'
 
@@ -156,7 +162,7 @@ export class VAxios {
     })
   }
 
-  // 支持表单数据
+  // support form-data
   supportFormData(config: AxiosRequestConfig) {
     const headers = config.headers || this.options.headers
     const contentType = headers?.['Content-Type'] || headers?.['content-type']
@@ -193,6 +199,10 @@ export class VAxios {
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
     let conf: CreateAxiosOptions = cloneDeep(config)
+    // cancelToken 如果被深拷贝，会导致最外层无法使用cancel方法来取消请求
+    if (config.cancelToken) {
+      conf.cancelToken = config.cancelToken
+    }
     const transform = this.getTransform()
 
     const { requestOptions } = this.options
@@ -228,7 +238,7 @@ export class VAxios {
             return
           }
           if (axios.isAxiosError(e)) {
-            // 在此处重写来自 axios 的错误消息
+            // rewrite error message from axios in here
           }
           reject(e)
         })

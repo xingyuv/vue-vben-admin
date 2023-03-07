@@ -142,5 +142,5 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
 }
 </script>
 <style lang="less">
-@import './index.less';
+@import url('./index.less');
 </style>

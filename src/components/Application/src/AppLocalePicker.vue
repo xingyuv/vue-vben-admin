@@ -13,18 +13,23 @@
     </span>
   </Dropdown>
 </template>
-<script setup lang="ts">
-import type { LocaleType } from '/#/config'
+<script lang="ts" setup>
+import type { LocaleType } from '@/types/config'
 import type { DropMenu } from '@/components/Dropdown'
 import { ref, watchEffect, unref, computed } from 'vue'
 import { Dropdown } from '@/components/Dropdown'
+import { Icon } from '@/components/Icon'
 import { useLocale } from '@/locales/useLocale'
 import { localeList } from '@/settings/localeSetting'
 
 const props = defineProps({
-  // 是否显示文本
+  /**
+   * Whether to display text
+   */
   showText: { type: Boolean, default: true },
-  // 更改时是否刷新界面
+  /**
+   * Whether to refresh the interface when changing
+   */
   reload: { type: Boolean }
 })
 

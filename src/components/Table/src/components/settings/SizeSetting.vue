@@ -22,24 +22,43 @@
     </Dropdown>
   </Tooltip>
 </template>
-<script setup lang="ts" name="SizeSetting">
+<script lang="ts">
 import type { SizeType } from '../../types/table'
-import { ref } from 'vue'
-import { Tooltip, Dropdown, Menu, MenuItem } from 'ant-design-vue'
+import { defineComponent, ref } from 'vue'
+import { Tooltip, Dropdown, Menu } from 'ant-design-vue'
 import { ColumnHeightOutlined } from '@ant-design/icons-vue'
 import { useI18n } from '@/hooks/web/useI18n'
 import { useTableContext } from '../../hooks/useTableContext'
 import { getPopupContainer } from '@/utils'
 
-const table = useTableContext()
-const { t } = useI18n()
+export default defineComponent({
+  name: 'SizeSetting',
+  components: {
+    ColumnHeightOutlined,
+    Tooltip,
+    Dropdown,
+    Menu,
+    MenuItem: Menu.Item
+  },
+  setup() {
+    const table = useTableContext()
+    const { t } = useI18n()
 
-const selectedKeysRef = ref<SizeType[]>([table.getSize()])
+    const selectedKeysRef = ref<SizeType[]>([table.getSize()])
 
-function handleTitleClick({ key }) {
-  selectedKeysRef.value = [key]
-  table.setProps({
-    size: key
-  })
-}
+    function handleTitleClick({ key }: { key: SizeType }) {
+      selectedKeysRef.value = [key]
+      table.setProps({
+        size: key
+      })
+    }
+
+    return {
+      handleTitleClick,
+      selectedKeysRef,
+      getPopupContainer,
+      t
+    }
+  }
+})
 </script>

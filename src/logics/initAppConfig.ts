@@ -1,7 +1,7 @@
 /**
  * Application configuration
  */
-import type { ProjectConfig } from '/#/config'
+import type { ProjectConfig } from '@/types/config'
 
 import { PROJ_CFG_KEY } from '@/enums/cacheEnum'
 import projectSetting from '@/settings/projectSetting'

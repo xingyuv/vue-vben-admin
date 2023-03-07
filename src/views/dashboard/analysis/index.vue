@@ -9,7 +9,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
 import GrowCard from './components/GrowCard.vue'
 import SiteAnalysis from './components/SiteAnalysis.vue'

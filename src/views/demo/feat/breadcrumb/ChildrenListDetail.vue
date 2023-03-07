@@ -3,6 +3,8 @@
     <div>子级详情页内容在此</div>
   </PageWrapper>
 </template>
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { PageWrapper } from '@/components/Page'
+export default defineComponent({ components: { PageWrapper } })
 </script>

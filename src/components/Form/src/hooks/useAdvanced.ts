@@ -153,6 +153,7 @@ export default function ({
         fieldsIsAdvancedMap[schema.field] = isAdvanced
       }
     }
+
     // 确保页面发送更新
     vm?.proxy?.$forceUpdate()
 

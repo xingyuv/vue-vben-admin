@@ -28,7 +28,7 @@
     />
   </div>
 </template>
-<script lang="ts" setup>
+<script lang="ts" setup name="CropperAvatar">
 import { computed, CSSProperties, unref, ref, watchEffect, watch } from 'vue'
 import CopperModal from './CopperModal.vue'
 import { useDesign } from '@/hooks/web/useDesign'
@@ -107,7 +107,7 @@ defineExpose({ openModal: openModal.bind(null, true), closeModal })
   }
 
   &-image-mask {
-    opacity: 0%;
+    opacity: 0;
     position: absolute;
     width: inherit;
     height: inherit;
@@ -123,7 +123,7 @@ defineExpose({ openModal: openModal.bind(null, true), closeModal })
   }
 
   &-image-mask:hover {
-    opacity: 4000%;
+    opacity: 40;
   }
 
   &-upload-btn {

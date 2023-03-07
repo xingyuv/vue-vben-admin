@@ -17,7 +17,7 @@
     </span>
   </div>
 </template>
-<script setup lang="ts" name="BasicDrawerHeader">
+<script lang="ts" setup name="BasicDrawerHeader">
 import { BasicTitle } from '@/components/Basic'
 import { ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { useDesign } from '@/hooks/web/useDesign'

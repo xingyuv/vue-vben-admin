@@ -18,8 +18,8 @@
     </template>
   </Cascader>
 </template>
-<script setup lang="ts" name="ApiCascader">
-import { ref, unref, watch, watchEffect } from 'vue'
+<script lang="ts" setup name="ApiCascader">
+import { PropType, ref, unref, watch, watchEffect } from 'vue'
 import { Cascader } from 'ant-design-vue'
 import { propTypes } from '@/utils/propTypes'
 import { isFunction } from '@/utils/is'
@@ -74,7 +74,7 @@ const emitData = ref<any[]>([])
 const isFirstLoad = ref(true)
 const { t } = useI18n()
 // Embedded in the form, just use the hook binding to perform form verification
-const [state] = useRuleFormItem(props, 'value', 'change', emitData)
+const [state]: any = useRuleFormItem(props, 'value', 'change', emitData)
 
 watch(
   apiData,

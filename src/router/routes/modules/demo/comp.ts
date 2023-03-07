@@ -254,6 +254,14 @@ const comp: AppRouteModule = {
           meta: {
             title: t('routes.demo.table.resizeParentHeightTable')
           }
+        },
+        {
+          path: 'vxeTable',
+          name: 'VxeTableDemo',
+          component: () => import('@/views/demo/table/VxeTable.vue'),
+          meta: {
+            title: t('routes.demo.table.vxeTable')
+          }
         }
       ]
     },

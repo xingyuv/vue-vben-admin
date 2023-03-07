@@ -3,7 +3,7 @@
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { Ref, ref, watch } from 'vue'
 import { Card } from 'ant-design-vue'
 import { useECharts } from '@/hooks/web/useECharts'

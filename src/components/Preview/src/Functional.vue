@@ -146,7 +146,6 @@ export default defineComponent({
       // 放大缩小的颗粒度
       const GRA = 0.1
       if (imgState.imgScale <= 0.2 && num < 0) return
-      imgState.imgScale += num
       imgState.imgScale += num * GRA
       // scale 不能 < 0，否则图片会倒置放大
       if (imgState.imgScale < 0) {
