@@ -2,7 +2,6 @@
   <div class="md:flex">
     <template v-for="(item, index) in growCardList" :key="item.title">
       <Card
-        size="small"
         :loading="loading"
         :title="item.title"
         class="md:w-1/4 w-full !md:mt-0"

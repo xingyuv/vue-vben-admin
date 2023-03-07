@@ -41,6 +41,8 @@
 
       <FullScreen v-if="getShowFullScreen" :class="`${prefixCls}-action__item fullscreen-item`" />
 
+      <AppSizePicker :showText="false" :class="`${prefixCls}-action__item`" />
+
       <AppLocalePicker
         v-if="getShowLocalePicker"
         :reload="true"
@@ -72,7 +74,7 @@ import { useRootSetting } from '@/hooks/setting/useRootSetting'
 
 import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum'
 import { SettingButtonPositionEnum } from '@/enums/appEnum'
-import { AppLocalePicker } from '@/components/Application'
+import { AppLocalePicker, AppSizePicker } from '@/components/Application'
 
 import { UserDropDown, LayoutBreadcrumb, FullScreen, Notify, ErrorAction } from './components'
 import { useAppInject } from '@/hooks/web/useAppInject'
@@ -90,6 +92,7 @@ export default defineComponent({
     LayoutBreadcrumb,
     LayoutMenu,
     UserDropDown,
+    AppSizePicker,
     AppLocalePicker,
     FullScreen,
     Notify,
@@ -196,5 +199,5 @@ export default defineComponent({
 })
 </script>
 <style lang="less">
-@import './index.less';
+@import url('./index.less');
 </style>

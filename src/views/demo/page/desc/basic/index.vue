@@ -1,7 +1,6 @@
 <template>
   <PageWrapper title="基础详情页" contentBackground>
     <Description
-      size="middle"
       title="退款申请"
       :bordered="false"
       :column="3"
@@ -10,7 +9,6 @@
     />
     <a-divider />
     <Description
-      size="middle"
       title="用户信息"
       :bordered="false"
       :column="3"
