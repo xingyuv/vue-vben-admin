@@ -36,7 +36,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, PropType } from 'vue'
+import { computed } from 'vue'
 import type { DropMenu } from './typing'
 import { Dropdown, Menu, Popconfirm } from 'ant-design-vue'
 import { Icon } from '@/components/Icon'

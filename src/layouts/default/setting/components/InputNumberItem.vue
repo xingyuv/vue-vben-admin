@@ -10,7 +10,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 
 import { InputNumber } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'

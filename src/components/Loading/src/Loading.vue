@@ -9,7 +9,6 @@
   </section>
 </template>
 <script lang="ts" setup name="Loading">
-import { PropType } from 'vue'
 import { Spin } from 'ant-design-vue'
 import { SizeEnum } from '@/enums/sizeEnum'
 

@@ -42,7 +42,7 @@
 <script lang="ts">
 import type { ColEx } from '../types/index'
 //import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
-import { defineComponent, computed, PropType } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { Form, Col } from 'ant-design-vue'
 import { Button, ButtonProps } from '@/components/Button'
 import { BasicArrow } from '@/components/Basic'

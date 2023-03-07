@@ -19,7 +19,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent } from 'vue'
 
 import { Tooltip } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'

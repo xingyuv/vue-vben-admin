@@ -15,7 +15,6 @@
   </Dropdown>
 </template>
 <script lang="ts">
-import type { PropType } from 'vue'
 import type { RouteLocationNormalized } from 'vue-router'
 
 import { defineComponent, computed, unref } from 'vue'
