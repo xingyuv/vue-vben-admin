@@ -124,7 +124,16 @@ const { t } = useI18n()
 const { prefixCls } = useDesign('icon-picker')
 
 const debounceHandleSearchChange = useDebounceFn(handleSearchChange, 100)
-const { clipboardRef, isSuccessRef } = useCopyToClipboard(props.value)
+
+let clipboardRef
+let isSuccessRef
+
+if (props.copy) {
+  const clipboard = useCopyToClipboard(props.value)
+  clipboardRef = clipboard?.clipboardRef
+  isSuccessRef = clipboard?.isSuccessRef
+}
+
 const { createMessage } = useMessage()
 
 const { getPaginationList, getTotal, setCurrentPage } = usePagination(currentList, props.pageSize)
