@@ -1,18 +1,25 @@
 <template>
   <PageWrapper title="UseForm操作示例">
-    <Space class="mb-4">
-      <a-button type="primary" @click="showDrawer"> 更改设置 </a-button>
-      <a-button @click="setProps({ resetButtonOptions: { disabled: true, text: '重置New' } })">
-        修改重置按钮
-      </a-button>
-      <a-button @click="setProps({ submitButtonOptions: { disabled: true, loading: true } })">
-        修改查询按钮
-      </a-button>
-      <a-button @click="handleLoad" class="mr-2"> 联动回显 </a-button>
-    </Space>
+    <a-button class="mb-4" type="primary" @click="showDrawer"> 更改设置 </a-button>
 
     <Drawer v-model:visible="visible" title="更改设置" placement="right">
-      <BasicForm ref="settingFormRef" @register="registerSetting" @submit="handleSubmitSetting" />
+      <BasicForm ref="settingFormRef" @register="registerSetting" @submit="handleSubmitSetting">
+        <template #other>
+          <Space>
+            <a-button
+              @click="() => withClose({ resetButtonOptions: { disabled: true, text: '重置New' } })"
+            >
+              修改重置按钮
+            </a-button>
+            <a-button
+              @click="() => withClose({ submitButtonOptions: { disabled: true, loading: true } })"
+            >
+              修改查询按钮
+            </a-button>
+            <a-button @click="handleLoad" class="mr-2"> 联动回显 </a-button>
+          </Space>
+        </template>
+      </BasicForm>
       <template #extra>
         <Space>
           <a-button @click="resetSettings">重置设置</a-button>
@@ -30,18 +37,16 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { Drawer, Space } from 'ant-design-vue'
-import { BasicForm, FormSchema, useForm } from '@/components/Form'
+import { BasicForm, FormSchema, useForm, type FormProps } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
 import { PageWrapper } from '@/components/Page'
 import { areaRecord } from '@/api/demo/cascader'
-
 const sizeList = [
   { value: 'large', label: 'large' },
   { value: 'middle', label: 'middle' },
   { value: 'small', label: 'small' },
   { value: 'default', label: 'defualt' }
 ]
-
 const schemas: FormSchema[] = [
   {
     field: 'field1',
@@ -150,7 +155,6 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-
 const formSchemas: FormSchema[] = [
   {
     field: '',
@@ -271,9 +275,24 @@ const formSchemas: FormSchema[] = [
     componentProps: {
       size: 'small'
     }
+  },
+  {
+    field: '',
+    component: 'Divider',
+    label: '其他事件',
+    colProps: { span: 24 },
+    componentProps: {
+      orientation: 'center'
+    }
+  },
+  {
+    field: 'other',
+    component: 'Input',
+    label: '',
+    colProps: { span: 24 },
+    colSlot: 'other'
   }
 ]
-
 export default defineComponent({
   components: {
     BasicForm,
@@ -292,23 +311,22 @@ export default defineComponent({
       actionColOptions: { span: 24 },
       showActionButtonGroup: false
     })
-
     const resetSettings = async () => {
+      setProps({ resetButtonOptions: { disabled: false, text: '重置' } })
+      setProps({ submitButtonOptions: { disabled: false, loading: false } })
+      await setFieldsValue({ field9: [] })
       await settingFormRef.value?.resetFields()
     }
-
     const handleSubmitSetting = async (values: Recordable) => {
       await setProps(values)
       visible.value = false
     }
-
     const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
       labelWidth: 120,
       schemas,
       actionColOptions: { span: 24 },
       fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']]
     })
-
     async function handleLoad() {
       const promiseFn = function () {
         return new Promise((resolve) => {
@@ -322,9 +340,7 @@ export default defineComponent({
           }, 1000)
         })
       }
-
       const item = await promiseFn()
-
       const { field9, province, city, district } = item as any
       await updateSchema({
         field: 'field9',
@@ -334,15 +350,16 @@ export default defineComponent({
       })
       await setFieldsValue({ field9 })
     }
-
     const showDrawer = () => {
       visible.value = true
     }
-
     const onSettings = () => {
       settingFormRef.value?.submit()
     }
-
+    const withClose = (formProps: Partial<FormProps>) => {
+      setProps(formProps)
+      visible.value = false
+    }
     return {
       register,
       schemas,
@@ -354,6 +371,7 @@ export default defineComponent({
       visible,
       showDrawer,
       settingFormRef,
+      withClose,
       onSettings,
       resetSettings,
       registerSetting,
