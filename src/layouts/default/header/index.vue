@@ -199,5 +199,5 @@ export default defineComponent({
 })
 </script>
 <style lang="less">
-@import url('./index.less');
+@import './index.less';
 </style>

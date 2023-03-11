@@ -134,5 +134,5 @@ async function handleSelect(key: string) {
 }
 </script>
 <style lang="less">
-@import url('./index.less');
+@import './index.less';
 </style>
