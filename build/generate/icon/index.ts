@@ -51,9 +51,7 @@ async function generateIcon() {
         if (data) {
           const { prefix } = data
           const isLocal = useType === 'local'
-          const icons = Object.keys(data.icons).map(
-            (item) => `${isLocal ? prefix + ':' : ''}${item}`
-          )
+          const icons = Object.keys(data.icons).map((item) => `${isLocal ? prefix + ':' : ''}${item}`)
 
           await fs.writeFileSync(
             path.join(output, `icons.data.ts`),
@@ -63,9 +61,7 @@ async function generateIcon() {
         }
       }
       fs.emptyDir(path.join(process.cwd(), 'node_modules/.vite'))
-      console.log(
-        `✨ ${colors.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`
-      )
+      console.log(`✨ ${colors.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`)
     })
 }
 

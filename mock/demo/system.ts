@@ -88,12 +88,7 @@ const menuList = (() => {
             menuName: ['菜单1', '菜单2', '菜单3', '菜单4'][j],
             icon: 'ion:document',
             permission: ['menu1:view', 'menu2:add', 'menu3:update', 'menu4:del'][index],
-            component: [
-              '/dashboard/welcome/index',
-              '/dashboard/analysis/index',
-              '/dashboard/workbench/index',
-              '/dashboard/test/index'
-            ][j],
+            component: ['/dashboard/welcome/index', '/dashboard/analysis/index', '/dashboard/workbench/index', '/dashboard/test/index'][j],
             orderNo: j + 1,
             createTime: '@datetime',
             'status|1': ['0', '1'],
@@ -106,10 +101,7 @@ const menuList = (() => {
                   type: '2',
                   menuName: '按钮' + (j + 1) + '-' + (k + 1),
                   icon: '',
-                  permission:
-                    ['menu1:view', 'menu2:add', 'menu3:update', 'menu4:del'][index] +
-                    ':btn' +
-                    (k + 1),
+                  permission: ['menu1:view', 'menu2:add', 'menu3:update', 'menu4:del'][index] + ':btn' + (k + 1),
                   component: [
                     '/dashboard/welcome/index',
                     '/dashboard/analysis/index',
