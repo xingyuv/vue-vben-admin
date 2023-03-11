@@ -22,7 +22,7 @@
   </div>
 </template>
 <script setup lang="ts" name="TableAction">
-import { PropType, computed, toRaw, unref } from 'vue'
+import { computed, toRaw, unref } from 'vue'
 import { MoreOutlined } from '@ant-design/icons-vue'
 import { Divider, Tooltip, TooltipProps } from 'ant-design-vue'
 import Icon from '@/components/Icon/index'

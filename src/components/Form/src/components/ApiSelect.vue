@@ -15,7 +15,7 @@
   </Select>
 </template>
 <script lang="ts" setup name="ApiSelect" inheritAttrs="false">
-import { PropType, ref, watchEffect, computed, unref, watch } from 'vue'
+import { ref, watchEffect, computed, unref, watch } from 'vue'
 import { Select } from 'ant-design-vue'
 import { isFunction } from '@/utils/is'
 import { useRuleFormItem } from '@/hooks/component/useFormItem'

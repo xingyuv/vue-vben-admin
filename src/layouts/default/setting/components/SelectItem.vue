@@ -12,7 +12,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 
 import { Select } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'
