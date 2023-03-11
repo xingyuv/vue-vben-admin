@@ -14,12 +14,7 @@
     :cancelButtonProps="{ disabled: isUploadingRef }"
   >
     <template #centerFooter>
-      <a-button
-        @click="handleStartUpload"
-        color="success"
-        :disabled="!getIsSelectFile"
-        :loading="isUploadingRef"
-      >
+      <a-button @click="handleStartUpload" color="success" :disabled="!getIsSelectFile" :loading="isUploadingRef">
         {{ getUploadBtnText }}
       </a-button>
     </template>
@@ -88,10 +83,7 @@ const { getStringAccept, getHelpText } = useUploadType({
 const { createMessage } = useMessage()
 
 const getIsSelectFile = computed(() => {
-  return (
-    fileListRef.value.length > 0 &&
-    !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
-  )
+  return fileListRef.value.length > 0 && !fileListRef.value.every((item) => item.status === UploadResultStatus.SUCCESS)
 })
 
 const getOkButtonProps = computed(() => {
@@ -208,8 +200,7 @@ async function handleStartUpload() {
   try {
     isUploadingRef.value = true
     // 只上传不是成功状态的
-    const uploadFileList =
-      fileListRef.value.filter((item) => item.status !== UploadResultStatus.SUCCESS) || []
+    const uploadFileList = fileListRef.value.filter((item) => item.status !== UploadResultStatus.SUCCESS) || []
     const data = await Promise.all(
       uploadFileList.map((item) => {
         return uploadApiByItem(item)

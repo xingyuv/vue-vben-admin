@@ -1,20 +1,8 @@
 <template>
   <PageWrapper title="基础详情页" contentBackground>
-    <Description
-      title="退款申请"
-      :bordered="false"
-      :column="3"
-      :data="refundData"
-      :schema="refundSchema"
-    />
+    <Description title="退款申请" :bordered="false" :column="3" :data="refundData" :schema="refundSchema" />
     <a-divider />
-    <Description
-      title="用户信息"
-      :bordered="false"
-      :column="3"
-      :data="personData"
-      :schema="personSchema"
-    />
+    <Description title="用户信息" :bordered="false" :column="3" :data="personData" :schema="personSchema" />
     <a-divider />
 
     <BasicTable @register="registerRefundTable" />

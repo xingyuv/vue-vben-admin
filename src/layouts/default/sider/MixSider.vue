@@ -31,11 +31,7 @@
           :key="item.path"
         >
           <SimpleMenuTag :item="item" collapseParent dot />
-          <Icon
-            :class="`${prefixCls}-module__icon`"
-            :size="getCollapsed ? 16 : 20"
-            :icon="item.icon || (item.meta && item.meta.icon)"
-          />
+          <Icon :class="`${prefixCls}-module__icon`" :size="getCollapsed ? 16 : 20" :icon="item.icon || (item.meta && item.meta.icon)" />
           <p :class="`${prefixCls}-module__name`">
             {{ t(item.name) }}
           </p>
@@ -54,26 +50,12 @@
         ]"
       >
         <span class="text"> {{ title }}</span>
-        <Icon
-          :size="16"
-          :icon="getMixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'"
-          class="pushpin"
-          @click="handleFixedMenu"
-        />
+        <Icon :size="16" :icon="getMixSideFixed ? 'ri:pushpin-2-fill' : 'ri:pushpin-2-line'" class="pushpin" @click="handleFixedMenu" />
       </div>
       <ScrollContainer :class="`${prefixCls}-menu-list__content`">
-        <SimpleMenu
-          :items="childrenMenus"
-          :theme="getMenuTheme"
-          mixSider
-          @menu-click="handleMenuClick"
-        />
+        <SimpleMenu :items="childrenMenus" :theme="getMenuTheme" mixSider @menu-click="handleMenuClick" />
       </ScrollContainer>
-      <div
-        v-show="getShowDragBar && openMenu"
-        :class="`${prefixCls}-drag-bar`"
-        ref="dragBarRef"
-      ></div>
+      <div v-show="getShowDragBar && openMenu" :class="`${prefixCls}-drag-bar`" ref="dragBarRef"></div>
     </div>
   </div>
 </template>

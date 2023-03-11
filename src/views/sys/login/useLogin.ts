@@ -86,9 +86,7 @@ export function useFormRules(formData?: Recordable) {
         return {
           account: accountFormRule,
           password: passwordFormRule,
-          confirmPassword: [
-            { validator: validateConfirmPassword(formData?.password), trigger: 'change' }
-          ],
+          confirmPassword: [{ validator: validateConfirmPassword(formData?.password), trigger: 'change' }],
           policy: [{ validator: validatePolicy, trigger: 'change' }],
           ...mobileRule
         }

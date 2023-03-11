@@ -66,10 +66,7 @@ watch(
 )
 
 function setTheme() {
-  unref(editor)?.setOption(
-    'theme',
-    appStore.getDarkMode === 'light' ? 'idea' : 'material-palenight'
-  )
+  unref(editor)?.setOption('theme', appStore.getDarkMode === 'light' ? 'idea' : 'material-palenight')
 }
 
 function refresh() {

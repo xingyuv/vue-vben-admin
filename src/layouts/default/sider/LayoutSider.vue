@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="getMenuFixed && !getIsMobile"
-    :style="getHiddenDomStyle"
-    v-show="showClassSideBarRef"
-  ></div>
+  <div v-if="getMenuFixed && !getIsMobile" :style="getHiddenDomStyle" v-show="showClassSideBarRef"></div>
   <Sider
     v-show="showClassSideBarRef"
     ref="sideRef"
@@ -47,17 +43,8 @@ export default defineComponent({
     const dragBarRef = ref<ElRef>(null)
     const sideRef = ref<ElRef>(null)
 
-    const {
-      getCollapsed,
-      getMenuWidth,
-      getSplit,
-      getMenuTheme,
-      getRealWidth,
-      getMenuHidden,
-      getMenuFixed,
-      getIsMixMode,
-      toggleCollapsed
-    } = useMenuSetting()
+    const { getCollapsed, getMenuWidth, getSplit, getMenuTheme, getRealWidth, getMenuHidden, getMenuFixed, getIsMixMode, toggleCollapsed } =
+      useMenuSetting()
 
     const { prefixCls } = useDesign('layout-sideBar')
 

@@ -10,12 +10,7 @@ export function useRuleFormItem<T extends Recordable, K extends keyof T, V = Unw
   emitData?: Ref<any[]>
 ): [WritableComputedRef<V>, (val: V) => void, DeepReadonly<V>]
 
-export function useRuleFormItem<T extends Recordable>(
-  props: T,
-  key: keyof T = 'value',
-  changeEvent = 'change',
-  emitData?: Ref<any[]>
-) {
+export function useRuleFormItem<T extends Recordable>(props: T, key: keyof T = 'value', changeEvent = 'change', emitData?: Ref<any[]>) {
   const instance = getCurrentInstance()
   const emit = instance?.emit
 

@@ -30,9 +30,7 @@ export function usePermission() {
   async function togglePermissionMode() {
     appStore.setProjectConfig({
       permissionMode:
-        appStore.projectConfig?.permissionMode === PermissionModeEnum.BACK
-          ? PermissionModeEnum.ROUTE_MAPPING
-          : PermissionModeEnum.BACK
+        appStore.projectConfig?.permissionMode === PermissionModeEnum.BACK ? PermissionModeEnum.ROUTE_MAPPING : PermissionModeEnum.BACK
     })
     location.reload()
   }
@@ -88,9 +86,7 @@ export function usePermission() {
    */
   async function changeRole(roles: RoleEnum | RoleEnum[]): Promise<void> {
     if (projectSetting.permissionMode !== PermissionModeEnum.ROUTE_MAPPING) {
-      throw new Error(
-        'Please switch PermissionModeEnum to ROUTE_MAPPING mode in the configuration to operate!'
-      )
+      throw new Error('Please switch PermissionModeEnum to ROUTE_MAPPING mode in the configuration to operate!')
     }
 
     if (!isArray(roles)) {

@@ -7,30 +7,13 @@
         </BasicTree>
       </Col>
       <Col :span="8">
-        <BasicTree
-          title="可勾选，默认全部展开"
-          :treeData="treeData"
-          :checkable="true"
-          defaultExpandAll
-          @check="handleCheck"
-        />
+        <BasicTree title="可勾选，默认全部展开" :treeData="treeData" :checkable="true" defaultExpandAll @check="handleCheck" />
       </Col>
       <Col :span="8">
-        <BasicTree
-          title="指定默认展开/勾选示例"
-          :treeData="treeData"
-          :checkable="true"
-          :expandedKeys="['0-0']"
-          :checkedKeys="['0-0']"
-        />
+        <BasicTree title="指定默认展开/勾选示例" :treeData="treeData" :checkable="true" :expandedKeys="['0-0']" :checkedKeys="['0-0']" />
       </Col>
       <Col :span="8">
-        <BasicTree
-          title="懒加载异步树"
-          ref="asyncTreeRef"
-          :treeData="tree"
-          :load-data="onLoadData"
-        />
+        <BasicTree title="懒加载异步树" ref="asyncTreeRef" :treeData="tree" :load-data="onLoadData" />
       </Col>
       <Col :span="8">
         <Card title="异步数据，默认展开">
@@ -120,9 +103,7 @@ export default defineComponent({
               { title: `Child Node ${treeNode.eventKey}-1`, key: `${treeNode.eventKey}-1` }
             ]
             asyncTreeAction.updateNodeByKey(treeNode.eventKey, { children: nodeChildren })
-            asyncTreeAction.setExpandedKeys(
-              uniq([treeNode.eventKey, ...asyncTreeAction.getExpandedKeys()])
-            )
+            asyncTreeAction.setExpandedKeys(uniq([treeNode.eventKey, ...asyncTreeAction.getExpandedKeys()]))
           }
 
           resolve()

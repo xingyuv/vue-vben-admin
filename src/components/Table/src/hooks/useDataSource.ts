@@ -1,16 +1,6 @@
 import type { BasicTableProps, FetchParams, SorterResult } from '../types/table'
 import type { PaginationProps } from '../types/pagination'
-import {
-  ref,
-  unref,
-  ComputedRef,
-  computed,
-  onMounted,
-  watch,
-  reactive,
-  Ref,
-  watchEffect
-} from 'vue'
+import { ref, unref, ComputedRef, computed, onMounted, watch, reactive, Ref, watchEffect } from 'vue'
 import { useTimeoutFn } from '@/hooks/core/useTimeout'
 import { buildUUID } from '@/utils/uuid'
 import { isFunction, isBoolean, isObject } from '@/utils/is'
@@ -32,14 +22,7 @@ interface SearchState {
 }
 export function useDataSource(
   propsRef: ComputedRef<BasicTableProps>,
-  {
-    getPaginationInfo,
-    setPagination,
-    setLoading,
-    getFieldsValue,
-    clearSelectedRowKeys,
-    tableData
-  }: ActionType,
+  { getPaginationInfo, setPagination, setLoading, getFieldsValue, clearSelectedRowKeys, tableData }: ActionType,
   emit: EmitType
 ) {
   const searchState = reactive<SearchState>({
@@ -64,11 +47,7 @@ export function useDataSource(
     }
   )
 
-  function handleTableChange(
-    pagination: PaginationProps,
-    filters: Partial<Recordable<string[]>>,
-    sorter: SorterResult
-  ) {
+  function handleTableChange(pagination: PaginationProps, filters: Partial<Recordable<string[]>>, sorter: SorterResult) {
     const { clearSelectOnPageChange, sortFn, filterFn } = unref(propsRef)
     if (clearSelectOnPageChange) {
       clearSelectedRowKeys()
@@ -146,10 +125,7 @@ export function useDataSource(
     return dataSourceRef.value[index]
   }
 
-  function updateTableDataRecord(
-    rowKey: string | number,
-    record: Recordable
-  ): Recordable | undefined {
+  function updateTableDataRecord(rowKey: string | number, record: Recordable): Recordable | undefined {
     const row = findTableDataRecord(rowKey)
 
     if (row) {
@@ -206,10 +182,7 @@ export function useDataSource(
     })
   }
 
-  function insertTableDataRecord(
-    record: Recordable | Recordable[],
-    index: number
-  ): Recordable[] | undefined {
+  function insertTableDataRecord(record: Recordable | Recordable[], index: number): Recordable[] | undefined {
     // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length
     const _record = isObject(record) ? [record as Recordable] : (record as Recordable[])
@@ -255,24 +228,11 @@ export function useDataSource(
   }
 
   async function fetch(opt?: FetchParams) {
-    const {
-      api,
-      searchInfo,
-      defSort,
-      fetchSetting,
-      beforeFetch,
-      afterFetch,
-      useSearchForm,
-      pagination
-    } = unref(propsRef)
+    const { api, searchInfo, defSort, fetchSetting, beforeFetch, afterFetch, useSearchForm, pagination } = unref(propsRef)
     if (!api || !isFunction(api)) return
     try {
       setLoading(true)
-      const { pageField, sizeField, listField, totalField } = Object.assign(
-        {},
-        FETCH_SETTING,
-        fetchSetting
-      )
+      const { pageField, sizeField, listField, totalField } = Object.assign({}, FETCH_SETTING, fetchSetting)
       let pageParams: Recordable = {}
 
       const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps

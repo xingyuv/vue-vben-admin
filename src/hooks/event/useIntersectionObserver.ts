@@ -8,13 +8,7 @@ interface IntersectionObserverProps {
   threshold?: number
 }
 
-export function useIntersectionObserver({
-  target,
-  root,
-  onIntersect,
-  rootMargin = '0px',
-  threshold = 0.1
-}: IntersectionObserverProps) {
+export function useIntersectionObserver({ target, root, onIntersect, rootMargin = '0px', threshold = 0.1 }: IntersectionObserverProps) {
   let cleanup = () => {}
   const observer: Ref<Nullable<IntersectionObserver>> = ref(null)
   const stopEffect = watchEffect(() => {

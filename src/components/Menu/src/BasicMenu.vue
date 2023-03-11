@@ -54,20 +54,12 @@ const { getCollapsed, getTopMenuAlign, getSplit } = useMenuSetting()
 
 const { currentRoute } = useRouter()
 
-const { handleOpenChange, setOpenKeys, getOpenKeys } = useOpenKeys(
-  menuState,
-  items,
-  mode as any,
-  accordion
-)
+const { handleOpenChange, setOpenKeys, getOpenKeys } = useOpenKeys(menuState, items, mode as any, accordion)
 
 const getIsTopMenu = computed(() => {
   const { type, mode } = props
 
-  return (
-    (type === MenuTypeEnum.TOP_MENU && mode === MenuModeEnum.HORIZONTAL) ||
-    (props.isHorizontal && unref(getSplit))
-  )
+  return (type === MenuTypeEnum.TOP_MENU && mode === MenuModeEnum.HORIZONTAL) || (props.isHorizontal && unref(getSplit))
 })
 
 const getMenuClass = computed(() => {
@@ -128,8 +120,7 @@ async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
     isClickGo.value = false
     return
   }
-  const path =
-    (route || unref(currentRoute)).meta?.currentActiveMenu || (route || unref(currentRoute)).path
+  const path = (route || unref(currentRoute)).meta?.currentActiveMenu || (route || unref(currentRoute)).path
   setOpenKeys(path)
   if (unref(currentActiveMenu)) return
   if (props.isHorizontal && unref(getSplit)) {

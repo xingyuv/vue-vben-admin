@@ -1,20 +1,5 @@
-import type {
-  UseModalReturnType,
-  ModalMethods,
-  ModalProps,
-  ReturnMethods,
-  UseModalInnerReturnType
-} from '../typing'
-import {
-  ref,
-  onUnmounted,
-  unref,
-  getCurrentInstance,
-  reactive,
-  watchEffect,
-  nextTick,
-  toRaw
-} from 'vue'
+import type { UseModalReturnType, ModalMethods, ModalProps, ReturnMethods, UseModalInnerReturnType } from '../typing'
+import { ref, onUnmounted, unref, getCurrentInstance, reactive, watchEffect, nextTick, toRaw } from 'vue'
 import { isProdMode } from '@/utils/env'
 import { isFunction } from '@/utils/is'
 import { isEqual } from 'lodash-es'

@@ -31,10 +31,7 @@ export default defineComponent({
 
     function imagePrint() {
       printJS({
-        printable: [
-          'https://anncwb.github.io/anncwb/images/preview1.png',
-          'https://anncwb.github.io/anncwb/images/preview2.png'
-        ],
+        printable: ['https://anncwb.github.io/anncwb/images/preview1.png', 'https://anncwb.github.io/anncwb/images/preview2.png'],
         type: 'image',
         header: 'Multiple Images',
         imageStyle: 'width:100%;'

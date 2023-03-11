@@ -1,10 +1,5 @@
 <template>
-  <PageWrapper
-    title="VxeTable表格"
-    content="只展示部分操作，详细功能请查看VxeTable官网事例"
-    contentFullHeight
-    fixedHeight
-  >
+  <PageWrapper title="VxeTable表格" content="只展示部分操作，详细功能请查看VxeTable官网事例" contentFullHeight fixedHeight>
     <VxeBasicTable ref="tableRef" v-bind="gridOptions">
       <template #action="{ row }">
         <TableAction outside :actions="createActions(row)" />

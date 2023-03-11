@@ -15,10 +15,7 @@ export abstract class AxiosTransform {
    * @description: Process configuration before request
    * @description: Process configuration before request
    */
-  beforeRequestHook?: (
-    config: AxiosRequestConfig,
-    options: RequestOptions
-  ) => InternalAxiosRequestConfig
+  beforeRequestHook?: (config: AxiosRequestConfig, options: RequestOptions) => InternalAxiosRequestConfig
 
   /**
    * @description: 处理响应数据
@@ -33,10 +30,7 @@ export abstract class AxiosTransform {
   /**
    * @description: 请求之前的拦截器
    */
-  requestInterceptors?: (
-    config: InternalAxiosRequestConfig,
-    options: CreateAxiosOptions
-  ) => InternalAxiosRequestConfig
+  requestInterceptors?: (config: InternalAxiosRequestConfig, options: CreateAxiosOptions) => InternalAxiosRequestConfig
 
   /**
    * @description: 请求之后的拦截器

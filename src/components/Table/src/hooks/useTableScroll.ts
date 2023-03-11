@@ -56,8 +56,7 @@ export function useTableScroll(
   let bodyEl: HTMLElement | null
 
   async function calcTableHeight() {
-    const { resizeHeightOffset, pagination, maxHeight, isCanResizeParent, useSearchForm } =
-      unref(propsRef)
+    const { resizeHeightOffset, pagination, maxHeight, isCanResizeParent, useSearchForm } = unref(propsRef)
     const tableData = unref(getDataSourceRef)
 
     const table = unref(tableElRef)
@@ -147,24 +146,16 @@ export function useTableScroll(
         paddingHeight = 0
       }
 
-      const headerCellHeight =
-        (tableEl.querySelector('.ant-table-title') as HTMLElement)?.offsetHeight ?? 0
+      const headerCellHeight = (tableEl.querySelector('.ant-table-title') as HTMLElement)?.offsetHeight ?? 0
 
       console.log(wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin)
-      bottomIncludeBody =
-        wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin
+      bottomIncludeBody = wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin
     } else {
       // Table height from bottom
       bottomIncludeBody = getViewportOffset(headEl).bottomIncludeBody
     }
 
-    let height =
-      bottomIncludeBody -
-      (resizeHeightOffset || 0) -
-      paddingHeight -
-      paginationHeight -
-      footerHeight -
-      headerHeight
+    let height = bottomIncludeBody - (resizeHeightOffset || 0) - paddingHeight - paginationHeight - footerHeight - headerHeight
     height = (height > maxHeight! ? (maxHeight as number) : height) ?? height
     setHeight(height)
 

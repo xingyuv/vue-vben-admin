@@ -8,12 +8,7 @@
       v-show="editorRef"
       :disabled="disabled"
     />
-    <textarea
-      :id="tinymceId"
-      ref="elRef"
-      :style="{ visibility: 'hidden' }"
-      v-if="!initOptions.inline"
-    ></textarea>
+    <textarea :id="tinymceId" ref="elRef" :style="{ visibility: 'hidden' }" v-if="!initOptions.inline"></textarea>
     <slot v-else></slot>
   </div>
 </template>
@@ -53,16 +48,7 @@ import 'tinymce/plugins/visualblocks'
 import 'tinymce/plugins/visualchars'
 import 'tinymce/plugins/wordcount'
 
-import {
-  defineComponent,
-  computed,
-  nextTick,
-  ref,
-  unref,
-  watch,
-  onDeactivated,
-  onBeforeUnmount
-} from 'vue'
+import { defineComponent, computed, nextTick, ref, unref, watch, onDeactivated, onBeforeUnmount } from 'vue'
 import ImgUpload from './ImgUpload.vue'
 import { toolbar, plugins } from './tinymce'
 import { buildShortUUID } from '@/utils/uuid'
@@ -162,8 +148,7 @@ export default defineComponent({
         auto_focus: true,
         skin: skinName.value,
         skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
-        content_css:
-          publicPath + 'resource/tinymce/skins/ui/' + skinName.value + '/content.min.css',
+        content_css: publicPath + 'resource/tinymce/skins/ui/' + skinName.value + '/content.min.css',
         ...options,
         setup: (editor: Editor) => {
           editorRef.value = editor
@@ -246,12 +231,7 @@ export default defineComponent({
     }
 
     function setValue(editor: Recordable, val: string, prevVal?: string) {
-      if (
-        editor &&
-        typeof val === 'string' &&
-        val !== prevVal &&
-        val !== editor.getContent({ format: attrs.outputFormat })
-      ) {
+      if (editor && typeof val === 'string' && val !== prevVal && val !== editor.getContent({ format: attrs.outputFormat })) {
         editor.setContent(val)
       }
     }

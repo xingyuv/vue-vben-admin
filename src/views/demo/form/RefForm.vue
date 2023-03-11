@@ -9,22 +9,14 @@
       <a-button @click="setProps({ disabled: false })" class="mr-2"> 解除禁用 </a-button>
       <a-button @click="setProps({ compact: true })" class="mr-2"> 紧凑表单 </a-button>
       <a-button @click="setProps({ compact: false })" class="mr-2"> 还原正常间距 </a-button>
-      <a-button @click="setProps({ actionColOptions: { span: 8 } })" class="mr-2">
-        操作按钮位置
-      </a-button>
+      <a-button @click="setProps({ actionColOptions: { span: 8 } })" class="mr-2"> 操作按钮位置 </a-button>
     </div>
     <div class="mb-4">
-      <a-button @click="setProps({ showActionButtonGroup: false })" class="mr-2">
-        隐藏操作按钮
-      </a-button>
-      <a-button @click="setProps({ showActionButtonGroup: true })" class="mr-2">
-        显示操作按钮
-      </a-button>
+      <a-button @click="setProps({ showActionButtonGroup: false })" class="mr-2"> 隐藏操作按钮 </a-button>
+      <a-button @click="setProps({ showActionButtonGroup: true })" class="mr-2"> 显示操作按钮 </a-button>
       <a-button @click="setProps({ showResetButton: false })" class="mr-2"> 隐藏重置按钮 </a-button>
       <a-button @click="setProps({ showResetButton: true })" class="mr-2"> 显示重置按钮 </a-button>
-      <a-button @click="setProps({ showSubmitButton: false })" class="mr-2">
-        隐藏查询按钮
-      </a-button>
+      <a-button @click="setProps({ showSubmitButton: false })" class="mr-2"> 隐藏查询按钮 </a-button>
       <a-button @click="setProps({ showSubmitButton: true })" class="mr-2"> 显示查询按钮 </a-button>
       <a-button
         @click="
@@ -54,13 +46,7 @@
       </a-button>
     </div>
     <CollapseContainer title="使用ref调用表单内部函数示例">
-      <BasicForm
-        :schemas="schemas"
-        ref="formElRef"
-        :labelWidth="100"
-        @submit="handleSubmit"
-        :actionColOptions="{ span: 24 }"
-      />
+      <BasicForm :schemas="schemas" ref="formElRef" :labelWidth="100" @submit="handleSubmit" :actionColOptions="{ span: 24 }" />
     </CollapseContainer>
   </PageWrapper>
 </template>

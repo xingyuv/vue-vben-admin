@@ -1,12 +1,6 @@
 <template>
   <div :class="getClass" ref="wrapperRef">
-    <PageHeader
-      :ghost="ghost"
-      :title="title"
-      v-bind="omit($attrs, 'class')"
-      ref="headerRef"
-      v-if="getShowHeader"
-    >
+    <PageHeader :ghost="ghost" :title="title" v-bind="omit($attrs, 'class')" ref="headerRef" v-if="getShowHeader">
       <template #default>
         <template v-if="content">
           {{ content }}
@@ -95,9 +89,7 @@ const getClass = computed(() => {
   ]
 })
 
-const getShowHeader = computed(
-  () => props.content || slots?.headerContent || props.title || getHeaderSlots.value.length
-)
+const getShowHeader = computed(() => props.content || slots?.headerContent || props.title || getHeaderSlots.value.length)
 
 const getShowFooter = computed(() => slots?.leftFooter || slots?.rightFooter)
 

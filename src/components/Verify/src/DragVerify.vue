@@ -248,13 +248,7 @@ export default defineComponent({
           cls.push('to-left')
         }
         return (
-          <div
-            class={cls}
-            onMousedown={handleDragStart}
-            onTouchstart={handleDragStart}
-            style={unref(getActionStyleRef)}
-            ref={actionElRef}
-          >
+          <div class={cls} onMousedown={handleDragStart} onTouchstart={handleDragStart} style={unref(getActionStyleRef)} ref={actionElRef}>
             {getSlot(slots, 'actionIcon', isPassing) ||
               (isPassing ? (
                 <CheckOutlined class={`darg-verify-action__icon`} />

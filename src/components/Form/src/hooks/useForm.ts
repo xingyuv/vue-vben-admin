@@ -17,9 +17,7 @@ export function useForm(props?: Props): UseFormReturnType {
   async function getForm() {
     const form = unref(formRef)
     if (!form) {
-      error(
-        'The form instance has not been obtained, please make sure that the form has been rendered when performing the form operation!'
-      )
+      error('The form instance has not been obtained, please make sure that the form has been rendered when performing the form operation!')
     }
     await nextTick()
     return form as FormActionType
@@ -93,11 +91,7 @@ export function useForm(props?: Props): UseFormReturnType {
       form.setFieldsValue<T>(values)
     },
 
-    appendSchemaByField: async (
-      schema: FormSchema | FormSchema[],
-      prefixField: string | undefined,
-      first: boolean
-    ) => {
+    appendSchemaByField: async (schema: FormSchema | FormSchema[], prefixField: string | undefined, first: boolean) => {
       const form = await getForm()
       form.appendSchemaByField(schema, prefixField, first)
     },

@@ -80,13 +80,7 @@ function vueErrorHandler(err: Error, vm: any, info: string) {
 /**
  * Configure script error handling function
  */
-export function scriptErrorHandler(
-  event: Event | string,
-  source?: string,
-  lineno?: number,
-  colno?: number,
-  error?: Error
-) {
+export function scriptErrorHandler(event: Event | string, source?: string, lineno?: number, colno?: number, error?: Error) {
   if (event === 'Script error.' && !source) {
     return false
   }

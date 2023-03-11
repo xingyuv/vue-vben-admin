@@ -1,11 +1,6 @@
 import { GridMethods, TableMethods, TableEditMethods, TableValidatorMethods } from 'vxe-table'
 
-export const gridComponentMethodKeys: (
-  | keyof GridMethods
-  | keyof TableMethods
-  | keyof TableEditMethods
-  | keyof TableValidatorMethods
-)[] = [
+export const gridComponentMethodKeys: (keyof GridMethods | keyof TableMethods | keyof TableEditMethods | keyof TableValidatorMethods)[] = [
   // vxe-grid 部分
   'dispatchEvent',
   'commitProxy',

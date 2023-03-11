@@ -1,9 +1,5 @@
 <template>
-  <PageWrapper
-    class="high-form"
-    title="高级表单"
-    content=" 高级表单常见于一次性输入和提交大批量数据的场景。"
-  >
+  <PageWrapper class="high-form" title="高级表单" content=" 高级表单常见于一次性输入和提交大批量数据的场景。">
     <a-card title="仓库管理" :bordered="false">
       <BasicForm @register="register" />
     </a-card>

@@ -12,14 +12,7 @@ export enum ToolbarEnum {
   CHECK_UN_STRICTLY
 }
 
-export const treeEmits = [
-  'update:expandedKeys',
-  'update:selectedKeys',
-  'update:value',
-  'change',
-  'check',
-  'update:searchValue'
-]
+export const treeEmits = ['update:expandedKeys', 'update:selectedKeys', 'update:value', 'change', 'check', 'update:searchValue']
 
 export interface TreeState {
   expandedKeys: KeyType[]
@@ -36,9 +29,7 @@ export interface FieldNames {
 
 export type KeyType = string | number
 
-export type CheckKeys =
-  | KeyType[]
-  | { checked: string[] | number[]; halfChecked: string[] | number[] }
+export type CheckKeys = KeyType[] | { checked: string[] | number[]; halfChecked: string[] | number[] }
 
 export const treeProps = buildProps({
   value: {
@@ -114,9 +105,7 @@ export const treeProps = buildProps({
   },
   // 自定义数据过滤判断方法(注: 不是整个过滤方法，而是内置过滤的判断方法，用于增强原本仅能通过title进行过滤的方式)
   filterFn: {
-    type: Function as PropType<
-      (searchValue: any, node: TreeItem, fieldNames: FieldNames) => boolean
-    >,
+    type: Function as PropType<(searchValue: any, node: TreeItem, fieldNames: FieldNames) => boolean>,
     default: undefined
   },
   // 高亮搜索值，仅高亮具体匹配值（通过title）值为true时使用默认色值，值为#xxx时使用此值替代且高亮开启
@@ -187,9 +176,5 @@ export interface TreeActionType {
   updateNodeByKey: (key: string, node: Omit<TreeDataItem, 'key'>) => void
   setSearchValue: (value: string) => void
   getSearchValue: () => string
-  getSelectedNode: (
-    key: KeyType,
-    treeList?: TreeItem[],
-    selectNode?: TreeItem | null
-  ) => TreeItem | null
+  getSelectedNode: (key: KeyType, treeList?: TreeItem[], selectNode?: TreeItem | null) => TreeItem | null
 }

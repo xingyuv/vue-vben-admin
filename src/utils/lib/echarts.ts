@@ -1,14 +1,6 @@
 import * as echarts from 'echarts/core'
 
-import {
-  BarChart,
-  LineChart,
-  PieChart,
-  MapChart,
-  PictorialBarChart,
-  RadarChart,
-  ScatterChart
-} from 'echarts/charts'
+import { BarChart, LineChart, PieChart, MapChart, PictorialBarChart, RadarChart, ScatterChart } from 'echarts/charts'
 
 import {
   TitleComponent,

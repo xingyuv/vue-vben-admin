@@ -374,12 +374,7 @@ export interface BasicTableProps<T = any> {
    *
    * The cell will not submit data while callback return false
    */
-  beforeEditSubmit?: (data: {
-    record: Recordable
-    index: number
-    key: string | number
-    value: any
-  }) => Promise<any>
+  beforeEditSubmit?: (data: { record: Recordable; index: number; key: string | number; value: any }) => Promise<any>
 
   /**
    * Callback executed when pagination, filters or sorter is changed
@@ -407,10 +402,7 @@ export interface BasicTableProps<T = any> {
   onColumnsChange?: (data: ColumnChangeParam[]) => void
 }
 
-export type CellFormat =
-  | string
-  | ((text: string, record: Recordable, index: number) => string | number)
-  | Map<string | number, any>
+export type CellFormat = string | ((text: string, record: Recordable, index: number) => string | number) | Map<string | number, any>
 
 // @ts-ignore
 export interface BasicColumn extends ColumnProps<Recordable> {
@@ -418,9 +410,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   filters?: {
     text: string
     value: string
-    children?:
-      | unknown[]
-      | (((props: Record<string, unknown>) => unknown[]) & (() => unknown[]) & (() => unknown[]))
+    children?: unknown[] | (((props: Record<string, unknown>) => unknown[]) & (() => unknown[]) & (() => unknown[]))
   }[]
 
   //
@@ -443,12 +433,7 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editable?: boolean
   editComponent?: ComponentType
   editComponentProps?:
-    | ((opt: {
-        text: string | number | boolean | Recordable
-        record: Recordable
-        column: BasicColumn
-        index: number
-      }) => Recordable)
+    | ((opt: { text: string | number | boolean | Recordable; record: Recordable; column: BasicColumn; index: number }) => Recordable)
     | Recordable
   editRule?: boolean | ((text: string, record: Recordable) => Promise<string>)
   editValueMap?: (value: any) => string

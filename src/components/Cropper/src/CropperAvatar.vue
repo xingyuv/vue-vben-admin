@@ -2,30 +2,15 @@
   <div :class="getClass" :style="getStyle">
     <div :class="`${prefixCls}-image-wrapper`" :style="getImageWrapperStyle" @click="openModal">
       <div :class="`${prefixCls}-image-mask`" :style="getImageWrapperStyle">
-        <Icon
-          icon="ant-design:cloud-upload-outlined"
-          :size="getIconWidth"
-          :style="getImageWrapperStyle"
-          color="#d6d6d6"
-        />
+        <Icon icon="ant-design:cloud-upload-outlined" :size="getIconWidth" :style="getImageWrapperStyle" color="#d6d6d6" />
       </div>
       <img :src="sourceValue" v-if="sourceValue" alt="avatar" />
     </div>
-    <a-button
-      :class="`${prefixCls}-upload-btn`"
-      @click="openModal"
-      v-if="showBtn"
-      v-bind="btnProps"
-    >
+    <a-button :class="`${prefixCls}-upload-btn`" @click="openModal" v-if="showBtn" v-bind="btnProps">
       {{ btnText ? btnText : t('component.cropper.selectImage') }}
     </a-button>
 
-    <CopperModal
-      @register="register"
-      @upload-success="handleUploadSuccess"
-      :uploadApi="uploadApi"
-      :src="sourceValue"
-    />
+    <CopperModal @register="register" @upload-success="handleUploadSuccess" :uploadApi="uploadApi" :src="sourceValue" />
   </div>
 </template>
 <script lang="ts" setup name="CropperAvatar">
@@ -63,9 +48,7 @@ const getIconWidth = computed(() => parseInt(`${props.width}`.replace(/px/, ''))
 
 const getStyle = computed((): CSSProperties => ({ width: unref(getWidth) }))
 
-const getImageWrapperStyle = computed(
-  (): CSSProperties => ({ width: unref(getWidth), height: unref(getWidth) })
-)
+const getImageWrapperStyle = computed((): CSSProperties => ({ width: unref(getWidth), height: unref(getWidth) }))
 
 watchEffect(() => {
   sourceValue.value = props.value || ''

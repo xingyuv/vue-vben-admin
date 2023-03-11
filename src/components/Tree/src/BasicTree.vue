@@ -1,25 +1,8 @@
 <script lang="tsx">
 import type { CSSProperties } from 'vue'
-import type {
-  FieldNames,
-  TreeState,
-  TreeItem,
-  KeyType,
-  CheckKeys,
-  TreeActionType
-} from './types/tree'
+import type { FieldNames, TreeState, TreeItem, KeyType, CheckKeys, TreeActionType } from './types/tree'
 
-import {
-  defineComponent,
-  reactive,
-  computed,
-  unref,
-  ref,
-  watchEffect,
-  toRaw,
-  watch,
-  onMounted
-} from 'vue'
+import { defineComponent, reactive, computed, unref, ref, watchEffect, toRaw, watch, onMounted } from 'vue'
 import TreeHeader from './components/TreeHeader.vue'
 import { Tree, Spin, Empty } from 'ant-design-vue'
 import { TreeIcon } from './TreeIcon'
@@ -109,9 +92,7 @@ export default defineComponent({
       return omit(propsData, 'treeData', 'class')
     })
 
-    const getTreeData = computed((): TreeItem[] =>
-      searchState.startSearch ? searchState.searchData : unref(treeDataRef)
-    )
+    const getTreeData = computed((): TreeItem[] => (searchState.startSearch ? searchState.searchData : unref(treeDataRef)))
 
     const getNotFound = computed((): boolean => {
       return !getTreeData.value || getTreeData.value.length === 0
@@ -228,9 +209,7 @@ export default defineComponent({
       searchState.searchData = filter(
         unref(treeDataRef),
         (node) => {
-          const result = filterFn
-            ? filterFn(searchValue, node, unref(getFieldNames))
-            : node[titleField]?.includes(searchValue) ?? false
+          const result = filterFn ? filterFn(searchValue, node, unref(getFieldNames)) : node[titleField]?.includes(searchValue) ?? false
           if (result) {
             matchedKeys.push(node[keyField])
           }
@@ -374,8 +353,7 @@ export default defineComponent({
         const title = get(item, titleField)
 
         const searchIdx = searchText ? title.indexOf(searchText) : -1
-        const isHighlight =
-          searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1
+        const isHighlight = searchState.startSearch && !isEmpty(searchText) && highlight && searchIdx !== -1
         const highlightStyle = `color: ${isBoolean(highlight) ? '#f50' : highlight}`
 
         const titleDom = isHighlight ? (
@@ -388,10 +366,7 @@ export default defineComponent({
           title
         )
         item[titleField] = (
-          <span
-            class={`${bem('title')} pl-2`}
-            onClick={handleClickNode.bind(null, item[keyField], item[childrenField])}
-          >
+          <span class={`${bem('title')} pl-2`} onClick={handleClickNode.bind(null, item[keyField], item[childrenField])}>
             {slots?.title ? (
               getSlot(slots, 'title', item)
             ) : (
@@ -432,11 +407,7 @@ export default defineComponent({
               {extendSlots(slots)}
             </TreeHeader>
           )}
-          <Spin
-            wrapperClassName={unref(props.treeWrapperClassName)}
-            spinning={unref(props.loading)}
-            tip="加载中..."
-          >
+          <Spin wrapperClassName={unref(props.treeWrapperClassName)} spinning={unref(props.loading)} tip="加载中...">
             <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
               <Tree {...unref(getBindValues)} showIcon={false} treeData={treeData.value} />
             </ScrollContainer>

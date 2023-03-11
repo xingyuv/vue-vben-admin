@@ -15,9 +15,7 @@ type ResolveProp<T> = ExtractPropTypes<{
   key: { type: T; required: true }
 }>['key']
 type ResolvePropType<T> = ResolveProp<T> extends { type: infer V } ? V : ResolveProp<T>
-type ResolvePropTypeWithReadonly<T> = Readonly<T> extends Readonly<Array<infer A>>
-  ? ResolvePropType<A[]>
-  : ResolvePropType<T>
+type ResolvePropTypeWithReadonly<T> = Readonly<T> extends Readonly<Array<infer A>> ? ResolvePropType<A[]> : ResolvePropType<T>
 
 type IfUnknown<T, V> = [unknown] extends [T] ? V : T
 
@@ -25,27 +23,15 @@ export type BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> = {
   type?: T
   values?: readonly V[]
   required?: R
-  default?: R extends true
-    ? never
-    : D extends Record<string, unknown> | Array<any>
-    ? () => D
-    : (() => D) | D
+  default?: R extends true ? never : D extends Record<string, unknown> | Array<any> ? () => D : (() => D) | D
   validator?: ((val: any) => val is C) | ((val: any) => boolean)
 }
 
 type _BuildPropType<T, V, C> =
-  | (T extends PropWrapper<unknown>
-      ? T[typeof wrapperKey]
-      : [V] extends [never]
-      ? ResolvePropTypeWithReadonly<T>
-      : never)
+  | (T extends PropWrapper<unknown> ? T[typeof wrapperKey] : [V] extends [never] ? ResolvePropTypeWithReadonly<T> : never)
   | V
   | C
-export type BuildPropType<T, V, C> = _BuildPropType<
-  IfUnknown<T, never>,
-  IfUnknown<V, never>,
-  IfUnknown<C, never>
->
+export type BuildPropType<T, V, C> = _BuildPropType<IfUnknown<T, never>, IfUnknown<V, never>, IfUnknown<C, never>>
 
 type _BuildPropDefault<T, D> = [T] extends [
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -59,9 +45,7 @@ type _BuildPropDefault<T, D> = [T] extends [
 export type BuildPropDefault<T, D, R> = R extends true
   ? { readonly default?: undefined }
   : {
-      readonly default: Exclude<D, undefined> extends never
-        ? undefined
-        : Exclude<_BuildPropDefault<T, D>, undefined>
+      readonly default: Exclude<D, undefined> extends never ? undefined : Exclude<_BuildPropDefault<T, D>, undefined>
     }
 export type BuildPropReturn<T, D, R, V, C> = {
   readonly type: PropType<BuildPropType<T, V, C>>
@@ -90,13 +74,10 @@ export type BuildPropReturn<T, D, R, V, C> = {
   } as const)
   @link see more: https://github.com/element-plus/element-plus/pull/3341
  */
-export function buildProp<
-  T = never,
-  D extends BuildPropType<T, V, C> = never,
-  R extends boolean = false,
-  V = never,
-  C = never
->(option: BuildPropOption<T, D, R, V, C>, key?: string): BuildPropReturn<T, D, R, V, C> {
+export function buildProp<T = never, D extends BuildPropType<T, V, C> = never, R extends boolean = false, V = never, C = never>(
+  option: BuildPropOption<T, D, R, V, C>,
+  key?: string
+): BuildPropReturn<T, D, R, V, C> {
   // filter native prop type and nested prop, e.g `null`, `undefined` (from `buildProps`)
   if (!isObject(option) || !!option[propKey]) return option as any
 
@@ -115,9 +96,7 @@ export function buildProp<
           if (validator) valid ||= validator(val)
 
           if (!valid && allowedValues.length > 0) {
-            const allowValuesText = [...new Set(allowedValues)]
-              .map((value) => JSON.stringify(value))
-              .join(', ')
+            const allowValuesText = [...new Set(allowedValues)].map((value) => JSON.stringify(value)).join(', ')
             warn(
               `Invalid prop: validation failed${
                 key ? ` for prop "${key}"` : ''
@@ -129,10 +108,7 @@ export function buildProp<
       : undefined
 
   return {
-    type:
-      typeof type === 'object' && type && Object.getOwnPropertySymbols(type).includes(wrapperKey)
-        ? type[wrapperKey]
-        : type,
+    type: typeof type === 'object' && type && Object.getOwnPropertySymbols(type).includes(wrapperKey) ? type[wrapperKey] : type,
     required: !!required,
     default: defaultValue,
     validator: _validator,
@@ -157,9 +133,7 @@ export const buildProps = <
 >(
   props: O
 ) =>
-  fromPairs(
-    Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)])
-  ) as unknown as {
+  fromPairs(Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)])) as unknown as {
     [K in keyof O]: O[K] extends { [propKey]: boolean }
       ? O[K]
       : [O[K]] extends NativePropType
@@ -179,7 +153,6 @@ export const buildProps = <
 export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>)
 
 export const keyOf = <T>(arr: T) => Object.keys(arr as any) as Array<keyof T>
-export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) =>
-  val as Mutable<typeof val>
+export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) => val as Mutable<typeof val>
 
 export const componentSize = ['large', 'medium', 'small', 'mini'] as const

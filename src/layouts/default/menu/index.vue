@@ -59,9 +59,7 @@ export default defineComponent({
 
     const { getIsMobile } = useAppInject()
 
-    const getComputedMenuMode = computed(() =>
-      unref(getIsMobile) ? MenuModeEnum.INLINE : props.menuMode || unref(getMenuMode)
-    )
+    const getComputedMenuMode = computed(() => (unref(getIsMobile) ? MenuModeEnum.INLINE : props.menuMode || unref(getMenuMode)))
 
     const getComputedMenuTheme = computed(() => props.theme || unref(getMenuTheme))
 
@@ -70,9 +68,7 @@ export default defineComponent({
     const getUseScroll = computed(() => {
       return (
         !unref(getIsHorizontal) &&
-        (unref(getIsSidebarType) ||
-          props.splitType === MenuSplitTyeEnum.LEFT ||
-          props.splitType === MenuSplitTyeEnum.NONE)
+        (unref(getIsSidebarType) || props.splitType === MenuSplitTyeEnum.LEFT || props.splitType === MenuSplitTyeEnum.NONE)
       )
     })
 
@@ -129,13 +125,7 @@ export default defineComponent({
     function renderHeader() {
       if (!unref(getIsShowLogo) && !unref(getIsMobile)) return null
 
-      return (
-        <AppLogo
-          showTitle={!unref(getCollapsed)}
-          class={unref(getLogoClass)}
-          theme={unref(getComputedMenuTheme)}
-        />
-      )
+      return <AppLogo showTitle={!unref(getCollapsed)} class={unref(getLogoClass)} theme={unref(getComputedMenuTheme)} />
     }
 
     function renderMenu() {
@@ -160,11 +150,7 @@ export default defineComponent({
       return (
         <>
           {renderHeader()}
-          {unref(getUseScroll) ? (
-            <ScrollContainer style={unref(getWrapperStyle)}>{() => renderMenu()}</ScrollContainer>
-          ) : (
-            renderMenu()
-          )}
+          {unref(getUseScroll) ? <ScrollContainer style={unref(getWrapperStyle)}>{() => renderMenu()}</ScrollContainer> : renderMenu()}
         </>
       )
     }

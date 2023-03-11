@@ -67,10 +67,10 @@ export function colorIsDark(color: string) {
 export function darken(color: string, amount: number) {
   color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
   amount = Math.trunc((255 * amount) / 100)
-  return `#${subtractLight(color.substring(0, 2), amount)}${subtractLight(
-    color.substring(2, 4),
+  return `#${subtractLight(color.substring(0, 2), amount)}${subtractLight(color.substring(2, 4), amount)}${subtractLight(
+    color.substring(4, 6),
     amount
-  )}${subtractLight(color.substring(4, 6), amount)}`
+  )}`
 }
 
 /**
@@ -82,10 +82,7 @@ export function darken(color: string, amount: number) {
 export function lighten(color: string, amount: number) {
   color = color.indexOf('#') >= 0 ? color.substring(1, color.length) : color
   amount = Math.trunc((255 * amount) / 100)
-  return `#${addLight(color.substring(0, 2), amount)}${addLight(
-    color.substring(2, 4),
-    amount
-  )}${addLight(color.substring(4, 6), amount)}`
+  return `#${addLight(color.substring(0, 2), amount)}${addLight(color.substring(2, 4), amount)}${addLight(color.substring(4, 6), amount)}`
 }
 
 /* Suma el porcentaje indicado a un color (RR, GG o BB) hexadecimal para aclararlo */
@@ -121,10 +118,7 @@ function luminanace(r: number, g: number, b: number) {
  * @param {string} rgb2 rgb color 2
  */
 function contrast(rgb1: string[], rgb2: number[]) {
-  return (
-    (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) /
-    (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
-  )
+  return (luminanace(~~rgb1[0], ~~rgb1[1], ~~rgb1[2]) + 0.05) / (luminanace(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
 }
 
 /**

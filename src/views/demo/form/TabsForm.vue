@@ -7,11 +7,7 @@
     </div>
     <CollapseContainer title="标签页+多级field表单">
       <Tabs v-model:activeKey="activeKey">
-        <TabPane
-          v-for="item in tabsFormSchema"
-          :key="item.key"
-          v-bind="omit(item, ['Form', 'key'])"
-        >
+        <TabPane v-for="item in tabsFormSchema" :key="item.key" v-bind="omit(item, ['Form', 'key'])">
           <BasicForm @register="item.Form[0]" />
         </TabPane>
       </Tabs>

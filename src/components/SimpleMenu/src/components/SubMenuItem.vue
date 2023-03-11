@@ -3,11 +3,7 @@
     <template v-if="!getCollapse">
       <div :class="`${prefixCls}-submenu-title`" @click.stop="handleClick" :style="getItemStyle">
         <slot name="title"></slot>
-        <Icon
-          icon="eva:arrow-ios-downward-outline"
-          :size="14"
-          :class="`${prefixCls}-submenu-title-icon`"
-        />
+        <Icon icon="eva:arrow-ios-downward-outline" :size="14" :class="`${prefixCls}-submenu-title-icon`" />
       </div>
       <CollapseTransition>
         <ul :class="prefixCls" v-show="state.opened">
@@ -36,12 +32,7 @@
         >
           <slot name="title"></slot>
         </div>
-        <Icon
-          v-if="getParentSubMenu"
-          icon="eva:arrow-ios-downward-outline"
-          :size="14"
-          :class="`${prefixCls}-submenu-title-icon`"
-        />
+        <Icon v-if="getParentSubMenu" icon="eva:arrow-ios-downward-outline" :size="14" :class="`${prefixCls}-submenu-title-icon`" />
       </div>
       <!-- eslint-disable-next-line -->
       <template #content v-show="state.opened">

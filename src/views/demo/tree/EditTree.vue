@@ -14,14 +14,7 @@
         <BasicTree title="右键菜单" :treeData="treeData" :beforeRightClick="getRightMenuList" />
       </Col>
       <Col :span="8">
-        <BasicTree
-          title="工具栏使用"
-          toolbar
-          checkable
-          search
-          :treeData="treeData"
-          :beforeRightClick="getRightMenuList"
-        />
+        <BasicTree title="工具栏使用" toolbar checkable search :treeData="treeData" :beforeRightClick="getRightMenuList" />
       </Col>
       <Col :span="8">
         <BasicTree title="没有fieldNames，插槽有效" helpMessage="正确的示例" :treeData="treeData3">

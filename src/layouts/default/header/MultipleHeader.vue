@@ -31,8 +31,7 @@ export default defineComponent({
 
     const { getCalcContentWidth, getSplit } = useMenuSetting()
     const { getIsMobile } = useAppInject()
-    const { getFixed, getShowInsetHeaderRef, getShowFullHeaderRef, getHeaderTheme, getShowHeader } =
-      useHeaderSetting()
+    const { getFixed, getShowInsetHeaderRef, getShowFullHeaderRef, getHeaderTheme, getShowHeader } = useHeaderSetting()
 
     const { getFullContent } = useFullContent()
 
@@ -63,11 +62,7 @@ export default defineComponent({
 
     const getPlaceholderDomStyle = computed((): CSSProperties => {
       let height = 0
-      if (
-        (unref(getShowFullHeaderRef) || !unref(getSplit)) &&
-        unref(getShowHeader) &&
-        !unref(getFullContent)
-      ) {
+      if ((unref(getShowFullHeaderRef) || !unref(getSplit)) && unref(getShowHeader) && !unref(getFullContent)) {
         height += HEADER_HEIGHT
       }
       if (unref(getShowMultipleTab) && !unref(getFullContent)) {
@@ -80,11 +75,7 @@ export default defineComponent({
     })
 
     const getClass = computed(() => {
-      return [
-        prefixCls,
-        `${prefixCls}--${unref(getHeaderTheme)}`,
-        { [`${prefixCls}--fixed`]: unref(getIsFixed) }
-      ]
+      return [prefixCls, `${prefixCls}--${unref(getHeaderTheme)}`, { [`${prefixCls}--fixed`]: unref(getIsFixed) }]
     })
 
     return {

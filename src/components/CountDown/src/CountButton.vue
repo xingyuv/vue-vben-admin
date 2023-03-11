@@ -25,9 +25,7 @@ const { currentCount, isStart, start, reset } = useCountdown(props.count)
 const { t } = useI18n()
 
 const getButtonText = computed(() => {
-  return !unref(isStart)
-    ? t('component.countdown.normalText')
-    : t('component.countdown.sendText', [unref(currentCount)])
+  return !unref(isStart) ? t('component.countdown.normalText') : t('component.countdown.sendText', [unref(currentCount)])
 })
 
 watchEffect(() => {

@@ -131,8 +131,7 @@ export default defineComponent({
         return value
       }
 
-      const options: LabelValueOptions =
-        unref(getComponentProps)?.options ?? (unref(optionsRef) || [])
+      const options: LabelValueOptions = unref(getComponentProps)?.options ?? (unref(optionsRef) || [])
       const option = options.find((item) => `${item.value}` === `${value}`)
 
       return option?.label ?? value
@@ -252,9 +251,7 @@ export default defineComponent({
 
         if (beforeEditSubmit && isFunction(beforeEditSubmit)) {
           spinning.value = true
-          const keys: string[] = columns
-            .map((_column) => _column.dataIndex)
-            .filter((field) => !!field) as string[]
+          const keys: string[] = columns.map((_column) => _column.dataIndex).filter((field) => !!field) as string[]
           let result: any = true
           try {
             result = await beforeEditSubmit({
@@ -337,9 +334,7 @@ export default defineComponent({
     function initCbs(cbs: 'submitCbs' | 'validCbs' | 'cancelCbs', handle: Fn) {
       if (props.record) {
         /* eslint-disable  */
-        isArray(props.record[cbs])
-          ? props.record[cbs]?.push(handle)
-          : (props.record[cbs] = [handle])
+        isArray(props.record[cbs]) ? props.record[cbs]?.push(handle) : (props.record[cbs] = [handle])
       }
     }
 
@@ -431,10 +426,7 @@ export default defineComponent({
               />
               {!this.getRowEditable && (
                 <div class={`${this.prefixCls}__action`}>
-                  <CheckOutlined
-                    class={[`${this.prefixCls}__icon`, 'mx-2']}
-                    onClick={this.handleSubmitClick}
-                  />
+                  <CheckOutlined class={[`${this.prefixCls}__icon`, 'mx-2']} onClick={this.handleSubmitClick} />
                   <CloseOutlined class={`${this.prefixCls}__icon `} onClick={this.handleCancel} />
                 </div>
               )}

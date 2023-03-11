@@ -1,25 +1,10 @@
 <template>
-  <a-input
-    disabled
-    :style="{ width }"
-    :placeholder="t('component.icon.placeholder')"
-    :class="prefixCls"
-    v-model:value="currentSelect"
-  >
+  <a-input disabled :style="{ width }" :placeholder="t('component.icon.placeholder')" :class="prefixCls" v-model:value="currentSelect">
     <template #addonAfter>
-      <a-popover
-        placement="bottomLeft"
-        trigger="click"
-        v-model="visible"
-        :overlayClassName="`${prefixCls}-popover`"
-      >
+      <a-popover placement="bottomLeft" trigger="click" v-model="visible" :overlayClassName="`${prefixCls}-popover`">
         <template #title>
           <div class="flex justify-between">
-            <a-input
-              :placeholder="t('component.icon.search')"
-              @change="debounceHandleSearchChange"
-              allowClear
-            />
+            <a-input :placeholder="t('component.icon.search')" @change="debounceHandleSearchChange" allowClear />
           </div>
         </template>
 
@@ -42,13 +27,7 @@
               </ul>
             </ScrollContainer>
             <div class="flex py-2 items-center justify-center" v-if="getTotal >= pageSize">
-              <a-pagination
-                showLessItems
-                size="small"
-                :pageSize="pageSize"
-                :total="getTotal"
-                @change="handlePageChange"
-              />
+              <a-pagination showLessItems size="small" :pageSize="pageSize" :total="getTotal" @change="handlePageChange" />
             </div>
           </div>
           <template v-else

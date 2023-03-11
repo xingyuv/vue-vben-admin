@@ -1,14 +1,7 @@
 <template>
   <PageWrapper title="上传组件示例">
     <a-alert message="基础示例" />
-    <BasicUpload
-      :maxSize="20"
-      :maxNumber="10"
-      @change="handleChange"
-      :api="uploadApi"
-      class="my-5"
-      :accept="['image/*']"
-    />
+    <BasicUpload :maxSize="20" :maxNumber="10" @change="handleChange" :api="uploadApi" class="my-5" :accept="['image/*']" />
 
     <a-alert message="嵌入表单,加入表单校验" />
 

@@ -12,11 +12,7 @@
     >
       <template #title>
         <div :class="`${prefixCls}__popover-title`">
-          <Checkbox
-            :indeterminate="indeterminate"
-            v-model:checked="checkAll"
-            @change="onCheckAllChange"
-          >
+          <Checkbox :indeterminate="indeterminate" v-model:checked="checkAll" @change="onCheckAllChange">
             {{ t('component.table.settingColumnShow') }}
           </Checkbox>
 
@@ -24,11 +20,7 @@
             {{ t('component.table.settingIndexColumnShow') }}
           </Checkbox>
 
-          <Checkbox
-            v-model:checked="checkSelect"
-            @change="handleSelectCheckChange"
-            :disabled="!defaultRowSelection"
-          >
+          <Checkbox v-model:checked="checkSelect" @change="handleSelectCheckChange" :disabled="!defaultRowSelection">
             {{ t('component.table.settingSelectColumnShow') }}
           </Checkbox>
 
@@ -48,11 +40,7 @@
                   {{ item.label }}
                 </Checkbox>
 
-                <Tooltip
-                  placement="bottomLeft"
-                  :mouseLeaveDelay="0.4"
-                  :getPopupContainer="getPopupContainer"
-                >
+                <Tooltip placement="bottomLeft" :mouseLeaveDelay="0.4" :getPopupContainer="getPopupContainer">
                   <template #title>
                     {{ t('component.table.settingFixedLeft') }}
                   </template>
@@ -69,11 +57,7 @@
                   />
                 </Tooltip>
                 <Divider type="vertical" />
-                <Tooltip
-                  placement="bottomLeft"
-                  :mouseLeaveDelay="0.4"
-                  :getPopupContainer="getPopupContainer"
-                >
+                <Tooltip placement="bottomLeft" :mouseLeaveDelay="0.4" :getPopupContainer="getPopupContainer">
                   <template #title>
                     {{ t('component.table.settingFixedRight') }}
                   </template>
@@ -308,11 +292,7 @@ export default defineComponent({
 
             plainSortOptions.value = columns
 
-            setColumns(
-              columns
-                .map((col: Options) => col.value)
-                .filter((value: string) => state.checkedList.includes(value))
-            )
+            setColumns(columns.map((col: Options) => col.value).filter((value: string) => state.checkedList.includes(value)))
           }
         })
         // 记录原始order 序列
@@ -338,9 +318,7 @@ export default defineComponent({
     function handleColumnFixed(item: BasicColumn, fixed?: 'left' | 'right') {
       if (!state.checkedList.includes(item.dataIndex as string)) return
 
-      const columns = getColumns().filter((c: BasicColumn) =>
-        state.checkedList.includes(c.dataIndex as string)
-      ) as BasicColumn[]
+      const columns = getColumns().filter((c: BasicColumn) => state.checkedList.includes(c.dataIndex as string)) as BasicColumn[]
       const isFixed = item.fixed === fixed ? false : fixed
       const index = columns.findIndex((col) => col.dataIndex === item.dataIndex)
       if (index !== -1) {
@@ -359,10 +337,7 @@ export default defineComponent({
       table.setColumns(columns)
       const data: ColumnChangeParam[] = unref(plainSortOptions).map((col) => {
         const visible =
-          columns.findIndex(
-            (c: BasicColumn | string) =>
-              c === col.value || (typeof c !== 'string' && c.dataIndex === col.value)
-          ) !== -1
+          columns.findIndex((c: BasicColumn | string) => c === col.value || (typeof c !== 'string' && c.dataIndex === col.value)) !== -1
         return { dataIndex: col.value, fixed: col.fixed, visible }
       })
 

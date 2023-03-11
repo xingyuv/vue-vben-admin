@@ -5,13 +5,7 @@
       {{ cancelText }}
     </a-button>
     <slot name="centerFooter"></slot>
-    <a-button
-      :type="okType"
-      @click="handleOk"
-      :loading="confirmLoading"
-      v-bind="okButtonProps"
-      v-if="showOkBtn"
-    >
+    <a-button :type="okType" @click="handleOk" :loading="confirmLoading" v-bind="okButtonProps" v-if="showOkBtn">
       {{ okText }}
     </a-button>
     <slot name="appendFooter"></slot>

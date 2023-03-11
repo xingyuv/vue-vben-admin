@@ -11,14 +11,7 @@
     <div :class="prefixCls">
       <div :class="`${prefixCls}-left`">
         <div :class="`${prefixCls}-cropper`">
-          <CropperImage
-            v-if="src"
-            :src="src"
-            height="300px"
-            :circled="circled"
-            @cropend="handleCropend"
-            @ready="handleReady"
-          />
+          <CropperImage v-if="src" :src="src" height="300px" :circled="circled" @cropend="handleCropend" @ready="handleReady" />
         </div>
 
         <div :class="`${prefixCls}-toolbar`">
@@ -56,22 +49,10 @@
               />
             </Tooltip>
             <Tooltip :title="t('component.cropper.btn_scale_x')" placement="bottom">
-              <a-button
-                type="primary"
-                preIcon="vaadin:arrows-long-h"
-                size="small"
-                :disabled="!src"
-                @click="handlerToolbar('scaleX')"
-              />
+              <a-button type="primary" preIcon="vaadin:arrows-long-h" size="small" :disabled="!src" @click="handlerToolbar('scaleX')" />
             </Tooltip>
             <Tooltip :title="t('component.cropper.btn_scale_y')" placement="bottom">
-              <a-button
-                type="primary"
-                preIcon="vaadin:arrows-long-v"
-                size="small"
-                :disabled="!src"
-                @click="handlerToolbar('scaleY')"
-              />
+              <a-button type="primary" preIcon="vaadin:arrows-long-v" size="small" :disabled="!src" @click="handlerToolbar('scaleY')" />
             </Tooltip>
             <Tooltip :title="t('component.cropper.btn_zoom_in')" placement="bottom">
               <a-button
@@ -213,20 +194,8 @@ async function handleOk() {
   &-cropper {
     height: 300px;
     background: #eee;
-    background-image: linear-gradient(
-        45deg,
-        rgb(0 0 0 / 25%) 25%,
-        transparent 0,
-        transparent 75%,
-        rgb(0 0 0 / 25%) 0
-      ),
-      linear-gradient(
-        45deg,
-        rgb(0 0 0 / 25%) 25%,
-        transparent 0,
-        transparent 75%,
-        rgb(0 0 0 / 25%) 0
-      );
+    background-image: linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0),
+      linear-gradient(45deg, rgb(0 0 0 / 25%) 25%, transparent 0, transparent 75%, rgb(0 0 0 / 25%) 0);
     background-position: 0 0, 12px 12px;
     background-size: 24px 24px;
   }

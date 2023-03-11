@@ -6,12 +6,7 @@
           <ListItemMeta>
             <template #title>
               {{ item.title }}
-              <Switch
-                class="extra"
-                checked-children="开"
-                un-checked-children="关"
-                default-checked
-              />
+              <Switch class="extra" checked-children="开" un-checked-children="关" default-checked />
             </template>
             <template #description>
               <div>{{ item.description }}</div>

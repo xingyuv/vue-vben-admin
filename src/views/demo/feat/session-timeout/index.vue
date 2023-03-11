@@ -1,8 +1,5 @@
 <template>
-  <PageWrapper
-    title="登录过期示例"
-    content="用户登录过期示例，不再跳转登录页，直接生成页面覆盖当前页面，方便保持过期前的用户状态！"
-  >
+  <PageWrapper title="登录过期示例" content="用户登录过期示例，不再跳转登录页，直接生成页面覆盖当前页面，方便保持过期前的用户状态！">
     <a-card title="请点击下面的按钮访问测试接口" extra="所访问的接口会返回Token过期响应">
       <a-card-grid style="width: 50%; text-align: center">
         <a-button type="primary" @click="test1">HttpStatus == 401</a-button>

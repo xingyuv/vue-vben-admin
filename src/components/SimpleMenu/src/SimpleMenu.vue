@@ -8,12 +8,7 @@
     @select="handleSelect"
   >
     <template v-for="item in items" :key="item.path">
-      <SimpleSubMenu
-        :item="item"
-        :parent="true"
-        :collapsedShowTitle="collapsedShowTitle"
-        :collapse="collapse"
-      />
+      <SimpleSubMenu :item="item" :parent="true" :collapsedShowTitle="collapsedShowTitle" :collapse="collapse" />
     </template>
   </Menu>
 </template>

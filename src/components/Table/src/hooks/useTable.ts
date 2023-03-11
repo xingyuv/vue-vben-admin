@@ -57,9 +57,7 @@ export function useTable(tableProps?: Props): [
   function getTableInstance(): TableActionType {
     const table = unref(tableRef)
     if (!table) {
-      error(
-        'The table instance has not been obtained yet, please make sure the table is presented when performing the table operation!'
-      )
+      error('The table instance has not been obtained yet, please make sure the table is presented when performing the table operation!')
     }
     return table as TableActionType
   }

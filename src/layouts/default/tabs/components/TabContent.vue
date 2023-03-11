@@ -48,14 +48,9 @@ export default defineComponent({
 
     const getIsTabs = computed(() => !props.isExtra)
 
-    const getTrigger = computed((): ('contextmenu' | 'click' | 'hover')[] =>
-      unref(getIsTabs) ? ['contextmenu'] : ['click']
-    )
+    const getTrigger = computed((): ('contextmenu' | 'click' | 'hover')[] => (unref(getIsTabs) ? ['contextmenu'] : ['click']))
 
-    const { getDropMenuList, handleMenuEvent, handleContextMenu } = useTabDropdown(
-      props as TabContentProps,
-      getIsTabs
-    )
+    const { getDropMenuList, handleMenuEvent, handleContextMenu } = useTabDropdown(props as TabContentProps, getIsTabs)
 
     function handleContext(e) {
       props.tabItem && handleContextMenu(props.tabItem)(e)

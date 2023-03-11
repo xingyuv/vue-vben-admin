@@ -3,35 +3,16 @@
     <LoginFormTitle class="enter-x" />
     <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
       <FormItem name="account" class="enter-x">
-        <Input
-          class="fix-auto-fill"
-          size="large"
-          v-model:value="formData.account"
-          :placeholder="t('sys.login.userName')"
-        />
+        <Input class="fix-auto-fill" size="large" v-model:value="formData.account" :placeholder="t('sys.login.userName')" />
       </FormItem>
       <FormItem name="mobile" class="enter-x">
-        <Input
-          size="large"
-          v-model:value="formData.mobile"
-          :placeholder="t('sys.login.mobile')"
-          class="fix-auto-fill"
-        />
+        <Input size="large" v-model:value="formData.mobile" :placeholder="t('sys.login.mobile')" class="fix-auto-fill" />
       </FormItem>
       <FormItem name="sms" class="enter-x">
-        <CountdownInput
-          size="large"
-          class="fix-auto-fill"
-          v-model:value="formData.sms"
-          :placeholder="t('sys.login.smsCode')"
-        />
+        <CountdownInput size="large" class="fix-auto-fill" v-model:value="formData.sms" :placeholder="t('sys.login.smsCode')" />
       </FormItem>
       <FormItem name="password" class="enter-x">
-        <StrengthMeter
-          size="large"
-          v-model:value="formData.password"
-          :placeholder="t('sys.login.password')"
-        />
+        <StrengthMeter size="large" v-model:value="formData.password" :placeholder="t('sys.login.password')" />
       </FormItem>
       <FormItem name="confirmPassword" class="enter-x">
         <InputPassword
@@ -49,14 +30,7 @@
         </Checkbox>
       </FormItem>
 
-      <Button
-        type="primary"
-        class="enter-x"
-        size="large"
-        block
-        @click="handleRegister"
-        :loading="loading"
-      >
+      <Button type="primary" class="enter-x" size="large" block @click="handleRegister" :loading="loading">
         {{ t('sys.login.registerButton') }}
       </Button>
       <Button size="large" block class="mt-4 enter-x" @click="handleBackLogin">

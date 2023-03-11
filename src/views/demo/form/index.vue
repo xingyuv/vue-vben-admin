@@ -10,22 +10,10 @@
         @reset="handleReset"
       >
         <template #selectA="{ model, field }">
-          <a-select
-            :options="optionsA"
-            mode="multiple"
-            v-model:value="model[field]"
-            @change="valueSelectA = model[field]"
-            allowClear
-          />
+          <a-select :options="optionsA" mode="multiple" v-model:value="model[field]" @change="valueSelectA = model[field]" allowClear />
         </template>
         <template #selectB="{ model, field }">
-          <a-select
-            :options="optionsB"
-            mode="multiple"
-            v-model:value="model[field]"
-            @change="valueSelectB = model[field]"
-            allowClear
-          />
+          <a-select :options="optionsB" mode="multiple" v-model:value="model[field]" @change="valueSelectB = model[field]" allowClear />
         </template>
         <template #localSearch="{ model, field }">
           <ApiSelect
@@ -538,10 +526,7 @@ const schemas: FormSchema[] = [
         placeholder: '省份与城市联动',
         onChange: (e: any) => {
           // console.log(e)
-          let citiesOptions =
-            e == 1
-              ? citiesOptionsData[provincesOptions[0].id]
-              : citiesOptionsData[provincesOptions[1].id]
+          let citiesOptions = e == 1 ? citiesOptionsData[provincesOptions[0].id] : citiesOptionsData[provincesOptions[1].id]
           // console.log(citiesOptions)
           if (e === undefined) {
             citiesOptions = []

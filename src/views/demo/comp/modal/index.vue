@@ -5,9 +5,7 @@
     参数进行控制是否可以拖动/全屏，并演示了在Modal内动态加载内容并自动调整高度"
       show-icon
     />
-    <a-button type="primary" class="my-4" @click="openModalLoading">
-      打开弹窗,加载动态数据并自动调整高度(默认可以拖动/全屏)
-    </a-button>
+    <a-button type="primary" class="my-4" @click="openModalLoading"> 打开弹窗,加载动态数据并自动调整高度(默认可以拖动/全屏) </a-button>
 
     <Alert message="内外同时同时显示隐藏" show-icon />
     <a-button type="primary" class="my-4" @click="openModal2"> 打开弹窗 </a-button>

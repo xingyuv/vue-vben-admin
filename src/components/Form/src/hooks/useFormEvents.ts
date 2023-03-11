@@ -147,11 +147,7 @@ export function useFormEvents({
   /**
    * @description: Insert after a certain field, if not insert the last
    */
-  async function appendSchemaByField(
-    schema: FormSchema | FormSchema[],
-    prefixField?: string,
-    first = false
-  ) {
+  async function appendSchemaByField(schema: FormSchema | FormSchema[], prefixField?: string, first = false) {
     const schemaList: FormSchema[] = cloneDeep(unref(getSchema))
 
     const index = schemaList.findIndex((schema) => schema.field === prefixField)
@@ -179,14 +175,10 @@ export function useFormEvents({
       updateData = [...data]
     }
 
-    const hasField = updateData.every(
-      (item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field)
-    )
+    const hasField = updateData.every((item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field))
 
     if (!hasField) {
-      error(
-        'All children of the form Schema array that need to be updated must contain the `field` field'
-      )
+      error('All children of the form Schema array that need to be updated must contain the `field` field')
       return
     }
     schemaRef.value = updateData as FormSchema[]
@@ -201,14 +193,10 @@ export function useFormEvents({
       updateData = [...data]
     }
 
-    const hasField = updateData.every(
-      (item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field)
-    )
+    const hasField = updateData.every((item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field))
 
     if (!hasField) {
-      error(
-        'All children of the form Schema array that need to be updated must contain the `field` field'
-      )
+      error('All children of the form Schema array that need to be updated must contain the `field` field')
       return
     }
     const schema: FormSchema[] = []
@@ -248,9 +236,7 @@ export function useFormEvents({
         Reflect.has(item, 'field') &&
         item.field &&
         !isNullOrUnDef(item.defaultValue) &&
-        (!(item.field in currentFieldsValue) ||
-          isNullOrUnDef(currentFieldsValue[item.field]) ||
-          isEmpty(currentFieldsValue[item.field]))
+        (!(item.field in currentFieldsValue) || isNullOrUnDef(currentFieldsValue[item.field]) || isEmpty(currentFieldsValue[item.field]))
       ) {
         obj[item.field] = item.defaultValue
       }

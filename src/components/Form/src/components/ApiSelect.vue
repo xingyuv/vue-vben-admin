@@ -1,11 +1,5 @@
 <template>
-  <Select
-    @dropdown-visible-change="handleFetch"
-    v-bind="attrs"
-    @change="handleChange"
-    :options="getOptions"
-    v-model:value="state"
-  >
+  <Select @dropdown-visible-change="handleFetch" v-bind="attrs" @change="handleChange" :options="getOptions" v-model:value="state">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>

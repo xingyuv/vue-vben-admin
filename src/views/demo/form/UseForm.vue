@@ -6,16 +6,8 @@
       <BasicForm ref="settingFormRef" @register="registerSetting" @submit="handleSubmitSetting">
         <template #other>
           <Space>
-            <a-button
-              @click="() => withClose({ resetButtonOptions: { disabled: true, text: '重置New' } })"
-            >
-              修改重置按钮
-            </a-button>
-            <a-button
-              @click="() => withClose({ submitButtonOptions: { disabled: true, loading: true } })"
-            >
-              修改查询按钮
-            </a-button>
+            <a-button @click="() => withClose({ resetButtonOptions: { disabled: true, text: '重置New' } })"> 修改重置按钮 </a-button>
+            <a-button @click="() => withClose({ submitButtonOptions: { disabled: true, loading: true } })"> 修改查询按钮 </a-button>
             <a-button @click="handleLoad" class="mr-2"> 联动回显 </a-button>
           </Space>
         </template>

@@ -1,11 +1,6 @@
 <template>
   <div class="p-4">
-    <BasicTable
-      @register="registerTable"
-      @edit-end="handleEditEnd"
-      @edit-cancel="handleEditCancel"
-      :beforeEditSubmit="beforeEditSubmit"
-    />
+    <BasicTable @register="registerTable" @edit-end="handleEditEnd" @edit-cancel="handleEditCancel" :beforeEditSubmit="beforeEditSubmit" />
   </div>
 </template>
 <script lang="ts">

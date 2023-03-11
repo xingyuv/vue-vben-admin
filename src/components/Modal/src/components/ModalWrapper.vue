@@ -110,12 +110,7 @@ async function setModalHeight() {
 
     const modalRect = getComputedStyle(modalDom as Element).top
     const modalTop = Number.parseInt(modalRect)
-    let maxHeight =
-      window.innerHeight -
-      modalTop * 2 +
-      (props.footerOffset! || 0) -
-      props.modalFooterHeight -
-      props.modalHeaderHeight
+    let maxHeight = window.innerHeight - modalTop * 2 + (props.footerOffset! || 0) - props.modalFooterHeight - props.modalHeaderHeight
 
     // 距离顶部过进会出现滚动条
     if (modalTop < 40) {
@@ -131,14 +126,9 @@ async function setModalHeight() {
     // }
 
     if (props.fullScreen) {
-      realHeightRef.value =
-        window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28
+      realHeightRef.value = window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28
     } else {
-      realHeightRef.value = props.height
-        ? props.height
-        : realHeight > maxHeight
-        ? maxHeight
-        : realHeight
+      realHeightRef.value = props.height ? props.height : realHeight > maxHeight ? maxHeight : realHeight
     }
     emit('height-change', unref(realHeightRef))
   } catch (error) {

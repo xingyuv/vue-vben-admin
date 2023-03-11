@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="prefixCls"
-    class="fixed inset-0 flex h-screen w-screen bg-black items-center justify-center"
-  >
+  <div :class="prefixCls" class="fixed inset-0 flex h-screen w-screen bg-black items-center justify-center">
     <div
       :class="`${prefixCls}__unlock`"
       class="absolute top-0 left-1/2 flex pt-5 h-16 items-center justify-center sm:text-md xl:text-xl text-white flex-col cursor-pointer transform translate-x-1/2"
@@ -33,31 +30,15 @@
               {{ userinfo.realName }}
             </p>
           </div>
-          <InputPassword
-            :placeholder="t('sys.lock.placeholder')"
-            class="enter-x"
-            v-model:value="password"
-          />
+          <InputPassword :placeholder="t('sys.lock.placeholder')" class="enter-x" v-model:value="password" />
           <span :class="`${prefixCls}-entry__err-msg enter-x`" v-if="errMsg">
             {{ t('sys.lock.alert') }}
           </span>
           <div :class="`${prefixCls}-entry__footer enter-x`">
-            <a-button
-              type="link"
-              size="small"
-              class="mt-2 mr-2 enter-x"
-              :disabled="loading"
-              @click="handleShowForm(true)"
-            >
+            <a-button type="link" size="small" class="mt-2 mr-2 enter-x" :disabled="loading" @click="handleShowForm(true)">
               {{ t('common.back') }}
             </a-button>
-            <a-button
-              type="link"
-              size="small"
-              class="mt-2 mr-2 enter-x"
-              :disabled="loading"
-              @click="goLogin"
-            >
+            <a-button type="link" size="small" class="mt-2 mr-2 enter-x" :disabled="loading" @click="goLogin">
               {{ t('sys.lock.backToLogin') }}
             </a-button>
             <a-button class="mt-2" type="link" size="small" @click="unLock()" :loading="loading">

@@ -6,16 +6,7 @@
 
 <script setup lang="ts" name="Menu">
 import type { SubMenuProvider } from './types'
-import {
-  ref,
-  computed,
-  onMounted,
-  watchEffect,
-  watch,
-  nextTick,
-  getCurrentInstance,
-  provide
-} from 'vue'
+import { ref, computed, onMounted, watchEffect, watch, nextTick, getCurrentInstance, provide } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'
 import { createSimpleRootMenuContext } from './useSimpleMenuContext'

@@ -12,11 +12,7 @@ interface Options {
   getAutoCreateKey: ComputedRef<boolean | undefined>
 }
 
-function getKey(
-  record: Recordable,
-  rowKey: string | ((record: Record<string, any>) => string) | undefined,
-  autoCreateKey?: boolean
-) {
+function getKey(record: Recordable, rowKey: string | ((record: Record<string, any>) => string) | undefined, autoCreateKey?: boolean) {
   if (!rowKey || autoCreateKey) {
     return record[ROW_KEY]
   }
@@ -47,9 +43,7 @@ export function useCustomRow(
           const isCheckbox = rowSelection.type === 'checkbox'
           if (isCheckbox) {
             // 找到tr
-            const tr: HTMLElement = (e as MouseEvent)
-              .composedPath?.()
-              .find((dom: HTMLElement) => dom.tagName === 'TR') as HTMLElement
+            const tr: HTMLElement = (e as MouseEvent).composedPath?.().find((dom: HTMLElement) => dom.tagName === 'TR') as HTMLElement
             if (!tr) return
             // 找到Checkbox，检查是否为disabled
             const checkBox = tr.querySelector('input[type=checkbox]')

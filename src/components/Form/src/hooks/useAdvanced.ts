@@ -18,14 +18,7 @@ interface UseAdvancedContext {
   defaultValueRef: Ref<Recordable>
 }
 
-export default function ({
-  advanceState,
-  emit,
-  getProps,
-  getSchema,
-  formModel,
-  defaultValueRef
-}: UseAdvancedContext) {
+export default function ({ advanceState, emit, getProps, getSchema, formModel, defaultValueRef }: UseAdvancedContext) {
   const vm = getCurrentInstance()
 
   const { realWidthRef, screenEnum, screenRef } = useBreakpoint()
@@ -92,10 +85,7 @@ export default function ({
         // When less than or equal to 2 lines, the collapse and expand buttons are not displayed
         advanceState.hideAdvanceBtn = true
         advanceState.isAdvanced = true
-      } else if (
-        itemColSum > BASIC_COL_LEN * 2 &&
-        itemColSum <= BASIC_COL_LEN * (unref(getProps).autoAdvancedLine || 3)
-      ) {
+      } else if (itemColSum > BASIC_COL_LEN * 2 && itemColSum <= BASIC_COL_LEN * (unref(getProps).autoAdvancedLine || 3)) {
         advanceState.hideAdvanceBtn = false
 
         // More than 3 lines collapsed by default
@@ -141,10 +131,7 @@ export default function ({
       }
 
       if (isShow && (colProps || baseColProps)) {
-        const { itemColSum: sum, isAdvanced } = getAdvanced(
-          { ...baseColProps, ...colProps },
-          itemColSum
-        )
+        const { itemColSum: sum, isAdvanced } = getAdvanced({ ...baseColProps, ...colProps }, itemColSum)
 
         itemColSum = sum || 0
         if (isAdvanced) {

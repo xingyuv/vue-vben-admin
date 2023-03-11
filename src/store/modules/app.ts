@@ -1,11 +1,4 @@
-import type {
-  ProjectConfig,
-  HeaderSetting,
-  MenuSetting,
-  TransitionSetting,
-  MultiTabsSetting,
-  AppSizeType
-} from '@/types/config'
+import type { ProjectConfig, HeaderSetting, MenuSetting, TransitionSetting, MultiTabsSetting, AppSizeType } from '@/types/config'
 import type { BeforeMiniState } from '@/types/store'
 
 import { defineStore } from 'pinia'
@@ -87,7 +80,7 @@ export const useAppStore = defineStore({
     setComponentSize(size: AppSizeType): void {
       this.componentSize = size
     },
-    
+
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config)
       Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig)

@@ -15,11 +15,7 @@
               <div :class="`${prefixCls}__card-num`">
                 新增用户：<span>{{ item.new }}</span>
               </div>
-              <Icon
-                :class="`${prefixCls}__card-download`"
-                v-if="item.download"
-                :icon="item.download"
-              />
+              <Icon :class="`${prefixCls}__card-download`" v-if="item.download" :icon="item.download" />
             </Card>
           </ListItem>
         </a-col>

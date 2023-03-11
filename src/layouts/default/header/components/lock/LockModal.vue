@@ -1,11 +1,5 @@
 <template>
-  <BasicModal
-    :footer="null"
-    :title="t('layout.header.lockScreen')"
-    v-bind="$attrs"
-    :class="prefixCls"
-    @register="register"
-  >
+  <BasicModal :footer="null" :title="t('layout.header.lockScreen')" v-bind="$attrs" :class="prefixCls" @register="register">
     <div :class="`${prefixCls}__entry`">
       <div :class="`${prefixCls}__header`">
         <img :src="avatar" :class="`${prefixCls}__header-img`" />

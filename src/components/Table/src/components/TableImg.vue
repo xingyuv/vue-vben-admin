@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="prefixCls"
-    class="flex items-center mx-auto"
-    v-if="imgList && imgList.length"
-    :style="getWrapStyle"
-  >
+  <div :class="prefixCls" class="flex items-center mx-auto" v-if="imgList && imgList.length" :style="getWrapStyle">
     <Badge :count="!showBadge || imgList.length == 1 ? 0 : imgList.length" v-if="simpleShow">
       <div class="img-div">
         <ImagePreviewGroup>
@@ -23,12 +18,7 @@
     </Badge>
     <ImagePreviewGroup v-else>
       <template v-for="(img, index) in imgList" :key="img">
-        <Image
-          :width="size"
-          :style="{ marginLeft: index === 0 ? 0 : margin + 'px' }"
-          :src="srcPrefix + img"
-          :fallback="fallback"
-        />
+        <Image :width="size" :style="{ marginLeft: index === 0 ? 0 : margin + 'px' }" :src="srcPrefix + img" :fallback="fallback" />
       </template>
     </ImagePreviewGroup>
   </div>

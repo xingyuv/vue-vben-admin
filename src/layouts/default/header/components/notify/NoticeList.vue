@@ -10,11 +10,7 @@
                 style="width: 100%; margin-bottom: 0 !important"
                 :style="{ cursor: isTitleClickable ? 'pointer' : '' }"
                 :delete="!!item.titleDelete"
-                :ellipsis="
-                  $props.titleRows && $props.titleRows > 0
-                    ? { rows: $props.titleRows, tooltip: !!item.title }
-                    : false
-                "
+                :ellipsis="$props.titleRows && $props.titleRows > 0 ? { rows: $props.titleRows, tooltip: !!item.title } : false"
                 :content="item.title"
               />
               <div class="extra" v-if="item.extra">
@@ -35,11 +31,7 @@
               <div class="description" v-if="item.description">
                 <a-typography-paragraph
                   style="width: 100%; margin-bottom: 0 !important"
-                  :ellipsis="
-                    $props.descRows && $props.descRows > 0
-                      ? { rows: $props.descRows, tooltip: !!item.description }
-                      : false
-                  "
+                  :ellipsis="$props.descRows && $props.descRows > 0 ? { rows: $props.descRows, tooltip: !!item.description } : false"
                   :content="item.description"
                 />
               </div>

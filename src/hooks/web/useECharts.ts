@@ -10,10 +10,7 @@ import echarts from '@/utils/lib/echarts'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 
-export function useECharts(
-  elRef: Ref<HTMLDivElement>,
-  theme: 'light' | 'dark' | 'default' = 'default'
-) {
+export function useECharts(elRef: Ref<HTMLDivElement>, theme: 'light' | 'dark' | 'default' = 'default') {
   const { getDarkMode: getSysDarkMode } = useRootSetting()
   const { getCollapsed } = useMenuSetting()
 
