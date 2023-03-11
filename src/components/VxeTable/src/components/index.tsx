@@ -3,6 +3,7 @@ import AAutoComplete from './AAutoComplete'
 import AInput from './AInput'
 import AInputNumber from './AInputNumber'
 import ASelect from './ASelect'
+import AApiTreeSelect from './AApiTreeSelect'
 import ACascader from './ACascader'
 import ADatePicker from './ADatePicker'
 import AMonthPicker from './AMonthPicker'
@@ -75,6 +76,7 @@ export const VXETablePluginAntd = {
       AInput,
       AInputNumber,
       ASelect,
+      AApiTreeSelect,
       ACascader,
       ADatePicker,
       AMonthPicker,
