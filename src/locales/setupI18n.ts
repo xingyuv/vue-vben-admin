@@ -37,7 +37,7 @@ async function createI18nOptions(): Promise<I18nOptions> {
 }
 
 // setup i18n instance with glob
-export async function setupI18n(app: App) {
+export async function setupI18n(app: App<Element>) {
   const options = await createI18nOptions()
   i18n = createI18n(options) as I18n
   app.use(i18n)
