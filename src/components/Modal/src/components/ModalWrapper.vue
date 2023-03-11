@@ -5,7 +5,7 @@
     </div>
   </ScrollContainer>
 </template>
-<script setup lang="ts" name="ModalWrapper" inheritAttrs="false">
+<script lang="ts" setup name="ModalWrapper" inheritAttrs="false">
 import type { CSSProperties } from 'vue'
 import { computed, ref, watchEffect, unref, watch, onMounted, nextTick, onUnmounted } from 'vue'
 import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn'

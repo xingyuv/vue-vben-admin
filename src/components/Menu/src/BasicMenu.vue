@@ -17,7 +17,7 @@
     </template>
   </Menu>
 </template>
-<script setup lang="ts" name="BasicMenu">
+<script lang="ts" setup name="BasicMenu">
 import type { MenuState } from './types'
 import { computed, unref, reactive, watch, toRefs, ref } from 'vue'
 import { Menu } from 'ant-design-vue'

@@ -5,7 +5,7 @@
   <span v-else>{{ getTitle }}</span>
   <BasicHelp v-if="getHelpMessage" :text="getHelpMessage" :class="`${prefixCls}__help`" />
 </template>
-<script setup lang="ts" name="TableHeaderCell">
+<script lang="ts" setup name="TableHeaderCell">
 import { computed } from 'vue'
 import type { BasicColumn } from '../types/table'
 import BasicHelp from '@/components/Basic/src/BasicHelp.vue'

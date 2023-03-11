@@ -34,7 +34,7 @@
     </template>
   </SubMenu>
 </template>
-<script setup lang="ts" name="SimpleSubMenu">
+<script lang="ts" setup name="SimpleSubMenu">
 import type { Menu } from '@/router/types'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'

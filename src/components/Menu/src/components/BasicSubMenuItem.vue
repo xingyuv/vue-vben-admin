@@ -10,7 +10,7 @@
     </template>
   </SubMenu>
 </template>
-<script setup lang="ts" name="BasicSubMenuItem">
+<script lang="ts" setup name="BasicSubMenuItem">
 import type { Menu as MenuType } from '@/router/types'
 import { computed } from 'vue'
 import { Menu } from 'ant-design-vue'

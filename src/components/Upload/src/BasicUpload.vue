@@ -35,7 +35,7 @@
     />
   </div>
 </template>
-<script setup lang="ts" name="BasicUpload">
+<script lang="ts" setup name="BasicUpload">
 import { ref, watch, unref, useAttrs, computed } from 'vue'
 import { Icon } from '@/components/Icon'
 import { Tooltip, Space } from 'ant-design-vue'

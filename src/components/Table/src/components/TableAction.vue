@@ -21,7 +21,7 @@
     </Dropdown>
   </div>
 </template>
-<script setup lang="ts" name="TableAction">
+<script lang="ts" setup name="TableAction">
 import { computed, toRaw, unref } from 'vue'
 import { MoreOutlined } from '@ant-design/icons-vue'
 import { Divider, Tooltip, TooltipProps } from 'ant-design-vue'

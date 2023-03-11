@@ -26,7 +26,7 @@
     </PageFooter>
   </div>
 </template>
-<script setup lang="ts" name="PageWrapper" inheritAttrs="false">
+<script lang="ts" setup name="PageWrapper" inheritAttrs="false">
 import { CSSProperties, provide } from 'vue'
 import { computed, watch, ref, unref, useAttrs, useSlots } from 'vue'
 import PageFooter from './PageFooter.vue'

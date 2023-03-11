@@ -14,7 +14,7 @@
     </ImagePreviewGroup>
   </div>
 </template>
-<script setup lang="ts" name="ImagePreview">
+<script lang="ts" setup name="ImagePreview">
 import { computed } from 'vue'
 import { Image, ImagePreviewGroup } from 'ant-design-vue'
 import { useDesign } from '@/hooks/web/useDesign'

@@ -24,7 +24,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { computed, ref, watch, useSlots } from 'vue'
 import { Dropdown, Menu, MenuItem, MenuDivider, InputSearch } from 'ant-design-vue'
 import { Icon } from '@/components/Icon'

@@ -13,7 +13,7 @@
     </Tooltip>
   </div>
 </template>
-<script setup lang="ts" name="ModalClose">
+<script lang="ts" setup name="ModalClose">
 import { computed } from 'vue'
 import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue'
 import { useDesign } from '@/hooks/web/useDesign'

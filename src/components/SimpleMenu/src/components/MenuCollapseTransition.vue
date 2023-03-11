@@ -3,7 +3,7 @@
     <slot></slot>
   </transition>
 </template>
-<script setup lang="ts" name="MenuCollapseTransition">
+<script lang="ts" setup name="MenuCollapseTransition">
 import { addClass, removeClass } from '@/utils/domUtils'
 const on = {
   beforeEnter(el) {

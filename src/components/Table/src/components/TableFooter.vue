@@ -11,7 +11,7 @@
     :scroll="scroll"
   />
 </template>
-<script setup lang="ts" name="BasicTableFooter">
+<script lang="ts" setup name="BasicTableFooter">
 import { unref, computed, toRaw } from 'vue'
 import { Table } from 'ant-design-vue'
 import { cloneDeep } from 'lodash-es'

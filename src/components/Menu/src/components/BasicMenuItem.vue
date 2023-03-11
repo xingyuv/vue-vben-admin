@@ -3,7 +3,7 @@
     <MenuItemContent v-bind="$props" :item="item" />
   </MenuItem>
 </template>
-<script setup lang="ts" name="BasicMenuItem">
+<script lang="ts" setup name="BasicMenuItem">
 import { Menu } from 'ant-design-vue'
 import { itemProps } from '../props'
 import MenuItemContent from './MenuItemContent.vue'

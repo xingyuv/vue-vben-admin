@@ -4,7 +4,7 @@
     {{ getI18nName }}
   </span>
 </template>
-<script setup lang="ts" name="MenuItemContent">
+<script lang="ts" setup name="MenuItemContent">
 import { computed } from 'vue'
 import Icon from '@/components/Icon/index'
 import { useI18n } from '@/hooks/web/useI18n'

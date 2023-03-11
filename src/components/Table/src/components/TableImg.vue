@@ -23,7 +23,7 @@
     </ImagePreviewGroup>
   </div>
 </template>
-<script setup lang="ts" name="TableImage">
+<script lang="ts" setup name="TableImage">
 import type { CSSProperties } from 'vue'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'

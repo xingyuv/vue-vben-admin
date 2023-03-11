@@ -37,7 +37,7 @@
     <FileList :dataSource="fileListRef" :columns="columns" :actionColumn="actionColumn" />
   </BasicModal>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref, toRefs, unref, computed } from 'vue'
 import { Upload, Alert } from 'ant-design-vue'
 import { BasicModal, useModalInner } from '@/components/Modal'

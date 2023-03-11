@@ -10,7 +10,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="StrengthMeter">
+<script lang="ts" setup name="StrengthMeter">
 import { computed, ref, watch, unref, watchEffect } from 'vue'
 import { InputPassword } from 'ant-design-vue'
 import { zxcvbn } from '@zxcvbn-ts/core'

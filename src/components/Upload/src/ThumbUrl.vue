@@ -3,7 +3,7 @@
     <Image v-if="fileUrl" :src="fileUrl" :width="104" />
   </span>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { propTypes } from '@/utils/propTypes'
 import { Image } from 'ant-design-vue'
 

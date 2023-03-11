@@ -16,7 +16,7 @@
     </template>
   </div>
 </template>
-<script setup lang="ts" name="Scrollbar">
+<script lang="ts" setup name="Scrollbar">
 import { addResizeListener, removeResizeListener } from '@/utils/event'
 import componentSetting from '@/settings/componentSetting'
 import { toObject } from './util'

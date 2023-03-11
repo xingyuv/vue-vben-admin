@@ -1,7 +1,7 @@
 <template>
   <span :class="getTagClass" v-if="getShowTag">{{ getContent }}</span>
 </template>
-<script setup lang="ts" name="SimpleMenuTag">
+<script lang="ts" setup name="SimpleMenuTag">
 import type { Menu } from '@/router/types'
 import { computed } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'

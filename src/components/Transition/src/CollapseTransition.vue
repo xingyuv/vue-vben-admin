@@ -3,7 +3,7 @@
     <slot></slot>
   </transition>
 </template>
-<script setup lang="ts" name="CollapseTransition">
+<script lang="ts" setup name="CollapseTransition">
 import { addClass, removeClass } from '@/utils/domUtils'
 const on = {
   beforeEnter(el) {

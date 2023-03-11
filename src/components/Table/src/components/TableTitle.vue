@@ -3,7 +3,7 @@
     {{ getTitle }}
   </BasicTitle>
 </template>
-<script setup lang="ts" name="BasicTableTitle">
+<script lang="ts" setup name="BasicTableTitle">
 import { computed } from 'vue'
 import { BasicTitle } from '@/components/Basic/index'
 import { useDesign } from '@/hooks/web/useDesign'

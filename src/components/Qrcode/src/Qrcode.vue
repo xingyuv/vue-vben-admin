@@ -3,7 +3,7 @@
     <component :is="tag" ref="wrapRef" />
   </div>
 </template>
-<script setup lang="ts" name="QrCode">
+<script lang="ts" setup name="QrCode">
 import { watch, ref, unref, onMounted } from 'vue'
 import { toCanvas, QRCodeRenderersOptions, LogoType } from './qrcodePlus'
 import { toDataURL } from 'qrcode'

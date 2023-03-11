@@ -10,7 +10,7 @@
     <FileList :dataSource="fileListRef" :columns="columns" :actionColumn="actionColumn" />
   </BasicModal>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { watch, ref } from 'vue'
 import FileList from './FileList.vue'
 import { BasicModal, useModalInner } from '@/components/Modal'

@@ -39,7 +39,7 @@
     </Table>
   </div>
 </template>
-<script setup lang="ts" name="BasicTable">
+<script lang="ts" setup name="BasicTable">
 import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam } from './types/table'
 import { ref, computed, unref, toRaw, inject, watchEffect, useAttrs, useSlots } from 'vue'
 import { Table } from 'ant-design-vue'

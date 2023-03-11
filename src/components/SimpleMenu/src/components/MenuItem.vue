@@ -16,7 +16,7 @@
   </li>
 </template>
 
-<script setup lang="ts" name="MenuItem">
+<script lang="ts" setup name="MenuItem">
 import { ref, useSlots, computed, unref, getCurrentInstance, watch } from 'vue'
 import { useDesign } from '@/hooks/web/useDesign'
 import { propTypes } from '@/utils/propTypes'
