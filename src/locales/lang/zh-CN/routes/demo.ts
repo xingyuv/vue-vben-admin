@@ -42,7 +42,6 @@ export default {
 
     loading: 'Loading',
 
-    time: '相对时间',
     cropperImage: '图片裁剪',
     cardList: '卡片列表'
   },

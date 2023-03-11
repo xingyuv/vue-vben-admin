@@ -43,7 +43,6 @@ export default {
 
     loading: 'Loading',
 
-    time: 'Relative Time',
     cropperImage: 'Cropper Image',
     cardList: 'Card List'
   },
