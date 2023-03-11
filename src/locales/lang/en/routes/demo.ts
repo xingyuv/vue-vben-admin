@@ -72,7 +72,6 @@ export default {
     print: 'Print',
     contextMenu: 'Context Menu',
     download: 'Download',
-    clickOutSide: 'ClickOutSide',
     imgPreview: 'Picture Preview',
     copy: 'Clipboard',
     msg: 'Message prompt',

@@ -149,14 +149,6 @@ const feat: AppRouteModule = {
       }
     },
     {
-      path: 'click-out-side',
-      name: 'ClickOutSideDemo',
-      component: () => import('@/views/demo/feat/click-out-side/index.vue'),
-      meta: {
-        title: t('routes.demo.feat.clickOutSide')
-      }
-    },
-    {
       path: 'img-preview',
       name: 'ImgPreview',
       component: () => import('@/views/demo/feat/img-preview/index.vue'),
