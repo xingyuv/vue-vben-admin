@@ -43,7 +43,7 @@ async function generateIcon() {
     .then(async (answers) => {
       const { iconSet, output, useType } = answers
       const outputDir = path.resolve(process.cwd(), output)
-      fs.ensureDir(outputDir)
+      await fs.ensureDir(outputDir)
       const genCollections = collections.filter((item) => [iconSet].includes(item.id))
       const prefixSet: string[] = []
       for (const info of genCollections) {
@@ -60,7 +60,7 @@ async function generateIcon() {
           prefixSet.push(prefix)
         }
       }
-      fs.emptyDir(path.join(process.cwd(), 'node_modules/.vite'))
+      await fs.emptyDir(path.join(process.cwd(), 'node_modules/.vite'))
       console.log(`✨ ${colors.cyan(`[${pkg.name}]`)}` + ' - Icon generated successfully:' + `[${prefixSet}]`)
     })
 }
