@@ -25,7 +25,7 @@ const authDirective: Directive = {
   mounted
 }
 
-export function setupPermissionDirective(app: App) {
+export function setupPermissionDirective(app: App<Element>) {
   app.directive('auth', authDirective)
 }
 

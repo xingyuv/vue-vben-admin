@@ -32,7 +32,7 @@ const loadingDirective: Directive = {
   }
 }
 
-export function setupLoadingDirective(app: App) {
+export function setupLoadingDirective(app: App<Element>) {
   app.directive('loading', loadingDirective)
 }
 
