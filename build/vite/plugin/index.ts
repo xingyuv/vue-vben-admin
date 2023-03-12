@@ -16,7 +16,7 @@ import { configVisualizerConfig } from './visualizer'
 import { configThemePlugin } from './theme'
 import { configImageminPlugin } from './imagemin'
 import { configSvgIconsPlugin } from './svgSprite'
-import { isDevFn } from '../../utils'
+import { isProdFn } from '../../utils'
 
 export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boolean) {
   const { VITE_USE_IMAGEMIN, VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
@@ -54,7 +54,7 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
   vitePlugins.push(purgeIcons())
 
   // vite-plugin-style-import
-  if (isDevFn(mode)) {
+  if (isProdFn(mode)) {
     vitePlugins.push(configStyleImportPlugin(isBuild))
   }
 

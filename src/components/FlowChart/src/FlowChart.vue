@@ -1,9 +1,9 @@
 <template>
   <div class="h-full" :class="prefixCls">
-    <FlowChartToolbar :prefixCls="prefixCls" v-if="toolbar" @view-data="handlePreview"/>
+    <FlowChartToolbar :prefixCls="prefixCls" v-if="toolbar" @view-data="handlePreview" />
     <div ref="lfElRef" class="h-full"></div>
     <BasicModal @register="register" title="流程数据" width="50%">
-      <JsonPreview :data="graphData"/>
+      <JsonPreview :data="graphData" />
     </BasicModal>
   </div>
 </template>
@@ -31,13 +31,11 @@ const props = defineProps({
   },
   data: {
     type: Object as PropType<any>,
-    default:
-      () => ({})
+    default: () => ({})
   },
   toolbar: {
     type: Boolean,
-    default:
-      true
+    default: true
   },
   patternItems: {
     type: Array

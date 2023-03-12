@@ -1,9 +1,5 @@
 lockfileVersion: 5.4
 
-overrides:
-  bin-wrapper: npm:bin-wrapper-china
-  gifsicle: 5.2.0
-
 specifiers:
   '@ant-design/colors': ^7.0.0
   '@ant-design/icons-vue': ^6.1.0
@@ -3675,16 +3671,14 @@ packages:
       find-versions: 3.2.0
     dev: true
 
-  /bin-wrapper-china/0.1.0:
-    resolution: {integrity: sha512-1UCm17WYEbgry50tup+AQN+JGVEVzoW4f8HMl899k1lvuFxWKGZXl/G2fgxQxAckRjnloO3ijLVVEsv8zescUg==}
-    engines: {node: '>=8.3'}
-    hasBin: true
+  /bin-wrapper/4.1.0:
+    resolution: {integrity: sha512-hfRmo7hWIXPkbpi0ZltboCMVrU+0ClXR/JgbCKKjlDjQf6igXa7OwdqNcFWQZPZTgiY7ZpzE3+LjjkLiTN2T7Q==}
+    engines: {node: '>=6'}
     dependencies:
       bin-check: 4.1.0
       bin-version-check: 4.0.0
-      binary-mirror-config: 1.41.0
       download: 7.1.0
-      import-lazy: 4.0.0
+      import-lazy: 3.1.0
       os-filter-obj: 2.0.0
       pify: 4.0.1
     dev: true
@@ -3692,10 +3686,6 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
-    dev: true
-
-  /binary-mirror-config/1.41.0:
-    resolution: {integrity: sha512-ZiIhR1s6Sv1Fv6qCQqfPjx0Cj86BgFlhqNxZgHkQOWcxJcMbO3mj1iqsuVjowYqJqeZL8e52+IEv7IRnSX6T6w==}
     dev: true
 
   /binary/0.3.0:
@@ -4650,7 +4640,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
     dev: true
 
   /cz-git/1.5.3:
@@ -6510,7 +6500,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
       execa: 5.1.1
       logalot: 2.1.0
     dev: true
@@ -7057,6 +7047,11 @@ packages:
       resolve-from: 4.0.0
     dev: true
 
+  /import-lazy/3.1.0:
+    resolution: {integrity: sha512-8/gvXvX2JMn0F+CDlSC4l6kOmVaLOO3XLkksI7CI3Ud95KDYJuYur2b9P/PUt/i/pDAMd/DulQsNbbbmRRsDIQ==}
+    engines: {node: '>=6'}
+    dev: true
+
   /import-lazy/4.0.0:
     resolution: {integrity: sha512-rKtvo6a868b5Hu3heneU+L4yEQ4jYKLtjpnPeUdK7h0yzXGmyBTypknlkCvHFBqfX9YlorEiMM6Dnq/5atfHkw==}
     engines: {node: '>=8'}
@@ -7554,7 +7549,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
       logalot: 2.1.0
     dev: true
 
@@ -7565,7 +7560,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
     dev: true
 
   /js-base64/2.6.4:
@@ -8372,7 +8367,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
     dev: true
 
   /ms/2.0.0:
@@ -8696,7 +8691,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
     dev: true
 
   /ora/6.1.2:
@@ -9086,7 +9081,7 @@ packages:
     requiresBuild: true
     dependencies:
       bin-build: 3.0.0
-      bin-wrapper: /bin-wrapper-china/0.1.0
+      bin-wrapper: 4.1.0
       execa: 4.1.0
     dev: true
 
