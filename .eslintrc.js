@@ -6,6 +6,7 @@ module.exports = {
     es6: true
   },
   parser: 'vue-eslint-parser',
+  plugins: ['vue'],
   parserOptions: {
     parser: '@typescript-eslint/parser',
     ecmaVersion: 2020,
