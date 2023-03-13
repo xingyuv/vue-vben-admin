@@ -4,7 +4,7 @@
   "volar.tsPluginStatus": false,
   "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
-  "prettier.printWidth": 100, // 超过最大值换行
+  "prettier.printWidth": 140, // 超过最大值换行
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
   "search.exclude": {
@@ -56,7 +56,7 @@
     "**/yarn.lock": true
   },
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "sass"],
+  "stylelint.validate": ["css", "less", "postcss", "scss", "vue", "scss"],
   "path-intellisense.mappings": {
     "@/": "${workspaceRoot}/src"
   },
