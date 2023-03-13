@@ -282,8 +282,8 @@ const schemas: FormSchema[] = [
           value: '2'
         }
       ],
-      onChange: (e, v) => {
-        console.log('RadioButtonGroup====>:', e, v)
+      onChange: (e: Event) => {
+        console.log('RadioButtonGroup====>:', e)
       }
     }
   },

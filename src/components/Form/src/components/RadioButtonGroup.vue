@@ -4,7 +4,7 @@
 <template>
   <RadioGroup v-bind="attrs" v-model:value="state" button-style="solid">
     <template v-for="item in getOptions" :key="`${item.value}`">
-      <RadioButton :value="item.value" :disabled="item.disabled" @click="handleClick(item)">
+      <RadioButton :value="item.value" :disabled="item.disabled" @click="handleClick(item.value)">
         {{ item.label }}
       </RadioButton>
     </template>
@@ -52,8 +52,9 @@ const getOptions = computed((): OptionsItem[] => {
   return options.map((item) => ({ label: item, value: item })) as OptionsItem[]
 })
 
-function handleClick(...args) {
+function handleClick(args) {
   emitData.value = args
+  console.info(emitData.value)
   emits('change', emitData.value)
 }
 </script>

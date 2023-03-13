@@ -114,7 +114,7 @@ function emitChange() {
   emit('options-change', unref(getOptions))
 }
 
-function handleChange(_, ...args) {
+function handleChange(args) {
   emitData.value = args
 }
 </script>

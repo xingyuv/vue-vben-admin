@@ -51,8 +51,8 @@
     <a-button v-auth="[RoleEnum.TEST, RoleEnum.SUPER]" color="error" class="mx-4"> 拥有[test,super]角色权限可见 </a-button>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { computed, defineComponent } from 'vue'
+<script lang="ts" setup>
+import { computed } from 'vue'
 import { Alert, Divider, Space } from 'ant-design-vue'
 import CurrentPermissionMode from '../CurrentPermissionMode.vue'
 import { useUserStore } from '@/store/modules/user'
@@ -61,22 +61,10 @@ import { usePermission } from '@/hooks/web/usePermission'
 import { Authority } from '@/components/Authority'
 import { PageWrapper } from '@/components/Page'
 
-export default defineComponent({
-  components: { Alert, PageWrapper, Space, CurrentPermissionMode, Divider, Authority },
-  setup() {
-    const { changeRole, hasPermission } = usePermission()
-    const userStore = useUserStore()
-
-    return {
-      userStore,
-      RoleEnum,
-      isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
-      isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
-      changeRole,
-      hasPermission
-    }
-  }
-})
+const { changeRole, hasPermission } = usePermission()
+const userStore = useUserStore()
+const isSuper = computed(() => userStore.getRoleList.includes(RoleEnum.SUPER))
+const isTest = computed(() => userStore.getRoleList.includes(RoleEnum.TEST))
 </script>
 <style lang="less" scoped>
 .demo {
