@@ -55,7 +55,7 @@
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.1",
-    "pinia": "2.0.33",
+    "pinia": "^2.0.33",
     "print-js": "^1.6.0",
     "qrcode": "^1.5.1",
     "qs": "^6.11.1",
