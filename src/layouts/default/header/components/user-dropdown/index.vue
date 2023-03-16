@@ -20,12 +20,12 @@
   </Dropdown>
   <LockAction @register="register" />
 </template>
-<script lang="ts">
+<script lang="ts" setup name="UserDropdown">
 // components
 import { Dropdown, Menu } from 'ant-design-vue'
 import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface'
 
-import { defineComponent, computed } from 'vue'
+import { computed } from 'vue'
 
 import { DOC_URL } from '@/settings/siteSetting'
 
@@ -41,72 +41,53 @@ import { openWindow } from '@/utils'
 
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
 
+const MenuItem = createAsyncComponent(() => import('./DropMenuItem.vue'))
+const LockAction = createAsyncComponent(() => import('../lock/LockModal.vue'))
+const MenuDivider = Menu.Divider
 type MenuEvent = 'logout' | 'doc' | 'lock'
 
-export default defineComponent({
-  name: 'UserDropdown',
-  components: {
-    Dropdown,
-    Menu,
-    MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
-    MenuDivider: Menu.Divider,
-    LockAction: createAsyncComponent(() => import('../lock/LockModal.vue'))
-  },
-  props: {
-    theme: propTypes.oneOf(['dark', 'light'])
-  },
-  setup() {
-    const { prefixCls } = useDesign('header-user-dropdown')
-    const { t } = useI18n()
-    const { getShowDoc, getUseLockPage } = useHeaderSetting()
-    const userStore = useUserStore()
-
-    const getUserInfo = computed(() => {
-      const { realName = '', avatar, desc } = userStore.getUserInfo || {}
-      return { realName, avatar: avatar || headerImg, desc }
-    })
-
-    const [register, { openModal }] = useModal()
-
-    function handleLock() {
-      openModal(true)
-    }
-
-    //  login out
-    function handleLoginOut() {
-      userStore.confirmLoginOut()
-    }
-
-    // open doc
-    function openDoc() {
-      openWindow(DOC_URL)
-    }
-
-    function handleMenuClick(e: MenuInfo) {
-      switch (e.key as MenuEvent) {
-        case 'logout':
-          handleLoginOut()
-          break
-        case 'doc':
-          openDoc()
-          break
-        case 'lock':
-          handleLock()
-          break
-      }
-    }
-
-    return {
-      prefixCls,
-      t,
-      getUserInfo,
-      handleMenuClick,
-      getShowDoc,
-      register,
-      getUseLockPage
-    }
-  }
+defineProps({
+  theme: propTypes.oneOf(['dark', 'light'])
 })
+const { prefixCls } = useDesign('header-user-dropdown')
+const { t } = useI18n()
+const { getShowDoc, getUseLockPage } = useHeaderSetting()
+const userStore = useUserStore()
+
+const getUserInfo = computed(() => {
+  const { realName = '', avatar, desc } = userStore.getUserInfo || {}
+  return { realName, avatar: avatar || headerImg, desc }
+})
+
+const [register, { openModal }] = useModal()
+
+function handleLock() {
+  openModal(true)
+}
+
+//  login out
+function handleLoginOut() {
+  userStore.confirmLoginOut()
+}
+
+// open doc
+function openDoc() {
+  openWindow(DOC_URL)
+}
+
+function handleMenuClick(e: MenuInfo) {
+  switch (e.key as MenuEvent) {
+    case 'logout':
+      handleLoginOut()
+      break
+    case 'doc':
+      openDoc()
+      break
+    case 'lock':
+      handleLock()
+      break
+  }
+}
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-header-user-dropdown';

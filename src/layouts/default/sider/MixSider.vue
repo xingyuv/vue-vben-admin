@@ -397,9 +397,9 @@ export default defineComponent({
 
   &.dark {
     &.open {
-      .@{prefix-cls}-logo {
-        // border-bottom: 1px solid @border-color;
-      }
+      // .@{prefix-cls}-logo {
+      //   border-bottom: 1px solid @border-color;
+      // }
 
       > .scrollbar {
         border-right: 1px solid @border-color;

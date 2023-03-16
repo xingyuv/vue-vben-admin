@@ -13,8 +13,8 @@
   </Layout>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, unref } from 'vue'
+<script lang="ts" setup name="DefaultLayout">
+import { computed, unref } from 'vue'
 import { Layout } from 'ant-design-vue'
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
 
@@ -30,44 +30,23 @@ import { useLockPage } from '@/hooks/web/useLockPage'
 
 import { useAppInject } from '@/hooks/web/useAppInject'
 
-export default defineComponent({
-  name: 'DefaultLayout',
-  components: {
-    LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
-    LayoutFooter: createAsyncComponent(() => import('@/layouts/default/footer/index.vue')),
-    LayoutHeader,
-    LayoutContent,
-    LayoutSideBar,
-    LayoutMultipleHeader,
-    Layout
-  },
-  setup() {
-    const { prefixCls } = useDesign('default-layout')
-    const { getIsMobile } = useAppInject()
-    const { getShowFullHeaderRef } = useHeaderSetting()
-    const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting()
+const LayoutFeatures = createAsyncComponent(() => import('@/layouts/default/feature/index.vue'))
+const LayoutFooter = createAsyncComponent(() => import('@/layouts/default/footer/index.vue'))
 
-    // Create a lock screen monitor
-    const lockEvents = useLockPage()
+const { prefixCls } = useDesign('default-layout')
+const { getIsMobile } = useAppInject()
+const { getShowFullHeaderRef } = useHeaderSetting()
+const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting()
 
-    const layoutClass = computed(() => {
-      let cls: string[] = ['ant-layout']
-      if (unref(getIsMixSidebar) || unref(getShowMenu)) {
-        cls.push('ant-layout-has-sider')
-      }
-      return cls
-    })
+// Create a lock screen monitor
+const lockEvents = useLockPage()
 
-    return {
-      getShowFullHeaderRef,
-      getShowSidebar,
-      prefixCls,
-      getIsMobile,
-      getIsMixSidebar,
-      layoutClass,
-      lockEvents
-    }
+const layoutClass = computed(() => {
+  let cls: string[] = ['ant-layout']
+  if (unref(getIsMixSidebar) || unref(getShowMenu)) {
+    cls.push('ant-layout-has-sider')
   }
+  return cls
 })
 </script>
 <style lang="less">

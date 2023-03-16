@@ -4,18 +4,9 @@
     <DoubleLeftOutlined v-else />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup name="SiderTrigger">
 import { DoubleRightOutlined, DoubleLeftOutlined } from '@ant-design/icons-vue'
 import { useMenuSetting } from '@/hooks/setting/useMenuSetting'
 
-export default defineComponent({
-  name: 'SiderTrigger',
-  components: { DoubleRightOutlined, DoubleLeftOutlined },
-  setup() {
-    const { getCollapsed, toggleCollapsed } = useMenuSetting()
-
-    return { getCollapsed, toggleCollapsed }
-  }
-})
+const { getCollapsed, toggleCollapsed } = useMenuSetting()
 </script>

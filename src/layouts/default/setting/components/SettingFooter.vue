@@ -16,8 +16,8 @@
     </a-button>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, unref } from 'vue'
+<script lang="ts" setup name="SettingFooter">
+import { unref } from 'vue'
 
 import { CopyOutlined, RedoOutlined } from '@ant-design/icons-vue'
 
@@ -36,56 +36,43 @@ import { updateGrayMode } from '@/logics/theme/updateGrayMode'
 import defaultSetting from '@/settings/projectSetting'
 import { changeTheme } from '@/logics/theme'
 
-export default defineComponent({
-  name: 'SettingFooter',
-  components: { CopyOutlined, RedoOutlined },
-  setup() {
-    const permissionStore = usePermissionStore()
-    const { prefixCls } = useDesign('setting-footer')
-    const { t } = useI18n()
-    const { createSuccessModal, createMessage } = useMessage()
-    const tabStore = useMultipleTabStore()
-    const userStore = useUserStore()
-    const appStore = useAppStore()
+const permissionStore = usePermissionStore()
+const { prefixCls } = useDesign('setting-footer')
+const { t } = useI18n()
+const { createSuccessModal, createMessage } = useMessage()
+const tabStore = useMultipleTabStore()
+const userStore = useUserStore()
+const appStore = useAppStore()
 
-    function handleCopy() {
-      const { isSuccessRef } = useCopyToClipboard(JSON.stringify(unref(appStore.getProjectConfig), null, 2))
-      unref(isSuccessRef) &&
-        createSuccessModal({
-          title: t('layout.setting.operatingTitle'),
-          content: t('layout.setting.operatingContent')
-        })
-    }
-    function handleResetSetting() {
-      try {
-        appStore.setProjectConfig(defaultSetting)
-        const { colorWeak, grayMode, themeColor } = defaultSetting
-        changeTheme(themeColor)
-        updateColorWeak(colorWeak)
-        updateGrayMode(grayMode)
-        createMessage.success(t('layout.setting.resetSuccess'))
-      } catch (error: any) {
-        createMessage.error(error)
-      }
-    }
-
-    function handleClearAndRedo() {
-      localStorage.clear()
-      appStore.resetAllState()
-      permissionStore.resetState()
-      tabStore.resetState()
-      userStore.resetState()
-      location.reload()
-    }
-    return {
-      prefixCls,
-      t,
-      handleCopy,
-      handleResetSetting,
-      handleClearAndRedo
-    }
+function handleCopy() {
+  const { isSuccessRef } = useCopyToClipboard(JSON.stringify(unref(appStore.getProjectConfig), null, 2))
+  unref(isSuccessRef) &&
+    createSuccessModal({
+      title: t('layout.setting.operatingTitle'),
+      content: t('layout.setting.operatingContent')
+    })
+}
+function handleResetSetting() {
+  try {
+    appStore.setProjectConfig(defaultSetting)
+    const { colorWeak, grayMode, themeColor } = defaultSetting
+    changeTheme(themeColor)
+    updateColorWeak(colorWeak)
+    updateGrayMode(grayMode)
+    createMessage.success(t('layout.setting.resetSuccess'))
+  } catch (error: any) {
+    createMessage.error(error)
   }
-})
+}
+
+function handleClearAndRedo() {
+  localStorage.clear()
+  appStore.resetAllState()
+  permissionStore.resetState()
+  tabStore.resetState()
+  userStore.resetState()
+  location.reload()
+}
 </script>
 <style lang="less" scoped>
 @prefix-cls: ~'@{namespace}-setting-footer';

@@ -21,8 +21,8 @@
     <DragBar ref="dragBarRef" />
   </Sider>
 </template>
-<script lang="ts">
-import { computed, defineComponent, ref, unref, CSSProperties, h } from 'vue'
+<script lang="ts" setup name="LayoutSideBar">
+import { computed, ref, unref, CSSProperties, h } from 'vue'
 
 import { Layout } from 'ant-design-vue'
 import LayoutMenu from '../menu/index.vue'
@@ -36,87 +36,59 @@ import { useAppInject } from '@/hooks/web/useAppInject'
 import { useDesign } from '@/hooks/web/useDesign'
 
 import DragBar from './DragBar.vue'
-export default defineComponent({
-  name: 'LayoutSideBar',
-  components: { Sider: Layout.Sider, LayoutMenu, DragBar, LayoutTrigger },
-  setup() {
-    const dragBarRef = ref<ElRef>(null)
-    const sideRef = ref<ElRef>(null)
+const Sider = Layout.Sider
+const dragBarRef = ref<ElRef>(null)
+const sideRef = ref<ElRef>(null)
 
-    const { getCollapsed, getMenuWidth, getSplit, getMenuTheme, getRealWidth, getMenuHidden, getMenuFixed, getIsMixMode, toggleCollapsed } =
-      useMenuSetting()
+const { getCollapsed, getMenuWidth, getSplit, getMenuTheme, getRealWidth, getMenuHidden, getMenuFixed, getIsMixMode } = useMenuSetting()
 
-    const { prefixCls } = useDesign('layout-sideBar')
+const { prefixCls } = useDesign('layout-sideBar')
 
-    const { getIsMobile } = useAppInject()
+const { getIsMobile } = useAppInject()
 
-    const { getTriggerAttr, getShowTrigger } = useTrigger(getIsMobile)
+const { getTriggerAttr, getShowTrigger } = useTrigger(getIsMobile)
 
-    useDragLine(sideRef, dragBarRef)
+useDragLine(sideRef, dragBarRef)
 
-    const { getCollapsedWidth, onBreakpointChange } = useSiderEvent()
+const { getCollapsedWidth, onBreakpointChange } = useSiderEvent()
 
-    const getMode = computed(() => {
-      return unref(getSplit) ? MenuModeEnum.INLINE : null
-    })
+const getMode = computed(() => {
+  return unref(getSplit) ? MenuModeEnum.INLINE : null
+})
 
-    const getSplitType = computed(() => {
-      return unref(getSplit) ? MenuSplitTyeEnum.LEFT : MenuSplitTyeEnum.NONE
-    })
+const getSplitType = computed(() => {
+  return unref(getSplit) ? MenuSplitTyeEnum.LEFT : MenuSplitTyeEnum.NONE
+})
 
-    const showClassSideBarRef = computed(() => {
-      return unref(getSplit) ? !unref(getMenuHidden) : true
-    })
+const showClassSideBarRef = computed(() => {
+  return unref(getSplit) ? !unref(getMenuHidden) : true
+})
 
-    const getSiderClass = computed(() => {
-      return [
-        prefixCls,
-        {
-          [`${prefixCls}--fixed`]: unref(getMenuFixed),
-          [`${prefixCls}--mix`]: unref(getIsMixMode) && !unref(getIsMobile)
-        }
-      ]
-    })
-
-    const getHiddenDomStyle = computed((): CSSProperties => {
-      const width = `${unref(getRealWidth)}px`
-      return {
-        width: width,
-        overflow: 'hidden',
-        flex: `0 0 ${width}`,
-        maxWidth: width,
-        minWidth: width,
-        transition: 'all 0.2s'
-      }
-    })
-
-    // 在此处使用计算量可能会导致sider异常
-    // andv 更新后，如果trigger插槽可用，则此处代码可废弃
-    const getTrigger = h(LayoutTrigger)
-
-    return {
-      prefixCls,
-      sideRef,
-      dragBarRef,
-      getIsMobile,
-      getHiddenDomStyle,
-      getSiderClass,
-      getTrigger,
-      getTriggerAttr,
-      getCollapsedWidth,
-      getMenuFixed,
-      showClassSideBarRef,
-      getMenuWidth,
-      getCollapsed,
-      getMenuTheme,
-      onBreakpointChange,
-      getMode,
-      getSplitType,
-      getShowTrigger,
-      toggleCollapsed
+const getSiderClass = computed(() => {
+  return [
+    prefixCls,
+    {
+      [`${prefixCls}--fixed`]: unref(getMenuFixed),
+      [`${prefixCls}--mix`]: unref(getIsMixMode) && !unref(getIsMobile)
     }
+  ]
+})
+
+const getHiddenDomStyle = computed((): CSSProperties => {
+  const width = `${unref(getRealWidth)}px`
+  return {
+    width: width,
+    overflow: 'hidden',
+    flex: `0 0 ${width}`,
+    maxWidth: width,
+    minWidth: width,
+    transition: 'all 0.2s'
   }
 })
+
+// 在此处使用计算量可能会导致sider异常
+// andv 更新后，如果trigger插槽可用，则此处代码可废弃
+const getTrigger = h(LayoutTrigger)
 </script>
 <style lang="less">
 @prefix-cls: ~'@{namespace}-layout-sideBar';

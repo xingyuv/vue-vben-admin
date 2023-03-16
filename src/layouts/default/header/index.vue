@@ -39,8 +39,8 @@
     </div>
   </Header>
 </template>
-<script lang="ts">
-import { defineComponent, unref, computed } from 'vue'
+<script lang="ts" setup name="LayoutHeader">
+import { unref, computed } from 'vue'
 
 import { propTypes } from '@/utils/propTypes'
 
@@ -66,112 +66,62 @@ import { useDesign } from '@/hooks/web/useDesign'
 import { createAsyncComponent } from '@/utils/factory/createAsyncComponent'
 import { useLocale } from '@/locales/useLocale'
 
-export default defineComponent({
-  name: 'LayoutHeader',
-  components: {
-    Header: Layout.Header,
-    AppLogo,
-    LayoutTrigger,
-    LayoutBreadcrumb,
-    LayoutMenu,
-    UserDropDown,
-    AppSizePicker,
-    AppLocalePicker,
-    FullScreen,
-    Notify,
-    AppSearch,
-    ErrorAction,
-    SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
-      loading: true
-    })
-  },
-  props: {
-    fixed: propTypes.bool
-  },
-  setup(props) {
-    const { prefixCls } = useDesign('layout-header')
-    const { getShowTopMenu, getShowHeaderTrigger, getSplit, getIsMixMode, getMenuWidth, getIsMixSidebar } = useMenuSetting()
-    const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } = useRootSetting()
+const Header = Layout.Header
+const SettingDrawer = createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
+  loading: true
+})
+const props = defineProps({
+  fixed: propTypes.bool
+})
+const { prefixCls } = useDesign('layout-header')
+const { getShowTopMenu, getShowHeaderTrigger, getSplit, getIsMixMode, getMenuWidth, getIsMixSidebar } = useMenuSetting()
+const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } = useRootSetting()
 
-    const {
-      getHeaderTheme,
-      getShowFullScreen,
-      getShowNotice,
-      getShowContent,
-      getShowBread,
-      getShowHeaderLogo,
-      getShowHeader,
-      getShowSearch
-    } = useHeaderSetting()
+const { getHeaderTheme, getShowFullScreen, getShowNotice, getShowContent, getShowBread, getShowHeaderLogo, getShowHeader, getShowSearch } =
+  useHeaderSetting()
 
-    const { getShowLocalePicker } = useLocale()
+const { getShowLocalePicker } = useLocale()
 
-    const { getIsMobile } = useAppInject()
+const { getIsMobile } = useAppInject()
 
-    const getHeaderClass = computed(() => {
-      const theme = unref(getHeaderTheme)
-      return [
-        prefixCls,
-        {
-          [`${prefixCls}--fixed`]: props.fixed,
-          [`${prefixCls}--mobile`]: unref(getIsMobile),
-          [`${prefixCls}--${theme}`]: theme
-        }
-      ]
-    })
-
-    const getShowSetting = computed(() => {
-      if (!unref(getShowSettingButton)) {
-        return false
-      }
-      const settingButtonPosition = unref(getSettingButtonPosition)
-
-      if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
-        return unref(getShowHeader)
-      }
-      return settingButtonPosition === SettingButtonPositionEnum.HEADER
-    })
-
-    const getLogoWidth = computed(() => {
-      if (!unref(getIsMixMode) || unref(getIsMobile)) {
-        return {}
-      }
-      const width = unref(getMenuWidth) < 180 ? 180 : unref(getMenuWidth)
-      return { width: `${width}px` }
-    })
-
-    const getSplitType = computed(() => {
-      return unref(getSplit) ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE
-    })
-
-    const getMenuMode = computed(() => {
-      return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null
-    })
-
-    return {
-      prefixCls,
-      getHeaderClass,
-      getShowHeaderLogo,
-      getHeaderTheme,
-      getShowHeaderTrigger,
-      getIsMobile,
-      getShowBread,
-      getShowContent,
-      getSplitType,
-      getSplit,
-      getMenuMode,
-      getShowTopMenu,
-      getShowLocalePicker,
-      getShowFullScreen,
-      getShowNotice,
-      getUseErrorHandle,
-      getLogoWidth,
-      getIsMixSidebar,
-      getShowSettingButton,
-      getShowSetting,
-      getShowSearch
+const getHeaderClass = computed(() => {
+  const theme = unref(getHeaderTheme)
+  return [
+    prefixCls,
+    {
+      [`${prefixCls}--fixed`]: props.fixed,
+      [`${prefixCls}--mobile`]: unref(getIsMobile),
+      [`${prefixCls}--${theme}`]: theme
     }
+  ]
+})
+
+const getShowSetting = computed(() => {
+  if (!unref(getShowSettingButton)) {
+    return false
   }
+  const settingButtonPosition = unref(getSettingButtonPosition)
+
+  if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+    return unref(getShowHeader)
+  }
+  return settingButtonPosition === SettingButtonPositionEnum.HEADER
+})
+
+const getLogoWidth = computed(() => {
+  if (!unref(getIsMixMode) || unref(getIsMobile)) {
+    return {}
+  }
+  const width = unref(getMenuWidth) < 180 ? 180 : unref(getMenuWidth)
+  return { width: `${width}px` }
+})
+
+const getSplitType = computed(() => {
+  return unref(getSplit) ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE
+})
+
+const getMenuMode = computed(() => {
+  return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null
 })
 </script>
 <style lang="less">
