@@ -3,8 +3,8 @@
     <BasicTable @register="registerTable" @edit-end="handleEditEnd" @edit-cancel="handleEditCancel" :beforeEditSubmit="beforeEditSubmit" />
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, h } from 'vue'
+<script lang="ts" setup>
+import { h } from 'vue'
 import { BasicTable, useTable, BasicColumn } from '@/components/Table'
 import { optionsListApi } from '@/api/demo/select'
 
@@ -204,67 +204,55 @@ const columns: BasicColumn[] = [
     width: 200
   }
 ]
-export default defineComponent({
-  components: { BasicTable },
-  setup() {
-    const [registerTable] = useTable({
-      title: '可编辑单元格示例',
-      api: demoListApi,
-      columns: columns,
-      showIndexColumn: false,
-      bordered: true
-    })
-
-    const { createMessage } = useMessage()
-
-    function handleEditEnd({ record, index, key, value }: Recordable) {
-      console.log(record, index, key, value)
-      return false
-    }
-
-    // 模拟将指定数据保存
-    function feakSave({ value, key, id }) {
-      createMessage.loading({
-        content: `正在模拟保存${key}`,
-        key: '_save_fake_data',
-        duration: 0
-      })
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          if (value === '') {
-            createMessage.error({
-              content: '保存失败：不能为空',
-              key: '_save_fake_data',
-              duration: 2
-            })
-            resolve(false)
-          } else {
-            createMessage.success({
-              content: `记录${id}的${key}已保存`,
-              key: '_save_fake_data',
-              duration: 2
-            })
-            resolve(true)
-          }
-        }, 2000)
-      })
-    }
-
-    async function beforeEditSubmit({ record, index, key, value }) {
-      console.log('单元格数据正在准备提交', { record, index, key, value })
-      return await feakSave({ id: record.id, key, value })
-    }
-
-    function handleEditCancel() {
-      console.log('cancel')
-    }
-
-    return {
-      registerTable,
-      handleEditEnd,
-      handleEditCancel,
-      beforeEditSubmit
-    }
-  }
+const [registerTable] = useTable({
+  title: '可编辑单元格示例',
+  api: demoListApi,
+  columns: columns,
+  showIndexColumn: false,
+  bordered: true
 })
+
+const { createMessage } = useMessage()
+
+function handleEditEnd({ record, index, key, value }: Recordable) {
+  console.log(record, index, key, value)
+  return false
+}
+
+// 模拟将指定数据保存
+function feakSave({ value, key, id }) {
+  createMessage.loading({
+    content: `正在模拟保存${key}`,
+    key: '_save_fake_data',
+    duration: 0
+  })
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (value === '') {
+        createMessage.error({
+          content: '保存失败：不能为空',
+          key: '_save_fake_data',
+          duration: 2
+        })
+        resolve(false)
+      } else {
+        createMessage.success({
+          content: `记录${id}的${key}已保存`,
+          key: '_save_fake_data',
+          duration: 2
+        })
+        resolve(true)
+      }
+    }, 2000)
+  })
+}
+
+async function beforeEditSubmit({ record, index, key, value }) {
+  console.log('单元格数据正在准备提交', { record, index, key, value })
+  return await feakSave({ id: record.id, key, value })
+}
+
+function handleEditCancel() {
+  console.log('cancel')
+}
 </script>
