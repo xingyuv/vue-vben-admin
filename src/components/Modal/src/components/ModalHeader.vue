@@ -12,5 +12,4 @@ defineProps({
   },
   title: { type: String }
 })
-defineEmits(['dblclick'])
 </script>

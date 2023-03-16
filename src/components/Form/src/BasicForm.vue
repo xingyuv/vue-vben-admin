@@ -55,11 +55,11 @@ import { useDebounceFn } from '@vueuse/core'
 import { basicProps } from './props'
 import { useDesign } from '@/hooks/web/useDesign'
 import { cloneDeep } from 'lodash-es'
-import { isFunction, isArray } from '@/utils/is'
 
 export default defineComponent({
   name: 'BasicForm',
   // @ts-ignore
+  // eslint-disable-next-line vue/no-reserved-component-names
   components: { FormItem, Form, Row, FormAction },
   props: basicProps,
   emits: ['advanced-change', 'reset', 'submit', 'register', 'field-value-change'],
@@ -234,11 +234,9 @@ export default defineComponent({
 
     function setFormModel(key: string, value: any, schema: FormSchema) {
       formModel[key] = value
-      const { validateTrigger } = unref(getBindValue)
-      if (isFunction(schema.dynamicRules) || isArray(schema.rules)) {
-        return
-      }
-      if (!validateTrigger || validateTrigger === 'change') {
+      emit('field-value-change', key, value)
+      // TODO 优化验证，这里如果是autoLink=false手动关联的情况下才会再次触发此函数
+      if (schema && schema.itemProps && !schema.itemProps.autoLink) {
         validateFields([key]).catch((_) => {})
       }
       emit('field-value-change', key, value)
