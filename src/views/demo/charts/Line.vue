@@ -6,16 +6,11 @@ import { ref, Ref, onMounted } from 'vue'
 
 import { useECharts } from '@/hooks/web/useECharts'
 import { getLineData } from './data'
+import { propTypes } from '@/utils/propTypes'
 
 defineProps({
-  width: {
-    type: String as PropType<string>,
-    default: '100%'
-  },
-  height: {
-    type: String as PropType<string>,
-    default: 'calc(100vh - 78px)'
-  }
+  width: propTypes.string.def('100%'),
+  height: propTypes.string.def('calc(100vh - 78px)')
 })
 const chartRef = ref<HTMLDivElement | null>(null)
 const { setOptions, echarts } = useECharts(chartRef as Ref<HTMLDivElement>)
