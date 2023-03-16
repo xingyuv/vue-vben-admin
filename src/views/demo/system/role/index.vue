@@ -52,7 +52,7 @@ const [registerTable, { reload }] = useTable({
   bordered: true,
   showIndexColumn: false,
   actionColumn: {
-    width: 80,
+    width: 120,
     title: '操作',
     dataIndex: 'action',
     // slots: { customRender: 'action' },
