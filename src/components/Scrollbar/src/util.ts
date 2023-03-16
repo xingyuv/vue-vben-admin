@@ -22,7 +22,6 @@ export const BAR_MAP: BarMap = {
   }
 }
 
-// @ts-ignore
 export function renderThumbStyle({ move, size, bar }) {
   const style = {} as any
   const translate = `translate${bar.axis}(${move}%)`
@@ -36,7 +35,7 @@ export function renderThumbStyle({ move, size, bar }) {
 }
 
 function extend<T, K>(to: T, _from: K): T & K {
-  return Object.assign(to, _from)
+  return Object.assign(to as any, _from)
 }
 
 export function toObject<T>(arr: Array<T>): Recordable<T> {

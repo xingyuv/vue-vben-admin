@@ -161,7 +161,6 @@ const schemas1: FormSchema[] = [
       span: 12
     },
     labelWidth: 200,
-    // @ts-ignore
     componentProps: ({ formActionType }) => {
       return {
         placeholder: '值改变时执行查询,查看控制台',

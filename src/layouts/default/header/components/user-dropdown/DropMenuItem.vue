@@ -7,13 +7,11 @@
   </MenuItem>
 </template>
 <script lang="ts" setup name="DropdownMenuItem">
-import { Menu } from 'ant-design-vue'
+import { MenuItem } from 'ant-design-vue'
 import { computed, getCurrentInstance } from 'vue'
 
 import Icon from '@/components/Icon/index'
 import { propTypes } from '@/utils/propTypes'
-
-const MenuItem = Menu.Item
 
 const props = defineProps({
   // eslint-disable-next-line

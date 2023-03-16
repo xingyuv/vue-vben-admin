@@ -119,15 +119,12 @@ const schemas: FormSchema[] = [
     rules: [
       {
         required: true,
-        // @ts-ignore
         validator: async (rule, value) => {
           if (!value) {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为空')
+            return Promise.reject(rule.message || '值不能为空')
           }
           if (value === '1') {
-            /* eslint-disable-next-line */
-            return Promise.reject('值不能为1')
+            return Promise.reject(rule.message || '值不能为1')
           }
           return Promise.resolve()
         },
