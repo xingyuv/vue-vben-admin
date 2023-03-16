@@ -9,13 +9,12 @@
   </TreeSelect>
 </template>
 <script lang="ts" setup name="ApiTreeSelect">
-import { computed, watch, ref, onMounted, unref } from 'vue'
+import { computed, watch, ref, onMounted, unref, useAttrs } from 'vue'
 import { TreeSelect } from 'ant-design-vue'
 import { isArray, isFunction } from '@/utils/is'
 import { get } from 'lodash-es'
 import { propTypes } from '@/utils/propTypes'
 import { LoadingOutlined } from '@ant-design/icons-vue'
-import { useAttrs } from '@/hooks/core/useAttrs'
 
 const props = defineProps({
   api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },

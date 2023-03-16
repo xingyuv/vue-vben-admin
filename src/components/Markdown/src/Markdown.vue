@@ -3,7 +3,7 @@
 </template>
 <script lang="ts" setup inheritAttrs="false">
 import type { Ref } from 'vue'
-import { ref, unref, nextTick, computed, watch, onBeforeUnmount, onDeactivated } from 'vue'
+import { ref, unref, nextTick, computed, watch, onBeforeUnmount, onDeactivated, useAttrs } from 'vue'
 import Vditor from 'vditor'
 import 'vditor/dist/index.css'
 import { useLocale } from '@/locales/useLocale'
@@ -11,13 +11,13 @@ import { useModalContext } from '../../Modal'
 import { useRootSetting } from '@/hooks/setting/useRootSetting'
 import { onMountedOrActivated } from '@/hooks/core/onMountedOrActivated'
 import { getTheme } from './getTheme'
-import { useAttrs } from '@/hooks/core/useAttrs'
+import { propTypes } from '@/utils/propTypes'
 
 type Lang = 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' | undefined
 
 const props = defineProps({
-  height: { type: Number, default: 360 },
-  value: { type: String, default: '' }
+  height: propTypes.number.def(360),
+  value: propTypes.string.def('')
 })
 const emit = defineEmits(['change', 'get', 'update:value'])
 const attrs = useAttrs()

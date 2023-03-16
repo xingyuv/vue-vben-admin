@@ -22,7 +22,7 @@
       titleHelpMessage="使用Ref调用表格内方法"
       ref="tableRef"
       :api="demoListApi"
-      :columns="getBasicColumns"
+      :columns="columns"
       rowKey="id"
       :rowSelection="{ type: 'checkbox' }"
     />
@@ -36,6 +36,8 @@ import { useMessage } from '@/hooks/web/useMessage'
 import { demoListApi } from '@/api/demo/table'
 const tableRef = ref<Nullable<TableActionType>>(null)
 const { createMessage } = useMessage()
+
+const columns = getBasicColumns()
 
 function getTableAction() {
   const tableAction = unref(tableRef)

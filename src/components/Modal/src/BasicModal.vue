@@ -47,7 +47,7 @@
 <script lang="ts" setup name="BasicModal" inheritAttrs="false">
 import type { ModalProps, ModalMethods } from './typing'
 
-import { computed, ref, watch, unref, watchEffect, toRef, getCurrentInstance, nextTick } from 'vue'
+import { computed, ref, watch, unref, watchEffect, toRef, getCurrentInstance, nextTick, useAttrs } from 'vue'
 import Modal from './components/Modal'
 import ModalWrapper from './components/ModalWrapper.vue'
 import ModalClose from './components/ModalClose.vue'
@@ -59,7 +59,6 @@ import { basicProps } from './props'
 import { useFullScreen } from './hooks/useModalFullScreen'
 import { omit } from 'lodash-es'
 import { useDesign } from '@/hooks/web/useDesign'
-import { useAttrs } from '@/hooks/core/useAttrs'
 
 const props = defineProps(basicProps)
 const attrs = useAttrs()
