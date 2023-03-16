@@ -2,7 +2,7 @@
  *  Introduces component library styles on demand.
  * https://github.com/anncwb/vite-plugin-style-import
  */
-import { createStyleImportPlugin, VxeTableResolve } from 'vite-plugin-style-import'
+import { createStyleImportPlugin } from 'vite-plugin-style-import'
 
 export function configStyleImportPlugin(_isBuild: boolean) {
   if (!_isBuild) {
@@ -76,8 +76,7 @@ export function configStyleImportPlugin(_isBuild: boolean) {
             : `ant-design-vue/es/${name}/style/index`
         }
       }
-    ],
-    resolves: [VxeTableResolve()]
+    ]
   })
   return styleImportPlugin
 }

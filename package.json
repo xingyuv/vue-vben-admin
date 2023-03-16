@@ -69,9 +69,6 @@
     "vue-json-pretty": "^2.2.3",
     "vue-router": "^4.1.6",
     "vue-types": "^5.0.2",
-    "vxe-table": "^4.3.10",
-    "vxe-table-plugin-export-xlsx": "^3.0.4",
-    "xe-utils": "^3.5.7",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
@@ -125,7 +122,6 @@
     "rimraf": "^4.4.0",
     "rollup": "^3.19.1",
     "rollup-plugin-visualizer": "^5.9.0",
-    "sass": "^1.59.3",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-recommended": "^9.0.0",

@@ -15,8 +15,6 @@ const include = [
   'vue-i18n',
   'vue-types',
   'vue-router',
-  'xe-utils',
-  'vxe-table',
   'sortablejs',
   'echarts/core',
   'echarts/charts',
