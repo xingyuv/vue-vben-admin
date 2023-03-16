@@ -12,8 +12,7 @@
     </CollapseContainer>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
@@ -206,54 +205,40 @@ const schemas: FormSchema[] = [
   }
 ]
 
-export default defineComponent({
-  components: { BasicForm, CollapseContainer, PageWrapper },
-  setup() {
-    const { createMessage } = useMessage()
-    const [register, { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }] = useForm({
-      labelWidth: 120,
-      schemas,
-      actionColOptions: {
-        span: 24
-      }
-    })
-    async function validateForm() {
-      try {
-        const res = await validateFields()
-        console.log('passing', res)
-      } catch (error) {
-        console.log('not passing', error)
-      }
-    }
-    async function resetValidate() {
-      clearValidate()
-    }
-    function getFormValues() {
-      const values = getFieldsValue()
-      createMessage.success('values:' + JSON.stringify(values))
-    }
-    function setFormValues() {
-      setFieldsValue({
-        field1: 1111,
-        field4: ['1'],
-        field5: ['1'],
-        field7: '1',
-        field33: '2020-12-12',
-        field3: '2020-12-12'
-      })
-    }
-    return {
-      register,
-      schemas,
-      handleSubmit: (values: any) => {
-        createMessage.success('click search,values:' + JSON.stringify(values))
-      },
-      getFormValues,
-      setFormValues,
-      validateForm,
-      resetValidate,
-      resetFields
-    }
+const { createMessage } = useMessage()
+const [register, { validateFields, clearValidate, getFieldsValue, resetFields, setFieldsValue }] = useForm({
+  labelWidth: 120,
+  schemas,
+  actionColOptions: {
+    span: 24
   }
 })
+async function validateForm() {
+  try {
+    const res = await validateFields()
+    console.log('passing', res)
+  } catch (error) {
+    console.log('not passing', error)
+  }
+}
+async function resetValidate() {
+  clearValidate()
+}
+function getFormValues() {
+  const values = getFieldsValue()
+  createMessage.success('values:' + JSON.stringify(values))
+}
+function setFormValues() {
+  setFieldsValue({
+    field1: 1111,
+    field4: ['1'],
+    field5: ['1'],
+    field7: '1',
+    field33: '2020-12-12',
+    field3: '2020-12-12'
+  })
+}
+function handleSubmit(values: any) {
+  createMessage.success('click search,values:' + JSON.stringify(values))
+}
 </script>

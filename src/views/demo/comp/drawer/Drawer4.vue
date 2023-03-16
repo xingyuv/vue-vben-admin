@@ -5,8 +5,7 @@
     </div>
   </BasicDrawer>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { BasicDrawer, useDrawerInner } from '@/components/Drawer'
 
 import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
@@ -29,25 +28,19 @@ const schemas: FormSchema[] = [
     }
   }
 ]
-export default defineComponent({
-  components: { BasicDrawer, BasicForm },
-  setup() {
-    const [registerForm, { setFieldsValue }] = useForm({
-      labelWidth: 120,
-      schemas,
-      showActionButtonGroup: false,
-      actionColOptions: {
-        span: 24
-      }
-    })
-    const [register] = useDrawerInner((data) => {
-      // 方式1
-      setFieldsValue({
-        field2: data.data,
-        field1: data.info
-      })
-    })
-    return { register, schemas, registerForm }
+const [registerForm, { setFieldsValue }] = useForm({
+  labelWidth: 120,
+  schemas,
+  showActionButtonGroup: false,
+  actionColOptions: {
+    span: 24
   }
+})
+const [register] = useDrawerInner((data) => {
+  // 方式1
+  setFieldsValue({
+    field2: data.data,
+    field1: data.info
+  })
 })
 </script>

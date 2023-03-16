@@ -11,15 +11,10 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import TargetContent from './TargetContent.vue'
 import { LazyContainer } from '@/components/Container/index'
 import { PageWrapper } from '@/components/Page'
-
-export default defineComponent({
-  components: { LazyContainer, TargetContent, PageWrapper }
-})
 </script>
 <style lang="less">
 .lazy-base-demo {

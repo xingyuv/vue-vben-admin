@@ -50,9 +50,8 @@
     <a-button type="link" @click="toIconify"> Iconify 图标大全 </a-button>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { CollapseContainer } from '@/components/Container/index'
+<script lang="ts" setup>
+import { CollapseContainer } from '@/components/Container'
 import { Alert } from 'ant-design-vue'
 import {
   QqCircleFilled,
@@ -64,33 +63,12 @@ import {
   CodepenCircleFilled
 } from '@ant-design/icons-vue'
 
-import { Icon, IconPicker, SvgIcon } from '@/components/Icon/index'
+import { Icon, IconPicker, SvgIcon } from '@/components/Icon'
 
 import { openWindow } from '@/utils'
 import { PageWrapper } from '@/components/Page'
 
-export default defineComponent({
-  components: {
-    PageWrapper,
-    CollapseContainer,
-    GithubFilled,
-    QqCircleFilled,
-    WechatFilled,
-    AlipayCircleFilled,
-    IeCircleFilled,
-    TaobaoCircleFilled,
-    CodepenCircleFilled,
-    Icon,
-    Alert,
-    IconPicker,
-    SvgIcon
-  },
-  setup() {
-    return {
-      toIconify: () => {
-        openWindow('https://iconify.design/')
-      }
-    }
-  }
-})
+function toIconify() {
+  openWindow('https://iconify.design/')
+}
 </script>

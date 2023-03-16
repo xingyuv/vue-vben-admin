@@ -26,8 +26,8 @@
   </PageWrapper>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { Drawer, Space } from 'ant-design-vue'
 import { BasicForm, FormSchema, useForm, type FormProps } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
@@ -285,90 +285,65 @@ const formSchemas: FormSchema[] = [
     colSlot: 'other'
   }
 ]
-export default defineComponent({
-  components: {
-    BasicForm,
-    CollapseContainer,
-    PageWrapper,
-    Drawer,
-    Space
-  },
-  setup() {
-    const visible = ref<boolean>(false)
-    const settingFormRef = ref()
-    const [registerSetting] = useForm({
-      labelWidth: 80,
-      schemas: formSchemas,
-      compact: true,
-      actionColOptions: { span: 24 },
-      showActionButtonGroup: false
-    })
-    const resetSettings = async () => {
-      setProps({ resetButtonOptions: { disabled: false, text: '重置' } })
-      setProps({ submitButtonOptions: { disabled: false, loading: false } })
-      await setFieldsValue({ field9: [] })
-      await settingFormRef.value?.resetFields()
-    }
-    const handleSubmitSetting = async (values: Recordable) => {
-      await setProps(values)
-      visible.value = false
-    }
-    const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
-      labelWidth: 120,
-      schemas,
-      actionColOptions: { span: 24 },
-      fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']]
-    })
-    async function handleLoad() {
-      const promiseFn = function () {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve({
-              field9: ['430000', '430100', '430102'],
-              province: '湖南省',
-              city: '长沙市',
-              district: '岳麓区'
-            })
-          }, 1000)
-        })
-      }
-      const item = await promiseFn()
-      const { field9, province, city, district } = item as any
-      await updateSchema({
-        field: 'field9',
-        componentProps: {
-          displayRenderArray: [province, city, district]
-        }
-      })
-      await setFieldsValue({ field9 })
-    }
-    const showDrawer = () => {
-      visible.value = true
-    }
-    const onSettings = () => {
-      settingFormRef.value?.submit()
-    }
-    const withClose = (formProps: Partial<FormProps>) => {
-      setProps(formProps)
-      visible.value = false
-    }
-    return {
-      register,
-      schemas,
-      handleSubmit: (values: Recordable) => {
-        console.log(values)
-      },
-      setProps,
-      handleLoad,
-      visible,
-      showDrawer,
-      settingFormRef,
-      withClose,
-      onSettings,
-      resetSettings,
-      registerSetting,
-      handleSubmitSetting
-    }
-  }
+const visible = ref<boolean>(false)
+const settingFormRef = ref()
+const [registerSetting] = useForm({
+  labelWidth: 80,
+  schemas: formSchemas,
+  compact: true,
+  actionColOptions: { span: 24 },
+  showActionButtonGroup: false
 })
+const resetSettings = async () => {
+  setProps({ resetButtonOptions: { disabled: false, text: '重置' } })
+  setProps({ submitButtonOptions: { disabled: false, loading: false } })
+  await setFieldsValue({ field9: [] })
+  await settingFormRef.value?.resetFields()
+}
+const handleSubmitSetting = async (values: Recordable) => {
+  await setProps(values)
+  visible.value = false
+}
+const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
+  labelWidth: 120,
+  schemas,
+  actionColOptions: { span: 24 },
+  fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']]
+})
+async function handleLoad() {
+  const promiseFn = function () {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({
+          field9: ['430000', '430100', '430102'],
+          province: '湖南省',
+          city: '长沙市',
+          district: '岳麓区'
+        })
+      }, 1000)
+    })
+  }
+  const item = await promiseFn()
+  const { field9, province, city, district } = item as any
+  await updateSchema({
+    field: 'field9',
+    componentProps: {
+      displayRenderArray: [province, city, district]
+    }
+  })
+  await setFieldsValue({ field9 })
+}
+const showDrawer = () => {
+  visible.value = true
+}
+const onSettings = () => {
+  settingFormRef.value?.submit()
+}
+const withClose = (formProps: Partial<FormProps>) => {
+  setProps(formProps)
+  visible.value = false
+}
+function handleSubmit(values: Recordable) {
+  console.log(values)
+}
 </script>

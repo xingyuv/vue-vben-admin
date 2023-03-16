@@ -1,27 +1,27 @@
 <template>
   <PageWrapper :class="prefixCls" title="标准列表">
     <div :class="`${prefixCls}__top`">
-      <a-row :gutter="12">
-        <a-col :span="8" :class="`${prefixCls}__top-col`">
+      <Row :gutter="12">
+        <Col :span="8" :class="`${prefixCls}__top-col`">
           <div>我的待办</div>
           <p>8个任务</p>
-        </a-col>
-        <a-col :span="8" :class="`${prefixCls}__top-col`">
+        </Col>
+        <Col :span="8" :class="`${prefixCls}__top-col`">
           <div>本周任务平均处理时间</div>
           <p>32分钟</p>
-        </a-col>
-        <a-col :span="8" :class="`${prefixCls}__top-col`">
+        </Col>
+        <Col :span="8" :class="`${prefixCls}__top-col`">
           <div>本周完成任务数</div>
           <p>24个任务</p>
-        </a-col>
-      </a-row>
+        </Col>
+      </Row>
     </div>
 
     <div :class="`${prefixCls}__content`">
-      <a-list :pagination="pagination">
-        <template v-for="item in list" :key="item.id">
-          <a-list-item class="list">
-            <a-list-item-meta>
+      <List :pagination="pagination">
+        <template v-for="item in cardList" :key="item.id">
+          <ListItem class="list">
+            <ListItemMeta>
               <template #avatar>
                 <Icon class="icon" v-if="item.icon" :icon="item.icon" :color="item.color" />
               </template>
@@ -43,43 +43,28 @@
                   <Progress :percent="item.percent" status="active" />
                 </div>
               </template>
-            </a-list-item-meta>
-          </a-list-item>
+            </ListItemMeta>
+          </ListItem>
         </template>
-      </a-list>
+      </List>
     </div>
   </PageWrapper>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import { Progress, Row, Col } from 'ant-design-vue'
-import { defineComponent } from 'vue'
 import Icon from '@/components/Icon/index'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
 import { List } from 'ant-design-vue'
+import { useDesign } from '@/hooks/web/useDesign'
 
-export default defineComponent({
-  components: {
-    Icon,
-    Progress,
-    PageWrapper,
-    [List.name]: List,
-    [List.Item.name]: List.Item,
-    AListItemMeta: List.Item.Meta,
-    [Row.name]: Row,
-    [Col.name]: Col
-  },
-  setup() {
-    return {
-      prefixCls: 'list-basic',
-      list: cardList,
-      pagination: {
-        show: true,
-        pageSize: 3
-      }
-    }
-  }
-})
+const ListItem = List.Item
+const ListItemMeta = List.Item.Meta
+const { prefixCls } = useDesign('list-basic')
+const pagination = {
+  show: true,
+  pageSize: 3
+}
 </script>
 <style lang="less" scoped>
 .list-basic {

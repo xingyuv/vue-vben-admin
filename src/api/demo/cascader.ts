@@ -6,5 +6,5 @@ enum Api {
 }
 
 export const areaRecord = (data: AreaParams) => {
-  defHttp.post<AreaModel>({ url: Api.AREA_RECORD, data })
+  return defHttp.post<AreaModel>({ url: Api.AREA_RECORD, data })
 }

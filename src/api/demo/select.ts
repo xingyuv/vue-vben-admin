@@ -8,5 +8,5 @@ enum Api {
  * @description: Get sample options value
  */
 export const optionsListApi = (params?: selectParams) => {
-  defHttp.get<DemoOptionsItem[]>({ url: Api.OPTIONS_LIST, params })
+  return defHttp.get<DemoOptionsItem[]>({ url: Api.OPTIONS_LIST, params })
 }

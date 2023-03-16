@@ -10,7 +10,7 @@ enum Api {
  */
 
 export const demoListApi = (params: DemoParams) => {
-  defHttp.get<DemoListGetResultModel>({
+  return defHttp.get<DemoListGetResultModel>({
     url: Api.DEMO_LIST,
     params,
     headers: {

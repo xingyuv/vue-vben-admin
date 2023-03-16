@@ -23,8 +23,7 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { VScroll } from '@/components/VirtualScroll/index'
 
 import { Divider } from 'ant-design-vue'
@@ -38,12 +37,6 @@ const data: Recordable[] = (() => {
   }
   return arr
 })()
-export default defineComponent({
-  components: { VScroll: VScroll, Divider, PageWrapper },
-  setup() {
-    return { data: data }
-  }
-})
 </script>
 <style lang="less" scoped>
 .virtual-scroll-demo {

@@ -35,18 +35,10 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { Result, Steps, Descriptions } from 'ant-design-vue'
-export default defineComponent({
-  components: {
-    Result,
-    Steps,
-    Step: Steps.Step,
-    Descriptions,
-    DescriptionItem: Descriptions.Item
-  }
-})
+const Step = Steps.Step
+const DescriptionItem = Descriptions.Item
 </script>
 <style lang="less" scoped>
 .result-success {

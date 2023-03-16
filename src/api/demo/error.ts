@@ -10,5 +10,5 @@ enum Api {
  */
 
 export const fireErrorApi = () => {
-  defHttp.get({ url: Api.Error })
+  return defHttp.get({ url: Api.Error })
 }

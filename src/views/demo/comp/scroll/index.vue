@@ -13,14 +13,9 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { ScrollContainer } from '@/components/Container/index'
 import { PageWrapper } from '@/components/Page'
-
-export default defineComponent({
-  components: { ScrollContainer, PageWrapper }
-})
 </script>
 <style lang="less" scoped>
 .scroll-wrap {

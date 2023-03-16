@@ -1,25 +1,26 @@
 <template>
   <PageWrapper title="代码编辑器组件示例" contentFullHeight fixedHeight contentBackground>
     <template #extra>
-      <a-space>
+      <Space>
         <a-button @click="showData" type="primary">获取数据</a-button>
         <RadioGroup button-style="solid" v-model:value="modeValue" @change="handleModeChange">
           <RadioButton value="application/json"> json数据 </RadioButton>
           <RadioButton value="htmlmixed"> html代码 </RadioButton>
           <RadioButton value="javascript"> javascript代码 </RadioButton>
         </RadioGroup>
-      </a-space>
+      </Space>
     </template>
     <CodeEditor v-model:value="value" :mode="modeValue" />
   </PageWrapper>
 </template>
-<script lang="ts">
-import { defineComponent, ref, unref, h } from 'vue'
+<script lang="ts" setup>
+import { ref, unref, h } from 'vue'
 import { CodeEditor, JsonPreview, MODE } from '@/components/CodeEditor'
 import { PageWrapper } from '@/components/Page'
 import { Radio, Space, Modal } from 'ant-design-vue'
 
 const jsonData =
+  // eslint-disable-next-line max-len
   '{"name":"BeJson","url":"http://www.xxx.com","page":88,"isNonProfit":true,"address":{"street":"科技园路.","city":"江苏苏州","country":"中国"},"links":[{"name":"Google","url":"http://www.xxx.com"},{"name":"Baidu","url":"http://www.xxx.com"},{"name":"SoSo","url":"http://www.xxx.com"}]}'
 
 const jsData = `
@@ -53,46 +54,35 @@ const htmlData = `
   </body>
 </html>
   `
-export default defineComponent({
-  components: {
-    CodeEditor,
-    PageWrapper,
-    RadioButton: Radio.Button,
-    RadioGroup: Radio.Group,
-    ASpace: Space
-  },
-  setup() {
-    const modeValue = ref<MODE>(MODE.JSON)
-    const value = ref(jsonData)
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
+const modeValue = ref<MODE>(MODE.JSON)
+const value = ref(jsonData)
 
-    function handleModeChange(e) {
-      const mode = e.target.value
-      if (mode === MODE.JSON) {
-        value.value = jsonData
-        return
-      }
-      if (mode === MODE.HTML) {
-        value.value = htmlData
-        return
-      }
-      if (mode === MODE.JS) {
-        value.value = jsData
-        return
-      }
-    }
-
-    function showData() {
-      if (unref(modeValue) === 'application/json') {
-        Modal.info({
-          title: '编辑器当前值',
-          content: h(JsonPreview, { data: JSON.parse(value.value) })
-        })
-      } else {
-        Modal.info({ title: '编辑器当前值', content: value.value })
-      }
-    }
-
-    return { value, modeValue, handleModeChange, showData }
+function handleModeChange(e) {
+  const mode = e.target.value
+  if (mode === MODE.JSON) {
+    value.value = jsonData
+    return
   }
-})
+  if (mode === MODE.HTML) {
+    value.value = htmlData
+    return
+  }
+  if (mode === MODE.JS) {
+    value.value = jsData
+    return
+  }
+}
+
+function showData() {
+  if (unref(modeValue) === 'application/json') {
+    Modal.info({
+      title: '编辑器当前值',
+      content: h(JsonPreview, { data: JSON.parse(value.value) })
+    })
+  } else {
+    Modal.info({ title: '编辑器当前值', content: value.value })
+  }
+}
 </script>

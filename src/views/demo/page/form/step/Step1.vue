@@ -3,17 +3,17 @@
     <div class="step1-form">
       <BasicForm @register="register">
         <template #fac="{ model, field }">
-          <a-input-group compact>
-            <a-select v-model:value="model['pay']" class="pay-select">
-              <a-select-option value="zfb"> 支付宝 </a-select-option>
-              <a-select-option value="yl"> 银联 </a-select-option>
-            </a-select>
+          <InputGroup compact>
+            <Select v-model:value="model['pay']" class="pay-select">
+              <SelectOption value="zfb"> 支付宝 </SelectOption>
+              <SelectOption value="yl"> 银联 </SelectOption>
+            </Select>
             <a-input class="pay-input" v-model:value="model[field]" />
-          </a-input-group>
+          </InputGroup>
         </template>
       </BasicForm>
     </div>
-    <a-divider />
+    <Divider />
     <h3>说明</h3>
     <h4>转账到支付宝账户</h4>
     <p>
@@ -26,46 +26,33 @@
     </p>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { BasicForm, useForm } from '@/components/Form'
 import { step1Schemas } from './data'
 
 import { Select, Input, Divider } from 'ant-design-vue'
-export default defineComponent({
-  components: {
-    BasicForm,
-    [Select.name]: Select,
-    ASelectOption: Select.Option,
-    [Input.name]: Input,
-    [Input.Group.name]: Input.Group,
-    [Divider.name]: Divider
+const SelectOption = Select.Option
+const InputGroup = Input.Group
+const emit = defineEmits(['next'])
+const [register, { validate }] = useForm({
+  labelWidth: 100,
+  schemas: step1Schemas,
+  actionColOptions: {
+    span: 14
   },
-  emits: ['next'],
-  setup(_, { emit }) {
-    const [register, { validate }] = useForm({
-      labelWidth: 100,
-      schemas: step1Schemas,
-      actionColOptions: {
-        span: 14
-      },
-      showResetButton: false,
-      submitButtonOptions: {
-        text: '下一步'
-      },
-      submitFunc: customSubmitFunc
-    })
-
-    async function customSubmitFunc() {
-      try {
-        const values = await validate()
-        emit('next', values)
-      } catch (error) {}
-    }
-
-    return { register }
-  }
+  showResetButton: false,
+  submitButtonOptions: {
+    text: '下一步'
+  },
+  submitFunc: customSubmitFunc
 })
+
+async function customSubmitFunc() {
+  try {
+    const values = await validate()
+    emit('next', values)
+  } catch (error) {}
+}
 </script>
 <style lang="less" scoped>
 .step1 {
