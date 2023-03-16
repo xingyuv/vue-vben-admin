@@ -7,13 +7,13 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup name="TestTab">
-import { computed, unref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { PageWrapper } from '@/components/Page'
 import { Input } from 'ant-design-vue'
 
-const { currentRoute } = useRouter()
+const route = useRoute()
 const params = computed(() => {
-  return unref(currentRoute).params
+  return route.params
 })
 </script>

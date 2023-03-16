@@ -1,6 +1,5 @@
 const include = [
   'qs',
-  'url',
   'vue',
   'less',
   'axios',
