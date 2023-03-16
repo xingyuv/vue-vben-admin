@@ -1,4 +1,4 @@
-import type { ValidationRule, FormInstance } from 'ant-design-vue/lib/form/Form'
+import type { Rule, FormInstance } from 'ant-design-vue/lib/form'
 import type { RuleObject, NamePath } from 'ant-design-vue/lib/form/interface'
 import { ref, computed, unref, Ref } from 'vue'
 import { useI18n } from '@/hooks/web/useI18n'
@@ -70,7 +70,7 @@ export function useFormRules(formData?: Recordable) {
     }
   }
 
-  const getFormRules = computed((): { [k: string]: ValidationRule | ValidationRule[] } => {
+  const getFormRules = computed((): { [k: string]: Rule | Rule[] } => {
     const accountFormRule = unref(getAccountFormRule)
     const passwordFormRule = unref(getPasswordFormRule)
     const smsFormRule = unref(getSmsFormRule)
@@ -120,5 +120,5 @@ function createRule(message: string) {
       message,
       trigger: 'change'
     }
-  ]
+  ] as RuleObject[]
 }
