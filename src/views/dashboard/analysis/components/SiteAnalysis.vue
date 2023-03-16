@@ -27,7 +27,7 @@ const tabListTitle = [
   }
 ]
 
-function onTabChange(key) {
+function onTabChange(key: string) {
   activeKey.value = key
 }
 </script>
