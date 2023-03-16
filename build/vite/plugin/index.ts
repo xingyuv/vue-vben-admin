@@ -14,12 +14,11 @@ import { configCompressPlugin } from './compress'
 import { configStyleImportPlugin } from './styleImport'
 import { configVisualizerConfig } from './visualizer'
 import { configThemePlugin } from './theme'
-import { configImageminPlugin } from './imagemin'
 import { configSvgIconsPlugin } from './svgSprite'
 import { isProdFn } from '../../utils'
 
 export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_IMAGEMIN, VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
+  const { VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
@@ -66,9 +65,6 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
 
   // The following plugins only work in the production environment
   if (isBuild) {
-    // vite-plugin-imagemin
-    VITE_USE_IMAGEMIN && vitePlugins.push(configImageminPlugin())
-
     // rollup-plugin-gzip
     vitePlugins.push(configCompressPlugin(VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE))
 
