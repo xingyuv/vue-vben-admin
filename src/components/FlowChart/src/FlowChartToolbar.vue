@@ -4,11 +4,10 @@
       <Tooltip placement="bottom" v-bind="item.disabled ? { visible: false } : {}">
         <template #title>{{ item.tooltip }}</template>
         <span :class="`${prefixCls}-toolbar__icon`" v-if="item.icon" @click="onControl(item)">
-          <Icon :icon="item.icon"
-                :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'"/>
+          <Icon :icon="item.icon" :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'" />
         </span>
       </Tooltip>
-      <Divider v-if="item.separate" type="vertical"/>
+      <Divider v-if="item.separate" type="vertical" />
     </template>
   </div>
 </template>
@@ -22,7 +21,7 @@ import { Icon } from '@/components/Icon'
 import { useFlowChartContext } from './useFlowContext'
 import { ToolbarTypeEnum } from './enum'
 
-const props = defineProps({
+defineProps({
   prefixCls: String
 })
 const emit = defineEmits(['view-data'])

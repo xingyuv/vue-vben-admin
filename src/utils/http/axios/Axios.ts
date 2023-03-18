@@ -112,7 +112,7 @@ export class VAxios {
   /**
    * @description:  File Upload
    */
-  uploadFile<T = any>(config: InternalAxiosRequestConfig, params: UploadFileParams) {
+  uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
     const formData = new window.FormData()
     const customFilename = params.name || 'file'
 

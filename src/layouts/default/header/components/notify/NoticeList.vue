@@ -98,7 +98,7 @@ watch(
 const isTitleClickable = computed(() => !!props.onTitleClick)
 const getPagination = computed(() => {
   const { list, pageSize } = props
-  if (pageSize > 0 && list && list.length > pageSize) {
+  if (isNumber(pageSize) && pageSize > 0 && list && list.length > pageSize) {
     return {
       total: list.length,
       pageSize,

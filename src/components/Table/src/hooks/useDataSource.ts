@@ -308,7 +308,7 @@ export function useDataSource(
     }
   }
 
-  function setTableData<T = Recordable>(values: T[]) {
+  function setTableData<T extends Ref<Recordable<any>[]>>(values: T[]) {
     dataSourceRef.value = values
   }
 

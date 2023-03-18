@@ -1,3 +1,9 @@
+interface onImgLoadType {
+  index: number
+  url: string
+  dom: HTMLImageElement
+}
+
 export interface Options {
   show?: boolean
   imageList: string[]
@@ -6,8 +12,8 @@ export interface Options {
   defaultWidth?: number
   maskClosable?: boolean
   rememberState?: boolean
-  onImgLoad?: ({ index: number, url: string, dom: HTMLImageElement }) => void
-  onImgError?: ({ index: number, url: string, dom: HTMLImageElement }) => void
+  onImgLoad?: (img: onImgLoadType) => void
+  onImgError?: (img: onImgLoadType) => void
 }
 
 export interface Props {

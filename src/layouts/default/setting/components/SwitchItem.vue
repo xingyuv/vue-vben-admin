@@ -3,7 +3,7 @@
     <span> {{ title }}</span>
     <Switch
       v-bind="getBindValue"
-      @change="handleChange"
+      @change="handleChange as any"
       :disabled="disabled"
       :checkedChildren="t('layout.setting.on')"
       :unCheckedChildren="t('layout.setting.off')"

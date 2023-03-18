@@ -4,7 +4,7 @@
     <Select
       v-bind="getBindValue"
       :class="`${prefixCls}-select`"
-      @change="handleChange"
+      @change="handleChange as any"
       :disabled="disabled"
       size="small"
       :options="options"
