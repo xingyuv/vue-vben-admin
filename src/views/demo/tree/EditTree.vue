@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import { h } from 'vue'
 import { Row, Col } from 'ant-design-vue'
-import { BasicTree, TreeActionItem, ContextMenuItem } from '@/components/Tree/index'
+import { BasicTree, TreeActionItem, ContextMenuItem } from '@/components/Tree'
 import { treeData, treeData2, treeData3 } from './data'
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons-vue'
 import { PageWrapper } from '@/components/Page'

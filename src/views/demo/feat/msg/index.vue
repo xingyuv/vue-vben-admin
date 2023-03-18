@@ -28,7 +28,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import { CollapseContainer } from '@/components/Container/index'
+import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
 

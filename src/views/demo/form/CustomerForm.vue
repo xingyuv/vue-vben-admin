@@ -11,8 +11,8 @@
 </template>
 <script lang="ts" setup>
 import { h } from 'vue'
-import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
-import { CollapseContainer } from '@/components/Container/index'
+import { BasicForm, FormSchema, useForm } from '@/components/Form'
+import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { Input } from 'ant-design-vue'
 import { PageWrapper } from '@/components/Page'

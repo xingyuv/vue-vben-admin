@@ -10,7 +10,7 @@
 </template>
 <script lang="ts" setup name="Copy">
 import { unref, ref } from 'vue'
-import { CollapseContainer } from '@/components/Container/index'
+import { CollapseContainer } from '@/components/Container'
 import { useCopyToClipboard } from '@/hooks/web/useCopyToClipboard'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'

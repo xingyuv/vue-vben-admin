@@ -36,7 +36,7 @@
 </template>
 <script lang="ts" setup>
 import { List, Tag } from 'ant-design-vue'
-import Icon from '@/components/Icon/index'
+import Icon from '@/components/Icon'
 import { actions, articleList } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
 

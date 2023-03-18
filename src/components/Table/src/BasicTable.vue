@@ -43,7 +43,7 @@
 import type { BasicTableProps, TableActionType, SizeType, ColumnChangeParam } from './types/table'
 import { ref, computed, unref, toRaw, inject, watchEffect, useAttrs, useSlots } from 'vue'
 import { Table } from 'ant-design-vue'
-import { BasicForm, useForm } from '@/components/Form/index'
+import { BasicForm, useForm } from '@/components/Form'
 import { PageWrapperFixedHeightKey } from '@/components/Page'
 import HeaderCell from './components/HeaderCell.vue'
 import { InnerHandlers } from './types/table'

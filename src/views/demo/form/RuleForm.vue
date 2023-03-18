@@ -13,7 +13,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import { BasicForm, FormSchema, useForm } from '@/components/Form/index'
+import { BasicForm, FormSchema, useForm } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'

@@ -43,8 +43,8 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import Icon from '@/components/Icon/index'
-import { BasicForm } from '@/components/Form/index'
+import Icon from '@/components/Icon'
+import { BasicForm } from '@/components/Form'
 import { actions, searchList, schemas } from './data'
 import { PageWrapper } from '@/components/Page'
 import { Tag, List } from 'ant-design-vue'

@@ -8,7 +8,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import { CollapseContainer } from '@/components/Container/index'
+import { CollapseContainer } from '@/components/Container'
 import { useWatermark } from '@/hooks/web/useWatermark'
 import { PageWrapper } from '@/components/Page'
 

@@ -45,7 +45,7 @@
 </template>
 <script lang="ts" setup>
 import { computed, unref, ref } from 'vue'
-import { BasicForm, FormSchema, ApiSelect } from '@/components/Form/index'
+import { BasicForm, FormSchema, ApiSelect } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'

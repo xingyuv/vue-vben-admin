@@ -1,5 +1,5 @@
 import type { Rule } from 'ant-design-vue/lib/form'
-import type { ComponentType } from './types/index'
+import type { ComponentType } from './types'
 import { useI18n } from '@/hooks/web/useI18n'
 import { dateUtil } from '@/utils/dateUtil'
 import { isNumber, isObject } from '@/utils/is'

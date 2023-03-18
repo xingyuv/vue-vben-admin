@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { Skeleton } from 'ant-design-vue'
 import TargetContent from './TargetContent.vue'
-import { LazyContainer } from '@/components/Container/index'
+import { LazyContainer } from '@/components/Container'
 import { PageWrapper } from '@/components/Page'
 </script>
 <style lang="less">

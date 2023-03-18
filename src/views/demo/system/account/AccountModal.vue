@@ -6,7 +6,7 @@
 <script lang="ts" setup name="AccountModal">
 import { ref, computed, unref } from 'vue'
 import { BasicModal, useModalInner } from '@/components/Modal'
-import { BasicForm, useForm } from '@/components/Form/index'
+import { BasicForm, useForm } from '@/components/Form'
 import { accountFormSchema } from './account.data'
 import { getDeptList } from '@/api/demo/system'
 

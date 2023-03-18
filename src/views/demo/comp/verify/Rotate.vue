@@ -6,7 +6,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import { RotateDragVerify } from '@/components/Verify/index'
+import { RotateDragVerify } from '@/components/Verify'
 
 import img from '@/assets/images/header.jpg'
 

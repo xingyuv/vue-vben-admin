@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import { Button, Row, Col } from 'ant-design-vue'
 import { computed, onMounted } from 'vue'
-import { BasicForm, useForm } from '@/components/Form/index'
+import { BasicForm, useForm } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
 import { CropperAvatar } from '@/components/Cropper'
 

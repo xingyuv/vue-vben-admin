@@ -25,7 +25,7 @@
 </template>
 <script lang="ts" setup>
 import { List, Card, Row, Col } from 'ant-design-vue'
-import Icon from '@/components/Icon/index'
+import Icon from '@/components/Icon'
 import { applicationList } from './data'
 import { useDesign } from '@/hooks/web/useDesign'
 

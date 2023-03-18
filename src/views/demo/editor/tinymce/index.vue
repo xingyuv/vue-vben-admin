@@ -5,7 +5,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { Tinymce } from '@/components/Tinymce/index'
+import { Tinymce } from '@/components/Tinymce'
 import { PageWrapper } from '@/components/Page'
 
 const value = ref('hello world!')

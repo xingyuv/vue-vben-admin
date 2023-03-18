@@ -1,5 +1,5 @@
 import type { Component } from 'vue'
-import type { ComponentType } from './types/index'
+import type { ComponentType } from './types'
 
 /**
  * Component list, register here to setting it in the form

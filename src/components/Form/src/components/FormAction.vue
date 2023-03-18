@@ -23,7 +23,7 @@
   </Col>
 </template>
 <script lang="ts" setup name="BasicFormAction">
-import type { ColEx } from '../types/index'
+import type { ColEx } from '../types'
 //import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
 import { computed } from 'vue'
 import { Form, Col } from 'ant-design-vue'

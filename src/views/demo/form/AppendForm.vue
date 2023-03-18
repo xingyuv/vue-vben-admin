@@ -13,7 +13,7 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { BasicForm, useForm } from '@/components/Form/index'
+import { BasicForm, useForm } from '@/components/Form'
 import { CollapseContainer } from '@/components/Container'
 import { PageWrapper } from '@/components/Page'
 

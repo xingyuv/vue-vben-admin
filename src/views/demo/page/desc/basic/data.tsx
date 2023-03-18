@@ -1,4 +1,4 @@
-import { DescItem } from '@/components/Description/index'
+import { DescItem } from '@/components/Description'
 import { BasicColumn } from '@/components/Table/src/types/table'
 import { Button } from '@/components/Button'
 

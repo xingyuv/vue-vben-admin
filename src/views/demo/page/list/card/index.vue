@@ -33,7 +33,7 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-import Icon from '@/components/Icon/index'
+import Icon from '@/components/Icon'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
 import { Card, Row, Col, List } from 'ant-design-vue'

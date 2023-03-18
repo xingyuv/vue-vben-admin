@@ -52,7 +52,7 @@
 </template>
 <script lang="ts" setup>
 import { Progress, Row, Col } from 'ant-design-vue'
-import Icon from '@/components/Icon/index'
+import Icon from '@/components/Icon'
 import { cardList } from './data'
 import { PageWrapper } from '@/components/Page'
 import { List } from 'ant-design-vue'
