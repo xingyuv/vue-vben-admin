@@ -52,8 +52,8 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { BasicForm, FormSchema, FormActionType, FormProps } from '@/components/Form/index'
-import { CollapseContainer } from '@/components/Container/index'
+import { BasicForm, FormSchema, FormActionType, FormProps } from '@/components/Form'
+import { CollapseContainer } from '@/components/Container'
 import { useMessage } from '@/hooks/web/useMessage'
 import { PageWrapper } from '@/components/Page'
 

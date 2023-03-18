@@ -39,6 +39,15 @@ const sizeList = [
   { value: 'small', label: 'small' },
   { value: 'default', label: 'defualt' }
 ]
+const layoutList = [
+  { value: 'vertical', label: 'vertical' },
+  { value: 'inline', label: 'inline' },
+  { value: 'horizontal', label: 'horizontal' }
+]
+const labelAlignList = [
+  { value: 'left', label: 'left' },
+  { value: 'right', label: 'right' }
+]
 const schemas: FormSchema[] = [
   {
     field: 'field1',
@@ -149,7 +158,7 @@ const schemas: FormSchema[] = [
 ]
 const formSchemas: FormSchema[] = [
   {
-    field: '',
+    field: 'd1',
     component: 'Divider',
     label: '基础属性',
     colProps: { span: 24 },
@@ -158,14 +167,38 @@ const formSchemas: FormSchema[] = [
     }
   },
   {
+    field: 'name',
+    defaultValue: 'useForm',
+    component: 'Input',
+    label: 'name',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'layout',
+    defaultValue: 'horizontal',
+    component: 'RadioButtonGroup',
+    label: 'layout',
+    colProps: { span: 24 },
+    componentProps: {
+      options: layoutList
+    }
+  },
+  {
+    field: 'labelAlign',
+    defaultValue: 'right',
+    component: 'RadioButtonGroup',
+    label: 'labelAlign',
+    colProps: { span: 24 },
+    componentProps: {
+      options: labelAlignList
+    }
+  },
+  {
     field: 'labelWidth',
     defaultValue: 120,
     component: 'InputNumber',
     label: 'labelWidth',
-    colProps: { span: 24 },
-    componentProps: {
-      size: 'small'
-    }
+    colProps: { span: 24 }
   },
   {
     field: 'size',
@@ -174,52 +207,120 @@ const formSchemas: FormSchema[] = [
     label: 'size',
     colProps: { span: 24 },
     componentProps: {
-      options: sizeList,
-      size: 'small'
+      options: sizeList
     }
+  },
+  {
+    field: 'colon',
+    defaultValue: false,
+    component: 'Switch',
+    label: 'colon',
+    colProps: { span: 24 }
   },
   {
     field: 'disabled',
     defaultValue: false,
     component: 'Switch',
     label: 'disabled',
-    colProps: { span: 24 },
-    componentProps: {
-      size: 'small'
-    }
+    colProps: { span: 24 }
   },
   {
     field: 'compact',
     defaultValue: false,
     component: 'Switch',
     label: 'compact',
-    colProps: { span: 24 },
-    componentProps: {
-      size: 'small'
-    }
+    colProps: { span: 24 }
   },
   {
-    field: '',
+    field: 'autoSetPlaceHolder',
+    defaultValue: true,
+    component: 'Switch',
+    label: 'autoSetPlaceHolder',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'autoSubmitOnEnter',
+    defaultValue: false,
+    component: 'Switch',
+    label: 'autoSubmitOnEnter',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'showAdvancedButton',
+    defaultValue: false,
+    component: 'Switch',
+    label: 'showAdvancedButton',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'd2',
     component: 'Divider',
-    label: '网格布局',
+    label: '网格布局(rowProps)',
     colProps: { span: 24 },
     componentProps: {
       orientation: 'center'
     }
   },
   {
-    field: 'actionColOptions.span',
-    component: 'Slider',
-    defaultValue: 24,
-    label: 'span',
+    field: 'rowProps.gutter.0',
+    component: 'InputNumber',
+    defaultValue: 0,
+    label: 'Horizontal Gutter',
     colProps: { span: 24 },
     componentProps: {
-      min: 1,
-      max: 24
+      addonAfter: 'px'
     }
   },
   {
-    field: '',
+    field: 'rowProps.gutter.1',
+    component: 'InputNumber',
+    defaultValue: 0,
+    label: 'Vertical Gutter',
+    colProps: { span: 24 },
+    componentProps: {
+      addonAfter: 'px'
+    }
+  },
+  {
+    field: 'rowProps.align',
+    defaultValue: 'top',
+    component: 'Select',
+    label: 'align',
+    colProps: { span: 24 },
+    componentProps: {
+      options: [
+        { value: 'stretch', label: 'stretch' },
+        { value: 'bottom', label: 'bottom' },
+        { value: 'top', label: 'top' },
+        { value: 'middle', label: 'middle' }
+      ]
+    }
+  },
+  {
+    field: 'rowProps.justify',
+    defaultValue: 'start',
+    component: 'Select',
+    label: 'justify',
+    colProps: { span: 24 },
+    componentProps: {
+      options: [
+        { value: 'space-around', label: 'space-around' },
+        { value: 'space-between', label: 'space-between' },
+        { value: 'center', label: 'center' },
+        { value: 'end', label: 'end' },
+        { value: 'start', label: 'start' }
+      ]
+    }
+  },
+  {
+    field: 'wrap',
+    defaultValue: true,
+    component: 'Switch',
+    label: 'wrap',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'd3',
     component: 'Divider',
     label: '操作按钮',
     colProps: { span: 24 },
@@ -231,16 +332,19 @@ const formSchemas: FormSchema[] = [
     field: 'showActionButtonGroup',
     defaultValue: true,
     component: 'Switch',
-    label: '操作按钮',
+    label: 'showActionButtonGroup',
     colProps: { span: 24 },
     componentProps: ({ formActionType }) => {
       return {
-        size: 'small',
         onChange: async (val: boolean) => {
           formActionType.updateSchema([
             { field: 'showResetButton', componentProps: { disabled: !val } },
             {
               field: 'showSubmitButton',
+              componentProps: { disabled: !val }
+            },
+            {
+              field: 'actionColOptions.span',
               componentProps: { disabled: !val }
             }
           ])
@@ -252,24 +356,35 @@ const formSchemas: FormSchema[] = [
     field: 'showResetButton',
     defaultValue: true,
     component: 'Switch',
-    label: '重置按钮',
-    colProps: { span: 24 },
-    componentProps: {
-      size: 'small'
-    }
+    label: 'showResetButton',
+    colProps: { span: 24 }
   },
   {
     field: 'showSubmitButton',
     defaultValue: true,
     component: 'Switch',
-    label: '提交按钮',
+    label: 'showSubmitButton',
+    colProps: { span: 24 }
+  },
+  {
+    field: 'd4',
+    component: 'Divider',
+    label: '操作按钮网格布局(actionColOptions)',
     colProps: { span: 24 },
     componentProps: {
-      size: 'small'
+      orientation: 'center'
     }
   },
   {
-    field: '',
+    field: 'actionColOptions.span',
+    component: 'Slider',
+    defaultValue: 24,
+    label: 'span',
+    colProps: { span: 24 },
+    componentProps: { min: 0, max: 24 }
+  },
+  {
+    field: 'd5',
     component: 'Divider',
     label: '其他事件',
     colProps: { span: 24 },
@@ -288,7 +403,7 @@ const formSchemas: FormSchema[] = [
 const visible = ref<boolean>(false)
 const settingFormRef = ref()
 const [registerSetting] = useForm({
-  labelWidth: 80,
+  size: 'small',
   schemas: formSchemas,
   compact: true,
   actionColOptions: { span: 24 },
@@ -301,6 +416,7 @@ const resetSettings = async () => {
   await settingFormRef.value?.resetFields()
 }
 const handleSubmitSetting = async (values: Recordable) => {
+  console.log(values)
   await setProps(values)
   visible.value = false
 }
@@ -332,6 +448,7 @@ async function handleLoad() {
     }
   })
   await setFieldsValue({ field9 })
+  visible.value = false
 }
 const showDrawer = () => {
   visible.value = true
