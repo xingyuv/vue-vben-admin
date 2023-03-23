@@ -22,7 +22,7 @@
 | --- | --- | --- |
 | [Vue](https://staging-cn.vuejs.org/) | Vue 框架 | 3.2.47 |
 | [Vite](https://cn.vitejs.dev//) | 开发与构建工具 | 4.2.1 |
-| [ant-design-vue](https://antdv.com/) | ant-design-vue | 3.2.15 |
+| [ant-design-vue](https://antdv.com/) | ant-design-vue | 3.2.16 |
 | [TypeScript](https://www.typescriptlang.org/docs/) | JavaScript 的超集 | 5.0.2 |
 | [pinia](https://pinia.vuejs.org/) | Vue 存储库 替代 vuex5 | 2.0.33 |
 | [vueuse](https://vueuse.org/) | 常用工具集 | 9.13.0 |

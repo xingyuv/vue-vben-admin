@@ -34,7 +34,7 @@ specifiers:
   '@vue/test-utils': ^2.3.2
   '@vueuse/core': ^9.13.0
   '@zxcvbn-ts/core': ^2.2.1
-  ant-design-vue: ^3.2.15
+  ant-design-vue: ^3.2.16
   autoprefixer: ^10.4.14
   axios: ^1.3.4
   codemirror: ^5.65.3
@@ -47,7 +47,7 @@ specifiers:
   czg: ^1.6.1
   dayjs: ^1.11.7
   dotenv: ^16.0.3
-  echarts: ^5.4.1
+  echarts: ^5.4.2
   eslint: ^8.36.0
   eslint-config-prettier: ^8.8.0
   eslint-plugin-prettier: ^4.2.1
@@ -119,14 +119,14 @@ dependencies:
   '@vue/runtime-core': 3.2.47
   '@vueuse/core': 9.13.0_vue@3.2.47
   '@zxcvbn-ts/core': 2.2.1
-  ant-design-vue: 3.2.15_vue@3.2.47
+  ant-design-vue: 3.2.16_vue@3.2.47
   axios: 1.3.4
   codemirror: 5.65.12
   consola: 2.15.3
   cropperjs: 1.5.13
   crypto-js: 4.1.1
   dayjs: 1.11.7
-  echarts: 5.4.1
+  echarts: 5.4.2
   intro.js: 6.0.0
   lodash-es: 4.17.21
   mockjs: 1.1.0
@@ -3063,8 +3063,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /ant-design-vue/3.2.15_vue@3.2.47:
-    resolution: {integrity: sha512-sJfE7LWimSdAPe4dzNyQBrmVMnOTNQTkG9oOyr+7W8qIYrX8sYWyC68Nn1uum4KBJUSZUa/BU6dohvTG0urBhA==}
+  /ant-design-vue/3.2.16_vue@3.2.47:
+    resolution: {integrity: sha512-kBGxk4csoEi2iaWO62DpNECTnBLIf/CNYW8RdNjLPWo6TBWLQNqLchxRcg8KatOkDRpdWRaqdqeD5P+F6MDC3Q==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       vue: '>=3.2.0'
@@ -4375,11 +4375,11 @@ packages:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
     dev: true
 
-  /echarts/5.4.1:
-    resolution: {integrity: sha512-9ltS3M2JB0w2EhcYjCdmtrJ+6haZcW6acBolMGIuf01Hql1yrIV01L1aRj7jsaaIULJslEP9Z3vKlEmnJaWJVQ==}
+  /echarts/5.4.2:
+    resolution: {integrity: sha512-2W3vw3oI2tWJdyAz+b8DuWS0nfXtSDqlDmqgin/lfzbkB01cuMEN66KWBlmur3YMp5nEDEEt5s23pllnAzB4EA==}
     dependencies:
       tslib: 2.3.0
-      zrender: 5.4.1
+      zrender: 5.4.3
     dev: false
 
   /editorconfig/0.15.3:
@@ -9722,8 +9722,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zrender/5.4.1:
-    resolution: {integrity: sha512-M4Z05BHWtajY2241EmMPHglDQAJ1UyHQcYsxDNzD9XLSkPDqMq4bB28v9Pb4mvHnVQ0GxyTklZ/69xCFP6RXBA==}
+  /zrender/5.4.3:
+    resolution: {integrity: sha512-DRUM4ZLnoaT0PBVvGBDO9oWIDBKFdAVieNWxWwK0niYzJCMwGchRk21/hsE+RKkIveH3XHCyvXcJDkgLVvfizQ==}
     dependencies:
       tslib: 2.3.0
     dev: false
