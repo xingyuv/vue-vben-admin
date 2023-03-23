@@ -9,6 +9,7 @@ import VitePluginCertificate from 'vite-plugin-mkcert'
 import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
 import { configPwaConfig } from './pwa'
 import { configMockPlugin } from './mock'
+import { configHtmlPlugin } from './html'
 import { configCompressPlugin } from './compress'
 import { configStyleImportPlugin } from './styleImport'
 import { configVisualizerConfig } from './visualizer'
@@ -38,6 +39,9 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
 
   // @vitejs/plugin-legacy
   VITE_LEGACY && isBuild && vitePlugins.push(legacy())
+
+  // vite-plugin-html
+  vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
 
   // vite-plugin-svg-icons
   vitePlugins.push(configSvgIconsPlugin(isBuild))

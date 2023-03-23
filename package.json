@@ -133,6 +133,7 @@
     "unplugin-vue-setup-extend-plus": "^0.4.9",
     "vite": "^4.2.1",
     "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.0",
     "vite-plugin-mkcert": "^1.13.3",
     "vite-plugin-mock": "^2.9.6",
     "vite-plugin-progress": "^0.0.6",
