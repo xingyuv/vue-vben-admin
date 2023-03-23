@@ -45,7 +45,7 @@ const htmlData = `
       name="viewport"
       content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0"
     />
-    <title><%= title %></title>
+    <title>%VITE_GLOB_APP_TITLE%</title>
     <link rel="icon" href="/favicon.ico" />
   </head>
   <body>
