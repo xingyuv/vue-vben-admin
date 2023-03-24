@@ -17,7 +17,7 @@ import { registerGlobComp } from '@/components/registerGlobComp'
 import { isDevMode } from './utils/env'
 
 if (isDevMode()) {
-  import('ant-design-vue/dist/antd.css')
+  import('ant-design-vue/dist/antd.less')
 }
 
 async function bootstrap() {
