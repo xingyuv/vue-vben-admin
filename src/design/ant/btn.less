@@ -17,8 +17,7 @@
     }
   }
 
-  /* stylelint-disable-next-line selector-not-notation */
-  &-primary:not(&-background-ghost):not([disabled]) {
+  &-primary:not(&-background-ghost, [disabled]) {
     color: @white;
   }
 

@@ -1,8 +1,8 @@
 import 'uno.css'
+import 'virtual:unocss-devtools'
 import '@/design/index.less'
 // Register icon sprite
 import 'virtual:svg-icons-register'
-import 'ant-design-vue/dist/antd.variable.min.css'
 import App from './App.vue'
 import { createApp } from 'vue'
 import { initAppConfigStore } from '@/logics/initAppConfig'
