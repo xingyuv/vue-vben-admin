@@ -52,7 +52,7 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
   // vite-plugin-purge-icons
   vitePlugins.push(purgeIcons())
 
-  // vite-plugin-style-import
+  // vite-vue-plugin-style-import
   if (isProdFn(mode)) {
     vitePlugins.push(configStyleImportPlugin(isBuild))
   }
