@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import legacy from '@vitejs/plugin-legacy'
 import progress from 'vite-plugin-progress'
-import windiCSS from 'vite-plugin-windicss'
+import Unocss from 'unocss/vite'
 import purgeIcons from 'vite-plugin-purge-icons'
 import VitePluginCertificate from 'vite-plugin-mkcert'
 import vueSetupExtend from 'unplugin-vue-setup-extend-plus/vite'
@@ -34,8 +34,8 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
     })
   ]
 
-  // vite-plugin-windicss
-  vitePlugins.push(windiCSS())
+  // Unocss
+  vitePlugins.push(Unocss())
 
   // @vitejs/plugin-legacy
   VITE_LEGACY && isBuild && vitePlugins.push(legacy())
