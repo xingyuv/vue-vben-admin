@@ -1,7 +1,6 @@
 import { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import legacy from '@vitejs/plugin-legacy'
 import progress from 'vite-plugin-progress'
 import Unocss from 'unocss/vite'
 import purgeIcons from 'vite-plugin-purge-icons'
@@ -18,7 +17,7 @@ import { configSvgIconsPlugin } from './svgSprite'
 import { isProdFn } from '../../utils'
 
 export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boolean) {
-  const { VITE_USE_MOCK, VITE_LEGACY, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
+  const { VITE_USE_MOCK, VITE_BUILD_COMPRESS, VITE_BUILD_COMPRESS_DELETE_ORIGIN_FILE } = viteEnv
 
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     // have to
@@ -36,9 +35,6 @@ export function createVitePlugins(mode: string, viteEnv: ViteEnv, isBuild: boole
 
   // Unocss
   vitePlugins.push(Unocss())
-
-  // @vitejs/plugin-legacy
-  VITE_LEGACY && isBuild && vitePlugins.push(legacy())
 
   // vite-plugin-html
   vitePlugins.push(configHtmlPlugin(viteEnv, isBuild))
