@@ -2,11 +2,15 @@
 
 [![license](https://img.shields.io/github/license/xingyu4j/vue-vben-admin.svg)](LICENSE)
 
-<h1>v1.0.3</h1>
+<h1>v1.0.4</h1>
 
 ## 精简版地址
 
 [gitee](https://gitee.com/xingyu4j/vue-vben-admin/tree/thin/) [github](https://github.com/xingyu4j/vue-vben-admin/tree/thin)
+
+## 预览地址
+
+[预览地址](http://vben.x-surge.com)
 
 </div>
 
@@ -47,10 +51,6 @@
     <img alt="VbenAdmin Logo" width="100%" src="https://anncwb.github.io/anncwb/images/preview3.png">
 </p>
 
-## 预览地址
-
-[预览地址](http://vben.x-surge.com)
-
 ## 准备
 
 - [node](http://nodejs.org/) 和 [git](https://git-scm.com/) -项目开发环境
@@ -69,7 +69,7 @@
 ```bash
 git clone https://github.com/xingyu4j/vue-vben-admin.git
 or
-git clone https://gitee.com/xingyu4j/vue-vben-admin
+git clone https://gitee.com/xingyu4j/vue-vben-admin.git
 ```
 
 - 安装依赖
@@ -84,7 +84,7 @@ pnpm install
 - 运行
 
 ```bash
-pnpm serve
+pnpm dev
 ```
 
 - 打包
