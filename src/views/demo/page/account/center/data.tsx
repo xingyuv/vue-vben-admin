@@ -60,24 +60,6 @@ export const details: ListItem[] = [
   }
 ]
 
-export const achieveList: TabItem[] = [
-  {
-    key: '1',
-    name: '文章',
-    component: 'Article'
-  },
-  {
-    key: '2',
-    name: '应用',
-    component: 'Application'
-  },
-  {
-    key: '3',
-    name: '项目',
-    component: 'Project'
-  }
-]
-
 export const actions: any[] = [
   { icon: 'clarity:star-line', text: '156', color: '#018ffb' },
   { icon: 'bx:bxs-like', text: '156', color: '#459ae8' },

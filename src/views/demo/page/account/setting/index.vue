@@ -1,49 +1,37 @@
 <template>
   <ScrollContainer>
-    <div ref="wrapperRef" :class="prefixCls">
-      <Tabs tab-position="left" :tabBarStyle="tabBarStyle">
-        <template v-for="item in settingList" :key="item.key">
-          <TabPane :tab="item.name">
-            <component :is="item.component" />
-          </TabPane>
-        </template>
+    <div ref="wrapperRef" :class="`${prefixCls}`">
+      <Tabs :activeKey="tabKey" tab-position="left" :tabBarStyle="{ width: '220px' }">
+        <TabPane key="1" tab="基本设置">
+          <BaseSetting />
+        </TabPane>
+        <TabPane key="2" tab="安全设置">
+          <SecureSetting />
+        </TabPane>
+        <TabPane key="3" tab="账号绑定">
+          <AccountBind />
+        </TabPane>
+        <TabPane key="4" tab="新消息通知">
+          <MsgNotify />
+        </TabPane>
       </Tabs>
     </div>
   </ScrollContainer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import { Tabs } from 'ant-design-vue'
-
 import { ScrollContainer } from '@/components/Container'
-import { settingList } from './data'
-
 import BaseSetting from './BaseSetting.vue'
 import SecureSetting from './SecureSetting.vue'
 import AccountBind from './AccountBind.vue'
 import MsgNotify from './MsgNotify.vue'
+import { useDesign } from '@/hooks/web/useDesign'
 
-export default defineComponent({
-  components: {
-    ScrollContainer,
-    Tabs,
-    TabPane: Tabs.TabPane,
-    BaseSetting,
-    SecureSetting,
-    AccountBind,
-    MsgNotify
-  },
-  setup() {
-    return {
-      prefixCls: 'account-setting',
-      settingList,
-      tabBarStyle: {
-        width: '220px'
-      }
-    }
-  }
-})
+const TabPane = Tabs.TabPane
+const tabKey = ref('1')
+const { prefixCls } = useDesign('account-setting')
 </script>
 <style lang="less">
 .account-setting {
