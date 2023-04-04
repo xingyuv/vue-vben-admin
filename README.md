@@ -12,6 +12,10 @@
 
 [预览地址](http://vben.x-surge.com)
 
+## 实际开发项目
+
+[ruoyi-vue-vben](https://gitee.com/xingyuv/yudao-ui-admin-vben)
+
 </div>
 
 ## 简介
