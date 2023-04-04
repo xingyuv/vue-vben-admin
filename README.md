@@ -2,7 +2,7 @@
 
 [![license](https://img.shields.io/github/license/xingyu4j/vue-vben-admin.svg)](LICENSE)
 
-<h1>v1.1.0</h1>
+<h1>v1.1.1</h1>
 
 ## 精简版地址
 
@@ -31,7 +31,7 @@
 | [Vue](https://staging-cn.vuejs.org/) | Vue 框架 | 3.2.47 |
 | [Vite](https://cn.vitejs.dev//) | 开发与构建工具 | 4.2.1 |
 | [ant-design-vue](https://antdv.com/) | ant-design-vue | 3.2.16 |
-| [TypeScript](https://www.typescriptlang.org/docs/) | JavaScript 的超集 | 5.0.2 |
+| [TypeScript](https://www.typescriptlang.org/docs/) | JavaScript 的超集 | 5.0.3 |
 | [pinia](https://pinia.vuejs.org/) | Vue 存储库 替代 vuex5 | 2.0.33 |
 | [vueuse](https://vueuse.org/) | 常用工具集 | 9.13.0 |
 | [vue-i18n](https://kazupon.github.io/vue-i18n/zh/introduction.html/) | 国际化 | 9.2.2 |
