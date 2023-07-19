@@ -2,8 +2,6 @@ import { defineStore } from 'pinia';
 import { h } from 'vue';
 import { RouteRecordRaw } from 'vue-router';
 
-import type { ErrorMessageMode } from '#/axios';
-import type { UserInfo } from '#/store';
 import { GetUserInfoModel, LoginParams } from '@/api/sys/model/userModel';
 import { doLogout, getUserInfo, loginApi } from '@/api/sys/user';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
@@ -17,6 +15,8 @@ import { store } from '@/store';
 import { usePermissionStore } from '@/store/modules/permission';
 import { getAuthCache, setAuthCache } from '@/utils/auth';
 import { isArray } from '@/utils/is';
+import type { ErrorMessageMode } from '#/axios';
+import type { UserInfo } from '#/store';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;

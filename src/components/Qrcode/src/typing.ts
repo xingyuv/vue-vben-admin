@@ -1,10 +1,10 @@
-import type { QRCodeSegment, QRCodeRenderersOptions } from 'qrcode';
+import type { QRCodeRenderersOptions, QRCodeSegment } from 'qrcode';
 
 export type ContentType = string | QRCodeSegment[];
 
 export type { QRCodeRenderersOptions };
 
-export type LogoType = {
+export interface LogoType {
   src: string;
   logoSize: number;
   borderColor: string;
@@ -13,7 +13,7 @@ export type LogoType = {
   crossOrigin: string;
   borderRadius: number;
   logoRadius: number;
-};
+}
 
 export interface RenderQrCodeParams {
   canvas: any;

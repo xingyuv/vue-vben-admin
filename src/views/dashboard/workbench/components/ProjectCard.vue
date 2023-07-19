@@ -18,9 +18,11 @@
   </Card>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { Card, CardGrid } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+
   import { groupItems } from './data';
 
   export default defineComponent({

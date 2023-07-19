@@ -6,7 +6,7 @@
           <ListItem>
             <Card :hoverable="true" :class="`${prefixCls}__card`">
               <div :class="`${prefixCls}__card-title`">
-                <Icon class="icon" v-if="item.icon" :icon="item.icon" :color="item.color" />
+                <Icon v-if="item.icon" class="icon" :icon="item.icon" :color="item.color" />
                 {{ item.title }}
               </div>
               <div :class="`${prefixCls}__card-num`">
@@ -16,8 +16,8 @@
                 新增用户：<span>{{ item.new }}</span>
               </div>
               <Icon
-                :class="`${prefixCls}__card-download`"
                 v-if="item.download"
+                :class="`${prefixCls}__card-download`"
                 :icon="item.download"
               />
             </Card>
@@ -28,9 +28,11 @@
   </List>
 </template>
 <script lang="ts">
+  import { Card, Col, List, Row } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { List, Card, Row, Col } from 'ant-design-vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+
   import { applicationList } from './data';
 
   export default defineComponent({
@@ -73,8 +75,8 @@
 
       &-num {
         margin-left: 24px;
-        color: @text-color-secondary;
         line-height: 36px;
+        color: @text-color-secondary;
 
         span {
           margin-left: 5px;
@@ -84,8 +86,8 @@
 
       &-download {
         float: right;
-        color: @primary-color;
         font-size: 20px !important;
+        color: @primary-color;
       }
     }
   }

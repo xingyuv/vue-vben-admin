@@ -27,13 +27,13 @@
 }
 
 .fade-slide-enter-from {
-  transform: translateX(-30px);
   opacity: 0;
+  transform: translateX(-30px);
 }
 
 .fade-slide-leave-to {
-  transform: translateX(30px);
   opacity: 0;
+  transform: translateX(30px);
 }
 
 // ///////////////////////////////////////////////
@@ -43,17 +43,19 @@
 // Speed: 1x
 .fade-bottom-enter-active,
 .fade-bottom-leave-active {
-  transition: opacity 0.25s, transform 0.3s;
+  transition:
+    opacity 0.25s,
+    transform 0.3s;
 }
 
 .fade-bottom-enter-from {
-  transform: translateY(-10%);
   opacity: 0;
+  transform: translateY(-10%);
 }
 
 .fade-bottom-leave-to {
-  transform: translateY(10%);
   opacity: 0;
+  transform: translateY(10%);
 }
 
 // fade-scale
@@ -63,13 +65,13 @@
 }
 
 .fade-scale-enter-from {
-  transform: scale(1.2);
   opacity: 0;
+  transform: scale(1.2);
 }
 
 .fade-scale-leave-to {
-  transform: scale(0.8);
   opacity: 0;
+  transform: scale(0.8);
 }
 
 // ///////////////////////////////////////////////
@@ -79,15 +81,17 @@
 // Speed: 1x
 .fade-top-enter-active,
 .fade-top-leave-active {
-  transition: opacity 0.2s, transform 0.25s;
+  transition:
+    opacity 0.2s,
+    transform 0.25s;
 }
 
 .fade-top-enter-from {
-  transform: translateY(8%);
   opacity: 0;
+  transform: translateY(8%);
 }
 
 .fade-top-leave-to {
-  transform: translateY(-8%);
   opacity: 0;
+  transform: translateY(-8%);
 }

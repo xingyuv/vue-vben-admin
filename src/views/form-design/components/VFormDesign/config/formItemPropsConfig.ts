@@ -1,5 +1,5 @@
-import { IAnyObject } from '../../../typings/base-type';
 import { baseComponents, customComponents } from '../../../core/formItemConfig';
+import { IAnyObject } from '../../../typings/base-type';
 
 export const globalConfigState: { span: number } = {
   span: 24,

@@ -32,5 +32,8 @@
       "name": "root",
       "path": "."
     }
-  ]
+  ],
+  "settings": {
+    "typescript.tsdk": "root\\node_modules\\typescript\\lib"
+  }
 }

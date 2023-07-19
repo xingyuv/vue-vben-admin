@@ -3,46 +3,46 @@
 -->
 <template>
   <div class="properties-content">
-    <div class="properties-body" v-if="formConfig.currentItem?.itemProps">
-      <Empty class="hint-box" v-if="!formConfig.currentItem.key" description="未选择控件" />
+    <div v-if="formConfig.currentItem?.itemProps" class="properties-body">
+      <Empty v-if="!formConfig.currentItem.key" class="hint-box" description="未选择控件" />
       <Form v-else label-align="left" layout="vertical">
         <div v-for="item of baseFormItemProps" :key="item.name">
-          <FormItem :label="item.label" v-if="showProps(item.exclude)">
+          <FormItem v-if="showProps(item.exclude)" :label="item.label">
             <component
-              class="component-props"
               v-bind="item.componentProps"
               :is="item.component"
               v-model:value="formConfig.currentItem[item.name]"
+              class="component-props"
             />
           </FormItem>
         </div>
         <div v-for="item of advanceFormItemProps" :key="item.name">
-          <FormItem :label="item.label" v-if="showProps(item.exclude)">
+          <FormItem v-if="showProps(item.exclude)" :label="item.label">
             <component
-              class="component-props"
               v-bind="item.componentProps"
               :is="item.component"
               v-model:value="formConfig.currentItem.itemProps[item.name]"
+              class="component-props"
             />
           </FormItem> </div
         ><div v-for="item of advanceFormItemColProps" :key="item.name">
-          <FormItem :label="item.label" v-if="showProps(item.exclude)">
+          <FormItem v-if="showProps(item.exclude)" :label="item.label">
             <component
-              class="component-props"
               v-bind="item.componentProps"
               :is="item.component"
               v-model:value="formConfig.currentItem.itemProps[item.name]['span']"
+              class="component-props"
             />
           </FormItem>
         </div>
-        <FormItem label="控制属性" v-if="controlPropsList.length">
+        <FormItem v-if="controlPropsList.length" label="控制属性">
           <Col v-for="item of controlPropsList" :key="item.name">
             <Checkbox v-model:checked="formConfig.currentItem.itemProps[item.name]">
               {{ item.label }}
             </Checkbox>
           </Col>
         </FormItem>
-        <FormItem label="是否必选" v-if="!['Grid'].includes(formConfig.currentItem.component)">
+        <FormItem v-if="!['Grid'].includes(formConfig.currentItem.component)" label="是否必选">
           <Switch v-model:checked="formConfig.currentItem.itemProps['required']" />
           <Input
             v-if="formConfig.currentItem.itemProps['required']"
@@ -62,29 +62,29 @@
   </div>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, watch } from 'vue';
   import {
-    baseFormItemControlAttrs,
-    baseFormItemProps,
-    advanceFormItemProps,
-    advanceFormItemColProps,
-  } from '../../VFormDesign/config/formItemPropsConfig';
-
-  import {
+    Checkbox,
+    Col,
     Empty,
-    Input,
     Form,
     FormItem,
-    Switch,
-    Checkbox,
+    Input,
+    RadioGroup,
     Select,
     Slider,
-    Col,
-    RadioGroup,
+    Switch,
   } from 'ant-design-vue';
-  import RuleProps from './RuleProps.vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
   import { isArray } from 'lodash-es';
+  import { computed, defineComponent, watch } from 'vue';
+
+  import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import {
+    advanceFormItemColProps,
+    advanceFormItemProps,
+    baseFormItemControlAttrs,
+    baseFormItemProps,
+  } from '../../VFormDesign/config/formItemPropsConfig';
+  import RuleProps from './RuleProps.vue';
 
   export default defineComponent({
     name: 'FormItemProps',

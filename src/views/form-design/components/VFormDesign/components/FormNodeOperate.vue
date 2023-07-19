@@ -14,10 +14,12 @@
 
 <script lang="ts">
   import { computed, defineComponent } from 'vue';
+
+  import Icon from '@/components/Icon/Icon.vue';
+
+  import { useFormDesignState } from '../../../hooks/useFormDesignState';
   import { IVFormComponent } from '../../../typings/v-form-component';
   import { remove } from '../../../utils';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import Icon from '@/components/Icon/Icon.vue';
 
   export default defineComponent({
     name: 'FormNodeOperate',
@@ -50,7 +52,7 @@
             ['Grid', 'Tabs'].includes(component) &&
               formItem.columns?.forEach((item) => traverse(item.children));
             if (key === props.currentItem.key) {
-              let params: IVFormComponent =
+              const params: IVFormComponent =
                 schemas.length === 1
                   ? { component: '' }
                   : schemas.length - 1 > index

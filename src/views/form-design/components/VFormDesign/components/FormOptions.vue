@@ -33,12 +33,14 @@
 </template>
 
 <script lang="ts">
+  import { Input } from 'ant-design-vue';
   import { defineComponent, reactive, toRefs } from 'vue';
+
+  import Icon from '@/components/Icon/Icon.vue';
+
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
   import { remove } from '../../../utils';
   import message from '../../../utils/message';
-  import { Input } from 'ant-design-vue';
-  import Icon from '@/components/Icon/Icon.vue';
 
   export default defineComponent({
     name: 'FormOptions',
@@ -99,11 +101,11 @@
       flex-shrink: 0;
       width: 30px;
       height: 30px;
-      border-radius: 50%;
-      background: #f5f5f5;
-      color: #666;
       line-height: 30px;
+      color: #666;
       text-align: center;
+      background: #f5f5f5;
+      border-radius: 50%;
 
       &:hover {
         background: #ff4d4f;

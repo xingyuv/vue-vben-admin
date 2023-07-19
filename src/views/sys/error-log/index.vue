@@ -36,13 +36,13 @@
   import { cloneDeep } from 'lodash-es';
   import { nextTick, ref, watch } from 'vue';
 
-  import type { ErrorLogInfo } from '#/store';
   import { fireErrorApi } from '@/api/demo/error';
   import { useModal } from '@/components/Modal';
   import { BasicTable, TableAction, useTable } from '@/components/Table/index';
   import { useI18n } from '@/hooks/web/useI18n';
   import { useMessage } from '@/hooks/web/useMessage';
   import { useErrorLogStore } from '@/store/modules/errorLog';
+  import type { ErrorLogInfo } from '#/store';
 
   import { getColumns } from './data';
   import DetailModal from './DetailModal.vue';

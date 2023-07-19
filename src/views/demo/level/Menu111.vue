@@ -6,8 +6,8 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { Input } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
 
   export default defineComponent({ name: 'Menu111Demo', components: { Input } });
 </script>

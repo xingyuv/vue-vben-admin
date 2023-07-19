@@ -1,7 +1,7 @@
 <template>
   <div ref="chartRef" :style="{ height, width }"></div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { onMounted, Ref, ref } from 'vue';
 
   import { useECharts } from '@/hooks/web/useECharts';

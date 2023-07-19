@@ -39,9 +39,11 @@
       },
       background: {
         type: String as PropType<string>,
+        default: '',
       },
       theme: {
         type: String as PropType<'dark' | 'light'>,
+        default: 'light',
       },
     },
   });

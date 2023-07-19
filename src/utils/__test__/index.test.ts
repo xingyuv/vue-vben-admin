@@ -1,6 +1,7 @@
 // 暂时未安装依赖，无法测试
 // @ts-ignore
 import { describe, expect, test } from 'vitest';
+
 import { deepMerge } from '@/utils';
 
 describe('deepMerge function', () => {

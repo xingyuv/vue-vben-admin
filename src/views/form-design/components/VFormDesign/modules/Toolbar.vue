@@ -6,8 +6,8 @@
     <!-- 头部操作按钮区域 start -->
     <!-- 操作左侧区域 start -->
     <div class="left-btn-box">
-      <Tooltip v-for="item in toolbarsConfigs" :title="item.title" :key="item.icon">
-        <a @click="$emit(item.event)" class="toolbar-text">
+      <Tooltip v-for="item in toolbarsConfigs" :key="item.icon" :title="item.title">
+        <a class="toolbar-text" @click="$emit(item.event)">
           <Icon :icon="item.icon" />
         </a>
       </Tooltip>
@@ -27,11 +27,13 @@
   <!-- 操作区域 start -->
 </template>
 <script lang="ts">
-  import { defineComponent, inject, reactive, toRefs } from 'vue';
   import { UseRefHistoryReturn } from '@vueuse/core';
-  import { IFormConfig } from '../../../typings/v-form-component';
-  import { Tooltip, Divider } from 'ant-design-vue';
+  import { Divider, Tooltip } from 'ant-design-vue';
+  import { defineComponent, inject, reactive, toRefs } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+
+  import { IFormConfig } from '../../../typings/v-form-component';
 
   interface IToolbarsConfig {
     type: string;
@@ -109,10 +111,10 @@
     height: @operating-area-height;
     padding: 0 12px;
     padding-left: 30px;
-    border-bottom: 2px solid @border-color;
     font-size: 16px;
     line-height: @operating-area-height;
     text-align: left;
+    border-bottom: 2px solid @border-color;
 
     a {
       margin: 0 5px;

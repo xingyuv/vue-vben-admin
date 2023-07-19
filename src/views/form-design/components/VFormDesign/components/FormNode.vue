@@ -4,8 +4,8 @@
 <template>
   <div
     class="drag-move-box"
-    @click.stop="handleSelectItem"
     :class="{ active: schema.key === formConfig.currentItem?.key }"
+    @click.stop="handleSelectItem"
   >
     <div class="form-item-box">
       <VFormItem :formConfig="formConfig" :schema="schema" />
@@ -17,11 +17,12 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, toRefs, PropType } from 'vue';
-  import { IVFormComponent } from '../../../typings/v-form-component';
-  import FormNodeOperate from './FormNodeOperate.vue';
+  import { defineComponent, PropType, reactive, toRefs } from 'vue';
+
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { IVFormComponent } from '../../../typings/v-form-component';
   import VFormItem from '../../VFormItem/index.vue';
+  import FormNodeOperate from './FormNodeOperate.vue';
   // import VFormItem from '../../VFormItem/vFormItem.vue';
   export default defineComponent({
     name: 'FormNode',

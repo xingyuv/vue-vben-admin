@@ -6,8 +6,8 @@
   </span>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
   import { FormOutlined } from '@ant-design/icons-vue';
+  import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'EditTableHeaderIcon',

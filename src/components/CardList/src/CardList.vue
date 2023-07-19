@@ -14,7 +14,8 @@
             <slot name="header"></slot>
             <Tooltip>
               <template #title>
-                <div class="w-50">每行显示数量</div><Slider
+                <div class="w-50">每行显示数量</div>
+                <Slider
                   id="slider"
                   v-bind="sliderProp"
                   v-model:value="grid"

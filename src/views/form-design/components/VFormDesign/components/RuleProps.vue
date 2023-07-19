@@ -33,12 +33,14 @@
   </div>
 </template>
 <script lang="ts">
-  import { ref, defineComponent } from 'vue';
-  import { remove } from '../../../utils';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { AutoComplete, Form, FormItem, Input } from 'ant-design-vue';
   import { isArray } from 'lodash-es';
-  import { Form, FormItem, AutoComplete, Input } from 'ant-design-vue';
+  import { defineComponent, ref } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+
+  import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { remove } from '../../../utils';
 
   export default defineComponent({
     name: 'RuleProps',
@@ -254,8 +256,8 @@
     width: 1em;
     height: 1em;
     overflow: hidden;
-    fill: currentcolor;
     vertical-align: -0.15em;
+    fill: currentcolor;
   }
 
   .rule-props-content {
@@ -265,10 +267,10 @@
 
     .rule-props-item {
       position: relative;
-      margin-bottom: 5px;
       padding: 3px 2px;
-      border-radius: 5px;
+      margin-bottom: 5px;
       background-color: #f0eded;
+      border-radius: 5px;
 
       :deep(.ant-form-item) {
         border: 0 !important;
@@ -276,13 +278,13 @@
 
       &-close {
         position: absolute;
-        z-index: 999;
         top: -5px;
         right: -5px;
-        border-radius: 7px;
-        background-color: #a3a0a0;
+        z-index: 999;
         color: #ccc;
         cursor: pointer;
+        background-color: #a3a0a0;
+        border-radius: 7px;
 
         &:hover {
           color: #00c;

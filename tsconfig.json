@@ -5,8 +5,6 @@
     "baseUrl": ".",
     "types": ["vite/client"],
     "paths": {
-      "/@/*": ["src/*"],
-      "/#/*": ["types/*"],
       "@/*": ["src/*"],
       "#/*": ["types/*"]
     }

@@ -3,17 +3,17 @@
 -->
 <template>
   <div class="properties-content">
-    <div class="properties-body" v-if="formConfig.currentItem">
-      <Empty class="hint-box" v-if="!formConfig.currentItem.key" description="未选择控件" />
+    <div v-if="formConfig.currentItem" class="properties-body">
+      <Empty v-if="!formConfig.currentItem.key" class="hint-box" description="未选择控件" />
       <Form v-else label-align="left" layout="vertical">
         <div v-for="item of baseItemColumnProps" :key="item.name">
-          <FormItem :label="item.label" v-if="showProps(item.exclude)">
+          <FormItem v-if="showProps(item.exclude)" :label="item.label">
             <component
-              v-if="formConfig.currentItem.colProps"
-              class="component-props"
               v-bind="item.componentProps"
               :is="item.component"
+              v-if="formConfig.currentItem.colProps"
               v-model:value="formConfig.currentItem.colProps[item.name]"
+              class="component-props"
             />
           </FormItem>
         </div>
@@ -22,13 +22,13 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { baseItemColumnProps } from '../config/formItemPropsConfig';
-
-  import { Empty, Input, Form, FormItem, Switch, Checkbox, Select, Slider } from 'ant-design-vue';
-  import RuleProps from './RuleProps.vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { Checkbox, Empty, Form, FormItem, Input, Select, Slider, Switch } from 'ant-design-vue';
   import { isArray } from 'lodash-es';
+  import { defineComponent } from 'vue';
+
+  import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { baseItemColumnProps } from '../config/formItemPropsConfig';
+  import RuleProps from './RuleProps.vue';
 
   export default defineComponent({
     name: 'FormItemProps',

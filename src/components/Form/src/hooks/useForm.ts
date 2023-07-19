@@ -1,10 +1,10 @@
 import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { nextTick, onUnmounted, ref, unref, watch } from 'vue';
 
-import type { DynamicProps } from '#/utils';
 import { getDynamicProps } from '@/utils';
 import { isProdMode } from '@/utils/env';
 import { error } from '@/utils/log';
+import type { DynamicProps } from '#/utils';
 
 import type { FormActionType, FormProps, FormSchema, UseFormReturnType } from '../types/form';
 

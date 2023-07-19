@@ -1,4 +1,3 @@
-import type { ProjectConfig } from '#/config';
 import {
   ContentEnum,
   PermissionModeEnum,
@@ -9,6 +8,7 @@ import {
 } from '@/enums/appEnum';
 import { CacheTypeEnum } from '@/enums/cacheEnum';
 import { MenuModeEnum, MenuTypeEnum, MixSidebarTriggerEnum, TriggerEnum } from '@/enums/menuEnum';
+import type { ProjectConfig } from '#/config';
 
 import { HEADER_PRESET_BG_COLOR_LIST, SIDE_BAR_BG_COLOR_LIST } from './designSetting';
 

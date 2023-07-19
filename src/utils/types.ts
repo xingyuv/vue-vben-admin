@@ -27,9 +27,9 @@ export type RefElement = Nullable<HTMLElement>;
 
 export type CustomizedHTMLElement<T> = HTMLElement & T;
 
-export type Indexable<T> = {
+export interface Indexable<T> {
   [key: string]: T;
-};
+}
 
 export type Hash<T> = Indexable<T>;
 

@@ -17,8 +17,8 @@
   </div>
 </template>
 <script lang="ts">
+  import { Descriptions, Result } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { Result, Descriptions } from 'ant-design-vue';
 
   export default defineComponent({
     components: {
@@ -43,8 +43,8 @@
   }
 
   .desc-wrap {
-    margin-top: 24px;
     padding: 24px 40px;
+    margin-top: 24px;
     background-color: @background-color-light;
   }
 </style>

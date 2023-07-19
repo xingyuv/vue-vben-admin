@@ -18,7 +18,7 @@ export function getBoundingClientRect(element: Element): DOMRect | number {
 }
 
 function trim(string: string) {
-  return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
+  return (string || '').replace(/^\s+|\s+$/g, '');
 }
 
 /* istanbul ignore next */
@@ -110,8 +110,8 @@ export function getViewportOffset(element: Element): ViewportOffsetResult {
   const clientWidth = window.document.documentElement.clientWidth;
   const clientHeight = window.document.documentElement.clientHeight;
   return {
-    left: left,
-    top: top,
+    left,
+    top,
     right: clientWidth - rectWidth - left,
     bottom: clientHeight - rectHeight - top,
     rightIncludeBody: clientWidth - left,

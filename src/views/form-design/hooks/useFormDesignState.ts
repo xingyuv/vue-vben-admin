@@ -1,4 +1,5 @@
 import { inject, Ref } from 'vue';
+
 import { IFormDesignMethods } from '../typings/form-type';
 import { IFormConfig } from '../typings/v-form-component';
 
@@ -12,7 +13,7 @@ export function useFormDesignState() {
 }
 
 export function useFormModelState() {
-  const formModel = inject('formModel') as Ref<{}>;
-  const setFormModel = inject('setFormModelMethod') as (key: String, value: any) => void;
+  const formModel = inject('formModel') as Ref<object>;
+  const setFormModel = inject('setFormModelMethod') as (key: string, value: any) => void;
   return { formModel, setFormModel };
 }

@@ -23,7 +23,6 @@ export const BAR_MAP: BarMap = {
   },
 };
 
-// @ts-ignore
 export function renderThumbStyle({ move, size, bar }) {
   const style = {} as any;
   const translate = `translate${bar.axis}(${move}%)`;

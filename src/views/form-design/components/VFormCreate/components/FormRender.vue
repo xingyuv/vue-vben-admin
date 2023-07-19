@@ -2,9 +2,9 @@
   <template v-if="['Grid'].includes(schema.component)">
     <Row class="grid-row">
       <Col
-        class="grid-col"
         v-for="(colItem, index) in schema.columns"
         :key="index"
+        class="grid-col"
         :span="colItem.span"
       >
         <FormRender
@@ -37,10 +37,11 @@
   </VFormItem>
 </template>
 <script lang="ts">
+  import { Col, Row } from 'ant-design-vue';
   import { defineComponent, PropType } from 'vue';
-  import { IVFormComponent, IFormConfig } from '../../../typings/v-form-component';
+
+  import { IFormConfig, IVFormComponent } from '../../../typings/v-form-component';
   import VFormItem from '../../VFormItem/index.vue';
-  import { Row, Col } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'FormRender',

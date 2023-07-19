@@ -5,20 +5,20 @@
 <template>
   <div class="form-panel v-form-container">
     <Empty
-      class="empty-text"
       v-show="formConfig.schemas.length === 0"
+      class="empty-text"
       description="从左侧选择控件添加"
     />
     <Form v-bind="formConfig">
       <div class="draggable-box">
         <draggable
+          v-model="formConfig.schemas"
           class="list-main ant-row"
           group="form-draggable"
           :component-data="{ name: 'list', tag: 'div', type: 'transition-group' }"
           ghostClass="moving"
           :animation="180"
           handle=".drag-move"
-          v-model="formConfig.schemas"
           item-key="key"
           @add="addItem"
           @start="handleDragStart"
@@ -37,12 +37,13 @@
   </div>
 </template>
 <script lang="ts">
-  import draggable from 'vuedraggable';
-  import LayoutItem from '../components/LayoutItem.vue';
-  import { defineComponent, computed } from 'vue';
+  import { Empty, Form } from 'ant-design-vue';
   import { cloneDeep } from 'lodash-es';
+  import { computed, defineComponent } from 'vue';
+  import draggable from 'vuedraggable';
+
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import { Form, Empty } from 'ant-design-vue';
+  import LayoutItem from '../components/LayoutItem.vue';
 
   export default defineComponent({
     name: 'FormComponentPanel',
@@ -123,8 +124,8 @@
 
     .empty-text {
       position: absolute;
-      z-index: 100;
       inset: -10% 0 0;
+      z-index: 100;
       height: 150px;
       margin: auto;
       color: #aaa;
@@ -151,8 +152,8 @@
 
         .list-enter,
         .list-leave-to {
-          transform: translateX(-100px);
           opacity: 0;
+          transform: translateX(-100px);
         }
 
         .list-enter {

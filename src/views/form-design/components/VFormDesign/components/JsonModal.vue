@@ -6,21 +6,22 @@
     title="JSON数据"
     :footer="null"
     :visible="visible"
-    @cancel="handleCancel"
     :destroyOnClose="true"
     wrapClassName="v-code-modal"
     style="top: 20px"
     width="850px"
+    @cancel="handleCancel"
   >
     <PreviewCode :editorJson="editorJson" />
   </Modal>
 </template>
 <script lang="ts">
+  import { Modal } from 'ant-design-vue';
   import { computed, defineComponent, reactive, toRefs } from 'vue';
-  import PreviewCode from './PreviewCode.vue';
+
   import { IFormConfig } from '../../../typings/v-form-component';
   import { formatRules, removeAttrs } from '../../../utils';
-  import { Modal } from 'ant-design-vue';
+  import PreviewCode from './PreviewCode.vue';
 
   export default defineComponent({
     name: 'JsonModal',

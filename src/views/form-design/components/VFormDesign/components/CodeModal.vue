@@ -6,21 +6,22 @@
     title="代码"
     :footer="null"
     :visible="visible"
-    @cancel="visible = false"
     wrapClassName="v-code-modal"
     style="top: 20px"
     width="850px"
     :destroyOnClose="true"
+    @cancel="visible = false"
   >
     <PreviewCode :editorJson="editorVueJson" fileFormat="vue" />
   </Modal>
 </template>
 <script lang="ts">
+  import { Modal } from 'ant-design-vue';
   import { computed, defineComponent, reactive, toRefs } from 'vue';
+
+  import { IFormConfig } from '../../../typings/v-form-component';
   import { formatRules, removeAttrs } from '../../../utils';
   import PreviewCode from './PreviewCode.vue';
-  import { IFormConfig } from '../../../typings/v-form-component';
-  import { Modal } from 'ant-design-vue';
 
   const codeVueFront = `<template>
   <div>

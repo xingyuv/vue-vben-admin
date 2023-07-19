@@ -5,7 +5,7 @@
 <script lang="ts" setup>
   import { onMountedOrActivated } from '@vben/hooks';
   import VditorPreview from 'vditor/dist/method.min';
-  import { defineProps, onBeforeUnmount, onDeactivated, Ref, ref, unref, watch } from 'vue';
+  import { onBeforeUnmount, onDeactivated, Ref, ref, unref, watch } from 'vue';
 
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
 

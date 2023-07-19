@@ -1,5 +1,6 @@
-import { resultSuccess, resultError, getRequestToken, requestParams } from '../_util';
 import { MockMethod } from 'vite-plugin-mock';
+
+import { getRequestToken, requestParams, resultError, resultSuccess } from '../_util';
 import { createFakeUserList } from './user';
 
 // single
@@ -250,7 +251,7 @@ export default [
         return resultError('Invalid user token!');
       }
       const id = checkUser.userId;
-      let menu: Object[];
+      let menu: object[];
       switch (id) {
         case '1':
           dashboardRoute.redirect = dashboardRoute.path + '/' + dashboardRoute.children[0].path;

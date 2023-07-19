@@ -1,6 +1,7 @@
-import type { VNode, FunctionalComponent } from 'vue';
-import { h } from 'vue';
 import { isString } from 'lodash-es';
+import type { FunctionalComponent, VNode } from 'vue';
+import { h } from 'vue';
+
 import Icon from '@/components/Icon/Icon.vue';
 
 export const TreeIcon: FunctionalComponent = ({ icon }: { icon: VNode | string }) => {

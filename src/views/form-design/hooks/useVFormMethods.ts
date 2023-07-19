@@ -1,8 +1,9 @@
-import { Ref, SetupContext } from 'vue';
-import { IVFormComponent, IFormConfig, AForm } from '../typings/v-form-component';
-import { findFormItem, formItemsForEach } from '../utils';
 import { cloneDeep, isFunction } from 'lodash-es';
+import { Ref, SetupContext } from 'vue';
+
 import { IAnyObject } from '../typings/base-type';
+import { AForm, IFormConfig, IVFormComponent } from '../typings/v-form-component';
+import { findFormItem, formItemsForEach } from '../utils';
 
 interface IFormInstanceMethods extends AForm {
   submit: () => Promise<any>;

@@ -1,12 +1,11 @@
 import type LogicFlow from '@logicflow/core';
-
-import { provide, inject } from 'vue';
+import { inject, provide } from 'vue';
 
 const key = Symbol('flow-chart');
 
-type Instance = {
+interface Instance {
   logicFlow: LogicFlow;
-};
+}
 
 export function createFlowChartContext(instance: Instance) {
   provide(key, instance);

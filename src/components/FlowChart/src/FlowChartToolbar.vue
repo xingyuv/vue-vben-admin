@@ -3,7 +3,7 @@
     <template v-for="item in toolbarItemList" :key="item.type">
       <Tooltip placement="bottom" v-bind="item.disabled ? { visible: false } : {}">
         <template #title>{{ item.tooltip }}</template>
-        <span :class="`${prefixCls}-toolbar__icon`" v-if="item.icon" @click="onControl(item)">
+        <span v-if="item.icon" :class="`${prefixCls}-toolbar__icon`" @click="onControl(item)">
           <Icon
             :icon="item.icon"
             :class="item.disabled ? 'cursor-not-allowed disabeld' : 'cursor-pointer'"
@@ -15,14 +15,14 @@
   </div>
 </template>
 <script lang="ts">
-  import type { ToolbarConfig } from './types';
-
-  import { defineComponent, ref, onUnmounted, unref, nextTick, watchEffect } from 'vue';
   import { Divider, Tooltip } from 'ant-design-vue';
+  import { defineComponent, nextTick, onUnmounted, ref, unref, watchEffect } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
 
-  import { useFlowChartContext } from './useFlowContext';
   import { ToolbarTypeEnum } from './enum';
+  import type { ToolbarConfig } from './types';
+  import { useFlowChartContext } from './useFlowContext';
 
   export default defineComponent({
     name: 'FlowChartToolbar',
@@ -142,8 +142,8 @@
   }
   .@{prefix-cls} {
     height: 36px;
-    border-bottom: 1px solid @border-color-base;
     background-color: @app-content-background;
+    border-bottom: 1px solid @border-color-base;
 
     .disabeld {
       color: @disabled-color;
@@ -151,8 +151,8 @@
 
     &__icon {
       display: inline-block;
-      margin-right: 10px;
       padding: 2px 4px;
+      margin-right: 10px;
 
       &:hover {
         color: @primary-color;

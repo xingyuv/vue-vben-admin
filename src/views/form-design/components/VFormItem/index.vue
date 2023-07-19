@@ -4,12 +4,12 @@
 <template>
   <Col v-bind="colPropsComputed">
     <FormItem v-bind="{ ...formItemProps }">
-      <template #label v-if="!formItemProps.hiddenLabel && schema.component !== 'Divider'">
+      <template v-if="!formItemProps.hiddenLabel && schema.component !== 'Divider'" #label>
         <Tooltip>
           <span>{{ schema.label }}</span>
-          <template #title v-if="schema.helpMessage"
-            ><span>{{ schema.helpMessage }}</span></template
-          >
+          <template v-if="schema.helpMessage" #title>
+            <span>{{ schema.helpMessage }}</span>
+          </template>
           <Icon v-if="schema.helpMessage" class="ml-5" icon="ant-design:question-circle-outlined" />
         </Tooltip>
       </template>
@@ -21,19 +21,21 @@
       ></slot>
       <Divider
         v-else-if="schema.component == 'Divider' && schema.label && !formItemProps.hiddenLabel"
-        >{{ schema.label }}</Divider
       >
+        {{ schema.label }}
+      </Divider>
       <!-- 部分控件需要一个空div -->
-      <div
-        ><component
-          class="v-form-item-wrapper"
+      <div>
+        <component
           :is="componentItem"
+          class="v-form-item-wrapper"
           v-bind="{ ...cmpProps, ...asyncProps }"
           :schema="schema"
           :style="schema.width ? { width: schema.width } : {}"
           @change="handleChange"
           @click="handleClick(schema)"
-      /></div>
+        />
+      </div>
 
       <span v-if="['Button'].includes(schema.component)">{{ schema.label }}</span>
     </FormItem>
@@ -41,15 +43,17 @@
 </template>
 <script lang="ts">
   import { type Recordable } from '@vben/types';
-  import { defineComponent, reactive, toRefs, computed, PropType, unref } from 'vue';
-  import { componentMap } from '../../core/formItemConfig';
-  import { IVFormComponent, IFormConfig } from '../../typings/v-form-component';
   import { asyncComputed } from '@vueuse/core';
-  import { handleAsyncOptions } from '../../utils';
+  import { Col, Divider, FormItem, Tooltip } from 'ant-design-vue';
   import { omit } from 'lodash-es';
-  import { Tooltip, FormItem, Divider, Col } from 'ant-design-vue';
+  import { computed, defineComponent, PropType, reactive, toRefs, unref } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+
+  import { componentMap } from '../../core/formItemConfig';
   import { useFormModelState } from '../../hooks/useFormDesignState';
+  import { IFormConfig, IVFormComponent } from '../../typings/v-form-component';
+  import { handleAsyncOptions } from '../../utils';
 
   export default defineComponent({
     name: 'VFormItem',
@@ -170,7 +174,7 @@
       const cmpProps = computed(() => {
         const isCheck =
           props.schema && ['Switch', 'Checkbox', 'Radio'].includes(props.schema.component);
-        let { field } = props.schema;
+        const { field } = props.schema;
 
         let { disabled, ...attrs } =
           omit(props.schema.componentProps, ['options', 'treeData']) ?? {};

@@ -1,12 +1,15 @@
 // copy from element-plus
 
-import { warn } from 'vue';
 import { fromPairs, isObject } from 'lodash-es';
 import type { ExtractPropTypes, PropType } from 'vue';
+import { warn } from 'vue';
+
 import type { Mutable } from './types';
 
 const wrapperKey = Symbol();
-export type PropWrapper<T> = { [wrapperKey]: T };
+export interface PropWrapper<T> {
+  [wrapperKey]: T;
+}
 
 export const propKey = Symbol();
 
@@ -20,7 +23,7 @@ type ResolvePropTypeWithReadonly<T> = Readonly<T> extends Readonly<Array<infer A
 
 type IfUnknown<T, V> = [unknown] extends [T] ? V : T;
 
-export type BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> = {
+export interface BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> {
   type?: T;
   values?: readonly V[];
   required?: R;
@@ -30,7 +33,7 @@ export type BuildPropOption<T, D extends BuildPropType<T, V, C>, R, V, C> = {
     ? () => D
     : (() => D) | D;
   validator?: ((val: any) => val is C) | ((val: any) => boolean);
-};
+}
 
 type _BuildPropType<T, V, C> =
   | (T extends PropWrapper<unknown>
@@ -175,7 +178,7 @@ export const buildProps = <
       : never;
   };
 
-export const definePropType = <T>(val: any) => ({ [wrapperKey]: val } as PropWrapper<T>);
+export const definePropType = <T>(val: any) => ({ [wrapperKey]: val }) as PropWrapper<T>;
 
 export const keyOf = <T>(arr: T) => Object.keys(arr) as Array<keyof T>;
 export const mutable = <T extends readonly any[] | Record<string, unknown>>(val: T) =>

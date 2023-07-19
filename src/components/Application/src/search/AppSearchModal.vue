@@ -63,7 +63,6 @@
   import { computed, nextTick, ref, unref, watch } from 'vue';
 
   import Icon from '@/components/Icon/Icon.vue';
-  // @ts-ignore
   import vClickOutside from '@/directives/clickOutside';
   import { useAppInject } from '@/hooks/web/useAppInject';
   import { useDesign } from '@/hooks/web/useDesign';

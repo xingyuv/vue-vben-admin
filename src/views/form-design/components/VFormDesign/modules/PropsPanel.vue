@@ -21,14 +21,15 @@
   </div>
 </template>
 <script lang="ts">
+  import { TabPane, Tabs } from 'ant-design-vue';
   import { computed, defineComponent } from 'vue';
-  import FormProps from '../components/FormProps.vue';
-  import FormItemProps from '../components/FormItemProps.vue';
+
+  import { customComponents } from '../../../core/formItemConfig';
+  import { useFormDesignState } from '../../../hooks/useFormDesignState';
   import ComponentProps from '../components/ComponentProps.vue';
   import ComponentColumnProps from '../components/FormItemColumnProps.vue';
-  import { useFormDesignState } from '../../../hooks/useFormDesignState';
-  import { customComponents } from '../../../core/formItemConfig';
-  import { TabPane, Tabs } from 'ant-design-vue';
+  import FormItemProps from '../components/FormItemProps.vue';
+  import FormProps from '../components/FormProps.vue';
 
   type ChangeTabKey = 1 | 2;
   export interface IPropsPanel {

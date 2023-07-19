@@ -3,7 +3,7 @@
 -->
 <template>
   <div class="v-form-container">
-    <Form class="v-form-model" ref="eFormModel" :model="formModel" v-bind="formModelProps">
+    <Form ref="eFormModel" class="v-form-model" :model="formModel" v-bind="formModelProps">
       <Row>
         <FormRender
           v-for="(schema, index) of noHiddenList"
@@ -11,8 +11,8 @@
           :schema="schema"
           :formConfig="formConfig"
           :formData="formModelNew"
-          @change="handleChange"
           :setFormModel="setFormModel"
+          @change="handleChange"
           @submit="handleSubmit"
           @reset="resetFields"
         >
@@ -28,14 +28,15 @@
   </div>
 </template>
 <script lang="ts">
+  import { useVModel } from '@vueuse/core';
+  import { Col, Form, Row } from 'ant-design-vue';
+  import { omit } from 'lodash-es';
   import { computed, defineComponent, PropType, provide, ref, unref } from 'vue';
-  import FormRender from './components/FormRender.vue';
-  import { IFormConfig, AForm } from '../../typings/v-form-component';
-  import { Form, Row, Col } from 'ant-design-vue';
+
   import { useFormInstanceMethods } from '../../hooks/useFormInstanceMethods';
   import { IProps, IVFormMethods, useVFormMethods } from '../../hooks/useVFormMethods';
-  import { useVModel } from '@vueuse/core';
-  import { omit } from 'lodash-es';
+  import { AForm, IFormConfig } from '../../typings/v-form-component';
+  import FormRender from './components/FormRender.vue';
 
   export default defineComponent({
     name: 'VFormCreate',
@@ -119,7 +120,7 @@
         formModelNew.value[key] = value;
       };
 
-      provide<(key: String, value: any) => void>('setFormModelMethod', setFormModel);
+      provide<(key: string, value: any) => void>('setFormModelMethod', setFormModel);
 
       // 把祖先组件的方法项注入到子组件中，子组件可通过inject获取
       return {
