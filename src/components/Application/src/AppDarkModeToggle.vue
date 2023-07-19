@@ -7,12 +7,13 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { SvgIcon } from '/@/components/Icon';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
-  import { updateDarkTheme } from '/@/logics/theme/dark';
-  import { ThemeEnum } from '/@/enums/appEnum';
+
+  import { SvgIcon } from '@/components/Icon';
+  import { ThemeEnum } from '@/enums/appEnum';
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { updateDarkTheme } from '@/logics/theme/dark';
+  import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
 
   const { prefixCls } = useDesign('dark-switch');
   const { getDarkMode, setDarkMode, getShowDarkModeToggle } = useRootSetting();
@@ -44,26 +45,26 @@
   }
 
   .@{prefix-cls} {
-    display: flex;
     position: relative;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 50px;
     height: 26px;
-    margin-left: auto;
     padding: 0 6px;
-    border-radius: 30px;
-    background-color: #151515;
+    margin-left: auto;
     cursor: pointer;
+    background-color: #151515;
+    border-radius: 30px;
 
     &-inner {
       position: absolute;
       z-index: 1;
       width: 18px;
       height: 18px;
-      transition: transform 0.5s, background-color 0.5s;
-      border-radius: 50%;
       background-color: #fff;
+      border-radius: 50%;
+      transition: transform 0.5s, background-color 0.5s;
       will-change: transform;
     }
 

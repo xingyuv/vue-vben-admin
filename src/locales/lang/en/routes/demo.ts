@@ -194,6 +194,5 @@ export default {
     editRowTable: 'Editable row',
     authColumn: 'Auth column',
     resizeParentHeightTable: 'resizeParentHeightTable',
-    vxeTable: 'VxeTable',
   },
 };

@@ -1,4 +1,3 @@
-
 *.sh
 node_modules
 *.md
@@ -13,3 +12,4 @@ dist
 .local
 /bin
 Dockerfile
+**/dist/**

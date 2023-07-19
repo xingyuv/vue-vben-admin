@@ -17,11 +17,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    },
-    "./strict": {
-      "types": "./dist/strict.d.ts",
-      "import": "./dist/strict.mjs",
-      "require": "./dist/strict.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -36,14 +31,19 @@
     "stub": "pnpm unbuild --stub"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "eslint": "^8.44.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-define-config": "^1.21.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-jsonc": "^2.9.0",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-regexp": "^1.15.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-vue": "^9.15.1",
+    "jsonc-eslint-parser": "^2.3.0",
     "vue-eslint-parser": "^9.3.1"
   }
 }

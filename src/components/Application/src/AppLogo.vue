@@ -5,19 +5,20 @@
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="goHome">
     <img src="../../../assets/images/logo.png" />
-    <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
+    <div v-show="showTitle" class="ml-2 truncate md:opacity-100" :class="getTitleClass">
       {{ title }}
     </div>
   </div>
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { useGlobSetting } from '/@/hooks/setting';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { PageEnum } from '/@/enums/pageEnum';
-  import { useUserStore } from '/@/store/modules/user';
+
+  import { PageEnum } from '@/enums/pageEnum';
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useUserStore } from '@/store/modules/user';
 
   const props = defineProps({
     /**
@@ -64,8 +65,8 @@
     display: flex;
     align-items: center;
     padding-left: 7px;
-    transition: all 0.2s ease;
     cursor: pointer;
+    transition: all 0.2s ease;
 
     &.light {
       border-bottom: 1px solid @border-color-base;
@@ -84,10 +85,10 @@
     }
 
     &__title {
-      transition: all 0.5s;
       font-size: 16px;
       font-weight: 700;
       line-height: normal;
+      transition: all 0.5s;
     }
   }
 </style>

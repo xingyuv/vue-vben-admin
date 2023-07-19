@@ -1,7 +1,6 @@
-import type { AppRouteModule } from '/@/router/types';
-
-import { getParentLayout, LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
+import { getParentLayout, LAYOUT } from '/@/router/constant';
+import type { AppRouteModule } from '/@/router/types';
 
 const comp: AppRouteModule = {
   path: '/comp',
@@ -253,14 +252,6 @@ const comp: AppRouteModule = {
           component: () => import('/@/views/demo/table/ResizeParentHeightTable.vue'),
           meta: {
             title: t('routes.demo.table.resizeParentHeightTable'),
-          },
-        },
-        {
-          path: 'vxeTable',
-          name: 'VxeTableDemo',
-          component: () => import('/@/views/demo/table/VxeTable.vue'),
-          meta: {
-            title: t('routes.demo.table.vxeTable'),
           },
         },
       ],

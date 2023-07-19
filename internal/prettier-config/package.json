@@ -1,5 +1,5 @@
 {
-  "name": "@vben/stylelint-config",
+  "name": "@vben/prettier-config",
   "version": "1.0.0",
   "private": true,
   "homepage": "https://github.com/vbenjs/vue-vben-admin",
@@ -31,22 +31,7 @@
     "stub": "pnpm unbuild --stub"
   },
   "dependencies": {
-    "stylelint-config-recess-order": "^4.3.0",
-    "stylelint-scss": "^5.0.1"
-  },
-  "devDependencies": {
-    "postcss": "^8.4.26",
-    "postcss-html": "^1.5.0",
-    "postcss-less": "^6.0.0",
-    "postcss-scss": "^4.0.6",
     "prettier": "^3.0.0",
-    "stylelint": "^15.10.2",
-    "stylelint-config-recommended": "^13.0.0",
-    "stylelint-config-recommended-scss": "^12.0.0",
-    "stylelint-config-recommended-vue": "^1.5.0",
-    "stylelint-config-standard": "^34.0.0",
-    "stylelint-config-standard-scss": "^10.0.0",
-    "stylelint-order": "^6.0.3",
-    "stylelint-prettier": "^4.0.0"
+    "prettier-plugin-packagejson": "^2.4.5"
   }
 }
