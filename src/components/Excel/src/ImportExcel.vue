@@ -1,9 +1,9 @@
 <template>
   <div>
     <input
+      v-show="false"
       ref="inputRef"
       type="file"
-      v-show="false"
       accept=".xlsx, .xls"
       @change="handleInputClick"
     />
@@ -15,7 +15,8 @@
 <script lang="ts">
   import { defineComponent, ref, unref } from 'vue';
   import * as XLSX from 'xlsx';
-  import { dateUtil } from '/@/utils/dateUtil';
+
+  import { dateUtil } from '@/utils/dateUtil';
 
   import type { ExcelData } from './typing';
 
@@ -41,8 +42,8 @@
     emits: ['success', 'error', 'cancel'],
     setup(props, { emit }) {
       const inputRef = ref<HTMLInputElement | null>(null);
-      const loadingRef = ref<Boolean>(false);
-      const cancelRef = ref<Boolean>(true);
+      const loadingRef = ref<boolean>(false);
+      const cancelRef = ref<boolean>(true);
 
       function shapeWorkSheel(sheet: XLSX.WorkSheet, range: XLSX.Range) {
         let str = ' ',
@@ -114,7 +115,7 @@
             dateNF: dateFormat, //Not worked
           }) as object[];
           results = results.map((row: object) => {
-            for (let field in row) {
+            for (const field in row) {
               if (row[field] instanceof Date) {
                 if (timeZone === 8) {
                   row[field].setSeconds(row[field].getSeconds() + 43);

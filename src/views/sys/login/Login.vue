@@ -3,9 +3,9 @@
     <div class="flex items-center absolute right-4 top-4">
       <!-- <AppDarkModeToggle class="enter-x mr-2" v-if="!sessionTimeout" /> -->
       <AppLocalePicker
+        v-if="!sessionTimeout && showLocale"
         class="text-white enter-x xl:text-gray-600"
         :show-text="false"
-        v-if="!sessionTimeout && showLocale"
       />
     </div>
 
@@ -49,16 +49,18 @@
 </template>
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { AppLogo, AppLocalePicker } from '/@/components/Application';
-  import LoginForm from './LoginForm.vue';
+
+  import { AppLocalePicker, AppLogo } from '@/components/Application';
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useLocaleStore } from '@/store/modules/locale';
+
   import ForgetPasswordForm from './ForgetPasswordForm.vue';
-  import RegisterForm from './RegisterForm.vue';
+  import LoginForm from './LoginForm.vue';
   import MobileForm from './MobileForm.vue';
   import QrCodeForm from './QrCodeForm.vue';
-  import { useGlobSetting } from '/@/hooks/setting';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useLocaleStore } from '/@/store/modules/locale';
+  import RegisterForm from './RegisterForm.vue';
 
   defineProps({
     sessionTimeout: {
@@ -84,7 +86,7 @@
       background-color: @dark-bg;
 
       &::before {
-        background-image: url('/@/assets/svg/login-bg-dark.svg');
+        background-image: url('@/assets/svg/login-bg-dark.svg');
       }
 
       .ant-input,
@@ -125,14 +127,14 @@
     }
 
     &::before {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       margin-left: -48%;
-      background-image: url('/@/assets/svg/login-bg.svg');
+      content: '';
+      background-image: url('@/assets/svg/login-bg.svg');
       background-repeat: no-repeat;
       background-position: 100%;
       background-size: auto 100%;
@@ -148,8 +150,8 @@
       height: 30px;
 
       &__title {
-        color: #fff;
         font-size: 16px;
+        color: #fff;
       }
 
       img {
@@ -164,8 +166,8 @@
         height: 80px;
 
         &__title {
-          color: #fff;
           font-size: 24px;
+          color: #fff;
         }
 
         img {
@@ -176,8 +178,8 @@
 
     &-sign-in-way {
       .anticon {
-        color: #888;
         font-size: 22px;
+        color: #888;
         cursor: pointer;
 
         &:hover {
@@ -211,8 +213,8 @@
     }
 
     .ant-divider-inner-text {
-      color: @text-color-secondary;
       font-size: 12px;
+      color: @text-color-secondary;
     }
   }
 </style>

@@ -3,16 +3,18 @@
     <template #title>
       <span>{{ t('component.table.settingFullScreen') }}</span>
     </template>
-    <FullscreenOutlined @click="toggle" v-if="!isFullscreen" />
-    <FullscreenExitOutlined @click="toggle" v-else />
+    <FullscreenOutlined v-if="!isFullscreen" @click="toggle" />
+    <FullscreenExitOutlined v-else @click="toggle" />
   </Tooltip>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { Tooltip } from 'ant-design-vue';
-  import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons-vue';
+  import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue';
   import { useFullscreen } from '@vueuse/core';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { Tooltip } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
+
+  import { useI18n } from '@/hooks/web/useI18n';
+
   import { useTableContext } from '../../hooks/useTableContext';
 
   export default defineComponent({

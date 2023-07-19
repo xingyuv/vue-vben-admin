@@ -2,9 +2,9 @@
   <div ref="wrapRef" :style="{ height, width }"></div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, nextTick, unref, onMounted } from 'vue';
+  import { defineComponent, nextTick, onMounted, ref, unref } from 'vue';
 
-  import { useScript } from '/@/hooks/web/useScript';
+  import { useScript } from '@/hooks/web/useScript';
 
   const BAI_DU_MAP_URL =
     'https://api.map.baidu.com/getscript?v=3.0&ak=OaBvYmKX3pjF7YFUFeeBCeGdy9Zp7xB2&services=&t=20210201100830&s=1';

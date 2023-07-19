@@ -11,27 +11,27 @@
       >
         <template #selectA="{ model, field }">
           <a-select
+            v-model:value="model[field]"
             :options="optionsA"
             mode="multiple"
-            v-model:value="model[field]"
-            @change="valueSelectA = model[field]"
             allowClear
+            @change="valueSelectA = model[field]"
           />
         </template>
         <template #selectB="{ model, field }">
           <a-select
+            v-model:value="model[field]"
             :options="optionsB"
             mode="multiple"
-            v-model:value="model[field]"
-            @change="valueSelectB = model[field]"
             allowClear
+            @change="valueSelectB = model[field]"
           />
         </template>
         <template #localSearch="{ model, field }">
           <ApiSelect
+            v-model:value="model[field]"
             :api="optionsListApi"
             showSearch
-            v-model:value="model[field]"
             optionFilterProp="label"
             resultField="list"
             labelField="name"
@@ -40,9 +40,9 @@
         </template>
         <template #remoteSearch="{ model, field }">
           <ApiSelect
+            v-model:value="model[field]"
             :api="optionsListApi"
             showSearch
-            v-model:value="model[field]"
             :filterOption="false"
             resultField="list"
             labelField="name"
@@ -56,19 +56,19 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, unref, ref } from 'vue';
-  import { BasicForm, FormSchema, ApiSelect } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { PageWrapper } from '/@/components/Page';
-
-  import { optionsListApi } from '/@/api/demo/select';
   import { useDebounceFn } from '@vueuse/core';
-  import { treeOptionsListApi } from '/@/api/demo/tree';
   import { Select } from 'ant-design-vue';
   import { cloneDeep } from 'lodash-es';
-  import { areaRecord } from '/@/api/demo/cascader';
-  import { uploadApi } from '/@/api/sys/upload';
+  import { computed, defineComponent, ref, unref } from 'vue';
+
+  import { areaRecord } from '@/api/demo/cascader';
+  import { optionsListApi } from '@/api/demo/select';
+  import { treeOptionsListApi } from '@/api/demo/tree';
+  import { uploadApi } from '@/api/sys/upload';
+  import { CollapseContainer } from '@/components/Container';
+  import { ApiSelect, BasicForm, FormSchema } from '@/components/Form/index';
+  import { PageWrapper } from '@/components/Page';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const valueSelectA = ref<string[]>([]);
   const valueSelectB = ref<string[]>([]);

@@ -1,8 +1,9 @@
-import { ComputedRef, isRef, nextTick, Ref, ref, unref, watch } from 'vue';
 import { onMountedOrActivated, useWindowSizeFn } from '@vben/hooks';
-import { useLayoutHeight } from '/@/layouts/default/content/useContentViewHeight';
-import { getViewportOffset } from '/@/utils/domUtils';
-import { isNumber, isString } from '/@/utils/is';
+import { ComputedRef, isRef, nextTick, Ref, ref, unref, watch } from 'vue';
+
+import { useLayoutHeight } from '@/layouts/default/content/useContentViewHeight';
+import { getViewportOffset } from '@/utils/domUtils';
+import { isNumber, isString } from '@/utils/is';
 
 export interface CompensationHeight {
   // 使用 layout Footer 高度作为判断补偿高度的条件
@@ -26,7 +27,7 @@ type Upward = number | string | null | undefined;
  * @returns 响应式高度
  */
 export function useContentHeight(
-  flag: ComputedRef<Boolean>,
+  flag: ComputedRef<boolean>,
   anchorRef: Ref,
   subtractHeightRefs: Ref[],
   substractSpaceRefs: Ref[],
@@ -54,7 +55,7 @@ export function useContentHeight(
     direction: 'all' | 'top' | 'bottom' = 'all',
   ): number {
     function numberPx(px: string) {
-      return Number(px.replace(/[^\d]/g, ''));
+      return Number(px.replace(/\D/g, ''));
     }
     let subtractHeight = 0;
     const ZERO_PX = '0px';

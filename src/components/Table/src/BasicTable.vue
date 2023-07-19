@@ -1,28 +1,28 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
     <BasicForm
+      v-if="getBindValues.useSearchForm"
       ref="formRef"
       submitOnReset
       v-bind="getFormProps"
-      v-if="getBindValues.useSearchForm"
       :tableAction="tableAction"
       @register="registerForm"
       @submit="handleSearchInfoChange"
       @advanced-change="redoHeight"
     >
-      <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
+      <template v-for="item in getFormSlotKeys" #[replaceFormSlotKey(item)]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </BasicForm>
 
     <Table
+      v-show="getEmptyDataIsShowTable"
       ref="tableElRef"
       v-bind="getBindValues"
       :rowClassName="getRowClassName"
-      v-show="getEmptyDataIsShowTable"
       @change="handleTableChange"
     >
-      <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
+      <template v-for="item in Object.keys($slots)" #[item]="data" :key="item">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
       <template #headerCell="{ column }">
@@ -39,40 +39,39 @@
   </div>
 </template>
 <script lang="ts">
-  import type {
-    BasicTableProps,
-    TableActionType,
-    SizeType,
-    ColumnChangeParam,
-  } from './types/table';
-
-  import { defineComponent, ref, computed, unref, toRaw, inject, watchEffect } from 'vue';
   import { Table } from 'ant-design-vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { PageWrapperFixedHeightKey } from '/@/enums/pageEnum';
-  import HeaderCell from './components/HeaderCell.vue';
-  import { InnerHandlers } from './types/table';
+  import { omit } from 'lodash-es';
+  import { computed, defineComponent, inject, ref, toRaw, unref, watchEffect } from 'vue';
 
-  import { usePagination } from './hooks/usePagination';
+  import { BasicForm, useForm } from '@/components/Form/index';
+  import { PageWrapperFixedHeightKey } from '@/enums/pageEnum';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { isFunction } from '@/utils/is';
+  import { warn } from '@/utils/log';
+
+  import HeaderCell from './components/HeaderCell.vue';
   import { useColumns } from './hooks/useColumns';
+  import { useCustomRow } from './hooks/useCustomRow';
   import { useDataSource } from './hooks/useDataSource';
   import { useLoading } from './hooks/useLoading';
+  import { usePagination } from './hooks/usePagination';
   import { useRowSelection } from './hooks/useRowSelection';
-  import { useTableScroll } from './hooks/useTableScroll';
   import { useTableScrollTo } from './hooks/useScrollTo';
-  import { useCustomRow } from './hooks/useCustomRow';
-  import { useTableStyle } from './hooks/useTableStyle';
-  import { useTableHeader } from './hooks/useTableHeader';
-  import { useTableExpand } from './hooks/useTableExpand';
   import { createTableContext } from './hooks/useTableContext';
+  import { useTableExpand } from './hooks/useTableExpand';
   import { useTableFooter } from './hooks/useTableFooter';
   import { useTableForm } from './hooks/useTableForm';
-  import { useDesign } from '/@/hooks/web/useDesign';
-
-  import { omit } from 'lodash-es';
+  import { useTableHeader } from './hooks/useTableHeader';
+  import { useTableScroll } from './hooks/useTableScroll';
+  import { useTableStyle } from './hooks/useTableStyle';
   import { basicProps } from './props';
-  import { isFunction } from '/@/utils/is';
-  import { warn } from '/@/utils/log';
+  import type {
+    BasicTableProps,
+    ColumnChangeParam,
+    SizeType,
+    TableActionType,
+  } from './types/table';
+  import { InnerHandlers } from './types/table';
 
   export default defineComponent({
     name: 'BasicTable',
@@ -381,10 +380,10 @@
 
       .ant-form {
         width: 100%;
-        margin-bottom: 16px;
         padding: 12px 10px 6px;
-        border-radius: 2px;
+        margin-bottom: 16px;
         background-color: @component-background;
+        border-radius: 2px;
       }
     }
 
@@ -396,8 +395,8 @@
 
     .ant-table-wrapper {
       padding: 6px;
-      border-radius: 2px;
       background-color: @component-background;
+      border-radius: 2px;
 
       .ant-table-title {
         min-height: 40px;

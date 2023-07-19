@@ -4,7 +4,7 @@
       <template #toolbar>
         <a-button @click="defaultHeader"> 导出：默认头部 </a-button>
         <a-button @click="customHeader"> 导出：自定义头部 </a-button>
-        <a-button @click="handleMultipleSheet" danger> 导出多Sheet </a-button>
+        <a-button danger @click="handleMultipleSheet"> 导出多Sheet </a-button>
       </template>
     </BasicTable>
   </PageWrapper>
@@ -12,11 +12,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicTable } from '/@/components/Table';
-  import { jsonToSheetXlsx } from '/@/components/Excel';
+
+  import { jsonToSheetXlsx } from '@/components/Excel';
+  import { jsonToMultipleSheetXlsx } from '@/components/Excel/src/Export2Excel';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicTable } from '@/components/Table';
+
   import { columns, data } from './data';
-  import { PageWrapper } from '/@/components/Page';
-  import { jsonToMultipleSheetXlsx } from '/@/components/Excel/src/Export2Excel';
 
   export default defineComponent({
     components: { BasicTable, PageWrapper },

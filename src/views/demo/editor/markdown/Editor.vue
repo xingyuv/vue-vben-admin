@@ -13,11 +13,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, h } from 'vue';
-  import { BasicForm, FormSchema } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { MarkDown } from '/@/components/Markdown';
-  import { PageWrapper } from '/@/components/Page';
+
+  import { CollapseContainer } from '@/components/Container/index';
+  import { BasicForm, FormSchema } from '@/components/Form/index';
+  import { MarkDown } from '@/components/Markdown';
+  import { PageWrapper } from '@/components/Page';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const schemas: FormSchema[] = [
     {

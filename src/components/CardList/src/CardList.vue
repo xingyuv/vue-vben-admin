@@ -10,17 +10,17 @@
         :pagination="paginationProp"
       >
         <template #header>
-          <div class="flex justify-end space-x-2"
-            ><slot name="header"></slot>
+          <div class="flex justify-end space-x-2">
+            <slot name="header"></slot>
             <Tooltip>
               <template #title>
-                <div class="w-50">每行显示数量</div
-                ><Slider
+                <div class="w-50">每行显示数量</div><Slider
                   id="slider"
                   v-bind="sliderProp"
                   v-model:value="grid"
                   @change="sliderChange"
-              /></template>
+                />
+              </template>
               <Button><TableOutlined /></Button>
             </Tooltip>
             <Tooltip @click="fetch">
@@ -76,20 +76,22 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, onMounted, ref } from 'vue';
   import {
     EditOutlined,
     EllipsisOutlined,
     RedoOutlined,
     TableOutlined,
   } from '@ant-design/icons-vue';
-  import { List, Card, Image, Typography, Tooltip, Slider, Avatar } from 'ant-design-vue';
-  import { Dropdown } from '/@/components/Dropdown';
-  import { BasicForm, useForm } from '/@/components/Form';
-  import { propTypes } from '/@/utils/propTypes';
-  import { Button } from '/@/components/Button';
-  import { isFunction } from '/@/utils/is';
-  import { useSlider, grid } from './data';
+  import { Avatar, Card, Image, List, Slider, Tooltip, Typography } from 'ant-design-vue';
+  import { computed, onMounted, ref } from 'vue';
+
+  import { Button } from '@/components/Button';
+  import { Dropdown } from '@/components/Dropdown';
+  import { BasicForm, useForm } from '@/components/Form';
+  import { isFunction } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
+
+  import { grid, useSlider } from './data';
 
   const ListItem = List.Item;
   const CardMeta = Card.Meta;

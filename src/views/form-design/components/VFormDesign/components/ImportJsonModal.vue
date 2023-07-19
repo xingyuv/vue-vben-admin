@@ -5,17 +5,17 @@
   <Modal
     title="JSON数据"
     :visible="visible"
-    @ok="handleImportJson"
-    @cancel="handleCancel"
     cancelText="关闭"
     :destroyOnClose="true"
     wrapClassName="v-code-modal"
     style="top: 20px"
     :width="850"
+    @ok="handleImportJson"
+    @cancel="handleCancel"
   >
     <p class="hint-box">导入格式如下:</p>
     <div class="v-json-box">
-      <CodeEditor v-model:value="json" ref="myEditor" :mode="MODE.JSON" />
+      <CodeEditor ref="myEditor" v-model:value="json" :mode="MODE.JSON" />
     </div>
 
     <template #footer>
@@ -33,15 +33,17 @@
   </Modal>
 </template>
 <script lang="ts">
+  import { Modal, Upload } from 'ant-design-vue';
   import { defineComponent, reactive, toRefs } from 'vue';
+
+  import { CodeEditor, MODE } from '@/components/CodeEditor';
+  import { useMessage } from '@/hooks/web/useMessage';
+
   // import message from '../../../utils/message';
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
   // import { codemirror } from 'vue-codemirror-lite';
   import { IFormConfig } from '../../../typings/v-form-component';
   import { formItemsForEach, generateKey } from '../../../utils';
-  import { CodeEditor, MODE } from '/@/components/CodeEditor';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { Upload, Modal } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'ImportJsonModal',

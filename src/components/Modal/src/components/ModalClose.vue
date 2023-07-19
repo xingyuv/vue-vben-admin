@@ -1,10 +1,10 @@
 <template>
   <div :class="getClass">
     <template v-if="canFullscreen">
-      <Tooltip :title="t('component.modal.restore')" placement="bottom" v-if="fullScreen">
+      <Tooltip v-if="fullScreen" :title="t('component.modal.restore')" placement="bottom">
         <FullscreenExitOutlined role="full" @click="handleFullScreen" />
       </Tooltip>
-      <Tooltip :title="t('component.modal.maximize')" placement="bottom" v-else>
+      <Tooltip v-else :title="t('component.modal.maximize')" placement="bottom">
         <FullscreenOutlined role="close" @click="handleFullScreen" />
       </Tooltip>
     </template>
@@ -14,11 +14,12 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-  import { FullscreenExitOutlined, FullscreenOutlined, CloseOutlined } from '@ant-design/icons-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { CloseOutlined, FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue';
   import { Tooltip } from 'ant-design-vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { computed, defineComponent } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   export default defineComponent({
     name: 'ModalClose',

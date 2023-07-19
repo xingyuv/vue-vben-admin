@@ -4,20 +4,21 @@
     <Select
       v-bind="getBindValue"
       :class="`${prefixCls}-select`"
-      @change="handleChange"
       :disabled="disabled"
       size="small"
       :options="options"
+      @change="handleChange"
     />
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed } from 'vue';
-
   import { Select } from 'ant-design-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { baseHandler } from '../handler';
+  import { computed, defineComponent, PropType } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+
   import { HandlerEnum } from '../enum';
+  import { baseHandler } from '../handler';
 
   export default defineComponent({
     name: 'SelectItem',

@@ -4,13 +4,13 @@
     :options="options"
     :load-data="loadData"
     change-on-select
-    @change="handleChange"
     :displayRender="handleRenderDisplay"
+    @change="handleChange"
   >
-    <template #suffixIcon v-if="loading">
+    <template v-if="loading" #suffixIcon>
       <LoadingOutlined spin />
     </template>
-    <template #notFoundContent v-if="loading">
+    <template v-if="loading" #notFoundContent>
       <span>
         <LoadingOutlined spin class="mr-1" />
         {{ t('component.form.apiSelectNotFound') }}
@@ -19,15 +19,16 @@
   </a-cascader>
 </template>
 <script lang="ts">
-  import { type Recordable } from '@vben/types';
-  import { defineComponent, PropType, ref, unref, watch, watchEffect } from 'vue';
-  import { Cascader } from 'ant-design-vue';
-  import { propTypes } from '/@/utils/propTypes';
-  import { isFunction } from '/@/utils/is';
-  import { get, omit } from 'lodash-es';
-  import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { type Recordable } from '@vben/types';
+  import { Cascader } from 'ant-design-vue';
+  import { get, omit } from 'lodash-es';
+  import { defineComponent, PropType, ref, unref, watch, watchEffect } from 'vue';
+
+  import { useRuleFormItem } from '@/hooks/component/useFormItem';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
 
   interface Option {
     value: string;

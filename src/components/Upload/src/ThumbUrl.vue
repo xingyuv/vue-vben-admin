@@ -4,9 +4,10 @@
   </span>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-  import { propTypes } from '/@/utils/propTypes';
   import { Image } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
+
+  import { propTypes } from '@/utils/propTypes';
 
   export default defineComponent({
     components: { Image },
@@ -19,10 +20,10 @@
 <style lang="less">
   .thumb {
     img {
-      display: block;
       position: static;
-      border-radius: 4px;
+      display: block;
       cursor: zoom-in;
+      border-radius: 4px;
       object-fit: cover;
     }
   }

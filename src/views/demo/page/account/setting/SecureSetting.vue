@@ -6,7 +6,7 @@
           <ListItemMeta>
             <template #title>
               {{ item.title }}
-              <div class="extra" v-if="item.extra">
+              <div v-if="item.extra" class="extra">
                 {{ item.extra }}
               </div>
             </template>
@@ -22,7 +22,8 @@
 <script lang="ts">
   import { List } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { CollapseContainer } from '/@/components/Container/index';
+
+  import { CollapseContainer } from '@/components/Container/index';
 
   import { secureSettingList } from './data';
 
@@ -37,11 +38,11 @@
 </script>
 <style lang="less" scoped>
   .extra {
+    float: right;
     margin-top: 10px;
     margin-right: 30px;
-    float: right;
-    color: #1890ff;
     font-weight: normal;
+    color: #1890ff;
     cursor: pointer;
   }
 </style>

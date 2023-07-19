@@ -11,12 +11,14 @@
   </div>
 </template>
 <script lang="ts">
-  import type { CSSProperties } from 'vue';
-  import { defineComponent, onMounted, ref, unref, computed, onUnmounted } from 'vue';
-  import Cropper from 'cropperjs';
   import 'cropperjs/dist/cropper.css';
-  import { useDesign } from '/@/hooks/web/useDesign';
+
   import { useDebounceFn } from '@vueuse/shared';
+  import Cropper from 'cropperjs';
+  import type { CSSProperties } from 'vue';
+  import { computed, defineComponent, onMounted, onUnmounted, ref, unref } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
 
   type Options = Cropper.Options;
 
@@ -132,13 +134,13 @@
         if (!cropper.value) {
           return;
         }
-        let imgInfo = cropper.value.getData();
+        const imgInfo = cropper.value.getData();
         const canvas = props.circled ? getRoundedCanvas() : cropper.value.getCroppedCanvas();
         canvas.toBlob((blob) => {
           if (!blob) {
             return;
           }
-          let fileReader: FileReader = new FileReader();
+          const fileReader: FileReader = new FileReader();
           fileReader.readAsDataURL(blob);
           fileReader.onloadend = (e) => {
             emit('cropend', {

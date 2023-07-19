@@ -3,47 +3,49 @@
     <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
       <Tooltip v-if="action.tooltip" v-bind="getTooltip(action.tooltip)">
         <PopConfirmButton v-bind="action">
-          <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" v-if="action.icon" />
+          <Icon v-if="action.icon" :icon="action.icon" :class="{ 'mr-1': !!action.label }" />
           <template v-if="action.label">{{ action.label }}</template>
         </PopConfirmButton>
       </Tooltip>
       <PopConfirmButton v-else v-bind="action">
-        <Icon :icon="action.icon" :class="{ 'mr-1': !!action.label }" v-if="action.icon" />
+        <Icon v-if="action.icon" :icon="action.icon" :class="{ 'mr-1': !!action.label }" />
         <template v-if="action.label">{{ action.label }}</template>
       </PopConfirmButton>
       <Divider
+        v-if="divider && index < getActions.length - 1"
         type="vertical"
         class="action-divider"
-        v-if="divider && index < getActions.length - 1"
       />
     </template>
     <Dropdown
+      v-if="dropDownActions && getDropdownList.length > 0"
       :trigger="['hover']"
       :dropMenuList="getDropdownList"
       popconfirm
-      v-if="dropDownActions && getDropdownList.length > 0"
     >
       <slot name="more"></slot>
-      <a-button type="link" size="small" v-if="!$slots.more">
+      <a-button v-if="!$slots.more" type="link" size="small">
         <MoreOutlined class="icon-more" />
       </a-button>
     </Dropdown>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, PropType, computed, toRaw, unref } from 'vue';
   import { MoreOutlined } from '@ant-design/icons-vue';
   import { Divider, Tooltip, TooltipProps } from 'ant-design-vue';
+  import { computed, defineComponent, PropType, toRaw, unref } from 'vue';
+
+  import { PopConfirmButton } from '@/components/Button';
+  import { Dropdown } from '@/components/Dropdown';
   import Icon from '@/components/Icon/Icon.vue';
-  import { ActionItem, TableActionType } from '/@/components/Table';
-  import { PopConfirmButton } from '/@/components/Button';
-  import { Dropdown } from '/@/components/Dropdown';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useTableContext } from '../hooks/useTableContext';
-  import { usePermission } from '/@/hooks/web/usePermission';
-  import { isBoolean, isFunction, isString } from '/@/utils/is';
-  import { propTypes } from '/@/utils/propTypes';
+  import { ActionItem, TableActionType } from '@/components/Table';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { usePermission } from '@/hooks/web/usePermission';
+  import { isBoolean, isFunction, isString } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
+
   import { ACTION_COLUMN_FLAG } from '../const';
+  import { useTableContext } from '../hooks/useTableContext';
 
   export default defineComponent({
     name: 'TableAction',

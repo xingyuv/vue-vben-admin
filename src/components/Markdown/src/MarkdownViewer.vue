@@ -1,12 +1,14 @@
 <template>
-  <div ref="viewerRef" id="markdownViewer" :class="$props.class"></div>
+  <div id="markdownViewer" ref="viewerRef" :class="$props.class"></div>
 </template>
 
 <script lang="ts" setup>
-  import { defineProps, onBeforeUnmount, onDeactivated, Ref, ref, unref, watch } from 'vue';
-  import VditorPreview from 'vditor/dist/method.min';
   import { onMountedOrActivated } from '@vben/hooks';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+  import VditorPreview from 'vditor/dist/method.min';
+  import { defineProps, onBeforeUnmount, onDeactivated, Ref, ref, unref, watch } from 'vue';
+
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+
   import { getTheme } from './getTheme';
 
   const props = defineProps({

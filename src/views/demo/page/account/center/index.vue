@@ -53,17 +53,18 @@
 </template>
 
 <script lang="ts">
-  import { Tag, Tabs, Row, Col } from 'ant-design-vue';
-  import { defineComponent, computed } from 'vue';
-  import { CollapseContainer } from '/@/components/Container/index';
-  import Icon from '@/components/Icon/Icon.vue';
-  import Article from './Article.vue';
-  import Application from './Application.vue';
-  import Project from './Project.vue';
+  import { Col, Row, Tabs, Tag } from 'ant-design-vue';
+  import { computed, defineComponent } from 'vue';
 
-  import headerImg from '/@/assets/images/header.jpg';
-  import { tags, teams, details, achieveList } from './data';
-  import { useUserStore } from '/@/store/modules/user';
+  import headerImg from '@/assets/images/header.jpg';
+  import { CollapseContainer } from '@/components/Container/index';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { useUserStore } from '@/store/modules/user';
+
+  import Application from './Application.vue';
+  import Article from './Article.vue';
+  import { achieveList, details, tags, teams } from './data';
+  import Project from './Project.vue';
 
   export default defineComponent({
     components: {
@@ -103,10 +104,10 @@
     }
 
     &-top {
-      margin: 16px 16px 12px;
       padding: 10px;
-      border-radius: 3px;
+      margin: 16px 16px 12px;
       background-color: @component-background;
+      border-radius: 3px;
 
       &__avatar {
         text-align: center;
@@ -129,8 +130,8 @@
       }
 
       &__detail {
-        margin-top: 15px;
         padding-left: 20px;
+        margin-top: 15px;
       }
 
       &__team {
@@ -146,10 +147,10 @@
     }
 
     &-bottom {
-      margin: 0 16px 16px;
       padding: 10px;
-      border-radius: 3px;
+      margin: 0 16px 16px;
       background-color: @component-background;
+      border-radius: 3px;
     }
   }
 </style>

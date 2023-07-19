@@ -1,7 +1,7 @@
 <template>
   <li :class="getClass">
     <template v-if="!getCollapse">
-      <div :class="`${prefixCls}-submenu-title`" @click.stop="handleClick" :style="getItemStyle">
+      <div :class="`${prefixCls}-submenu-title`" :style="getItemStyle" @click.stop="handleClick">
         <slot name="title"></slot>
         <Icon
           icon="eva:arrow-ios-downward-outline"
@@ -10,20 +10,20 @@
         />
       </div>
       <CollapseTransition>
-        <ul :class="prefixCls" v-show="opened">
+        <ul v-show="opened" :class="prefixCls">
           <slot></slot>
         </ul>
       </CollapseTransition>
     </template>
 
     <Popover
+      v-else
       placement="right"
       :overlayClassName="`${prefixCls}-menu-popover`"
-      v-else
       :visible="getIsOpend"
-      @visible-change="handleVisibleChange"
       :overlayStyle="getOverlayStyle"
       :align="{ offset: [0, 0] }"
+      @visible-change="handleVisibleChange"
     >
       <div :class="getSubClass" v-bind="getEvents(false)">
         <div
@@ -56,29 +56,31 @@
 </template>
 
 <script lang="ts">
-  import { type TimeoutHandle, type Recordable } from '@vben/types';
+  import { type Recordable, type TimeoutHandle } from '@vben/types';
+  import { Popover } from 'ant-design-vue';
   import type { CSSProperties, PropType } from 'vue';
-  import type { SubMenuProvider } from './types';
   import {
-    defineComponent,
     computed,
-    unref,
+    defineComponent,
     getCurrentInstance,
-    toRefs,
-    reactive,
-    provide,
-    onBeforeMount,
     inject,
+    onBeforeMount,
+    provide,
+    reactive,
+    toRefs,
+    unref,
   } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
+
+  import Icon from '@/components/Icon/Icon.vue';
+  import { CollapseTransition } from '@/components/Transition';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { isBoolean, isObject } from '@/utils/is';
+  import { mitt } from '@/utils/mitt';
+  import { propTypes } from '@/utils/propTypes';
+
+  import type { SubMenuProvider } from './types';
   import { useMenuItem } from './useMenu';
   import { useSimpleRootMenuContext } from './useSimpleMenuContext';
-  import { CollapseTransition } from '/@/components/Transition';
-  import Icon from '@/components/Icon/Icon.vue';
-  import { Popover } from 'ant-design-vue';
-  import { isBoolean, isObject } from '/@/utils/is';
-  import { mitt } from '/@/utils/mitt';
 
   const DELAY = 200;
   export default defineComponent({
@@ -194,7 +196,7 @@
           rootMenuEmitter.emit('on-update-opened', {
             opend: false,
             parent: instance?.parent,
-            uidList: uidList,
+            uidList,
           });
         } else {
           rootMenuEmitter.emit('open-name-change', {

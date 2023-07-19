@@ -12,14 +12,15 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
+
   import {
-    BasicTable,
-    useTable,
-    TableAction,
-    BasicColumn,
     ActionItem,
+    BasicColumn,
+    BasicTable,
     EditRecordRow,
-  } from '/@/components/Table';
+    TableAction,
+    useTable,
+  } from '@/components/Table';
 
   const columns: BasicColumn[] = [
     {
@@ -60,7 +61,7 @@
     components: { BasicTable, TableAction },
     setup() {
       const [registerTable, { getDataSource }] = useTable({
-        columns: columns,
+        columns,
         showIndexColumn: false,
         dataSource: data,
         actionColumn: {

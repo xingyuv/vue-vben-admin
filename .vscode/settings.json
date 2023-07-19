@@ -151,5 +151,5 @@
     "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,LICENSE,.gitattributes,.gitignore,.gitpod.yml,CNAME,.npmrc,.browserslistrc,.nvmrc",
     ".eslintrc.cjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,.stylelintrc.*,.lintstagedrc"
   },
-  "terminal.integrated.scrollback": 10000,
+  "terminal.integrated.scrollback": 10000
 }

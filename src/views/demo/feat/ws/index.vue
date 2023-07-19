@@ -20,9 +20,9 @@
         <hr class="my-4" />
 
         <InputTextArea
+          v-model:value="sendValue"
           placeholder="需要发送到服务器的内容"
           :disabled="!getIsOpen"
-          v-model:value="sendValue"
           allowClear
         />
 
@@ -37,7 +37,7 @@
 
         <div class="max-h-80 overflow-auto">
           <ul>
-            <li v-for="item in getList" class="mt-2" :key="item.time">
+            <li v-for="item in getList" :key="item.time" class="mt-2">
               <div class="flex items-center">
                 <span class="mr-2 text-primary font-medium">收到消息:</span>
                 <span>{{ formatToDateTime(item.time) }}</span>
@@ -53,11 +53,12 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, watchEffect, computed, toRefs } from 'vue';
-  import { Tag, Input } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
   import { useWebSocket } from '@vueuse/core';
-  import { formatToDateTime } from '/@/utils/dateUtil';
+  import { Input, Tag } from 'ant-design-vue';
+  import { computed, defineComponent, reactive, toRefs, watchEffect } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { formatToDateTime } from '@/utils/dateUtil';
 
   export default defineComponent({
     components: {

@@ -1,10 +1,10 @@
 <template>
   <div>
     <Space>
-      <a-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload">
+      <a-button type="primary" preIcon="carbon:cloud-upload" @click="openUploadModal">
         {{ t('component.upload.upload') }}
       </a-button>
-      <Tooltip placement="bottom" v-if="showPreview">
+      <Tooltip v-if="showPreview" placement="bottom">
         <template #title>
           {{ t('component.upload.uploaded') }}
           <template v-if="fileList.length">
@@ -36,15 +36,17 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, watch, unref, computed } from 'vue';
   import { Recordable } from '@vben/types';
-  import Icon from '@/components/Icon/Icon.vue';
-  import { Tooltip, Space } from 'ant-design-vue';
-  import { useModal } from '/@/components/Modal';
-  import { uploadContainerProps } from './props';
+  import { Space, Tooltip } from 'ant-design-vue';
   import { omit } from 'lodash-es';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { isArray } from '/@/utils/is';
+  import { computed, defineComponent, ref, unref, watch } from 'vue';
+
+  import Icon from '@/components/Icon/Icon.vue';
+  import { useModal } from '@/components/Modal';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isArray } from '@/utils/is';
+
+  import { uploadContainerProps } from './props';
   import UploadModal from './UploadModal.vue';
   import UploadPreviewModal from './UploadPreviewModal.vue';
 

@@ -8,7 +8,7 @@
               <a-select-option value="zfb"> 支付宝 </a-select-option>
               <a-select-option value="yl"> 银联 </a-select-option>
             </a-select>
-            <a-input class="pay-input" v-model:value="model[field]" />
+            <a-input v-model:value="model[field]" class="pay-input" />
           </a-input-group>
         </template>
       </BasicForm>
@@ -27,11 +27,12 @@
   </div>
 </template>
 <script lang="ts">
+  import { Divider, Input, Select } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form';
-  import { step1Schemas } from './data';
 
-  import { Select, Input, Divider } from 'ant-design-vue';
+  import { BasicForm, useForm } from '@/components/Form';
+
+  import { step1Schemas } from './data';
 
   export default defineComponent({
     components: {
@@ -79,16 +80,16 @@
 
     h3 {
       margin: 0 0 12px;
-      color: @text-color;
       font-size: 16px;
       line-height: 32px;
+      color: @text-color;
     }
 
     h4 {
       margin: 0 0 4px;
-      color: @text-color;
       font-size: 14px;
       line-height: 22px;
+      color: @text-color;
     }
 
     p {

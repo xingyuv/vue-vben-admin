@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="getMenuFixed && !getIsMobile"
-    :style="getHiddenDomStyle"
     v-show="showClassSideBarRef"
+    :style="getHiddenDomStyle"
   ></div>
   <Sider
     v-show="showClassSideBarRef"
@@ -14,11 +14,11 @@
     :collapsed="getCollapsed"
     :collapsedWidth="getCollapsedWidth"
     :theme="getMenuTheme"
-    @breakpoint="onBreakpointChange"
     :trigger="getTrigger"
     v-bind="getTriggerAttr"
+    @breakpoint="onBreakpointChange"
   >
-    <template #trigger v-if="getShowTrigger">
+    <template v-if="getShowTrigger" #trigger>
       <LayoutTrigger />
     </template>
     <LayoutMenu :theme="getMenuTheme" :menuMode="getMode" :splitType="getSplitType" />
@@ -26,17 +26,18 @@
   </Sider>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, ref, unref, CSSProperties, h } from 'vue';
-
   import { Layout } from 'ant-design-vue';
+  import { computed, CSSProperties, defineComponent, h, ref, unref } from 'vue';
+
+  import { MenuModeEnum, MenuSplitTyeEnum } from '@/enums/menuEnum';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useAppInject } from '@/hooks/web/useAppInject';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import LayoutTrigger from '@/layouts/default/trigger/index.vue';
+
   import LayoutMenu from '../menu/index.vue';
-  import LayoutTrigger from '/@/layouts/default/trigger/index.vue';
-  import { MenuModeEnum, MenuSplitTyeEnum } from '/@/enums/menuEnum';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { useTrigger, useDragLine, useSiderEvent } from './useLayoutSider';
-  import { useAppInject } from '/@/hooks/web/useAppInject';
-  import { useDesign } from '/@/hooks/web/useDesign';
   import DragBar from './DragBar.vue';
+  import { useDragLine, useSiderEvent, useTrigger } from './useLayoutSider';
 
   export default defineComponent({
     name: 'LayoutSideBar',
@@ -92,7 +93,7 @@
       const getHiddenDomStyle = computed((): CSSProperties => {
         const width = `${unref(getRealWidth)}px`;
         return {
-          width: width,
+          width,
           overflow: 'hidden',
           flex: `0 0 ${width}`,
           maxWidth: width,
@@ -151,12 +152,12 @@
       background-color: @sider-dark-bg-color;
 
       .ant-layout-sider-trigger {
-        background-color: @trigger-dark-bg-color;
         color: darken(@white, 25%);
+        background-color: @trigger-dark-bg-color;
 
         &:hover {
-          background-color: @trigger-dark-hover-bg-color;
           color: @white;
+          background-color: @trigger-dark-hover-bg-color;
         }
       }
     }
@@ -165,14 +166,14 @@
       // box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
 
       .ant-layout-sider-trigger {
-        border-top: 1px solid @border-color-light;
         color: @text-color-base;
+        border-top: 1px solid @border-color-light;
       }
     }
 
     .ant-layout-sider-zero-width-trigger {
-      z-index: 10;
       top: 40%;
+      z-index: 10;
     }
 
     & .ant-layout-sider-trigger {

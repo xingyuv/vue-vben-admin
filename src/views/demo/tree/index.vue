@@ -26,8 +26,8 @@
       </Col>
       <Col :span="8">
         <BasicTree
-          title="懒加载异步树"
           ref="asyncTreeRef"
+          title="懒加载异步树"
           :treeData="tree"
           :load-data="onLoadData"
         />
@@ -35,7 +35,7 @@
       <Col :span="8">
         <Card title="异步数据，默认展开">
           <template #extra>
-            <a-button @click="loadTreeData" :loading="treeLoading">加载数据</a-button>
+            <a-button :loading="treeLoading" @click="loadTreeData">加载数据</a-button>
           </template>
           <Spin :spinning="treeLoading">
             <BasicTree ref="asyncExpandTreeRef" :treeData="tree2" />
@@ -45,7 +45,7 @@
       <Col :span="8">
         <Card title="BasicTree内置加载">
           <template #extra>
-            <a-button @click="loadTreeData2" :loading="treeLoading">请求数据</a-button>
+            <a-button :loading="treeLoading" @click="loadTreeData2">请求数据</a-button>
           </template>
           <BasicTree ref="loadTreeRef" :treeData="tree2" :loading="treeLoading" />
         </Card>
@@ -54,14 +54,16 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { nextTick, ref, unref } from 'vue';
-  import { BasicTree, TreeActionType, TreeItem } from '/@/components/Tree/index';
-  import { treeData } from './data';
-  import { PageWrapper } from '/@/components/Page';
-  import { Card, Row, Col, Spin } from 'ant-design-vue';
-  import { cloneDeep, uniq } from 'lodash-es';
-  import { isArray } from '/@/utils/is';
   import { type Nullable } from '@vben/types';
+  import { Card, Col, Row, Spin } from 'ant-design-vue';
+  import { cloneDeep, uniq } from 'lodash-es';
+  import { nextTick, ref, unref } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { BasicTree, TreeActionType, TreeItem } from '@/components/Tree/index';
+  import { isArray } from '@/utils/is';
+
+  import { treeData } from './data';
 
   const asyncTreeRef = ref<Nullable<TreeActionType>>(null);
   const asyncExpandTreeRef = ref<Nullable<TreeActionType>>(null);

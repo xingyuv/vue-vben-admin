@@ -12,15 +12,17 @@
   />
 </template>
 <script lang="ts">
-  import type { PropType } from 'vue';
-  import { defineComponent, unref, computed, toRaw } from 'vue';
   import { Table } from 'ant-design-vue';
   import { cloneDeep } from 'lodash-es';
-  import { isFunction } from '/@/utils/is';
-  import type { BasicColumn } from '../types/table';
+  import type { PropType } from 'vue';
+  import { computed, defineComponent, toRaw, unref } from 'vue';
+
+  import { isFunction } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
+
   import { INDEX_COLUMN_FLAG } from '../const';
-  import { propTypes } from '/@/utils/propTypes';
   import { useTableContext } from '../hooks/useTableContext';
+  import type { BasicColumn } from '../types/table';
 
   const SUMMARY_ROW_KEY = '_row';
   const SUMMARY_INDEX_KEY = '_index';

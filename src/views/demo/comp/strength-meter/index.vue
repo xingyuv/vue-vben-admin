@@ -13,8 +13,9 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { StrengthMeter } from '/@/components/StrengthMeter';
-  import { PageWrapper } from '/@/components/Page';
+
+  import { PageWrapper } from '@/components/Page';
+  import { StrengthMeter } from '@/components/StrengthMeter';
 
   export default defineComponent({
     components: {
@@ -26,7 +27,7 @@
 <style lang="less" scoped>
   .demo-wrap {
     width: 50%;
-    border-radius: 10px;
     background-color: @component-background;
+    border-radius: 10px;
   }
 </style>

@@ -6,7 +6,7 @@
         <template #message>
           <template v-if="checkedKeys.length > 0">
             <span>已选中{{ checkedKeys.length }}条记录(可跨页)</span>
-            <a-button type="link" @click="checkedKeys = []" size="small">清空</a-button>
+            <a-button type="link" size="small" @click="checkedKeys = []">清空</a-button>
           </template>
           <template v-else>
             <span>未选中任何项目</span>
@@ -20,12 +20,13 @@
   </BasicTable>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { BasicTable, useTable } from '/@/components/Table';
-  import { getBasicColumns, getFormConfig } from './tableData';
   import { Alert } from 'ant-design-vue';
+  import { defineComponent, ref } from 'vue';
 
-  import { demoListApi } from '/@/api/demo/table';
+  import { demoListApi } from '@/api/demo/table';
+  import { BasicTable, useTable } from '@/components/Table';
+
+  import { getBasicColumns, getFormConfig } from './tableData';
 
   export default defineComponent({
     components: { BasicTable, AAlert: Alert },
@@ -44,8 +45,8 @@
         rowSelection: {
           type: 'checkbox',
           selectedRowKeys: checkedKeys,
-          onSelect: onSelect,
-          onSelectAll: onSelectAll,
+          onSelect,
+          onSelectAll,
         },
       });
 

@@ -1,26 +1,26 @@
 <template>
   <LoginFormTitle v-show="getShow" class="enter-x" />
   <Form
+    v-show="getShow"
+    ref="formRef"
     class="p-4 enter-x"
     :model="formData"
     :rules="getFormRules"
-    ref="formRef"
-    v-show="getShow"
     @keypress.enter="handleLogin"
   >
     <FormItem name="account" class="enter-x">
       <Input
-        size="large"
         v-model:value="formData.account"
+        size="large"
         :placeholder="t('sys.login.userName')"
         class="fix-auto-fill"
       />
     </FormItem>
     <FormItem name="password" class="enter-x">
       <InputPassword
+        v-model:value="formData.password"
         size="large"
         visibilityToggle
-        v-model:value="formData.password"
         :placeholder="t('sys.login.password')"
       />
     </FormItem>
@@ -45,7 +45,7 @@
     </ARow>
 
     <FormItem class="enter-x">
-      <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
+      <Button type="primary" size="large" block :loading="loading" @click="handleLogin">
         {{ t('sys.login.loginButton') }}
       </Button>
       <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
@@ -82,24 +82,23 @@
   </Form>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue';
-
-  import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
   import {
-    GithubFilled,
-    WechatFilled,
     AlipayCircleFilled,
+    GithubFilled,
     GoogleCircleFilled,
     TwitterCircleFilled,
+    WechatFilled,
   } from '@ant-design/icons-vue';
+  import { Button, Checkbox, Col, Divider, Form, Input, Row } from 'ant-design-vue';
+  import { computed, reactive, ref, unref } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { useUserStore } from '@/store/modules/user';
+
   import LoginFormTitle from './LoginFormTitle.vue';
-
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
-
-  import { useUserStore } from '/@/store/modules/user';
-  import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
   //import { onKeyStroke } from '@vueuse/core';
 
   const ACol = Col;

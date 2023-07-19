@@ -1,25 +1,27 @@
-import type {
-  UseDrawerReturnType,
-  DrawerInstance,
-  ReturnMethods,
-  DrawerProps,
-  UseDrawerInnerReturnType,
-} from './typing';
-import {
-  ref,
-  getCurrentInstance,
-  unref,
-  reactive,
-  watchEffect,
-  nextTick,
-  toRaw,
-  computed,
-} from 'vue';
-import { isProdMode } from '/@/utils/env';
-import { isFunction } from '/@/utils/is';
 import { tryOnUnmounted } from '@vueuse/core';
 import { isEqual } from 'lodash-es';
-import { error } from '/@/utils/log';
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  reactive,
+  ref,
+  toRaw,
+  unref,
+  watchEffect,
+} from 'vue';
+
+import { isProdMode } from '@/utils/env';
+import { isFunction } from '@/utils/is';
+import { error } from '@/utils/log';
+
+import type {
+  DrawerInstance,
+  DrawerProps,
+  ReturnMethods,
+  UseDrawerInnerReturnType,
+  UseDrawerReturnType,
+} from './typing';
 
 const dataTransferRef = reactive<any>({});
 
@@ -75,7 +77,7 @@ export function useDrawer(): UseDrawerReturnType {
 
     openDrawer: <T = any>(visible = true, data?: T, openOnSet = true): void => {
       getInstance()?.setDrawerProps({
-        visible: visible,
+        visible,
       });
       if (!data) return;
 

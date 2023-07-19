@@ -4,7 +4,7 @@
       <BasicForm @register="register" @submit="handleSubmit">
         <template #add="{ field }">
           <Button v-if="Number(field) === 0" @click="add">+</Button>
-          <Button class="ml-2" v-if="Number(field) === 0" @click="batchAdd">
+          <Button v-if="Number(field) === 0" class="ml-2" @click="batchAdd">
             批量添加表单配置
           </Button>
           <Button v-if="field > 0" @click="del(field)">-</Button>
@@ -14,12 +14,13 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container';
   import { Input } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Button } from '/@/components/Button';
+  import { defineComponent, ref } from 'vue';
+
+  import { Button } from '@/components/Button';
+  import { CollapseContainer } from '@/components/Container';
+  import { BasicForm, useForm } from '@/components/Form/index';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     components: { BasicForm, CollapseContainer, PageWrapper, [Input.name]: Input, Button },

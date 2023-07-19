@@ -50,7 +50,7 @@
       </CollapseContainer>
 
       <CollapseContainer title="下载示例" class="text-center qrcode-demo-item">
-        <QrCode :value="qrCodeUrl" ref="qrRef" :logo="LogoImg" />
+        <QrCode ref="qrRef" :value="qrCodeUrl" :logo="LogoImg" />
         <a-button class="mb-2" type="primary" @click="download"> 下载 </a-button>
         <div class="msg">(在线logo会导致图片跨域，需要下载图片需要自行解决跨域问题)</div>
       </CollapseContainer>
@@ -61,10 +61,10 @@
 
       <CollapseContainer title="扩展绘制示例" class="text-center qrcode-demo-item">
         <QrCode
+          ref="qrDiyRef"
           :value="qrCodeUrl"
           :width="200"
           :options="{ margin: 5 }"
-          ref="qrDiyRef"
           :logo="LogoImg"
           @done="onQrcodeDone"
         />
@@ -75,12 +75,13 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
-  import { QrCode, QrCodeActionType } from '/@/components/Qrcode/index';
-  import LogoImg from '/@/assets/images/logo.png';
-  import { CollapseContainer } from '/@/components/Container/index';
-  import { PageWrapper } from '/@/components/Page';
   import { type Nullable } from '@vben/types';
+  import { defineComponent, ref, unref } from 'vue';
+
+  import LogoImg from '@/assets/images/logo.png';
+  import { CollapseContainer } from '@/components/Container/index';
+  import { PageWrapper } from '@/components/Page';
+  import { QrCode, QrCodeActionType } from '@/components/Qrcode/index';
 
   const qrCodeUrl = 'https://www.vvbin.cn';
   export default defineComponent({

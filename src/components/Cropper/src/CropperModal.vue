@@ -1,12 +1,12 @@
 <template>
   <BasicModal
     v-bind="$attrs"
-    @register="register"
     :title="t('component.cropper.modalTitle')"
     width="800px"
     :canFullscreen="false"
-    @ok="handleOk"
     :okText="t('component.cropper.okText')"
+    @register="register"
+    @ok="handleOk"
   >
     <div :class="prefixCls">
       <div :class="`${prefixCls}-left`">
@@ -96,7 +96,7 @@
       </div>
       <div :class="`${prefixCls}-right`">
         <div :class="`${prefixCls}-preview`">
-          <img :src="previewSource" v-if="previewSource" :alt="t('component.cropper.preview')" />
+          <img v-if="previewSource" :src="previewSource" :alt="t('component.cropper.preview')" />
         </div>
         <template v-if="previewSource">
           <div :class="`${prefixCls}-group`">
@@ -111,18 +111,23 @@
   </BasicModal>
 </template>
 <script lang="ts">
+  import { Avatar, Space, Tooltip, Upload } from 'ant-design-vue';
+  import { defineComponent, PropType, ref } from 'vue';
+
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { dataURLtoBlob } from '@/utils/file/base64Conver';
+  import { isFunction } from '@/utils/is';
+
+  import CropperImage from './Cropper.vue';
   import type { CropendResult, Cropper } from './typing';
 
-  import { defineComponent, ref, PropType } from 'vue';
-  import CropperImage from './Cropper.vue';
-  import { Space, Upload, Avatar, Tooltip } from 'ant-design-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { dataURLtoBlob } from '/@/utils/file/base64Conver';
-  import { isFunction } from '/@/utils/is';
-  import { useI18n } from '/@/hooks/web/useI18n';
-
-  type apiFunParams = { file: Blob; name: string; filename: string };
+  interface apiFunParams {
+    file: Blob;
+    name: string;
+    filename: string;
+  }
 
   const props = {
     circled: { type: Boolean, default: true },
@@ -276,8 +281,8 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      margin-top: 8px;
       padding-top: 8px;
+      margin-top: 8px;
       border-top: 1px solid @border-color-base;
     }
   }

@@ -6,19 +6,19 @@
     </div>
 
     <div class="flex justify-center p-4 items-center bg-gray-700">
-      <BasicDragVerify ref="el2" @success="handleSuccess" circle />
+      <BasicDragVerify ref="el2" circle @success="handleSuccess" />
       <a-button type="primary" class="ml-2" @click="handleBtnClick(el2)"> 还原 </a-button>
     </div>
 
     <div class="flex justify-center p-4 items-center bg-gray-700">
       <BasicDragVerify
         ref="el3"
-        @success="handleSuccess"
         text="拖动以进行校验"
         successText="校验成功"
         :barStyle="{
           backgroundColor: '#018ffb',
         }"
+        @success="handleSuccess"
       />
       <a-button type="primary" class="ml-2" @click="handleBtnClick(el3)"> 还原 </a-button>
     </div>
@@ -51,12 +51,13 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { BasicDragVerify, DragVerifyActionType, PassingData } from '/@/components/Verify/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { BugOutlined, RightOutlined } from '@ant-design/icons-vue';
-  import { PageWrapper } from '/@/components/Page';
   import { type Nullable } from '@vben/types';
+  import { defineComponent, ref } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { BasicDragVerify, DragVerifyActionType, PassingData } from '@/components/Verify/index';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   export default defineComponent({
     components: { BasicDragVerify, BugOutlined, RightOutlined, PageWrapper },

@@ -4,9 +4,10 @@
   </Card>
 </template>
 <script lang="ts" setup>
-  import { Ref, ref, watch } from 'vue';
   import { Card } from 'ant-design-vue';
-  import { useECharts } from '/@/hooks/web/useECharts';
+  import { Ref, ref, watch } from 'vue';
+
+  import { useECharts } from '@/hooks/web/useECharts';
 
   const props = defineProps({
     loading: Boolean,
@@ -52,7 +53,7 @@
             roseType: 'radius',
             animationType: 'scale',
             animationEasing: 'exponentialInOut',
-            animationDelay: function () {
+            animationDelay() {
               return Math.random() * 400;
             },
           },

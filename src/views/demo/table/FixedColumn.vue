@@ -28,9 +28,9 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
 
-  import { demoListApi } from '/@/api/demo/table';
+  import { demoListApi } from '@/api/demo/table';
+  import { BasicColumn, BasicTable, TableAction, useTable } from '@/components/Table';
 
   const columns: BasicColumn[] = [
     {
@@ -70,7 +70,7 @@
       const [registerTable] = useTable({
         title: 'TableAction组件及固定列示例',
         api: demoListApi,
-        columns: columns,
+        columns,
         rowSelection: { type: 'radio' },
         bordered: true,
         actionColumn: {

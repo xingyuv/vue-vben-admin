@@ -17,10 +17,10 @@
       <a-button class="mr-2" @click="getPagination"> 获取分页信息 </a-button>
     </div>
     <BasicTable
+      ref="tableRef"
       :canResize="false"
       title="RefTable示例"
       titleHelpMessage="使用Ref调用表格内方法"
-      ref="tableRef"
       :api="api"
       :columns="columns"
       rowKey="id"
@@ -29,12 +29,14 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
-  import { BasicTable, TableActionType } from '/@/components/Table';
-  import { getBasicColumns, getBasicShortColumns } from './tableData';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { demoListApi } from '/@/api/demo/table';
   import { type Nullable } from '@vben/types';
+  import { defineComponent, ref, unref } from 'vue';
+
+  import { demoListApi } from '@/api/demo/table';
+  import { BasicTable, TableActionType } from '@/components/Table';
+  import { useMessage } from '@/hooks/web/useMessage';
+
+  import { getBasicColumns, getBasicShortColumns } from './tableData';
 
   export default defineComponent({
     components: { BasicTable },

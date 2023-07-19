@@ -1,28 +1,30 @@
 <template>
   <ScrollContainer ref="wrapperRef">
-    <div ref="spinRef" :style="spinStyle" v-loading="loading" :loading-tip="loadingTip">
+    <div ref="spinRef" v-loading="loading" :style="spinStyle" :loading-tip="loadingTip">
       <slot></slot>
     </div>
   </ScrollContainer>
 </template>
 <script lang="ts">
-  import type { CSSProperties } from 'vue';
-  import {
-    defineComponent,
-    computed,
-    ref,
-    watchEffect,
-    unref,
-    watch,
-    onMounted,
-    nextTick,
-    onUnmounted,
-  } from 'vue';
   import { useWindowSizeFn } from '@vben/hooks';
   import { type AnyFunction } from '@vben/types';
-  import { ScrollContainer } from '/@/components/Container';
-  import { createModalContext } from '../hooks/useModalContext';
   import { useMutationObserver } from '@vueuse/core';
+  import type { CSSProperties } from 'vue';
+  import {
+    computed,
+    defineComponent,
+    nextTick,
+    onMounted,
+    onUnmounted,
+    ref,
+    unref,
+    watch,
+    watchEffect,
+  } from 'vue';
+
+  import { ScrollContainer } from '@/components/Container';
+
+  import { createModalContext } from '../hooks/useModalContext';
 
   const props = {
     loading: { type: Boolean },
@@ -51,7 +53,7 @@
 
       let realHeight = 0;
 
-      let stopElResizeFn: AnyFunction = () => {};
+      const stopElResizeFn: AnyFunction = () => {};
 
       useWindowSizeFn(setModalHeight.bind(null, false));
 

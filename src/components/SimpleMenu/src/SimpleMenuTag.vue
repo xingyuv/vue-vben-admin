@@ -1,13 +1,12 @@
 <template>
-  <span :class="getTagClass" v-if="getShowTag">{{ getContent }}</span>
+  <span v-if="getShowTag" :class="getTagClass">{{ getContent }}</span>
 </template>
 <script lang="ts">
-  import type { Menu } from '/@/router/types';
+  import { computed, defineComponent } from 'vue';
 
-  import { defineComponent, computed } from 'vue';
-
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import type { Menu } from '@/router/types';
+  import { propTypes } from '@/utils/propTypes';
 
   export default defineComponent({
     name: 'SimpleMenuTag',

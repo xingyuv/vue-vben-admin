@@ -4,18 +4,18 @@
       <slot name="headerTop"></slot>
     </div>
     <div class="flex items-center">
-      <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
+      <slot v-if="$slots.tableTitle" name="tableTitle"></slot>
       <TableTitle
+        v-if="!$slots.tableTitle && title"
         :helpMessage="titleHelpMessage"
         :title="title"
-        v-if="!$slots.tableTitle && title"
       />
       <div :class="`${prefixCls}__toolbar`">
         <slot name="toolbar"></slot>
-        <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
+        <Divider v-if="$slots.toolbar && showTableSetting" type="vertical" />
         <TableSetting
-          :setting="tableSetting"
           v-if="showTableSetting"
+          :setting="tableSetting"
           @columns-change="handleColumnChange"
         />
       </div>
@@ -23,13 +23,15 @@
   </div>
 </template>
 <script lang="ts">
-  import type { TableSetting, ColumnChangeParam } from '../types/table';
+  import { Divider } from 'ant-design-vue';
   import type { PropType } from 'vue';
   import { defineComponent } from 'vue';
-  import { Divider } from 'ant-design-vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+
+  import type { ColumnChangeParam, TableSetting } from '../types/table';
   import TableSettingComponent from './settings/index.vue';
   import TableTitle from './TableTitle.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
 
   export default defineComponent({
     name: 'BasicTableHeader',

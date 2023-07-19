@@ -13,24 +13,26 @@
       </a-steps>
     </div>
     <div class="mt-5">
-      <Step1 @next="handleStep1Next" v-show="current === 0" />
+      <Step1 v-show="current === 0" @next="handleStep1Next" />
       <Step2
-        @prev="handleStepPrev"
-        @next="handleStep2Next"
         v-show="current === 1"
         v-if="initSetp2"
+        @prev="handleStepPrev"
+        @next="handleStep2Next"
       />
-      <Step3 v-show="current === 2" @redo="handleRedo" v-if="initSetp3" />
+      <Step3 v-show="current === 2" v-if="initSetp3" @redo="handleRedo" />
     </div>
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, reactive, toRefs } from 'vue';
+  import { Steps } from 'ant-design-vue';
+  import { defineComponent, reactive, ref, toRefs } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+
   import Step1 from './Step1.vue';
   import Step2 from './Step2.vue';
   import Step3 from './Step3.vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Steps } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'FormStepPage',

@@ -1,9 +1,9 @@
 <template>
-  <PageWrapper title="标签页+多级field表单" v-loading="loading">
+  <PageWrapper v-loading="loading" title="标签页+多级field表单">
     <div class="mb-4">
-      <a-button @click="handleReset" class="mr-2"> 重置表单 </a-button>
-      <a-button @click="handleSetValues" class="mr-2"> 设置默认值 </a-button>
-      <a-button @click="handleSubmit" class="mr-2" type="primary"> 提交表单 </a-button>
+      <a-button class="mr-2" @click="handleReset"> 重置表单 </a-button>
+      <a-button class="mr-2" @click="handleSetValues"> 设置默认值 </a-button>
+      <a-button class="mr-2" type="primary" @click="handleSubmit"> 提交表单 </a-button>
     </div>
     <CollapseContainer title="标签页+多级field表单">
       <Tabs v-model:activeKey="activeKey">
@@ -20,25 +20,26 @@
 </template>
 
 <script lang="ts">
-  import { ref, defineComponent } from 'vue';
   import { Tabs } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { CollapseContainer } from '/@/components/Container';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { omit } from 'lodash-es';
-  import { deepMerge } from '/@/utils';
-  import { BasicForm, FormSchema, useForm, FormProps, UseFormReturnType } from '/@/components/Form';
+  import { defineComponent, ref } from 'vue';
+
+  import { CollapseContainer } from '@/components/Container';
+  import { BasicForm, FormProps, FormSchema, useForm, UseFormReturnType } from '@/components/Form';
+  import { PageWrapper } from '@/components/Page';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { deepMerge } from '@/utils';
 
   export default defineComponent({
     name: 'TabsFormDemo',
     components: { Tabs, TabPane: Tabs.TabPane, PageWrapper, CollapseContainer, BasicForm },
     setup() {
-      type TabsFormType = {
+      interface TabsFormType {
         key: string;
         tab: string;
         forceRender?: boolean;
         Form: UseFormReturnType;
-      };
+      }
 
       const { createMessage } = useMessage();
       const activeKey = ref('tabs2');

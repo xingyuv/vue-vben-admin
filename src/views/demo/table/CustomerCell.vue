@@ -28,10 +28,11 @@
   </div>
 </template>
 <script lang="ts">
+  import { Avatar, Tag } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { BasicTable, useTable, BasicColumn, TableImg } from '/@/components/Table';
-  import { Tag, Avatar } from 'ant-design-vue';
-  import { demoListApi } from '/@/api/demo/table';
+
+  import { demoListApi } from '@/api/demo/table';
+  import { BasicColumn, BasicTable, TableImg, useTable } from '@/components/Table';
 
   const columns: BasicColumn[] = [
     {
@@ -96,7 +97,7 @@
         title: '自定义列内容',
         titleHelpMessage: '表格中所有头像、图片均为mock生成，仅用于演示图片占位',
         api: demoListApi,
-        columns: columns,
+        columns,
         bordered: true,
         showTableSetting: true,
       });

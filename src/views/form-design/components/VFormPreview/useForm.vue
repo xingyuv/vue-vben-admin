@@ -5,26 +5,28 @@
   <Modal
     title="预览(不支持布局)"
     :visible="state.visible"
-    @ok="handleGetData"
-    @cancel="handleCancel"
     okText="获取数据"
     cancelText="关闭"
     style="top: 20px"
     :destroyOnClose="true"
     :width="900"
+    @ok="handleGetData"
+    @cancel="handleCancel"
   >
     <BasicForm v-bind="attrs" @register="registerForm" />
     <JsonModal ref="jsonModal" />
   </Modal>
 </template>
 <script lang="ts" setup>
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { reactive, ref, computed } from 'vue';
-  import { IFormConfig } from '../../typings/v-form-component';
-  import { IAnyObject } from '../../typings/base-type';
-  import JsonModal from '../VFormDesign/components/JsonModal.vue';
-  import { IToolbarMethods } from '../../typings/form-type';
   import { Modal } from 'ant-design-vue';
+  import { computed, reactive, ref } from 'vue';
+
+  import { BasicForm, useForm } from '@/components/Form/index';
+
+  import { IAnyObject } from '../../typings/base-type';
+  import { IToolbarMethods } from '../../typings/form-type';
+  import { IFormConfig } from '../../typings/v-form-component';
+  import JsonModal from '../VFormDesign/components/JsonModal.vue';
 
   const jsonModal = ref<IToolbarMethods | null>(null);
   const state = reactive<{
@@ -63,7 +65,7 @@
    * @return {Promise<void>}
    */
   const handleGetData = async () => {
-    let data = await validate();
+    const data = await validate();
     jsonModal.value?.showModal?.(data);
   };
 

@@ -2,37 +2,38 @@
   <PageWrapper title="动画组件示例">
     <div class="flex">
       <Select
-        :options="options"
         v-model:value="value"
+        :options="options"
         placeholder="选择动画"
         :style="{ width: '150px' }"
       />
       <a-button type="primary" class="ml-4" @click="start"> start </a-button>
     </div>
     <component :is="`${value}Transition`">
-      <div class="box" v-show="show"></div>
+      <div v-show="show" class="box"></div>
     </component>
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
   import { Select } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
+  import { defineComponent, ref } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
   import {
-    FadeTransition,
-    ScaleTransition,
-    SlideYTransition,
-    ScrollYTransition,
-    SlideYReverseTransition,
-    ScrollYReverseTransition,
-    SlideXTransition,
-    ScrollXTransition,
-    SlideXReverseTransition,
-    ScrollXReverseTransition,
-    ScaleRotateTransition,
-    ExpandXTransition,
     ExpandTransition,
-  } from '/@/components/Transition';
+    ExpandXTransition,
+    FadeTransition,
+    ScaleRotateTransition,
+    ScaleTransition,
+    ScrollXReverseTransition,
+    ScrollXTransition,
+    ScrollYReverseTransition,
+    ScrollYTransition,
+    SlideXReverseTransition,
+    SlideXTransition,
+    SlideYReverseTransition,
+    SlideYTransition,
+  } from '@/components/Transition';
 
   const transitionList = [
     'Fade',

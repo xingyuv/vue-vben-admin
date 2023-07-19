@@ -1,6 +1,6 @@
 <template>
-  <Drawer :class="prefixCls" @close="onClose" v-bind="getBindValues">
-    <template #title v-if="!$slots.title">
+  <Drawer :class="prefixCls" v-bind="getBindValues" @close="onClose">
+    <template v-if="!$slots.title" #title>
       <DrawerHeader
         :title="getMergeProps.title"
         :isDetail="isDetail"
@@ -17,42 +17,44 @@
     </template>
 
     <ScrollContainer
-      :style="getScrollContentStyle"
       v-loading="getLoading"
+      :style="getScrollContentStyle"
       :loading-tip="loadingText || t('common.loadingText')"
     >
       <slot></slot>
     </ScrollContainer>
-    <DrawerFooter v-bind="getProps" @close="onClose" @ok="handleOk" :height="getFooterHeight">
-      <template #[item]="data" v-for="item in Object.keys($slots)">
+    <DrawerFooter v-bind="getProps" :height="getFooterHeight" @close="onClose" @ok="handleOk">
+      <template v-for="item in Object.keys($slots)" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </DrawerFooter>
   </Drawer>
 </template>
 <script lang="ts">
-  import type { DrawerInstance, DrawerProps } from './typing';
+  import { useAttrs } from '@vben/hooks';
+  import { Drawer } from 'ant-design-vue';
   import type { CSSProperties } from 'vue';
   import {
-    defineComponent,
-    ref,
     computed,
-    watch,
-    unref,
-    nextTick,
-    toRaw,
+    defineComponent,
     getCurrentInstance,
+    nextTick,
+    ref,
+    toRaw,
+    unref,
+    watch,
   } from 'vue';
-  import { Drawer } from 'ant-design-vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { isFunction, isNumber } from '/@/utils/is';
-  import { deepMerge } from '/@/utils';
+
+  import { ScrollContainer } from '@/components/Container';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { deepMerge } from '@/utils';
+  import { isFunction, isNumber } from '@/utils/is';
+
   import DrawerFooter from './components/DrawerFooter.vue';
   import DrawerHeader from './components/DrawerHeader.vue';
-  import { ScrollContainer } from '/@/components/Container';
   import { basicProps } from './props';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useAttrs } from '@vben/hooks';
+  import type { DrawerInstance, DrawerProps } from './typing';
 
   export default defineComponent({
     components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
@@ -215,8 +217,8 @@
       background-color: @component-background;
 
       .scrollbar__wrap {
-        margin-bottom: 0 !important;
         padding: 16px !important;
+        margin-bottom: 0 !important;
       }
 
       > .scrollbar > .scrollbar__bar.is-horizontal {

@@ -1,10 +1,12 @@
-import type { BasicTableProps, TableRowSelection, BasicColumn } from '../types/table';
-import { Ref, ComputedRef, ref, computed, unref, nextTick, watch } from 'vue';
-import { getViewportOffset } from '/@/utils/domUtils';
-import { isBoolean } from '/@/utils/is';
-import { useWindowSizeFn, onMountedOrActivated } from '@vben/hooks';
-import { useModalContext } from '/@/components/Modal';
+import { onMountedOrActivated, useWindowSizeFn } from '@vben/hooks';
 import { useDebounceFn } from '@vueuse/core';
+import { computed, ComputedRef, nextTick, Ref, ref, unref, watch } from 'vue';
+
+import { useModalContext } from '@/components/Modal';
+import { getViewportOffset } from '@/utils/domUtils';
+import { isBoolean } from '@/utils/is';
+
+import type { BasicColumn, BasicTableProps, TableRowSelection } from '../types/table';
 
 export function useTableScroll(
   propsRef: ComputedRef<BasicTableProps>,

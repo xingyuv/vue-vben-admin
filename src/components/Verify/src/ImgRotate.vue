@@ -1,11 +1,13 @@
 <script lang="tsx">
-  import type { MoveData, DragVerifyActionType } from './typing';
-  import { defineComponent, computed, unref, reactive, watch, ref } from 'vue';
   import { useTimeoutFn } from '@vben/hooks';
+  import { computed, defineComponent, reactive, ref, unref, watch } from 'vue';
+
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { hackCss } from '@/utils/domUtils';
+
   import BasicDragVerify from './DragVerify.vue';
-  import { hackCss } from '/@/utils/domUtils';
   import { rotateProps } from './props';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import type { DragVerifyActionType, MoveData } from './typing';
 
   export default defineComponent({
     name: 'ImgRotateDragVerify',
@@ -167,8 +169,8 @@
 </script>
 <style lang="less">
   .ir-dv {
-    display: flex;
     position: relative;
+    display: flex;
     flex-direction: column;
     align-items: center;
 
@@ -188,16 +190,16 @@
     }
 
     &-img__tip {
-      display: block;
       position: absolute;
-      z-index: 1;
       bottom: 10px;
       left: 0;
+      z-index: 1;
+      display: block;
       width: 100%;
       height: 30px;
-      color: @white;
       font-size: 12px;
       line-height: 30px;
+      color: @white;
       text-align: center;
 
       &.success {

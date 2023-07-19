@@ -1,11 +1,13 @@
 <script lang="tsx">
-  import type { Ref } from 'vue';
-  import { defineComponent, ref, computed, unref, reactive, watch, watchEffect } from 'vue';
-  import { useTimeoutFn } from '@vben/hooks';
-  import { useEventListener } from '/@/hooks/event/useEventListener';
-  import { basicProps } from './props';
-  import { getSlot } from '/@/utils/helper/tsxHelper';
   import { CheckOutlined, DoubleRightOutlined } from '@ant-design/icons-vue';
+  import { useTimeoutFn } from '@vben/hooks';
+  import type { Ref } from 'vue';
+  import { computed, defineComponent, reactive, ref, unref, watch, watchEffect } from 'vue';
+
+  import { useEventListener } from '@/hooks/event/useEventListener';
+  import { getSlot } from '@/utils/helper/tsxHelper';
+
+  import { basicProps } from './props';
 
   export default defineComponent({
     name: 'BaseDargVerify',
@@ -291,17 +293,17 @@
   .darg-verify {
     position: relative;
     overflow: hidden;
+    text-align: center;
+    background-color: rgb(238 238 238);
     border: 1px solid #ddd;
     border-radius: @radius;
-    background-color: rgb(238 238 238);
-    text-align: center;
 
     &-bar {
       position: absolute;
       width: 0;
       height: 36px;
-      border-radius: @radius;
       background-color: @success-color;
+      border-radius: @radius;
 
       &.to-left {
         width: 0 !important;
@@ -312,8 +314,8 @@
     &-content {
       position: absolute;
       top: 0;
-      animation: slidetounlock 3s infinite;
-      background-clip: text;
+      font-size: 12px;
+      user-select: none;
       background-color: -webkit-gradient(
         linear,
         left top,
@@ -324,8 +326,8 @@
         color-stop(0.6, #333),
         color-stop(1, #333)
       );
-      font-size: 12px;
-      user-select: none;
+      background-clip: text;
+      animation: slidetounlock 3s infinite;
       text-size-adjust: none;
 
       &.success {
@@ -338,15 +340,15 @@
     }
 
     &-action {
-      display: flex;
       position: absolute;
       top: 0;
       left: 0;
+      display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: @radius;
-      background-color: @white;
       cursor: move;
+      background-color: @white;
+      border-radius: @radius;
 
       &__icon {
         cursor: inherit;

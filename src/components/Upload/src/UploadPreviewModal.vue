@@ -4,23 +4,25 @@
     :title="t('component.upload.preview')"
     class="upload-preview-modal"
     v-bind="$attrs"
-    @register="register"
     :showOkBtn="false"
+    @register="register"
   >
     <FileList :dataSource="fileListRef" :columns="columns" :actionColumn="actionColumn" />
   </BasicModal>
 </template>
 <script lang="ts">
-  import { defineComponent, watch, ref } from 'vue';
-  //   import { BasicTable, useTable } from '/@/components/Table';
+  import { defineComponent, ref, watch } from 'vue';
+
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { downloadByUrl } from '@/utils/file/download';
+  import { isArray } from '@/utils/is';
+
+  import { createPreviewActionColumn, createPreviewColumns } from './data';
+  //   import { BasicTable, useTable } from '@/components/Table';
   import FileList from './FileList.vue';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
   import { previewProps } from './props';
   import { PreviewFileItem } from './typing';
-  import { downloadByUrl } from '/@/utils/file/download';
-  import { createPreviewColumns, createPreviewActionColumn } from './data';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { isArray } from '/@/utils/is';
 
   export default defineComponent({
     components: { BasicModal, FileList },

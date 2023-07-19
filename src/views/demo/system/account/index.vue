@@ -1,7 +1,7 @@
 <template>
   <PageWrapper dense contentFullHeight fixedHeight contentClass="flex">
     <DeptTree class="w-1/4 xl:w-1/5" @select="handleSelect" />
-    <BasicTable @register="registerTable" class="w-3/4 xl:w-4/5" :searchInfo="searchInfo">
+    <BasicTable class="w-3/4 xl:w-4/5" :searchInfo="searchInfo" @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">新增账号</a-button>
       </template>
@@ -40,16 +40,15 @@
 <script lang="ts">
   import { defineComponent, reactive } from 'vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { getAccountList } from '/@/api/demo/system';
-  import { PageWrapper } from '/@/components/Page';
-  import DeptTree from './DeptTree.vue';
-
-  import { useModal } from '/@/components/Modal';
-  import AccountModal from './AccountModal.vue';
+  import { getAccountList } from '@/api/demo/system';
+  import { useModal } from '@/components/Modal';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicTable, TableAction, useTable } from '@/components/Table';
+  import { useGo } from '@/hooks/web/usePage';
 
   import { columns, searchFormSchema } from './account.data';
-  import { useGo } from '/@/hooks/web/usePage';
+  import AccountModal from './AccountModal.vue';
+  import DeptTree from './DeptTree.vue';
 
   export default defineComponent({
     name: 'AccountManagement',

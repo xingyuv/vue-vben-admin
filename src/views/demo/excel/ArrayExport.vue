@@ -3,7 +3,7 @@
     <BasicTable title="基础表格" :columns="columns" :dataSource="data">
       <template #toolbar>
         <a-button @click="aoaToExcel"> 导出 </a-button>
-        <a-button @click="aoaToMultipleSheet" danger> 导出多Sheet </a-button>
+        <a-button danger @click="aoaToMultipleSheet"> 导出多Sheet </a-button>
       </template>
     </BasicTable>
   </PageWrapper>
@@ -11,11 +11,13 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicTable } from '/@/components/Table';
-  import { aoaToSheetXlsx } from '/@/components/Excel';
-  import { arrHeader, arrData, columns, data } from './data';
-  import { PageWrapper } from '/@/components/Page';
-  import { aoaToMultipleSheetXlsx } from '/@/components/Excel/src/Export2Excel';
+
+  import { aoaToSheetXlsx } from '@/components/Excel';
+  import { aoaToMultipleSheetXlsx } from '@/components/Excel/src/Export2Excel';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicTable } from '@/components/Table';
+
+  import { arrData, arrHeader, columns, data } from './data';
 
   export default defineComponent({
     components: { BasicTable, PageWrapper },

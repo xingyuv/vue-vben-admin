@@ -1,8 +1,8 @@
 <template>
   <Form
     v-bind="getBindValue"
-    :class="getFormClass"
     ref="formElRef"
+    :class="getFormClass"
     :model="formModel"
     @keypress.enter="handleEnterPress"
   >
@@ -19,7 +19,7 @@
           :formModel="formModel"
           :setFormModel="setFormModel"
         >
-          <template #[item]="data" v-for="item in Object.keys($slots)">
+          <template v-for="item in Object.keys($slots)" #[item]="data">
             <slot :name="item" v-bind="data || {}"></slot>
           </template>
         </FormItem>
@@ -27,8 +27,8 @@
 
       <FormAction v-bind="getFormActionBindProps" @toggle-advanced="handleToggleAdvanced">
         <template
-          #[item]="data"
           v-for="item in ['resetBefore', 'submitBefore', 'advanceBefore', 'advanceAfter']"
+          #[item]="data"
         >
           <slot :name="item" v-bind="data || {}"></slot>
         </template>
@@ -38,32 +38,29 @@
   </Form>
 </template>
 <script lang="ts">
+  import { useDebounceFn } from '@vueuse/core';
+  import { Form, Row } from 'ant-design-vue';
+  import { cloneDeep } from 'lodash-es';
+  import type { Ref } from 'vue';
+  import { computed, defineComponent, nextTick, onMounted, reactive, ref, unref, watch } from 'vue';
+
+  import { useModalContext } from '@/components/Modal';
+  import { useDesign } from '@/hooks/web/useDesign';
+  // import { cloneDeep } from 'lodash-es';
+  import { deepMerge } from '@/utils';
+  import { dateUtil } from '@/utils/dateUtil';
+
+  import FormAction from './components/FormAction.vue';
+  import FormItem from './components/FormItem.vue';
+  import { dateItemType } from './helper';
+  import useAdvanced from './hooks/useAdvanced';
+  import { useAutoFocus } from './hooks/useAutoFocus';
+  import { createFormContext } from './hooks/useFormContext';
+  import { useFormEvents } from './hooks/useFormEvents';
+  import { useFormValues } from './hooks/useFormValues';
+  import { basicProps } from './props';
   import type { FormActionType, FormProps, FormSchema } from './types/form';
   import type { AdvanceState } from './types/hooks';
-  import type { Ref } from 'vue';
-
-  import { defineComponent, reactive, ref, computed, unref, onMounted, watch, nextTick } from 'vue';
-  import { Form, Row } from 'ant-design-vue';
-  import FormItem from './components/FormItem.vue';
-  import FormAction from './components/FormAction.vue';
-
-  import { dateItemType } from './helper';
-  import { dateUtil } from '/@/utils/dateUtil';
-
-  // import { cloneDeep } from 'lodash-es';
-  import { deepMerge } from '/@/utils';
-
-  import { useFormValues } from './hooks/useFormValues';
-  import useAdvanced from './hooks/useAdvanced';
-  import { useFormEvents } from './hooks/useFormEvents';
-  import { createFormContext } from './hooks/useFormContext';
-  import { useAutoFocus } from './hooks/useAutoFocus';
-  import { useModalContext } from '/@/components/Modal';
-  import { useDebounceFn } from '@vueuse/core';
-
-  import { basicProps } from './props';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { cloneDeep } from 'lodash-es';
 
   export default defineComponent({
     name: 'BasicForm',
@@ -117,14 +114,19 @@
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any);
         for (const schema of schemas) {
-          const { defaultValue, component, componentProps,isHandleDateDefaultValue = true } = schema;
+          const {
+            defaultValue,
+            component,
+            componentProps,
+            isHandleDateDefaultValue = true,
+          } = schema;
           // handle date type
           if (isHandleDateDefaultValue && defaultValue && dateItemType.includes(component)) {
-              const valueFormat =componentProps ? componentProps['valueFormat'] : null;
+            const valueFormat = componentProps ? componentProps['valueFormat'] : null;
             if (!Array.isArray(defaultValue)) {
-              schema.defaultValue =  valueFormat
-                  ? dateUtil(defaultValue).format(valueFormat)
-                  : dateUtil(defaultValue);
+              schema.defaultValue = valueFormat
+                ? dateUtil(defaultValue).format(valueFormat)
+                : dateUtil(defaultValue);
             } else {
               const def: any[] = [];
               defaultValue.forEach((item) => {
@@ -276,7 +278,7 @@
         validateFields,
         validate,
         submit: handleSubmit,
-        scrollToField: scrollToField,
+        scrollToField,
       };
 
       onMounted(() => {
@@ -334,8 +336,8 @@
         .suffix {
           display: inline-flex;
           align-items: center;
-          margin-top: 1px;
           padding-left: 6px;
+          margin-top: 1px;
           line-height: 1;
         }
       }

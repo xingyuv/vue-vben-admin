@@ -1,17 +1,18 @@
 <template>
   <section
+    v-show="loading"
     class="full-loading"
     :class="{ absolute, [theme]: !!theme }"
     :style="[background ? `background-color: ${background}` : '']"
-    v-show="loading"
   >
     <Spin v-bind="$attrs" :tip="tip" :size="size" :spinning="loading" />
   </section>
 </template>
 <script lang="ts">
-  import { PropType, defineComponent } from 'vue';
   import { Spin } from 'ant-design-vue';
-  import { SizeEnum } from '/@/enums/sizeEnum';
+  import { defineComponent, PropType } from 'vue';
+
+  import { SizeEnum } from '@/enums/sizeEnum';
 
   export default defineComponent({
     name: 'Loading',
@@ -47,11 +48,11 @@
 </script>
 <style lang="less" scoped>
   .full-loading {
-    display: flex;
     position: fixed;
-    z-index: 200;
     top: 0;
     left: 0;
+    z-index: 200;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -60,9 +61,9 @@
 
     &.absolute {
       position: absolute;
-      z-index: 300;
       top: 0;
       left: 0;
+      z-index: 300;
     }
   }
 

@@ -22,8 +22,8 @@
       <CollapseContainer title="自定义控件">
         <CollapseItem
           :list="customComponents"
-          @add-attrs="handleAddAttrs"
           :handleListPush="handleListPushDrag"
+          @add-attrs="handleAddAttrs"
           @handle-list-push="handleListPush"
         />
       </CollapseContainer>
@@ -79,32 +79,30 @@
 </template>
 
 <script lang="ts" setup>
-  import CollapseItem from './modules/CollapseItem.vue';
-  import FormComponentPanel from './modules/FormComponentPanel.vue';
-  import JsonModal from './components/JsonModal.vue';
-  import VFormPreview from '../VFormPreview/index.vue';
-  import VFormPreview2 from '../VFormPreview/useForm.vue';
-
-  import Toolbar from './modules/Toolbar.vue';
-  import PropsPanel from './modules/PropsPanel.vue';
-  import ImportJsonModal from './components/ImportJsonModal.vue';
-  import CodeModal from './components/CodeModal.vue';
-
   import 'codemirror/mode/javascript/javascript';
 
-  import { ref, provide, Ref } from 'vue';
-  import { Layout, LayoutContent, LayoutSider } from 'ant-design-vue';
-
-  import { IVFormComponent, IFormConfig, PropsTabKey } from '../../typings/v-form-component';
-  import { formItemsForEach, generateKey } from '../../utils';
-  import { cloneDeep } from 'lodash-es';
-  import { baseComponents, customComponents, layoutComponents } from '../../core/formItemConfig';
   import { useRefHistory, UseRefHistoryReturn } from '@vueuse/core';
-  import { globalConfigState } from './config/formItemPropsConfig';
-  import { IFormDesignMethods, IPropsPanel, IToolbarMethods } from '../../typings/form-type';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { Layout, LayoutContent, LayoutSider } from 'ant-design-vue';
+  import { cloneDeep } from 'lodash-es';
+  import { provide, Ref, ref } from 'vue';
 
-  import { CollapseContainer } from '/@/components/Container/index';
+  import { CollapseContainer } from '@/components/Container/index';
+  import { useDesign } from '@/hooks/web/useDesign';
+
+  import { baseComponents, customComponents, layoutComponents } from '../../core/formItemConfig';
+  import { IFormDesignMethods, IPropsPanel, IToolbarMethods } from '../../typings/form-type';
+  import { IFormConfig, IVFormComponent, PropsTabKey } from '../../typings/v-form-component';
+  import { formItemsForEach, generateKey } from '../../utils';
+  import VFormPreview from '../VFormPreview/index.vue';
+  import VFormPreview2 from '../VFormPreview/useForm.vue';
+  import CodeModal from './components/CodeModal.vue';
+  import ImportJsonModal from './components/ImportJsonModal.vue';
+  import JsonModal from './components/JsonModal.vue';
+  import { globalConfigState } from './config/formItemPropsConfig';
+  import CollapseItem from './modules/CollapseItem.vue';
+  import FormComponentPanel from './modules/FormComponentPanel.vue';
+  import PropsPanel from './modules/PropsPanel.vue';
+  import Toolbar from './modules/Toolbar.vue';
 
   defineProps({
     title: {
@@ -311,7 +309,7 @@
   const setFormModel = (key, value) => (formModel.value[key] = value);
   provide('formModel', formModel);
   // 把祖先组件的方法项注入到子组件中，子组件可通过inject获取
-  provide<(key: String, value: any) => void>('setFormModelMethod', setFormModel);
+  provide<(key: string, value: any) => void>('setFormModelMethod', setFormModel);
   // region 注入给子组件的属性
   // provide('currentItem', formConfig.value.currentItem)
 

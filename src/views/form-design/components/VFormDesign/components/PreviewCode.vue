@@ -1,29 +1,29 @@
 <template>
   <div>
     <div class="v-json-box">
-      <CodeEditor :value="editorJson" ref="myEditor" :mode="MODE.JSON" />
+      <CodeEditor ref="myEditor" :value="editorJson" :mode="MODE.JSON" />
     </div>
     <div class="copy-btn-box">
       <a-button
-        @click="handleCopyJson"
         type="primary"
         class="copy-btn"
         data-clipboard-action="copy"
         :data-clipboard-text="editorJson"
+        @click="handleCopyJson"
       >
         复制数据
       </a-button>
-      <a-button @click="handleExportJson" type="primary">导出代码</a-button>
+      <a-button type="primary" @click="handleExportJson">导出代码</a-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, reactive, toRefs, unref } from 'vue';
-  import { CodeEditor, MODE } from '/@/components/CodeEditor';
 
-  import { useCopyToClipboard } from '/@/hooks/web/useCopyToClipboard';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { CodeEditor, MODE } from '@/components/CodeEditor';
+  import { useCopyToClipboard } from '@/hooks/web/useCopyToClipboard';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'PreviewCode',

@@ -2,13 +2,12 @@
  * Used to configure the global error handling function, which can monitor vue errors, script errors, static resource errors and Promise errors
  */
 
-import type { ErrorLogInfo } from '/#/store';
-
-import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
-
-import { ErrorTypeEnum } from '/@/enums/exceptionEnum';
 import { App } from 'vue';
-import projectSetting from '/@/settings/projectSetting';
+
+import type { ErrorLogInfo } from '#/store';
+import { ErrorTypeEnum } from '@/enums/exceptionEnum';
+import projectSetting from '@/settings/projectSetting';
+import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 
 /**
  * Handling error stack information
@@ -19,13 +18,13 @@ function processStackMsg(error: Error) {
     return '';
   }
   let stack = error.stack
-    .replace(/\n/gi, '') // Remove line breaks to save the size of the transmitted content
+    .replace(/\n/g, '') // Remove line breaks to save the size of the transmitted content
     .replace(/\bat\b/gi, '@') // At in chrome, @ in ff
     .split('@') // Split information with @
     .slice(0, 9) // The maximum stack length (Error.stackTraceLimit = 10), so only take the first 10
     .map((v) => v.replace(/^\s*|\s*$/g, '')) // Remove extra spaces
     .join('~') // Manually add separators for later display
-    .replace(/\?[^:]+/gi, ''); // Remove redundant parameters of js file links (?x=1 and the like)
+    .replace(/\?[^:]+/g, ''); // Remove redundant parameters of js file links (?x=1 and the like)
   const msg = error.toString();
   if (stack.indexOf(msg) < 0) {
     stack = msg + '@' + stack;
@@ -54,7 +53,7 @@ function formatComponentName(vm: any) {
   }
   const name = options.name || options._componentTag;
   return {
-    name: name,
+    name,
     path: options.__file,
   };
 }
@@ -102,7 +101,7 @@ export function scriptErrorHandler(
   const errorLogStore = useErrorLogStoreWithOut();
   errorLogStore.addErrorLogInfo({
     type: ErrorTypeEnum.SCRIPT,
-    name: name,
+    name,
     file: source as string,
     detail: 'lineno' + lineno,
     url: window.location.href,

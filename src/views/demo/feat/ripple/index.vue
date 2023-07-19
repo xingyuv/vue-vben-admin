@@ -1,12 +1,13 @@
 <template>
   <PageWrapper title="Ripple示例">
-    <div class="demo-box" v-ripple>content</div>
+    <div v-ripple class="demo-box">content</div>
   </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import RippleDirective from '/@/directives/ripple';
-  import { PageWrapper } from '/@/components/Page';
+
+  import { PageWrapper } from '@/components/Page';
+  import RippleDirective from '@/directives/ripple';
 
   export default defineComponent({
     components: { PageWrapper },
@@ -23,9 +24,9 @@
     justify-content: center;
     width: 300px;
     height: 300px;
-    border-radius: 10px;
-    background-color: #408ede;
-    color: #fff;
     font-size: 24px;
+    color: #fff;
+    background-color: #408ede;
+    border-radius: 10px;
   }
 </style>

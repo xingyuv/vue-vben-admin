@@ -2,7 +2,7 @@
   <div :class="[prefixCls, `${prefixCls}--${theme}`]">
     <a-breadcrumb :routes="routes">
       <template #itemRender="{ route, routes: routesMatched, paths }">
-        <Icon :icon="getIcon(route)" v-if="getShowBreadCrumbIcon && getIcon(route)" />
+        <Icon v-if="getShowBreadCrumbIcon && getIcon(route)" :icon="getIcon(route)" />
         <span v-if="!hasRedirect(routesMatched, route)">
           {{ t(route.name || route.meta.title) }}
         </span>
@@ -14,27 +14,23 @@
   </div>
 </template>
 <script lang="ts">
+  import { Breadcrumb } from 'ant-design-vue';
+  import { defineComponent, ref, watchEffect } from 'vue';
   import type { RouteLocationMatched } from 'vue-router';
   import { useRouter } from 'vue-router';
-  import type { Menu } from '/@/router/types';
 
-  import { defineComponent, ref, watchEffect } from 'vue';
-
-  import { Breadcrumb } from 'ant-design-vue';
   import Icon from '@/components/Icon/Icon.vue';
-
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { useI18n } from '/@/hooks/web/useI18n';
-
-  import { propTypes } from '/@/utils/propTypes';
-  import { isString } from '/@/utils/is';
-  import { filter } from '/@/utils/helper/treeHelper';
-  import { getMenus } from '/@/router/menus';
-
-  import { REDIRECT_NAME } from '/@/router/constant';
-  import { getAllParentPath } from '/@/router/helper/menuHelper';
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useGo } from '@/hooks/web/usePage';
+  import { REDIRECT_NAME } from '@/router/constant';
+  import { getAllParentPath } from '@/router/helper/menuHelper';
+  import { getMenus } from '@/router/menus';
+  import type { Menu } from '@/router/types';
+  import { filter } from '@/utils/helper/treeHelper';
+  import { isString } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
 
   export default defineComponent({
     name: 'LayoutBreadcrumb',

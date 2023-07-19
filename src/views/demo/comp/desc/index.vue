@@ -18,14 +18,15 @@
       :schema="schema"
     />
 
-    <Description @register="register" class="mt-4" />
-    <Description @register="register1" class="mt-4" />
+    <Description class="mt-4" @register="register" />
+    <Description class="mt-4" @register="register1" />
   </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { Description, DescItem, useDescription } from '/@/components/Description/index';
-  import { PageWrapper } from '/@/components/Page';
+
+  import { DescItem, Description, useDescription } from '@/components/Description/index';
+  import { PageWrapper } from '@/components/Page';
 
   const mockData: Recordable = {
     username: 'test',
@@ -69,14 +70,14 @@
       const [register] = useDescription({
         title: 'useDescription',
         data: mockData,
-        schema: schema,
+        schema,
       });
 
       const [register1] = useDescription({
         title: '无边框',
         bordered: false,
         data: mockData,
-        schema: schema,
+        schema,
       });
 
       return { mockData, schema, register, register1 };

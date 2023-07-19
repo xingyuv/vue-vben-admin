@@ -2,10 +2,10 @@
   <div :class="getClass" :style="getDragBarStyle"></div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+  import { computed, defineComponent, unref } from 'vue';
 
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
 
   export default defineComponent({
     name: 'DargBar',
@@ -45,14 +45,14 @@
 
   .@{prefix-cls} {
     position: absolute;
-    z-index: @side-drag-z-index;
     top: 0;
     right: -2px;
+    z-index: @side-drag-z-index;
     width: 2px;
     height: 100%;
+    cursor: col-resize;
     border-top: none;
     border-bottom: none;
-    cursor: col-resize;
 
     &--hide {
       display: none;

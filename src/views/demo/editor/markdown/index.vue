@@ -1,13 +1,13 @@
 <template>
   <PageWrapper title="MarkDown组件示例">
     <div>
-      <a-button @click="toggleTheme" class="mb-2" type="primary"> 黑暗主题 </a-button>
-      <a-button @click="clearValue" class="mb-2" type="default"> 清空内容 </a-button>
+      <a-button class="mb-2" type="primary" @click="toggleTheme"> 黑暗主题 </a-button>
+      <a-button class="mb-2" type="default" @click="clearValue"> 清空内容 </a-button>
       <MarkDown
-        v-model:value="value"
-        @change="handleChange"
         ref="markDownRef"
+        v-model:value="value"
         placeholder="这是占位文本"
+        @change="handleChange"
       />
     </div>
     <div class="mt-2">
@@ -18,11 +18,12 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
-  import { MarkDown, MarkDownActionType, MarkdownViewer } from '/@/components/Markdown';
-  import { PageWrapper } from '/@/components/Page';
-  import { Card } from 'ant-design-vue';
   import { type Nullable } from '@vben/types';
+  import { Card } from 'ant-design-vue';
+  import { defineComponent, ref, unref } from 'vue';
+
+  import { MarkDown, MarkDownActionType, MarkdownViewer } from '@/components/Markdown';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     components: { MarkDown, PageWrapper, MarkdownViewer, ACard: Card },

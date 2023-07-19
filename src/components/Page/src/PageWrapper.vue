@@ -1,24 +1,24 @@
 <template>
-  <div :class="getClass" ref="wrapperRef">
+  <div ref="wrapperRef" :class="getClass">
     <PageHeader
-      :ghost="ghost"
-      :title="title"
+      v-if="getShowHeader"
       v-bind="omit($attrs, 'class')"
       ref="headerRef"
-      v-if="getShowHeader"
+      :ghost="ghost"
+      :title="title"
     >
       <template #default>
         <template v-if="content">
           {{ content }}
         </template>
-        <slot name="headerContent" v-else></slot>
+        <slot v-else name="headerContent"></slot>
       </template>
-      <template #[item]="data" v-for="item in getHeaderSlots">
+      <template v-for="item in getHeaderSlots" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </PageHeader>
 
-    <div class="overflow-hidden" :class="getContentClass" :style="getContentStyle" ref="contentRef">
+    <div ref="contentRef" class="overflow-hidden" :class="getContentClass" :style="getContentStyle">
       <slot></slot>
     </div>
 
@@ -33,26 +33,26 @@
   </div>
 </template>
 <script lang="ts" setup>
+  import { PageHeader } from 'ant-design-vue';
+  import { omit } from 'lodash-es';
   import {
+    computed,
     CSSProperties,
     PropType,
     provide,
-    computed,
-    watch,
     ref,
     unref,
     useAttrs,
     useSlots,
+    watch,
   } from 'vue';
 
-  import PageFooter from './PageFooter.vue';
+  import { PageWrapperFixedHeightKey } from '@/enums/pageEnum';
+  import { useContentHeight } from '@/hooks/web/useContentHeight';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
-  import { omit } from 'lodash-es';
-  import { PageHeader } from 'ant-design-vue';
-  import { useContentHeight } from '/@/hooks/web/useContentHeight';
-  import { PageWrapperFixedHeightKey } from '/@/enums/pageEnum';
+  import PageFooter from './PageFooter.vue';
 
   defineOptions({
     name: 'PageWrapper',

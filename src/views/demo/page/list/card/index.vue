@@ -17,7 +17,7 @@
               <a-list-item>
                 <a-card :hoverable="true" :class="`${prefixCls}__card`">
                   <div :class="`${prefixCls}__card-title`">
-                    <Icon class="icon" v-if="item.icon" :icon="item.icon" :color="item.color" />
+                    <Icon v-if="item.icon" class="icon" :icon="item.icon" :color="item.color" />
                     {{ item.title }}
                   </div>
                   <div :class="`${prefixCls}__card-detail`">
@@ -33,11 +33,13 @@
   </PageWrapper>
 </template>
 <script lang="ts">
+  import { Card, Col, List, Row } from 'ant-design-vue';
   import { defineComponent } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+  import { PageWrapper } from '@/components/Page';
+
   import { cardList } from './data';
-  import { PageWrapper } from '/@/components/Page';
-  import { Card, Row, Col, List } from 'ant-design-vue';
 
   export default defineComponent({
     components: {
@@ -82,9 +84,9 @@
 
       &-title {
         margin-bottom: 5px;
-        color: @text-color;
         font-size: 16px;
         font-weight: 500;
+        color: @text-color;
 
         .icon {
           margin-top: -5px;
@@ -96,8 +98,8 @@
       &-detail {
         padding-top: 10px;
         padding-left: 30px;
-        color: @text-color-secondary;
         font-size: 14px;
+        color: @text-color-secondary;
       }
     }
   }

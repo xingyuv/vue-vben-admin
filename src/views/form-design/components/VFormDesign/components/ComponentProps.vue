@@ -3,8 +3,8 @@
 -->
 <template>
   <div class="properties-content">
-    <div class="properties-body" v-if="formConfig.currentItem">
-      <Empty class="hint-box" v-if="!formConfig.currentItem.key" description="未选择组件" />
+    <div v-if="formConfig.currentItem" class="properties-body">
+      <Empty v-if="!formConfig.currentItem.key" class="hint-box" description="未选择组件" />
 
       <Form label-align="left" layout="vertical">
         <!--    循环遍历渲染组件属性      -->
@@ -15,20 +15,20 @@
 
             <div v-if="item.children">
               <component
-                v-for="(child, index) of item.children"
-                :key="index"
                 v-bind="child.componentProps"
                 :is="child.component"
+                v-for="(child, index) of item.children"
+                :key="index"
                 v-model:value="formConfig.currentItem.componentProps[item.name][index]"
               />
             </div>
             <!--     如果不是数组，则正常处理属性值       -->
             <component
-              v-else
-              class="component-prop"
               v-bind="item.componentProps"
               :is="item.component"
+              v-else
               v-model:value="formConfig.currentItem.componentProps[item.name]"
+              class="component-prop"
             />
           </FormItem>
           <FormItem label="控制属性">
@@ -45,14 +45,13 @@
         </div>
         <FormItem label="关联字段">
           <Select
-            mode="multiple"
             v-model:value="formConfig.currentItem['link']"
+            mode="multiple"
             :options="linkOptions"
           />
         </FormItem>
 
         <FormItem
-          label="选项"
           v-if="
             [
               'Select',
@@ -63,11 +62,12 @@
               'AutoComplete',
             ].includes(formConfig.currentItem.component)
           "
+          label="选项"
         >
           <FormOptions />
         </FormItem>
 
-        <FormItem label="栅格" v-if="['Grid'].includes(formConfig.currentItem.component)">
+        <FormItem v-if="['Grid'].includes(formConfig.currentItem.component)" label="栅格">
           <FormOptions />
         </FormItem>
       </Form>
@@ -76,30 +76,32 @@
 </template>
 <script lang="ts">
   import {
+    Checkbox,
+    Col,
     Empty,
-    Input,
     Form,
     FormItem,
-    Switch,
-    Checkbox,
-    Select,
+    Input,
     InputNumber,
     RadioGroup,
-    Col,
     Row,
+    Select,
+    Switch,
   } from 'ant-design-vue';
-  import RadioButtonGroup from '/@/components/Form/src/components/RadioButtonGroup.vue';
   import { computed, defineComponent, ref, watch } from 'vue';
+
+  import RadioButtonGroup from '@/components/Form/src/components/RadioButtonGroup.vue';
+
   import { useFormDesignState } from '../../../hooks/useFormDesignState';
+  import { formItemsForEach, remove } from '../../../utils';
   import {
-    baseComponentControlAttrs,
     baseComponentAttrs,
     baseComponentCommonAttrs,
+    baseComponentControlAttrs,
     componentPropsFuncs,
   } from '../../VFormDesign/config/componentPropsConfig';
-  import FormOptions from './FormOptions.vue';
-  import { formItemsForEach, remove } from '../../../utils';
   import { IBaseFormAttrs } from '../config/formItemPropsConfig';
+  import FormOptions from './FormOptions.vue';
 
   export default defineComponent({
     name: 'ComponentProps',

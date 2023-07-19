@@ -2,16 +2,18 @@
   <div class="h-full">
     <CodeMirrorEditor
       :value="getValue"
-      @change="handleValueChange"
       :mode="mode"
       :readonly="readonly"
+      @change="handleValueChange"
     />
   </div>
 </template>
 <script lang="ts" setup>
   import { computed } from 'vue';
+
+  import { isString } from '@/utils/is';
+
   import CodeMirrorEditor from './codemirror/CodeMirror.vue';
-  import { isString } from '/@/utils/is';
   import { MODE } from './typing';
 
   const props = defineProps({

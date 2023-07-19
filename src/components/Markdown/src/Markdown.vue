@@ -2,23 +2,26 @@
   <div ref="wrapRef"></div>
 </template>
 <script lang="ts">
+  import 'vditor/dist/index.css';
+
+  import { onMountedOrActivated } from '@vben/hooks';
+  import Vditor from 'vditor';
   import type { Ref } from 'vue';
   import {
-    defineComponent,
-    ref,
-    unref,
-    nextTick,
     computed,
-    watch,
+    defineComponent,
+    nextTick,
     onBeforeUnmount,
     onDeactivated,
+    ref,
+    unref,
+    watch,
   } from 'vue';
-  import Vditor from 'vditor';
-  import 'vditor/dist/index.css';
-  import { useLocale } from '/@/locales/useLocale';
+
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+  import { useLocale } from '@/locales/useLocale';
+
   import { useModalContext } from '../../Modal';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { onMountedOrActivated } from '@vben/hooks';
   import { getTheme } from './getTheme';
 
   type Lang = 'zh_CN' | 'en_US' | 'ja_JP' | 'ko_KR' | undefined;

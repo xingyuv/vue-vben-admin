@@ -1,13 +1,13 @@
 <template>
   <PageWrapper title="滚动组件函数示例" content="基于el-scrollbar">
     <div class="my-4">
-      <a-button @click="scrollTo(100)" class="mr-2"> 滚动到100px位置 </a-button>
-      <a-button @click="scrollTo(800)" class="mr-2"> 滚动到800px位置 </a-button>
-      <a-button @click="scrollTo(0)" class="mr-2"> 滚动到顶部 </a-button>
-      <a-button @click="scrollBottom()" class="mr-2"> 滚动到底部 </a-button>
+      <a-button class="mr-2" @click="scrollTo(100)"> 滚动到100px位置 </a-button>
+      <a-button class="mr-2" @click="scrollTo(800)"> 滚动到800px位置 </a-button>
+      <a-button class="mr-2" @click="scrollTo(0)"> 滚动到顶部 </a-button>
+      <a-button class="mr-2" @click="scrollBottom()"> 滚动到底部 </a-button>
     </div>
     <div class="scroll-wrap">
-      <ScrollContainer class="mt-4" ref="scrollRef">
+      <ScrollContainer ref="scrollRef" class="mt-4">
         <ul class="p-3">
           <template v-for="index in 100" :key="index">
             <li class="p-2" :style="{ border: '1px solid #eee' }">
@@ -20,10 +20,11 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, unref } from 'vue';
-  import { ScrollContainer, ScrollActionType } from '/@/components/Container/index';
-  import { PageWrapper } from '/@/components/Page';
   import { type Nullable } from '@vben/types';
+  import { defineComponent, ref, unref } from 'vue';
+
+  import { ScrollActionType, ScrollContainer } from '@/components/Container/index';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     components: { ScrollContainer, PageWrapper },

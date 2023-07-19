@@ -5,10 +5,10 @@
       v-bind="$attrs"
       allowClear
       :value="innerValueRef"
-      @change="handleChange"
       :disabled="disabled"
+      @change="handleChange"
     >
-      <template #[item]="data" v-for="item in Object.keys($slots)">
+      <template v-for="item in Object.keys($slots)" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </InputPassword>
@@ -19,11 +19,12 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, ref, watch, unref, watchEffect } from 'vue';
-  import { Input } from 'ant-design-vue';
   import { zxcvbn } from '@zxcvbn-ts/core';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
+  import { Input } from 'ant-design-vue';
+  import { computed, defineComponent, ref, unref, watch, watchEffect } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
   export default defineComponent({
     name: 'StrengthMeter',
@@ -79,21 +80,21 @@
       position: relative;
       height: 6px;
       margin: 10px auto 6px;
-      border-radius: 6px;
       background-color: @disabled-color;
+      border-radius: 6px;
 
       &::before,
       &::after {
-        content: '';
-        display: block;
         position: absolute;
         z-index: 10;
+        display: block;
         width: 20%;
         height: inherit;
-        border-width: 0 5px;
-        border-style: solid;
-        border-color: @white;
+        content: '';
         background-color: transparent;
+        border-color: @white;
+        border-style: solid;
+        border-width: 0 5px;
       }
 
       &::before {
@@ -108,9 +109,9 @@
         position: absolute;
         width: 0;
         height: inherit;
-        transition: width 0.5s ease-in-out, background 0.25s;
-        border-radius: inherit;
         background-color: transparent;
+        border-radius: inherit;
+        transition: width 0.5s ease-in-out, background 0.25s;
 
         &[data-score='0'] {
           width: 20%;

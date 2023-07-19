@@ -1,21 +1,23 @@
-import type { BasicTableProps, FetchParams, SorterResult } from '../types/table';
-import type { PaginationProps } from '../types/pagination';
+import { useTimeoutFn } from '@vben/hooks';
+import { cloneDeep, get, merge } from 'lodash-es';
 import {
-  ref,
-  unref,
-  ComputedRef,
   computed,
+  ComputedRef,
   onMounted,
-  watch,
   reactive,
   Ref,
+  ref,
+  unref,
+  watch,
   watchEffect,
 } from 'vue';
-import { useTimeoutFn } from '@vben/hooks';
-import { buildUUID } from '/@/utils/uuid';
-import { isFunction, isBoolean, isObject } from '/@/utils/is';
-import { get, cloneDeep, merge } from 'lodash-es';
-import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
+
+import { isBoolean, isFunction, isObject } from '@/utils/is';
+import { buildUUID } from '@/utils/uuid';
+
+import { FETCH_SETTING, PAGE_SIZE, ROW_KEY } from '../const';
+import type { PaginationProps } from '../types/pagination';
+import type { BasicTableProps, FetchParams, SorterResult } from '../types/table';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;

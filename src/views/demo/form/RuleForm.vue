@@ -1,11 +1,11 @@
 <template>
   <PageWrapper title="表单校验示例">
     <div class="mb-4">
-      <a-button @click="validateForm" class="mr-2"> 手动校验表单 </a-button>
-      <a-button @click="resetValidate" class="mr-2"> 清空校验信息 </a-button>
-      <a-button @click="getFormValues" class="mr-2"> 获取表单值 </a-button>
-      <a-button @click="setFormValues" class="mr-2"> 设置表单值 </a-button>
-      <a-button @click="resetFields" class="mr-2"> 重置 </a-button>
+      <a-button class="mr-2" @click="validateForm"> 手动校验表单 </a-button>
+      <a-button class="mr-2" @click="resetValidate"> 清空校验信息 </a-button>
+      <a-button class="mr-2" @click="getFormValues"> 获取表单值 </a-button>
+      <a-button class="mr-2" @click="setFormValues"> 设置表单值 </a-button>
+      <a-button class="mr-2" @click="resetFields"> 重置 </a-button>
     </div>
     <CollapseContainer title="表单校验">
       <BasicForm @register="register" @submit="handleSubmit" />
@@ -14,11 +14,12 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { PageWrapper } from '/@/components/Page';
-  import { isAccountExist } from '/@/api/demo/system';
+
+  import { isAccountExist } from '@/api/demo/system';
+  import { CollapseContainer } from '@/components/Container';
+  import { BasicForm, FormSchema, useForm } from '@/components/Form/index';
+  import { PageWrapper } from '@/components/Page';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const schemas: FormSchema[] = [
     {

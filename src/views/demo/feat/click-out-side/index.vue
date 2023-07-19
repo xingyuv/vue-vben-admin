@@ -1,7 +1,7 @@
 <template>
   <PageWrapper title="点内外部触发事件">
-    <ClickOutSide @click-outside="handleClickOutside" class="flex justify-center">
-      <div @click="innerClick" class="demo-box">
+    <ClickOutSide class="flex justify-center" @click-outside="handleClickOutside">
+      <div class="demo-box" @click="innerClick">
         {{ text }}
       </div>
     </ClickOutSide>
@@ -9,8 +9,9 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
-  import { ClickOutSide } from '/@/components/ClickOutSide';
-  import { PageWrapper } from '/@/components/Page';
+
+  import { ClickOutSide } from '@/components/ClickOutSide';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     components: { ClickOutSide, PageWrapper },
@@ -35,9 +36,9 @@
     justify-content: center;
     width: 100%;
     height: 300px;
-    border-radius: 10px;
-    background-color: #408ede;
-    color: #fff;
     font-size: 24px;
+    color: #fff;
+    background-color: #408ede;
+    border-radius: 10px;
   }
 </style>

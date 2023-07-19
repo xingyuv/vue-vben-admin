@@ -13,8 +13,8 @@
                 <span v-if="item.list.length !== 0">({{ item.list.length }})</span>
               </template>
               <!-- 绑定title-click事件的通知列表中标题是“可点击”的-->
-              <NoticeList :list="item.list" v-if="item.key === '1'" @title-click="onNoticeClick" />
-              <NoticeList :list="item.list" v-else />
+              <NoticeList v-if="item.key === '1'" :list="item.list" @title-click="onNoticeClick" />
+              <NoticeList v-else :list="item.list" />
             </TabPane>
           </template>
         </Tabs>
@@ -23,13 +23,15 @@
   </div>
 </template>
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue';
-  import { Popover, Tabs, Badge } from 'ant-design-vue';
   import { BellOutlined } from '@ant-design/icons-vue';
-  import { tabListData, ListItem } from './data';
+  import { Badge, Popover, Tabs } from 'ant-design-vue';
+  import { computed, defineComponent, ref } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useMessage } from '@/hooks/web/useMessage';
+
+  import { ListItem, tabListData } from './data';
   import NoticeList from './NoticeList.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     components: { Popover, BellOutlined, Tabs, TabPane: Tabs.TabPane, Badge, NoticeList },

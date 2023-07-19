@@ -1,10 +1,10 @@
 <template>
   <BasicDrawer
     v-bind="$attrs"
-    @register="registerDrawer"
     showFooter
     :title="getTitle"
     width="500px"
+    @register="registerDrawer"
     @ok="handleSubmit"
   >
     <BasicForm @register="registerForm">
@@ -22,13 +22,14 @@
   </BasicDrawer>
 </template>
 <script lang="ts" setup>
-  import { ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './role.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
-  import { BasicTree, TreeItem } from '/@/components/Tree';
+  import { computed, ref, unref } from 'vue';
 
-  import { getMenuList } from '/@/api/demo/system';
+  import { getMenuList } from '@/api/demo/system';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
+  import { BasicForm, useForm } from '@/components/Form/index';
+  import { BasicTree, TreeItem } from '@/components/Tree';
+
+  import { formSchema } from './role.data';
 
   const emit = defineEmits(['success', 'register']);
   const isUpdate = ref(true);

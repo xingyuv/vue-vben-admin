@@ -1,5 +1,5 @@
 <template>
-  <BasicDrawer v-bind="$attrs" @register="register" title="Drawer Title" width="50%">
+  <BasicDrawer v-bind="$attrs" title="Drawer Title" width="50%" @register="register">
     <div>
       <BasicForm @register="registerForm" />
     </div>
@@ -7,9 +7,9 @@
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
 
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
+  import { BasicForm, FormSchema, useForm } from '@/components/Form/index';
 
   const schemas: FormSchema[] = [
     {

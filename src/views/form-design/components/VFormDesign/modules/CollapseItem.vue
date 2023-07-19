@@ -24,18 +24,20 @@
             <use :xlink:href="`#${element.icon}`" />
           </svg> -->
           <Icon :icon="element.icon" />
-          {{ element.label }}</li
-        ></template
-      >
+          {{ element.label }}
+        </li>
+      </template>
     </draggable>
   </div>
 </template>
 <script lang="ts">
   import { defineComponent, reactive } from 'vue';
-  import { IVFormComponent } from '../../../typings/v-form-component';
   import draggable from 'vuedraggable';
+
   import Icon from '@/components/Icon/Icon.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useDesign } from '@/hooks/web/useDesign';
+
+  import { IVFormComponent } from '../../../typings/v-form-component';
 
   export default defineComponent({
     name: 'CollapseItem',
@@ -79,28 +81,28 @@
     ul {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: 0;
       padding: 5px;
+      margin-bottom: 0;
       list-style: none;
       // background: #efefef;
 
       li {
         width: calc(50% - 6px);
         height: 36px;
-        margin: 2.7px;
         padding: 8px 12px;
-        transition: all 0.3s;
-        border: 1px solid @border-color;
-        border-radius: 3px;
+        margin: 2.7px;
         line-height: 20px;
         cursor: move;
+        border: 1px solid @border-color;
+        border-radius: 3px;
+        transition: all 0.3s;
 
         &:hover {
           position: relative;
+          color: @primary-color;
           border: 1px solid @primary-color;
           // z-index: 1;
           box-shadow: 0 2px 6px @primary-color;
-          color: @primary-color;
         }
       }
     }

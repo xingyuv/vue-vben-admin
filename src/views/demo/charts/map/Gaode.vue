@@ -2,9 +2,9 @@
   <div ref="wrapRef" :style="{ height, width }"></div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, nextTick, unref, onMounted } from 'vue';
+  import { defineComponent, nextTick, onMounted, ref, unref } from 'vue';
 
-  import { useScript } from '/@/hooks/web/useScript';
+  import { useScript } from '@/hooks/web/useScript';
 
   const A_MAP_URL = 'https://webapi.amap.com/maps?v=2.0&key=d7bb98e7185300250dd5f918c12f484b';
 

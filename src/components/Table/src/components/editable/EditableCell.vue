@@ -1,21 +1,20 @@
 <script lang="tsx">
+  import { CheckOutlined, CloseOutlined, FormOutlined } from '@ant-design/icons-vue';
+  import { Spin } from 'ant-design-vue';
+  import { pick, set } from 'lodash-es';
   import type { CSSProperties, PropType } from 'vue';
   import { computed, defineComponent, nextTick, ref, toRaw, unref, watchEffect } from 'vue';
-  import type { BasicColumn } from '../../types/table';
-  import { CheckOutlined, CloseOutlined, FormOutlined } from '@ant-design/icons-vue';
-  import { CellComponent } from './CellComponent';
 
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import clickOutside from '@/directives/clickOutside';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { treeToList } from '@/utils/helper/treeHelper';
+  import { isArray, isBoolean, isFunction, isNumber, isString } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
+
   import { useTableContext } from '../../hooks/useTableContext';
-
-  import clickOutside from '/@/directives/clickOutside';
-
-  import { propTypes } from '/@/utils/propTypes';
-  import { isArray, isBoolean, isFunction, isNumber, isString } from '/@/utils/is';
+  import type { BasicColumn } from '../../types/table';
+  import { CellComponent } from './CellComponent';
   import { createPlaceholderMessage } from './helper';
-  import { pick, set } from 'lodash-es';
-  import { treeToList } from '/@/utils/helper/treeHelper';
-  import { Spin } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'EditableCell',
@@ -476,9 +475,9 @@
   .edit-cell-rule-popover {
     .ant-popover-inner-content {
       padding: 4px 8px;
+      color: @error-color;
       // border: 1px solid @error-color;
       border-radius: 2px;
-      color: @error-color;
     }
   }
   .@{prefix-cls} {
@@ -510,17 +509,17 @@
         overflow: hidden;
         text-overflow: ellipsis;
         word-break: break-word;
-        white-space: nowrap;
         overflow-wrap: break-word;
+        white-space: nowrap;
       }
     }
 
     &__normal {
       &-icon {
-        display: none;
         position: absolute;
         top: 4px;
         right: 0;
+        display: none;
         width: 20px;
         cursor: pointer;
       }

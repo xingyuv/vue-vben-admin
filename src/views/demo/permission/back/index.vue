@@ -12,10 +12,10 @@
     <div class="mt-4">
       权限切换(请先切换权限模式为后台权限模式):
       <Space>
-        <a-button @click="switchToken(1)" :disabled="!isBackPermissionMode">
+        <a-button :disabled="!isBackPermissionMode" @click="switchToken(1)">
           获取用户id为1的菜单
         </a-button>
-        <a-button @click="switchToken(2)" :disabled="!isBackPermissionMode">
+        <a-button :disabled="!isBackPermissionMode" @click="switchToken(2)">
           获取用户id为2的菜单
         </a-button>
       </Space>
@@ -23,14 +23,16 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-  import { RoleEnum } from '/@/enums/roleEnum';
-  import { usePermission } from '/@/hooks/web/usePermission';
-  import { useUserStore } from '/@/store/modules/user';
-  import { PageWrapper } from '/@/components/Page';
-  import { PermissionModeEnum } from '/@/enums/appEnum';
-  import { useAppStore } from '/@/store/modules/app';
   import { Alert, Space } from 'ant-design-vue';
+  import { computed, defineComponent } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { PermissionModeEnum } from '@/enums/appEnum';
+  import { RoleEnum } from '@/enums/roleEnum';
+  import { usePermission } from '@/hooks/web/usePermission';
+  import { useAppStore } from '@/store/modules/app';
+  import { useUserStore } from '@/store/modules/user';
+
   import CurrentPermissionMode from '../CurrentPermissionMode.vue';
 
   export default defineComponent({

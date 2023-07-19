@@ -1,18 +1,19 @@
 <script lang="tsx">
   import {
-    defineComponent,
     computed,
+    CSSProperties,
+    defineComponent,
+    nextTick,
+    onMounted,
+    PropType,
+    reactive,
     ref,
     unref,
-    reactive,
-    onMounted,
     watch,
-    nextTick,
-    CSSProperties,
-    PropType,
   } from 'vue';
-  import { useEventListener } from '/@/hooks/event/useEventListener';
-  import { getSlot } from '/@/utils/helper/tsxHelper';
+
+  import { useEventListener } from '@/hooks/event/useEventListener';
+  import { getSlot } from '@/utils/helper/tsxHelper';
 
   type NumberOrNumberString = PropType<string | number | undefined>;
 
@@ -171,8 +172,8 @@
 </script>
 <style scoped lang="less">
   .virtual-scroll {
-    display: block;
     position: relative;
+    display: block;
     flex: 1 1 auto;
     width: 100%;
     max-width: 100%;

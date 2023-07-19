@@ -1,12 +1,13 @@
 <script lang="tsx">
-  import type { CSSProperties, PropType } from 'vue';
-  import { defineComponent, computed, unref } from 'vue';
-  import { Tooltip } from 'ant-design-vue';
   import { InfoCircleOutlined } from '@ant-design/icons-vue';
-  import { getPopupContainer } from '/@/utils';
-  import { isString, isArray } from '/@/utils/is';
-  import { getSlot } from '/@/utils/helper/tsxHelper';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { Tooltip } from 'ant-design-vue';
+  import type { CSSProperties, PropType } from 'vue';
+  import { computed, defineComponent, unref } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { getPopupContainer } from '@/utils';
+  import { getSlot } from '@/utils/helper/tsxHelper';
+  import { isArray, isString } from '@/utils/is';
 
   const props = {
     /**
@@ -97,8 +98,8 @@
   .@{prefix-cls} {
     display: inline-block;
     margin-left: 6px;
-    color: @text-color-help-dark;
     font-size: 14px;
+    color: @text-color-help-dark;
     cursor: pointer;
 
     &:hover {

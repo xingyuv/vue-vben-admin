@@ -9,7 +9,7 @@
             </template>
             <template #title>
               {{ item.title }}
-              <a-button type="link" size="small" v-if="item.extra" class="extra">
+              <a-button v-if="item.extra" type="link" size="small" class="extra">
                 {{ item.extra }}
               </a-button>
             </template>
@@ -25,7 +25,8 @@
 <script lang="ts">
   import { List } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { CollapseContainer } from '/@/components/Container/index';
+
+  import { CollapseContainer } from '@/components/Container/index';
   import Icon from '@/components/Icon/Icon.vue';
 
   import { accountBindList } from './data';
@@ -51,9 +52,9 @@
   }
 
   .extra {
+    float: right;
     margin-top: 10px;
     margin-right: 30px;
-    float: right;
     cursor: pointer;
   }
 </style>

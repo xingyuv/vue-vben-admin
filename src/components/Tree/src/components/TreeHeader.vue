@@ -1,22 +1,22 @@
 <template>
   <div :class="bem()" class="flex px-2 py-1.5 items-center">
-    <slot name="headerTitle" v-if="slots.headerTitle"></slot>
-    <BasicTitle :helpMessage="helpMessage" v-if="!slots.headerTitle && title">
+    <slot v-if="slots.headerTitle" name="headerTitle"></slot>
+    <BasicTitle v-if="!slots.headerTitle && title" :helpMessage="helpMessage">
       {{ title }}
     </BasicTitle>
     <div
-      class="flex items-center flex-1 cursor-pointer justify-self-stretch"
       v-if="search || toolbar"
+      class="flex items-center flex-1 cursor-pointer justify-self-stretch"
     >
-      <div :class="getInputSearchCls" v-if="search">
+      <div v-if="search" :class="getInputSearchCls">
         <InputSearch
+          v-model:value="searchValue"
           :placeholder="t('common.searchText')"
           size="small"
           allowClear
-          v-model:value="searchValue"
         />
       </div>
-      <Dropdown @click.prevent v-if="toolbar">
+      <Dropdown v-if="toolbar" @click.prevent>
         <Icon icon="ion:ellipsis-vertical" />
         <template #overlay>
           <Menu @click="handleMenuClick">
@@ -33,13 +33,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { type PropType, computed, ref, watch, useSlots } from 'vue';
-  import { Dropdown, Menu, MenuItem, MenuDivider, InputSearch } from 'ant-design-vue';
-  import Icon from '@/components/Icon/Icon.vue';
-  import { BasicTitle } from '/@/components/Basic';
-  import { useI18n } from '/@/hooks/web/useI18n';
   import { useDebounceFn } from '@vueuse/core';
-  import { createBEM } from '/@/utils/bem';
+  import { Dropdown, InputSearch, Menu, MenuDivider, MenuItem } from 'ant-design-vue';
+  import { computed, type PropType, ref, useSlots, watch } from 'vue';
+
+  import { BasicTitle } from '@/components/Basic';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { createBEM } from '@/utils/bem';
+
   import { ToolbarEnum } from '../types/tree';
 
   const searchValue = ref('');

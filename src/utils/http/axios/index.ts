@@ -2,23 +2,25 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import { clone } from 'lodash-es';
-import type { RequestOptions, Result } from '/#/axios';
-import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
-import { VAxios } from './Axios';
-import { checkStatus } from './checkStatus';
-import { useGlobSetting } from '/@/hooks/setting';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { RequestEnum, ResultEnum, ContentTypeEnum } from '/@/enums/httpEnum';
-import { isString, isUnDef, isNull, isEmpty } from '/@/utils/is';
-import { getToken } from '/@/utils/auth';
-import { setObjToUrlParams, deepMerge } from '/@/utils';
-import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { joinTimestamp, formatRequestDate } from './helper';
-import { useUserStoreWithOut } from '/@/store/modules/user';
-import { AxiosRetry } from '/@/utils/http/axios/axiosRetry';
 import axios from 'axios';
+import { clone } from 'lodash-es';
+
+import type { RequestOptions, Result } from '#/axios';
+import { ContentTypeEnum, RequestEnum, ResultEnum } from '@/enums/httpEnum';
+import { useGlobSetting } from '@/hooks/setting';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useMessage } from '@/hooks/web/useMessage';
+import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
+import { useUserStoreWithOut } from '@/store/modules/user';
+import { deepMerge, setObjToUrlParams } from '@/utils';
+import { getToken } from '@/utils/auth';
+import { AxiosRetry } from '@/utils/http/axios/axiosRetry';
+import { isEmpty, isNull, isString, isUnDef } from '@/utils/is';
+
+import { VAxios } from './Axios';
+import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
+import { checkStatus } from './checkStatus';
+import { formatRequestDate, joinTimestamp } from './helper';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
@@ -257,7 +259,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 接口地址
           apiUrl: globSetting.apiUrl,
           // 接口拼接地址
-          urlPrefix: urlPrefix,
+          urlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求

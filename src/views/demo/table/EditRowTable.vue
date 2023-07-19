@@ -10,21 +10,21 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import {
-    BasicTable,
-    useTable,
-    TableAction,
-    BasicColumn,
-    ActionItem,
-    EditRecordRow,
-  } from '/@/components/Table';
-  import { optionsListApi } from '/@/api/demo/select';
-
-  import { demoListApi } from '/@/api/demo/table';
-  import { treeOptionsListApi } from '/@/api/demo/tree';
   import { cloneDeep } from 'lodash-es';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { defineComponent, ref } from 'vue';
+
+  import { optionsListApi } from '@/api/demo/select';
+  import { demoListApi } from '@/api/demo/table';
+  import { treeOptionsListApi } from '@/api/demo/tree';
+  import {
+    ActionItem,
+    BasicColumn,
+    BasicTable,
+    EditRecordRow,
+    TableAction,
+    useTable,
+  } from '@/components/Table';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const columns: BasicColumn[] = [
     {
@@ -232,7 +232,7 @@
           '本例中修改[数字输入框]这一列时，同一行的[远程下拉]列的当前编辑数据也会同步发生改变',
         ],
         api: demoListApi,
-        columns: columns,
+        columns,
         showIndexColumn: false,
         showTableSetting: true,
         tableSetting: { fullScreen: true },

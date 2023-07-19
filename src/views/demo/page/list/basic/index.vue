@@ -23,11 +23,11 @@
           <a-list-item class="list">
             <a-list-item-meta>
               <template #avatar>
-                <Icon class="icon" v-if="item.icon" :icon="item.icon" :color="item.color" />
+                <Icon v-if="item.icon" class="icon" :icon="item.icon" :color="item.color" />
               </template>
               <template #title>
                 <span>{{ item.title }}</span>
-                <div class="extra" v-if="item.extra">
+                <div v-if="item.extra" class="extra">
                   {{ item.extra }}
                 </div>
               </template>
@@ -51,11 +51,13 @@
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { Progress, Row, Col, List } from 'ant-design-vue';
+  import { Col, List, Progress, Row } from 'ant-design-vue';
   import { defineComponent } from 'vue';
+
   import Icon from '@/components/Icon/Icon.vue';
+  import { PageWrapper } from '@/components/Page';
+
   import { cardList } from './data';
-  import { PageWrapper } from '/@/components/Page';
 
   export default defineComponent({
     components: {
@@ -84,8 +86,8 @@
   .list-basic {
     &__top {
       padding: 24px;
-      background-color: @component-background;
       text-align: center;
+      background-color: @component-background;
 
       &-col {
         &:not(:last-child) {
@@ -94,23 +96,23 @@
 
         div {
           margin-bottom: 12px;
-          color: @text-color;
           font-size: 14px;
           line-height: 22px;
+          color: @text-color;
         }
 
         p {
           margin: 0;
-          color: @text-color;
           font-size: 24px;
           line-height: 32px;
+          color: @text-color;
         }
       }
     }
 
     &__content {
-      margin-top: 12px;
       padding: 24px;
+      margin-top: 12px;
       background-color: @component-background;
 
       .list {
@@ -125,8 +127,8 @@
         position: absolute;
         top: 20px;
         right: 15px;
-        color: @primary-color;
         font-weight: normal;
+        color: @primary-color;
         cursor: pointer;
       }
 

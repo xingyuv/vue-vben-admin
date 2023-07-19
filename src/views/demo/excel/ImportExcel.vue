@@ -1,6 +1,6 @@
 <template>
   <PageWrapper title="excel数据导入示例">
-    <ImpExcel @success="loadDataSuccess" dateFormat="YYYY-MM-DD">
+    <ImpExcel dateFormat="YYYY-MM-DD" @success="loadDataSuccess">
       <a-button class="m-3"> 导入Excel </a-button>
     </ImpExcel>
     <BasicTable
@@ -15,9 +15,9 @@
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
 
-  import { ImpExcel, ExcelData } from '/@/components/Excel';
-  import { BasicTable, BasicColumn } from '/@/components/Table';
-  import { PageWrapper } from '/@/components/Page';
+  import { ExcelData, ImpExcel } from '@/components/Excel';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicColumn, BasicTable } from '@/components/Table';
 
   export default defineComponent({
     components: { BasicTable, ImpExcel, PageWrapper },

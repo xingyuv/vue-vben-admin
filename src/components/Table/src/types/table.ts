@@ -1,12 +1,13 @@
-import type { VNodeChild } from 'vue';
-import type { PaginationProps } from './pagination';
-import type { FormProps } from '/@/components/Form';
-import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib/table/interface';
 import type { ColumnProps } from 'ant-design-vue/lib/table';
+import type { TableRowSelection as ITableRowSelection } from 'ant-design-vue/lib/table/interface';
+import type { VNodeChild } from 'vue';
+
+import type { FormProps } from '@/components/Form';
+import { RoleEnum } from '@/enums/roleEnum';
+import { VueNode } from '@/utils/propTypes';
 
 import { ComponentType } from './componentType';
-import { VueNode } from '/@/utils/propTypes';
-import { RoleEnum } from '/@/enums/roleEnum';
+import type { PaginationProps } from './pagination';
 
 export declare type SortOrder = 'ascend' | 'descend';
 
@@ -469,11 +470,11 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editDynamicDisabled?: boolean | ((record: Recordable) => boolean);
 }
 
-export type ColumnChangeParam = {
+export interface ColumnChangeParam {
   dataIndex: string;
   fixed: boolean | 'left' | 'right' | undefined;
   visible: boolean;
-};
+}
 
 export interface InnerHandlers {
   onColumnsChange: (data: ColumnChangeParam[]) => void;

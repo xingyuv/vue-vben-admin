@@ -1,26 +1,24 @@
 <template>
   <div :class="prefixCls" :style="{ width: containerWidth }">
     <ImgUpload
-      :fullscreen="fullscreen"
-      @uploading="handleImageUploading"
-      @done="handleDone"
       v-if="showImageUpload"
       v-show="editorRef"
+      :fullscreen="fullscreen"
       :disabled="disabled"
+      @uploading="handleImageUploading"
+      @done="handleDone"
     />
     <textarea
+      v-if="!initOptions.inline"
       :id="tinymceId"
       ref="elRef"
       :style="{ visibility: 'hidden' }"
-      v-if="!initOptions.inline"
     ></textarea>
     <slot v-else></slot>
   </div>
 </template>
 
 <script lang="ts">
-  import type { Editor, RawEditorSettings } from 'tinymce';
-  import tinymce from 'tinymce/tinymce';
   import 'tinymce/themes/silver';
   import 'tinymce/icons/default/icons';
   import 'tinymce/plugins/advlist';
@@ -53,26 +51,30 @@
   import 'tinymce/plugins/visualchars';
   import 'tinymce/plugins/wordcount';
 
+  import { onMountedOrActivated } from '@vben/hooks';
+  import type { Editor, RawEditorSettings } from 'tinymce';
+  import tinymce from 'tinymce/tinymce';
   import {
-    defineComponent,
     computed,
+    defineComponent,
     nextTick,
+    onBeforeUnmount,
+    onDeactivated,
+    PropType,
     ref,
     unref,
     watch,
-    onDeactivated,
-    onBeforeUnmount,
-    PropType,
   } from 'vue';
-  import ImgUpload from './ImgUpload.vue';
-  import { toolbar, plugins } from './tinymce';
-  import { buildShortUUID } from '/@/utils/uuid';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useLocale } from '@/locales/useLocale';
+  import { useAppStore } from '@/store/modules/app';
+  import { isNumber } from '@/utils/is';
+  import { buildShortUUID } from '@/utils/uuid';
+
   import { bindHandlers } from './helper';
-  import { onMountedOrActivated } from '@vben/hooks';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { isNumber } from '/@/utils/is';
-  import { useLocale } from '/@/locales/useLocale';
-  import { useAppStore } from '/@/store/modules/app';
+  import ImgUpload from './ImgUpload.vue';
+  import { plugins, toolbar } from './tinymce';
 
   const tinymceProps = {
     options: {
@@ -340,8 +342,8 @@
     line-height: normal;
 
     textarea {
-      visibility: hidden;
       z-index: -1;
+      visibility: hidden;
     }
   }
 </style>

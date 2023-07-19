@@ -1,18 +1,18 @@
 <template>
   <div class="p-4">
     <template v-for="src in imgList" :key="src">
-      <img :src="src" v-show="false" alt="" />
+      <img v-show="false" :src="src" alt="" />
     </template>
     <DetailModal :info="rowInfo" @register="registerModal" />
-    <BasicTable @register="register" class="error-handle-table">
+    <BasicTable class="error-handle-table" @register="register">
       <template #toolbar>
-        <a-button @click="fireVueError" type="primary">
+        <a-button type="primary" @click="fireVueError">
           {{ t('sys.errorLog.fireVueError') }}
         </a-button>
-        <a-button @click="fireResourceError" type="primary">
+        <a-button type="primary" @click="fireResourceError">
           {{ t('sys.errorLog.fireResourceError') }}
         </a-button>
-        <a-button @click="fireAjaxError" type="primary">
+        <a-button type="primary" @click="fireAjaxError">
           {{ t('sys.errorLog.fireAjaxError') }}
         </a-button>
       </template>
@@ -33,17 +33,19 @@
 </template>
 
 <script lang="ts" setup>
-  import type { ErrorLogInfo } from '/#/store';
-  import { watch, ref, nextTick } from 'vue';
-  import DetailModal from './DetailModal.vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table/index';
-  import { useModal } from '/@/components/Modal';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useErrorLogStore } from '/@/store/modules/errorLog';
-  import { fireErrorApi } from '/@/api/demo/error';
-  import { getColumns } from './data';
   import { cloneDeep } from 'lodash-es';
+  import { nextTick, ref, watch } from 'vue';
+
+  import type { ErrorLogInfo } from '#/store';
+  import { fireErrorApi } from '@/api/demo/error';
+  import { useModal } from '@/components/Modal';
+  import { BasicTable, TableAction, useTable } from '@/components/Table/index';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { useErrorLogStore } from '@/store/modules/errorLog';
+
+  import { getColumns } from './data';
+  import DetailModal from './DetailModal.vue';
 
   const rowInfo = ref<ErrorLogInfo>();
   const imgList = ref<string[]>([]);

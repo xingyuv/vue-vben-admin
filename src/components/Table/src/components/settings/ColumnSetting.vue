@@ -6,15 +6,15 @@
     <Popover
       placement="bottomLeft"
       trigger="click"
-      @visible-change="handleVisibleChange"
       :overlayClassName="`${prefixCls}__cloumn-list`"
       :getPopupContainer="getPopupContainer"
+      @visible-change="handleVisibleChange"
     >
       <template #title>
         <div :class="`${prefixCls}__popover-title`">
           <Checkbox
-            :indeterminate="indeterminate"
             v-model:checked="checkAll"
+            :indeterminate="indeterminate"
             @change="onCheckAllChange"
           >
             {{ t('component.table.settingColumnShow') }}
@@ -26,8 +26,8 @@
 
           <Checkbox
             v-model:checked="checkSelect"
-            @change="handleSelectCheckChange"
             :disabled="!defaultRowSelection"
+            @change="handleSelectCheckChange"
           >
             {{ t('component.table.settingSelectColumnShow') }}
           </Checkbox>
@@ -40,9 +40,9 @@
 
       <template #content>
         <ScrollContainer>
-          <CheckboxGroup v-model:value="checkedList" @change="onChange" ref="columnListRef">
+          <CheckboxGroup ref="columnListRef" v-model:value="checkedList" @change="onChange">
             <template v-for="item in plainOptions" :key="item.value">
-              <div :class="`${prefixCls}__check-item`" v-if="!('ifShow' in item && !item.ifShow)">
+              <div v-if="!('ifShow' in item && !item.ifShow)" :class="`${prefixCls}__check-item`">
                 <DragOutlined class="table-column-drag-icon" />
                 <Checkbox :value="item.value">
                   {{ item.label }}
@@ -99,31 +99,33 @@
   </Tooltip>
 </template>
 <script lang="ts">
-  import type { BasicColumn, BasicTableProps, ColumnChangeParam } from '../../types/table';
-  import {
-    defineComponent,
-    ref,
-    reactive,
-    toRefs,
-    watchEffect,
-    nextTick,
-    unref,
-    computed,
-  } from 'vue';
-  import { Tooltip, Popover, Checkbox, Divider } from 'ant-design-vue';
+  import { DragOutlined, SettingOutlined } from '@ant-design/icons-vue';
+  import { Checkbox, Divider, Popover, Tooltip } from 'ant-design-vue';
   import type { CheckboxChangeEvent } from 'ant-design-vue/lib/checkbox/interface';
-  import { SettingOutlined, DragOutlined } from '@ant-design/icons-vue';
-  import Icon from '@/components/Icon/Icon.vue';
-  import { ScrollContainer } from '/@/components/Container';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useTableContext } from '../../hooks/useTableContext';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  // import { useSortable } from '/@/hooks/web/useSortable';
-  import { isFunction, isNullAndUnDef } from '/@/utils/is';
-  import { getPopupContainer as getParentContainer } from '/@/utils';
   import { cloneDeep, omit } from 'lodash-es';
-  import Sortablejs from 'sortablejs';
   import type Sortable from 'sortablejs';
+  import Sortablejs from 'sortablejs';
+  import {
+    computed,
+    defineComponent,
+    nextTick,
+    reactive,
+    ref,
+    toRefs,
+    unref,
+    watchEffect,
+  } from 'vue';
+
+  import { ScrollContainer } from '@/components/Container';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { getPopupContainer as getParentContainer } from '@/utils';
+  // import { useSortable } from '@/hooks/web/useSortable';
+  import { isFunction, isNullAndUnDef } from '@/utils/is';
+
+  import { useTableContext } from '../../hooks/useTableContext';
+  import type { BasicColumn, BasicTableProps, ColumnChangeParam } from '../../types/table';
 
   interface State {
     checkAll: boolean;
@@ -272,7 +274,7 @@
 
       const indeterminate = computed(() => {
         const len = plainOptions.value.length;
-        let checkedLen = state.checkedList.length;
+        const checkedLen = state.checkedList.length;
         // unref(checkIndex) && checkedLen--;
         return checkedLen > 0 && checkedLen < len;
       });
@@ -447,8 +449,8 @@
 
   .@{prefix-cls} {
     &__popover-title {
-      display: flex;
       position: relative;
+      display: flex;
       align-items: center;
       justify-content: space-between;
     }

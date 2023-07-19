@@ -10,7 +10,7 @@
       <a-button type="primary"> 修改密码 </a-button>
     </template>
     <template #footer>
-      <a-tabs default-active-key="detail" v-model:activeKey="currentKey">
+      <a-tabs v-model:activeKey="currentKey" default-active-key="detail">
         <a-tab-pane key="detail" tab="用户资料" />
         <a-tab-pane key="logs" tab="操作日志" />
       </a-tabs>
@@ -27,12 +27,13 @@
 </template>
 
 <script lang="ts" setup>
+  import { Tabs } from 'ant-design-vue';
   import { ref } from 'vue';
   import { useRoute } from 'vue-router';
-  import { PageWrapper } from '/@/components/Page';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { useTabs } from '/@/hooks/web/useTabs';
-  import { Tabs } from 'ant-design-vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useTabs } from '@/hooks/web/useTabs';
 
   defineOptions({ name: 'AccountDetail' });
 

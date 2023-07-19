@@ -3,10 +3,10 @@
     <Upload
       name="file"
       multiple
-      @change="handleChange"
       :action="uploadUrl"
       :showUploadList="false"
       accept=".jpg,.jpeg,.gif,.png,.webp"
+      @change="handleChange"
     >
       <a-button type="primary" v-bind="{ ...getButtonProps }">
         {{ t('component.upload.imgUpload') }}
@@ -15,12 +15,12 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, computed } from 'vue';
-
   import { Upload } from 'ant-design-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useGlobSetting } from '/@/hooks/setting';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { computed, defineComponent } from 'vue';
+
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   export default defineComponent({
     name: 'TinymceImageUpload',
@@ -84,9 +84,9 @@
 
   .@{prefix-cls} {
     position: absolute;
-    z-index: 20;
     top: 4px;
     right: 10px;
+    z-index: 20;
 
     &.fullscreen {
       position: fixed;

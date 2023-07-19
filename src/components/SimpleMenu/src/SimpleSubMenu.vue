@@ -1,7 +1,7 @@
 <template>
   <MenuItem
-    :name="item.path"
     v-if="!menuHasChildren(item) && getShowMenu"
+    :name="item.path"
     v-bind="$props"
     :class="getLevelClass"
   >
@@ -17,8 +17,8 @@
     </template>
   </MenuItem>
   <SubMenu
-    :name="item.path"
     v-if="menuHasChildren(item) && getShowMenu"
+    :name="item.path"
     :class="[getLevelClass, theme]"
     :collapsedShowTitle="collapsedShowTitle"
   >
@@ -44,17 +44,17 @@
 </template>
 <script lang="ts">
   import type { PropType } from 'vue';
-  import type { Menu } from '/@/router/types';
+  import { computed, defineComponent } from 'vue';
 
-  import { defineComponent, computed } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
   import Icon from '@/components/Icon/Icon.vue';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import type { Menu } from '@/router/types';
+  import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
+  import { propTypes } from '@/utils/propTypes';
 
   import MenuItem from './components/MenuItem.vue';
   import SubMenu from './components/SubMenuItem.vue';
-  import { propTypes } from '/@/utils/propTypes';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 
   export default defineComponent({
     name: 'SimpleSubMenu',

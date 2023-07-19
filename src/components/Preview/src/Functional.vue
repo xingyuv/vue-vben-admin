@@ -1,11 +1,12 @@
 <script lang="tsx">
-  import { defineComponent, ref, unref, computed, reactive, watchEffect, PropType } from 'vue';
   import { CloseOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons-vue';
-  import resumeSvg from '/@/assets/svg/preview/resume.svg';
-  import rotateSvg from '/@/assets/svg/preview/p-rotate.svg';
-  import scaleSvg from '/@/assets/svg/preview/scale.svg';
-  import unScaleSvg from '/@/assets/svg/preview/unscale.svg';
-  import unRotateSvg from '/@/assets/svg/preview/unrotate.svg';
+  import { computed, defineComponent, PropType, reactive, ref, unref, watchEffect } from 'vue';
+
+  import rotateSvg from '@/assets/svg/preview/p-rotate.svg';
+  import resumeSvg from '@/assets/svg/preview/resume.svg';
+  import scaleSvg from '@/assets/svg/preview/scale.svg';
+  import unRotateSvg from '@/assets/svg/preview/unrotate.svg';
+  import unScaleSvg from '@/assets/svg/preview/unscale.svg';
 
   enum StatueEnum {
     LOADING,
@@ -435,10 +436,10 @@
 <style lang="less">
   .img-preview {
     position: fixed;
-    z-index: @preview-comp-z-index;
     inset: 0;
-    background: rgb(0 0 0 / 50%);
+    z-index: @preview-comp-z-index;
     user-select: none;
+    background: rgb(0 0 0 / 50%);
 
     &-content {
       display: flex;
@@ -450,8 +451,8 @@
     }
 
     &-image {
-      transition: transform 0.3s;
       cursor: pointer;
+      transition: transform 0.3s;
     }
 
     &__close {
@@ -461,11 +462,11 @@
       width: 80px;
       height: 80px;
       overflow: hidden;
-      transition: all 0.2s;
-      border-radius: 50%;
-      background-color: rgb(0 0 0 / 50%);
       color: @white;
       cursor: pointer;
+      background-color: rgb(0 0 0 / 50%);
+      border-radius: 50%;
+      transition: all 0.2s;
 
       &-icon {
         position: absolute;
@@ -484,32 +485,32 @@
       bottom: 5%;
       left: 50%;
       padding: 0 22px;
-      transform: translateX(-50%);
-      border-radius: 15px;
-      background: rgb(109 109 109 / 60%);
       font-size: 16px;
+      background: rgb(109 109 109 / 60%);
+      border-radius: 15px;
+      transform: translateX(-50%);
     }
 
     &__controller {
-      display: flex;
       position: absolute;
       bottom: 10%;
       left: 50%;
+      display: flex;
       justify-content: center;
       width: 260px;
       height: 44px;
-      margin-left: -139px;
       padding: 0 22px;
-      border-radius: 22px;
+      margin-left: -139px;
       background: rgb(109 109 109 / 60%);
+      border-radius: 22px;
 
       &-item {
         display: flex;
         height: 100%;
         padding: 0 9px;
-        transition: all 0.2s;
         font-size: 24px;
         cursor: pointer;
+        transition: all 0.2s;
 
         &:hover {
           transform: scale(1.2);
@@ -522,18 +523,18 @@
     }
 
     &__arrow {
-      display: flex;
       position: absolute;
       top: 50%;
+      display: flex;
       align-items: center;
       justify-content: center;
       width: 50px;
       height: 50px;
-      transition: all 0.2s;
-      border-radius: 50%;
-      background-color: rgb(0 0 0 / 50%);
       font-size: 28px;
       cursor: pointer;
+      background-color: rgb(0 0 0 / 50%);
+      border-radius: 50%;
+      transition: all 0.2s;
 
       &:hover {
         background-color: rgb(0 0 0 / 80%);

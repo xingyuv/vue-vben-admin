@@ -19,16 +19,21 @@
   </RadioGroup>
 </template>
 <script lang="ts">
-  import { defineComponent, type PropType, ref, watchEffect, computed, unref, watch } from 'vue';
-  import { Radio } from 'ant-design-vue';
-  import { isFunction } from '/@/utils/is';
-  import { useRuleFormItem } from '/@/hooks/component/useFormItem';
   import { useAttrs } from '@vben/hooks';
-  import { propTypes } from '/@/utils/propTypes';
+  import { Radio } from 'ant-design-vue';
   import { get, omit } from 'lodash-es';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { computed, defineComponent, type PropType, ref, unref, watch, watchEffect } from 'vue';
 
-  type OptionsItem = { label: string; value: string | number | boolean; disabled?: boolean };
+  import { useRuleFormItem } from '@/hooks/component/useFormItem';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
+
+  interface OptionsItem {
+    label: string;
+    value: string | number | boolean;
+    disabled?: boolean;
+  }
 
   export default defineComponent({
     name: 'ApiRadioGroup',

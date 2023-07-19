@@ -18,37 +18,32 @@
         </TabPane>
       </template>
 
-      <template #rightExtra v-if="getShowRedo || getShowQuick">
+      <template v-if="getShowRedo || getShowQuick" #rightExtra>
         <TabRedo v-if="getShowRedo" />
-        <TabContent isExtra :tabItem="$route" v-if="getShowQuick" />
+        <TabContent v-if="getShowQuick" isExtra :tabItem="$route" />
         <FoldButton v-if="getShowFold" />
       </template>
     </Tabs>
   </div>
 </template>
 <script lang="ts">
-  import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
-
-  import { defineComponent, computed, unref, ref } from 'vue';
-
   import { Tabs } from 'ant-design-vue';
-  import TabContent from './components/TabContent.vue';
-  import FoldButton from './components/FoldButton.vue';
-  import TabRedo from './components/TabRedo.vue';
-
-  import { useGo } from '/@/hooks/web/usePage';
-
-  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
-  import { useUserStore } from '/@/store/modules/user';
-
-  import { initAffixTabs, useTabsDrag } from './useMultipleTabs';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting';
-
-  import { REDIRECT_NAME } from '/@/router/constant';
-  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
-
+  import { computed, defineComponent, ref, unref } from 'vue';
+  import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
   import { useRouter } from 'vue-router';
+
+  import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useGo } from '@/hooks/web/usePage';
+  import { listenerRouteChange } from '@/logics/mitt/routeChange';
+  import { REDIRECT_NAME } from '@/router/constant';
+  import { useMultipleTabStore } from '@/store/modules/multipleTab';
+  import { useUserStore } from '@/store/modules/user';
+
+  import FoldButton from './components/FoldButton.vue';
+  import TabContent from './components/TabContent.vue';
+  import TabRedo from './components/TabRedo.vue';
+  import { initAffixTabs, useTabsDrag } from './useMultipleTabs';
 
   export default defineComponent({
     name: 'MultipleTabs',

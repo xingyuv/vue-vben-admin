@@ -9,43 +9,45 @@
           color="#d6d6d6"
         />
       </div>
-      <img :src="sourceValue" v-if="sourceValue" alt="avatar" />
+      <img v-if="sourceValue" :src="sourceValue" alt="avatar" />
     </div>
     <a-button
-      :class="`${prefixCls}-upload-btn`"
-      @click="openModal"
       v-if="showBtn"
+      :class="`${prefixCls}-upload-btn`"
       v-bind="btnProps"
+      @click="openModal"
     >
       {{ btnText ? btnText : t('component.cropper.selectImage') }}
     </a-button>
 
     <CropperModal
-      @register="register"
-      @upload-success="handleUploadSuccess"
       :uploadApi="uploadApi"
       :src="sourceValue"
+      @register="register"
+      @upload-success="handleUploadSuccess"
     />
   </div>
 </template>
 <script lang="ts">
   import {
-    defineComponent,
     computed,
     CSSProperties,
-    unref,
-    ref,
-    watchEffect,
-    watch,
+    defineComponent,
     PropType,
+    ref,
+    unref,
+    watch,
+    watchEffect,
   } from 'vue';
-  import CropperModal from './CropperModal.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useModal } from '/@/components/Modal';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import type { ButtonProps } from '/@/components/Button';
+
+  import type { ButtonProps } from '@/components/Button';
   import Icon from '@/components/Icon/Icon.vue';
+  import { useModal } from '@/components/Modal';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useMessage } from '@/hooks/web/useMessage';
+
+  import CropperModal from './CropperModal.vue';
 
   const props = {
     width: { type: [String, Number], default: '200px' },
@@ -124,10 +126,10 @@
 
     &-image-wrapper {
       overflow: hidden;
+      cursor: pointer;
+      background: @component-background;
       border: 1px solid @border-color-base;
       border-radius: 50%;
-      background: @component-background;
-      cursor: pointer;
 
       img {
         width: 100%;
@@ -138,12 +140,12 @@
       position: absolute;
       width: inherit;
       height: inherit;
-      transition: opacity 0.4s;
+      cursor: pointer;
+      background: rgb(0 0 0 / 40%);
       border: inherit;
       border-radius: inherit;
       opacity: 0;
-      background: rgb(0 0 0 / 40%);
-      cursor: pointer;
+      transition: opacity 0.4s;
 
       ::v-deep(svg) {
         margin: auto;

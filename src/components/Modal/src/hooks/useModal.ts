@@ -1,26 +1,28 @@
+import { tryOnUnmounted } from '@vueuse/core';
+import { isEqual } from 'lodash-es';
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onUnmounted,
+  reactive,
+  ref,
+  toRaw,
+  unref,
+  watchEffect,
+} from 'vue';
+
+import { isProdMode } from '@/utils/env';
+import { isFunction } from '@/utils/is';
+import { error } from '@/utils/log';
+
 import type {
-  UseModalReturnType,
   ModalMethods,
   ModalProps,
   ReturnMethods,
   UseModalInnerReturnType,
+  UseModalReturnType,
 } from '../typing';
-import {
-  ref,
-  onUnmounted,
-  unref,
-  getCurrentInstance,
-  reactive,
-  watchEffect,
-  nextTick,
-  toRaw,
-  computed,
-} from 'vue';
-import { isProdMode } from '/@/utils/env';
-import { isFunction } from '/@/utils/is';
-import { isEqual } from 'lodash-es';
-import { tryOnUnmounted } from '@vueuse/core';
-import { error } from '/@/utils/log';
 
 const dataTransfer = reactive<any>({});
 
@@ -77,7 +79,7 @@ export function useModal(): UseModalReturnType {
 
     openModal: <T = any>(visible = true, data?: T, openOnSet = true): void => {
       getInstance()?.setModalProps({
-        visible: visible,
+        visible,
       });
 
       if (!data) return;

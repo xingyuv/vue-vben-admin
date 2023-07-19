@@ -8,23 +8,23 @@
         <template v-for="item in dropMenuList" :key="`${item.event}`">
           <a-menu-item
             v-bind="getAttr(item.event)"
-            @click="handleClickMenu(item)"
             :disabled="item.disabled"
+            @click="handleClickMenu(item)"
           >
             <a-popconfirm
               v-if="popconfirm && item.popConfirm"
               v-bind="getPopConfirmAttrs(item.popConfirm)"
             >
-              <template #icon v-if="item.popConfirm.icon">
+              <template v-if="item.popConfirm.icon" #icon>
                 <Icon :icon="item.popConfirm.icon" />
               </template>
               <div>
-                <Icon :icon="item.icon" v-if="item.icon" />
+                <Icon v-if="item.icon" :icon="item.icon" />
                 <span class="ml-1">{{ item.text }}</span>
               </div>
             </a-popconfirm>
             <template v-else>
-              <Icon :icon="item.icon" v-if="item.icon" />
+              <Icon v-if="item.icon" :icon="item.icon" />
               <span class="ml-1">{{ item.text }}</span>
             </template>
           </a-menu-item>
@@ -36,13 +36,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, PropType } from 'vue';
   import { type Recordable } from '@vben/types';
-  import { type DropMenu } from './typing';
   import { Dropdown, Menu, Popconfirm } from 'ant-design-vue';
-  import Icon from '@/components/Icon/Icon.vue';
   import { omit } from 'lodash-es';
-  import { isFunction } from '/@/utils/is';
+  import { computed, PropType } from 'vue';
+
+  import Icon from '@/components/Icon/Icon.vue';
+  import { isFunction } from '@/utils/is';
+
+  import { type DropMenu } from './typing';
 
   const ADropdown = Dropdown;
   const AMenu = Menu;

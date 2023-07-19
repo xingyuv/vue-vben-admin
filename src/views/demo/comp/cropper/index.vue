@@ -7,9 +7,9 @@
     <CollapseContainer title="矩形裁剪" class="my-4">
       <div class="container p-4">
         <div class="cropper-container mr-10">
-          <CropperImage ref="refCropper" :src="img" @cropend="handleCropend" style="width: 40vw" />
+          <CropperImage ref="refCropper" :src="img" style="width: 40vw" @cropend="handleCropend" />
         </div>
-        <img :src="cropperImg" class="croppered" v-if="cropperImg" alt="" />
+        <img v-if="cropperImg" :src="cropperImg" class="croppered" alt="" />
       </div>
       <p v-if="cropperImg">裁剪后图片信息：{{ info }}</p>
     </CollapseContainer>
@@ -20,12 +20,12 @@
           <CropperImage
             ref="refCropper"
             :src="img"
-            @cropend="handleCircleCropend"
             style="width: 40vw"
             circled
+            @cropend="handleCircleCropend"
           />
         </div>
-        <img :src="circleImg" class="croppered" v-if="circleImg" />
+        <img v-if="circleImg" :src="circleImg" class="croppered" />
       </div>
       <p v-if="circleImg">裁剪后图片信息：{{ circleInfo }}</p>
     </CollapseContainer>
@@ -33,12 +33,13 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { CollapseContainer } from '/@/components/Container';
-  import { CropperImage, CropperAvatar } from '/@/components/Cropper';
-  import { uploadApi } from '/@/api/sys/upload';
-  import img from '/@/assets/images/header.jpg';
-  import { useUserStore } from '/@/store/modules/user';
+
+  import { uploadApi } from '@/api/sys/upload';
+  import img from '@/assets/images/header.jpg';
+  import { CollapseContainer } from '@/components/Container';
+  import { CropperAvatar, CropperImage } from '@/components/Cropper';
+  import { PageWrapper } from '@/components/Page';
+  import { useUserStore } from '@/store/modules/user';
 
   export default defineComponent({
     components: {

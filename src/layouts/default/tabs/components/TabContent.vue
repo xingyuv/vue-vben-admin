@@ -6,26 +6,25 @@
     overlayClassName="multiple-tabs__dropdown"
     @menu-event="handleMenuEvent"
   >
-    <div :class="`${prefixCls}__info`" @contextmenu="handleContext" v-if="getIsTabs">
+    <div v-if="getIsTabs" :class="`${prefixCls}__info`" @contextmenu="handleContext">
       <span class="ml-1">{{ getTitle }}</span>
     </div>
-    <span :class="`${prefixCls}__extra-quick`" v-else @click="handleContext">
+    <span v-else :class="`${prefixCls}__extra-quick`" @click="handleContext">
       <Icon icon="ion:chevron-down" />
     </span>
   </Dropdown>
 </template>
 <script lang="ts">
   import type { PropType } from 'vue';
+  import { computed, defineComponent, unref } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
 
-  import { defineComponent, computed, unref } from 'vue';
-  import { Dropdown } from '/@/components/Dropdown/index';
+  import { Dropdown } from '@/components/Dropdown/index';
   import Icon from '@/components/Icon/Icon.vue';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   import { TabContentProps } from '../types';
-
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useI18n } from '/@/hooks/web/useI18n';
   import { useTabDropdown } from '../useTabDropdown';
 
   export default defineComponent({

@@ -1,6 +1,7 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { h } from 'vue';
 import { Tag } from 'ant-design-vue';
+import { h } from 'vue';
+
+import { BasicColumn, FormSchema } from '@/components/Table';
 
 export const columns: BasicColumn[] = [
   {
@@ -23,7 +24,7 @@ export const columns: BasicColumn[] = [
       const enable = ~~status === 0;
       const color = enable ? 'green' : 'red';
       const text = enable ? '启用' : '停用';
-      return h(Tag, { color: color }, () => text);
+      return h(Tag, { color }, () => text);
     },
   },
   {

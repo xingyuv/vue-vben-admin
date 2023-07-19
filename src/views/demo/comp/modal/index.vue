@@ -27,22 +27,24 @@
 
     <component :is="currentModal" v-model:visible="modalVisible" :userData="userData" />
 
-    <Modal1 @register="register1" :minHeight="100" />
+    <Modal1 :minHeight="100" @register="register1" />
     <Modal2 @register="register2" />
     <Modal3 @register="register3" />
     <Modal4 @register="register4" />
   </PageWrapper>
 </template>
 <script lang="ts">
-  import { defineComponent, shallowRef, ComponentOptions, ref, nextTick } from 'vue';
+  import { type Nullable } from '@vben/types';
   import { Alert, Space } from 'ant-design-vue';
-  import { useModal } from '/@/components/Modal';
+  import { ComponentOptions, defineComponent, nextTick, ref, shallowRef } from 'vue';
+
+  import { useModal } from '@/components/Modal';
+  import { PageWrapper } from '@/components/Page';
+
   import Modal1 from './Modal1.vue';
   import Modal2 from './Modal2.vue';
   import Modal3 from './Modal3.vue';
   import Modal4 from './Modal4.vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { type Nullable } from '@vben/types';
 
   export default defineComponent({
     components: { Alert, Modal1, Modal2, Modal3, Modal4, PageWrapper, ASpace: Space },
@@ -52,7 +54,7 @@
       const [register2, { openModal: openModal2 }] = useModal();
       const [register3, { openModal: openModal3 }] = useModal();
       const [register4, { openModal: openModal4 }] = useModal();
-      const modalVisible = ref<Boolean>(false);
+      const modalVisible = ref<boolean>(false);
       const userData = ref<any>(null);
 
       function send() {

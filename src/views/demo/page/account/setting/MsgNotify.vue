@@ -25,7 +25,8 @@
 <script lang="ts">
   import { List, Switch } from 'ant-design-vue';
   import { defineComponent } from 'vue';
-  import { CollapseContainer } from '/@/components/Container/index';
+
+  import { CollapseContainer } from '@/components/Container/index';
 
   import { msgNotifyList } from './data';
 
@@ -46,8 +47,8 @@
 </script>
 <style lang="less" scoped>
   .extra {
+    float: right;
     margin-top: 10px;
     margin-right: 30px;
-    float: right;
   }
 </style>

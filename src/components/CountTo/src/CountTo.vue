@@ -4,9 +4,10 @@
   </span>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, computed, watchEffect, unref, onMounted, watch } from 'vue';
-  import { useTransition, TransitionPresets } from '@vueuse/core';
-  import { isNumber } from '/@/utils/is';
+  import { TransitionPresets, useTransition } from '@vueuse/core';
+  import { computed, defineComponent, onMounted, ref, unref, watch, watchEffect } from 'vue';
+
+  import { isNumber } from '@/utils/is';
 
   const props = {
     startVal: { type: Number, default: 0 },

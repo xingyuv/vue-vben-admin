@@ -1,43 +1,43 @@
 <template>
   <div v-if="getShow">
     <LoginFormTitle class="enter-x" />
-    <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
+    <Form ref="formRef" class="p-4 enter-x" :model="formData" :rules="getFormRules">
       <FormItem name="account" class="enter-x">
         <Input
+          v-model:value="formData.account"
           class="fix-auto-fill"
           size="large"
-          v-model:value="formData.account"
           :placeholder="t('sys.login.userName')"
         />
       </FormItem>
       <FormItem name="mobile" class="enter-x">
         <Input
-          size="large"
           v-model:value="formData.mobile"
+          size="large"
           :placeholder="t('sys.login.mobile')"
           class="fix-auto-fill"
         />
       </FormItem>
       <FormItem name="sms" class="enter-x">
         <CountdownInput
+          v-model:value="formData.sms"
           size="large"
           class="fix-auto-fill"
-          v-model:value="formData.sms"
           :placeholder="t('sys.login.smsCode')"
         />
       </FormItem>
       <FormItem name="password" class="enter-x">
         <StrengthMeter
-          size="large"
           v-model:value="formData.password"
+          size="large"
           :placeholder="t('sys.login.password')"
         />
       </FormItem>
       <FormItem name="confirmPassword" class="enter-x">
         <InputPassword
+          v-model:value="formData.confirmPassword"
           size="large"
           visibilityToggle
-          v-model:value="formData.confirmPassword"
           :placeholder="t('sys.login.confirmPassword')"
         />
       </FormItem>
@@ -54,8 +54,8 @@
         class="enter-x"
         size="large"
         block
-        @click="handleRegister"
         :loading="loading"
+        @click="handleRegister"
       >
         {{ t('sys.login.registerButton') }}
       </Button>
@@ -66,13 +66,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue';
+  import { Button, Checkbox, Form, Input } from 'ant-design-vue';
+  import { computed, reactive, ref, unref } from 'vue';
+
+  import { CountdownInput } from '@/components/CountDown';
+  import { StrengthMeter } from '@/components/StrengthMeter';
+  import { useI18n } from '@/hooks/web/useI18n';
+
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox } from 'ant-design-vue';
-  import { StrengthMeter } from '/@/components/StrengthMeter';
-  import { CountdownInput } from '/@/components/CountDown';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
 
   const FormItem = Form.Item;
   const InputPassword = Input.Password;

@@ -1,14 +1,15 @@
 <template>
   <PageWrapper title="图片预览示例">
     <ImagePreview :imageList="imgList" />
-    <a-button @click="openImg" type="primary">无预览图</a-button>
+    <a-button type="primary" @click="openImg">无预览图</a-button>
   </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { createImgPreview, ImagePreview } from '/@/components/Preview/index';
-  import { PageWrapper } from '/@/components/Page';
-  // import { PreviewActions } from '/@/components/Preview/src/typing';
+
+  import { PageWrapper } from '@/components/Page';
+  import { createImgPreview, ImagePreview } from '@/components/Preview/index';
+  // import { PreviewActions } from '@/components/Preview/src/typing';
 
   const imgList: string[] = [
     'https://picsum.photos/id/66/346/216',

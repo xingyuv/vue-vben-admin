@@ -1,7 +1,6 @@
-import type { AppRouteModule } from '/@/router/types';
-
-import { getParentLayout, LAYOUT } from '/@/router/constant';
-import { t } from '/@/hooks/web/useI18n';
+import { t } from '@/hooks/web/useI18n';
+import { getParentLayout, LAYOUT } from '@/router/constant';
+import type { AppRouteModule } from '@/router/types';
 
 const charts: AppRouteModule = {
   path: '/charts',
@@ -20,7 +19,7 @@ const charts: AppRouteModule = {
       meta: {
         title: t('routes.demo.charts.baiduMap'),
       },
-      component: () => import('/@/views/demo/charts/map/Baidu.vue'),
+      component: () => import('@/views/demo/charts/map/Baidu.vue'),
     },
     {
       path: 'aMap',
@@ -28,7 +27,7 @@ const charts: AppRouteModule = {
       meta: {
         title: t('routes.demo.charts.aMap'),
       },
-      component: () => import('/@/views/demo/charts/map/Gaode.vue'),
+      component: () => import('@/views/demo/charts/map/Gaode.vue'),
     },
     {
       path: 'googleMap',
@@ -36,7 +35,7 @@ const charts: AppRouteModule = {
       meta: {
         title: t('routes.demo.charts.googleMap'),
       },
-      component: () => import('/@/views/demo/charts/map/Google.vue'),
+      component: () => import('@/views/demo/charts/map/Google.vue'),
     },
 
     {
@@ -51,7 +50,7 @@ const charts: AppRouteModule = {
         {
           path: 'map',
           name: 'Map',
-          component: () => import('/@/views/demo/charts/Map.vue'),
+          component: () => import('@/views/demo/charts/Map.vue'),
           meta: {
             title: t('routes.demo.charts.map'),
           },
@@ -59,7 +58,7 @@ const charts: AppRouteModule = {
         {
           path: 'line',
           name: 'Line',
-          component: () => import('/@/views/demo/charts/Line.vue'),
+          component: () => import('@/views/demo/charts/Line.vue'),
           meta: {
             title: t('routes.demo.charts.line'),
           },
@@ -67,7 +66,7 @@ const charts: AppRouteModule = {
         {
           path: 'pie',
           name: 'Pie',
-          component: () => import('/@/views/demo/charts/Pie.vue'),
+          component: () => import('@/views/demo/charts/Pie.vue'),
           meta: {
             title: t('routes.demo.charts.pie'),
           },

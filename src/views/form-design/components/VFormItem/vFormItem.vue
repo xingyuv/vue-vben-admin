@@ -13,17 +13,18 @@
 
 <template>
   <FormItem :schema="schemaNew" :formProps="getProps">
-    <template #[item]="data" v-for="item in Object.keys($slots)">
+    <template v-for="item in Object.keys($slots)" #[item]="data">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
   </FormItem>
 </template>
 <script lang="ts">
   import { computed, defineComponent, unref } from 'vue';
-  import { IFormConfig, IVFormComponent } from '../../typings/v-form-component';
-  import { FormProps, FormSchema } from '/@/components/Form';
 
-  import FormItem from '/@/components/Form/src/components/FormItem.vue';
+  import { FormProps, FormSchema } from '@/components/Form';
+  import FormItem from '@/components/Form/src/components/FormItem.vue';
+
+  import { IFormConfig, IVFormComponent } from '../../typings/v-form-component';
 
   export default defineComponent({
     name: 'VFormItem',

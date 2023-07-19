@@ -6,11 +6,11 @@
     :openKeys="getOpenKeys"
     :inlineIndent="inlineIndent"
     :theme="theme"
-    @open-change="handleOpenChange"
     :class="getMenuClass"
-    @click="handleMenuClick"
     :subMenuOpenDelay="0.2"
     v-bind="getInlineCollapseOptions"
+    @open-change="handleOpenChange"
+    @click="handleMenuClick"
   >
     <template v-for="item in items" :key="item.path">
       <BasicSubMenuItem :item="item" :theme="theme" :isHorizontal="isHorizontal" />
@@ -18,21 +18,23 @@
   </Menu>
 </template>
 <script lang="ts">
-  import type { MenuState } from './types';
-  import { computed, defineComponent, unref, reactive, watch, toRefs, ref } from 'vue';
   import { Menu } from 'ant-design-vue';
-  import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
-  import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
-  import { useOpenKeys } from './useOpenKeys';
+  import { computed, defineComponent, reactive, ref, toRefs, unref, watch } from 'vue';
   import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
-  import { isFunction } from '/@/utils/is';
+
+  import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { listenerRouteChange } from '@/logics/mitt/routeChange';
+  import { REDIRECT_NAME } from '@/router/constant';
+  import { getAllParentPath } from '@/router/helper/menuHelper';
+  import { getCurrentParentPath } from '@/router/menus';
+  import { isFunction } from '@/utils/is';
+
+  import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
   import { basicProps } from './props';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { REDIRECT_NAME } from '/@/router/constant';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { getCurrentParentPath } from '/@/router/menus';
-  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
-  import { getAllParentPath } from '/@/router/helper/menuHelper';
+  import type { MenuState } from './types';
+  import { useOpenKeys } from './useOpenKeys';
 
   export default defineComponent({
     name: 'BasicMenu',

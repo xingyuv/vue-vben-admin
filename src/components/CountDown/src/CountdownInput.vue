@@ -3,16 +3,18 @@
     <template #addonAfter>
       <CountButton :size="size" :count="count" :value="state" :beforeStartFunc="sendCodeApi" />
     </template>
-    <template #[item]="data" v-for="item in Object.keys($slots).filter((k) => k !== 'addonAfter')">
+    <template v-for="item in Object.keys($slots).filter((k) => k !== 'addonAfter')" #[item]="data">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
   </a-input>
 </template>
 <script lang="ts">
   import { defineComponent, PropType } from 'vue';
+
+  import { useRuleFormItem } from '@/hooks/component/useFormItem';
+  import { useDesign } from '@/hooks/web/useDesign';
+
   import CountButton from './CountButton.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useRuleFormItem } from '/@/hooks/component/useFormItem';
 
   const props = {
     value: { type: String },
@@ -43,8 +45,8 @@
   .@{prefix-cls} {
     .ant-input-group-addon {
       padding-right: 0;
-      border: none;
       background-color: transparent;
+      border: none;
 
       button {
         font-size: 14px;

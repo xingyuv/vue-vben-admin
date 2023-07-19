@@ -1,22 +1,22 @@
 <template>
   <div class="p-4">
     <BasicTable
+      :beforeEditSubmit="beforeEditSubmit"
       @register="registerTable"
       @edit-end="handleEditEnd"
       @edit-cancel="handleEditCancel"
-      :beforeEditSubmit="beforeEditSubmit"
     />
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, h } from 'vue';
-  import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
-  import { optionsListApi } from '/@/api/demo/select';
-
-  import { demoListApi } from '/@/api/demo/table';
-  import { treeOptionsListApi } from '/@/api/demo/tree';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { Progress } from 'ant-design-vue';
+  import { defineComponent, h } from 'vue';
+
+  import { optionsListApi } from '@/api/demo/select';
+  import { demoListApi } from '@/api/demo/table';
+  import { treeOptionsListApi } from '@/api/demo/tree';
+  import { BasicColumn, BasicTable, useTable } from '@/components/Table';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const columns: BasicColumn[] = [
     {
@@ -216,7 +216,7 @@
       const [registerTable] = useTable({
         title: '可编辑单元格示例',
         api: demoListApi,
-        columns: columns,
+        columns,
         showIndexColumn: false,
         bordered: true,
       });

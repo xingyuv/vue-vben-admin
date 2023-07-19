@@ -9,17 +9,18 @@
         </span>
       </div>
     </template>
-    <Description @register="infoRegister" class="enter-y" />
-    <Description @register="register" class="my-4 enter-y" />
-    <Description @register="registerDev" class="enter-y" />
+    <Description class="enter-y" @register="infoRegister" />
+    <Description class="my-4 enter-y" @register="register" />
+    <Description class="enter-y" @register="registerDev" />
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { h } from 'vue';
   import { Tag } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
-  import { Description, DescItem, useDescription } from '/@/components/Description/index';
-  import { GITHUB_URL, SITE_URL, DOC_URL } from '/@/settings/siteSetting';
+  import { h } from 'vue';
+
+  import { DescItem, Description, useDescription } from '@/components/Description/index';
+  import { PageWrapper } from '@/components/Page';
+  import { DOC_URL, GITHUB_URL, SITE_URL } from '@/settings/siteSetting';
 
   const { pkg, lastBuildTime } = __APP_INFO__;
 
@@ -78,7 +79,7 @@
   const [register] = useDescription({
     title: '生产环境依赖',
     data: dependencies,
-    schema: schema,
+    schema,
     column: 3,
   });
 

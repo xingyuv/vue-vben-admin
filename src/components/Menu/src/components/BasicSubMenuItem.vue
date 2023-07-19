@@ -2,8 +2,8 @@
   <BasicMenuItem v-if="!menuHasChildren(item) && getShowMenu" v-bind="$props" />
   <SubMenu
     v-if="menuHasChildren(item) && getShowMenu"
-    :class="[theme]"
     :key="`submenu-${item.path}`"
+    :class="[theme]"
     popupClassName="app-top-menu-popup"
   >
     <template #title>
@@ -16,10 +16,12 @@
   </SubMenu>
 </template>
 <script lang="ts">
-  import type { Menu as MenuType } from '/@/router/types';
-  import { defineComponent, computed } from 'vue';
   import { Menu } from 'ant-design-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { computed, defineComponent } from 'vue';
+
+  import { useDesign } from '@/hooks/web/useDesign';
+  import type { Menu as MenuType } from '@/router/types';
+
   import { itemProps } from '../props';
   import BasicMenuItem from './BasicMenuItem.vue';
   import MenuItemContent from './MenuItemContent.vue';
