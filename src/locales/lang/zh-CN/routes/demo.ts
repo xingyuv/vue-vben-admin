@@ -6,7 +6,7 @@ export default {
     charts: '图表',
     map: '地图',
     line: '折线图',
-    pie: '饼图'
+    pie: '饼图',
   },
   comp: {
     comp: '组件',
@@ -28,10 +28,6 @@ export default {
     drawer: '抽屉扩展',
     desc: '详情组件',
 
-    lazy: '懒加载组件',
-    lazyBasic: '基础示例',
-    lazyTransition: '动画效果',
-
     verify: '验证组件',
     verifyDrag: '拖拽校验',
     verifyRotate: '图片还原',
@@ -42,8 +38,9 @@ export default {
 
     loading: 'Loading',
 
+    time: '相对时间',
     cropperImage: '图片裁剪',
-    cardList: '卡片列表'
+    cardList: '卡片列表',
   },
   editor: {
     editor: '编辑器',
@@ -52,14 +49,14 @@ export default {
 
     tinymce: '富文本',
     tinymceBasic: '基础使用',
-    tinymceForm: '嵌入form'
+    tinymceForm: '嵌入form',
   },
   excel: {
     excel: 'Excel',
     customExport: '选择导出格式',
     jsonExport: 'JSON数据导出',
     arrayExport: 'Array数据导出',
-    importExcel: '导入'
+    importExcel: '导入',
   },
   feat: {
     feat: '功能',
@@ -70,6 +67,7 @@ export default {
     print: '打印',
     contextMenu: '右键菜单',
     download: '文件下载',
+    clickOutSide: 'ClickOutSide组件',
     imgPreview: '图片预览',
     copy: '剪切板',
     msg: '消息提示',
@@ -89,11 +87,11 @@ export default {
     requestDemo: '测试请求重试',
     breadcrumbFlatDetail: '平级详情',
     breadcrumbChildren: '层级模式',
-    breadcrumbChildrenDetail: '层级详情'
+    breadcrumbChildrenDetail: '层级详情',
   },
   flow: {
     name: '图形编辑器',
-    flowChart: '流程图'
+    flowChart: '流程图',
   },
   form: {
     form: 'Form',
@@ -105,13 +103,13 @@ export default {
     dynamicForm: '动态表单',
     customerForm: '自定义组件',
     appendForm: '表单增删示例',
-    tabsForm: '标签页+多级field'
+    tabsForm: '标签页+多级field',
   },
   iframe: {
     frame: '外部页面',
     antv: 'antVue文档(内嵌)',
     doc: '项目文档(内嵌)',
-    docExternal: '项目文档(外链)'
+    docExternal: '项目文档(外链)',
   },
   level: { level: '多级菜单' },
   page: {
@@ -141,7 +139,7 @@ export default {
     list: '列表页',
     listCard: '卡片列表',
     listBasic: '标准列表',
-    listSearch: '搜索列表'
+    listSearch: '搜索列表',
   },
   permission: {
     permission: '权限管理',
@@ -154,10 +152,10 @@ export default {
 
     back: '基于后台权限',
     backPage: '页面权限',
-    backBtn: '按钮权限'
+    backBtn: '按钮权限',
   },
   setup: {
-    page: '引导页'
+    page: '引导页',
   },
   system: {
     moduleName: '系统管理',
@@ -166,7 +164,7 @@ export default {
     password: '修改密码',
     dept: '部门管理',
     menu: '菜单管理',
-    role: '角色管理'
+    role: '角色管理',
   },
   table: {
     table: 'Table',
@@ -186,6 +184,7 @@ export default {
     editCellTable: '可编辑单元格',
     editRowTable: '可编辑行',
     authColumn: '权限列',
-    resizeParentHeightTable: '继承父元素高度'
-  }
-}
+    resizeParentHeightTable: '继承父元素高度',
+    vxeTable: 'VxeTable',
+  },
+};

@@ -26,95 +26,119 @@
     </Tabs>
   </div>
 </template>
-<script lang="ts" setup name="MultipleTabs">
-import type { RouteLocationNormalized, RouteMeta } from 'vue-router'
+<script lang="ts">
+  import type { RouteLocationNormalized, RouteMeta } from 'vue-router';
 
-import { computed, unref, ref } from 'vue'
+  import { defineComponent, computed, unref, ref } from 'vue';
 
-import { Tabs } from 'ant-design-vue'
-import TabContent from './components/TabContent.vue'
-import FoldButton from './components/FoldButton.vue'
-import TabRedo from './components/TabRedo.vue'
+  import { Tabs } from 'ant-design-vue';
+  import TabContent from './components/TabContent.vue';
+  import FoldButton from './components/FoldButton.vue';
+  import TabRedo from './components/TabRedo.vue';
 
-import { useGo } from '@/hooks/web/usePage'
+  import { useGo } from '/@/hooks/web/usePage';
 
-import { useMultipleTabStore } from '@/store/modules/multipleTab'
-import { useUserStore } from '@/store/modules/user'
+  import { useMultipleTabStore } from '/@/store/modules/multipleTab';
+  import { useUserStore } from '/@/store/modules/user';
 
-import { initAffixTabs, useTabsDrag } from './useMultipleTabs'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting'
+  import { initAffixTabs, useTabsDrag } from './useMultipleTabs';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting';
 
-import { REDIRECT_NAME } from '@/router/constant'
-import { listenerRouteChange } from '@/logics/mitt/routeChange'
+  import { REDIRECT_NAME } from '/@/router/constant';
+  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
 
-import { useRouter } from 'vue-router'
-const TabPane = Tabs.TabPane
-const affixTextList = initAffixTabs()
-const activeKeyRef = ref('')
+  import { useRouter } from 'vue-router';
 
-useTabsDrag(affixTextList)
-const tabStore = useMultipleTabStore()
-const userStore = useUserStore()
-const router = useRouter()
+  export default defineComponent({
+    name: 'MultipleTabs',
+    components: {
+      TabRedo,
+      FoldButton,
+      Tabs,
+      TabPane: Tabs.TabPane,
+      TabContent,
+    },
+    setup() {
+      const affixTextList = initAffixTabs();
+      const activeKeyRef = ref('');
 
-const { prefixCls } = useDesign('multiple-tabs')
-const go = useGo()
-const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting()
+      useTabsDrag(affixTextList);
+      const tabStore = useMultipleTabStore();
+      const userStore = useUserStore();
+      const router = useRouter();
 
-const getTabsState = computed(() => {
-  return tabStore.getTabList.filter((item) => !item.meta?.hideTab)
-})
+      const { prefixCls } = useDesign('multiple-tabs');
+      const go = useGo();
+      const { getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
 
-const unClose = computed(() => unref(getTabsState).length === 1)
+      const getTabsState = computed(() => {
+        return tabStore.getTabList.filter((item) => !item.meta?.hideTab);
+      });
 
-const getWrapClass = computed(() => {
-  return [
-    prefixCls,
-    {
-      [`${prefixCls}--hide-close`]: unref(unClose)
-    }
-  ]
-})
+      const unClose = computed(() => unref(getTabsState).length === 1);
 
-listenerRouteChange((route) => {
-  const { name } = route
-  if (name === REDIRECT_NAME || !route || !userStore.getToken) {
-    return
-  }
+      const getWrapClass = computed(() => {
+        return [
+          prefixCls,
+          {
+            [`${prefixCls}--hide-close`]: unref(unClose),
+          },
+        ];
+      });
 
-  const { path, fullPath, meta = {} } = route
-  const { currentActiveMenu, hideTab } = meta as RouteMeta
-  const isHide = !hideTab ? null : currentActiveMenu
-  const p = isHide || fullPath || path
-  if (activeKeyRef.value !== p) {
-    activeKeyRef.value = p as string
-  }
+      listenerRouteChange((route) => {
+        const { name } = route;
+        if (name === REDIRECT_NAME || !route || !userStore.getToken) {
+          return;
+        }
 
-  if (isHide) {
-    const findParentRoute = router.getRoutes().find((item) => item.path === currentActiveMenu)
+        const { path, fullPath, meta = {} } = route;
+        const { currentActiveMenu, hideTab } = meta as RouteMeta;
+        const isHide = !hideTab ? null : currentActiveMenu;
+        const p = isHide || fullPath || path;
+        if (activeKeyRef.value !== p) {
+          activeKeyRef.value = p as string;
+        }
 
-    findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized)
-  } else {
-    tabStore.addTab(unref(route))
-  }
-})
+        if (isHide) {
+          const findParentRoute = router
+            .getRoutes()
+            .find((item) => item.path === currentActiveMenu);
 
-function handleChange(activeKey: any) {
-  activeKeyRef.value = activeKey
-  go(activeKey, false)
-}
+          findParentRoute && tabStore.addTab(findParentRoute as unknown as RouteLocationNormalized);
+        } else {
+          tabStore.addTab(unref(route));
+        }
+      });
 
-// Close the current tab
-function handleEdit(targetKey: string) {
-  // Added operation to hide, currently only use delete operation
-  if (unref(unClose)) {
-    return
-  }
+      function handleChange(activeKey: any) {
+        activeKeyRef.value = activeKey;
+        go(activeKey, false);
+      }
 
-  tabStore.closeTabByKey(targetKey, router)
-}
+      // Close the current tab
+      function handleEdit(targetKey: string) {
+        // Added operation to hide, currently only use delete operation
+        if (unref(unClose)) {
+          return;
+        }
+
+        tabStore.closeTabByKey(targetKey, router);
+      }
+      return {
+        getWrapClass,
+        handleEdit,
+        handleChange,
+        activeKeyRef,
+        getTabsState,
+        getShowQuick,
+        getShowRedo,
+        getShowFold,
+      };
+    },
+  });
 </script>
 <style lang="less">
-@import './index.less';
+  @import url('./index.less');
 </style>

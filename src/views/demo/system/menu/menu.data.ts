@@ -1,67 +1,66 @@
-import { BasicColumn } from '@/components/Table'
-import { FormSchema } from '@/components/Table'
-import { h } from 'vue'
-import { Tag } from 'ant-design-vue'
-import { Icon } from '@/components/Icon'
+import { BasicColumn, FormSchema } from '/@/components/Table';
+import { h } from 'vue';
+import { Tag } from 'ant-design-vue';
+import Icon from '@/components/Icon/Icon.vue';
 
 export const columns: BasicColumn[] = [
   {
     title: '菜单名称',
     dataIndex: 'menuName',
     width: 200,
-    align: 'left'
+    align: 'left',
   },
   {
     title: '图标',
     dataIndex: 'icon',
     width: 50,
     customRender: ({ record }) => {
-      return h(Icon, { icon: record.icon })
-    }
+      return h(Icon, { icon: record.icon });
+    },
   },
   {
     title: '权限标识',
     dataIndex: 'permission',
-    width: 180
+    width: 180,
   },
   {
     title: '组件',
-    dataIndex: 'component'
+    dataIndex: 'component',
   },
   {
     title: '排序',
     dataIndex: 'orderNo',
-    width: 50
+    width: 50,
   },
   {
     title: '状态',
     dataIndex: 'status',
     width: 80,
     customRender: ({ record }) => {
-      const status = record.status
-      const enable = ~~status === 0
-      const color = enable ? 'green' : 'red'
-      const text = enable ? '启用' : '停用'
-      return h(Tag, { color: color }, () => text)
-    }
+      const status = record.status;
+      const enable = ~~status === 0;
+      const color = enable ? 'green' : 'red';
+      const text = enable ? '启用' : '停用';
+      return h(Tag, { color: color }, () => text);
+    },
   },
   {
     title: '创建时间',
     dataIndex: 'createTime',
-    width: 180
-  }
-]
+    width: 180,
+  },
+];
 
-const isDir = (type: string) => type === '0'
-const isMenu = (type: string) => type === '1'
-const isButton = (type: string) => type === '2'
+const isDir = (type: string) => type === '0';
+const isMenu = (type: string) => type === '1';
+const isButton = (type: string) => type === '2';
 
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'menuName',
     label: '菜单名称',
     component: 'Input',
-    colProps: { span: 8 }
+    colProps: { span: 8 },
   },
   {
     field: 'status',
@@ -70,12 +69,12 @@ export const searchFormSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: '启用', value: '0' },
-        { label: '停用', value: '1' }
-      ]
+        { label: '停用', value: '1' },
+      ],
     },
-    colProps: { span: 8 }
-  }
-]
+    colProps: { span: 8 },
+  },
+];
 
 export const formSchema: FormSchema[] = [
   {
@@ -87,16 +86,16 @@ export const formSchema: FormSchema[] = [
       options: [
         { label: '目录', value: '0' },
         { label: '菜单', value: '1' },
-        { label: '按钮', value: '2' }
-      ]
+        { label: '按钮', value: '2' },
+      ],
     },
-    colProps: { lg: 24, md: 24 }
+    colProps: { lg: 24, md: 24 },
   },
   {
     field: 'menuName',
     label: '菜单名称',
     component: 'Input',
-    required: true
+    required: true,
   },
 
   {
@@ -107,24 +106,24 @@ export const formSchema: FormSchema[] = [
       fieldNames: {
         label: 'menuName',
         key: 'id',
-        value: 'id'
+        value: 'id',
       },
-      getPopupContainer: () => document.body
-    }
+      getPopupContainer: () => document.body,
+    },
   },
 
   {
     field: 'orderNo',
     label: '排序',
     component: 'InputNumber',
-    required: true
+    required: true,
   },
   {
     field: 'icon',
     label: '图标',
     component: 'IconPicker',
     required: true,
-    ifShow: ({ values }) => !isButton(values.type)
+    ifShow: ({ values }) => !isButton(values.type),
   },
 
   {
@@ -132,19 +131,19 @@ export const formSchema: FormSchema[] = [
     label: '路由地址',
     component: 'Input',
     required: true,
-    ifShow: ({ values }) => !isButton(values.type)
+    ifShow: ({ values }) => !isButton(values.type),
   },
   {
     field: 'component',
     label: '组件路径',
     component: 'Input',
-    ifShow: ({ values }) => isMenu(values.type)
+    ifShow: ({ values }) => isMenu(values.type),
   },
   {
     field: 'permission',
     label: '权限标识',
     component: 'Input',
-    ifShow: ({ values }) => !isDir(values.type)
+    ifShow: ({ values }) => !isDir(values.type),
   },
   {
     field: 'status',
@@ -154,9 +153,9 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: '启用', value: '0' },
-        { label: '禁用', value: '1' }
-      ]
-    }
+        { label: '禁用', value: '1' },
+      ],
+    },
   },
   {
     field: 'isExt',
@@ -166,10 +165,10 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: '否', value: '0' },
-        { label: '是', value: '1' }
-      ]
+        { label: '是', value: '1' },
+      ],
     },
-    ifShow: ({ values }) => !isButton(values.type)
+    ifShow: ({ values }) => !isButton(values.type),
   },
 
   {
@@ -180,10 +179,10 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: '否', value: '0' },
-        { label: '是', value: '1' }
-      ]
+        { label: '是', value: '1' },
+      ],
     },
-    ifShow: ({ values }) => isMenu(values.type)
+    ifShow: ({ values }) => isMenu(values.type),
   },
 
   {
@@ -194,9 +193,9 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: '是', value: '0' },
-        { label: '否', value: '1' }
-      ]
+        { label: '否', value: '1' },
+      ],
     },
-    ifShow: ({ values }) => !isButton(values.type)
-  }
-]
+    ifShow: ({ values }) => !isButton(values.type),
+  },
+];

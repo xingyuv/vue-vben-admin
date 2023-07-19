@@ -10,7 +10,7 @@
             :actions="[
               {
                 icon: 'clarity:note-edit-line',
-                onClick: handleEdit.bind(null, record)
+                onClick: handleEdit.bind(null, record),
               },
               {
                 icon: 'ant-design:delete-outlined',
@@ -18,9 +18,9 @@
                 popConfirm: {
                   title: '是否确认删除',
                   placement: 'left',
-                  confirm: handleDelete.bind(null, record)
-                }
-              }
+                  confirm: handleDelete.bind(null, record),
+                },
+              },
             ]"
           />
         </template>
@@ -29,55 +29,72 @@
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts" setup name="RoleManagement">
-import { BasicTable, useTable, TableAction } from '@/components/Table'
-import { getRoleListByPage } from '@/api/demo/system'
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
-import { useDrawer } from '@/components/Drawer'
-import RoleDrawer from './RoleDrawer.vue'
+  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { getRoleListByPage } from '/@/api/demo/system';
 
-import { columns, searchFormSchema } from './role.data'
+  import { useDrawer } from '/@/components/Drawer';
+  import RoleDrawer from './RoleDrawer.vue';
 
-const [registerDrawer, { openDrawer }] = useDrawer()
-const [registerTable, { reload }] = useTable({
-  title: '角色列表',
-  api: getRoleListByPage,
-  columns,
-  formConfig: {
-    labelWidth: 120,
-    schemas: searchFormSchema
-  },
-  useSearchForm: true,
-  showTableSetting: true,
-  bordered: true,
-  showIndexColumn: false,
-  actionColumn: {
-    width: 120,
-    title: '操作',
-    dataIndex: 'action',
-    // slots: { customRender: 'action' },
-    fixed: undefined
-  }
-})
+  import { columns, searchFormSchema } from './role.data';
 
-function handleCreate() {
-  openDrawer(true, {
-    isUpdate: false
-  })
-}
+  export default defineComponent({
+    name: 'RoleManagement',
+    components: { BasicTable, RoleDrawer, TableAction },
+    setup() {
+      const [registerDrawer, { openDrawer }] = useDrawer();
+      const [registerTable, { reload }] = useTable({
+        title: '角色列表',
+        api: getRoleListByPage,
+        columns,
+        formConfig: {
+          labelWidth: 120,
+          schemas: searchFormSchema,
+        },
+        useSearchForm: true,
+        showTableSetting: true,
+        bordered: true,
+        showIndexColumn: false,
+        actionColumn: {
+          width: 80,
+          title: '操作',
+          dataIndex: 'action',
+          // slots: { customRender: 'action' },
+          fixed: undefined,
+        },
+      });
 
-function handleEdit(record: Recordable) {
-  openDrawer(true, {
-    record,
-    isUpdate: true
-  })
-}
+      function handleCreate() {
+        openDrawer(true, {
+          isUpdate: false,
+        });
+      }
 
-function handleDelete(record: Recordable) {
-  console.log(record)
-}
+      function handleEdit(record: Recordable) {
+        openDrawer(true, {
+          record,
+          isUpdate: true,
+        });
+      }
 
-function handleSuccess() {
-  reload()
-}
+      function handleDelete(record: Recordable) {
+        console.log(record);
+      }
+
+      function handleSuccess() {
+        reload();
+      }
+
+      return {
+        registerTable,
+        registerDrawer,
+        handleCreate,
+        handleEdit,
+        handleDelete,
+        handleSuccess,
+      };
+    },
+  });
 </script>

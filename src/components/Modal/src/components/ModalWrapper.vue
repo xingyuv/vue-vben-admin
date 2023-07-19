@@ -5,136 +5,166 @@
     </div>
   </ScrollContainer>
 </template>
-<script lang="ts" setup name="ModalWrapper" inheritAttrs="false">
-import type { CSSProperties } from 'vue'
-import { computed, ref, watchEffect, unref, watch, onMounted, nextTick, onUnmounted } from 'vue'
-import { useWindowSizeFn } from '@/hooks/event/useWindowSizeFn'
-import { ScrollContainer } from '@/components/Container'
-import { createModalContext } from '../hooks/useModalContext'
-import { useMutationObserver } from '@vueuse/core'
+<script lang="ts">
+  import type { CSSProperties } from 'vue';
+  import {
+    defineComponent,
+    computed,
+    ref,
+    watchEffect,
+    unref,
+    watch,
+    onMounted,
+    nextTick,
+    onUnmounted,
+  } from 'vue';
+  import { useWindowSizeFn } from '@vben/hooks';
+  import { type AnyFunction } from '@vben/types';
+  import { ScrollContainer } from '/@/components/Container';
+  import { createModalContext } from '../hooks/useModalContext';
+  import { useMutationObserver } from '@vueuse/core';
 
-const emit = defineEmits(['height-change', 'ext-height'])
-const props = defineProps({
-  loading: { type: Boolean },
-  useWrapper: { type: Boolean, default: true },
-  modalHeaderHeight: { type: Number, default: 57 },
-  modalFooterHeight: { type: Number, default: 74 },
-  minHeight: { type: Number, default: 200 },
-  height: { type: Number },
-  footerOffset: { type: Number, default: 0 },
-  visible: { type: Boolean },
-  fullScreen: { type: Boolean },
-  loadingTip: { type: String }
-})
-const wrapperRef = ref<ComponentRef>(null)
-const spinRef = ref<ElRef>(null)
-const realHeightRef = ref(0)
-const minRealHeightRef = ref(0)
+  const props = {
+    loading: { type: Boolean },
+    useWrapper: { type: Boolean, default: true },
+    modalHeaderHeight: { type: Number, default: 57 },
+    modalFooterHeight: { type: Number, default: 74 },
+    minHeight: { type: Number, default: 200 },
+    height: { type: Number },
+    footerOffset: { type: Number, default: 0 },
+    visible: { type: Boolean },
+    fullScreen: { type: Boolean },
+    loadingTip: { type: String },
+  };
 
-let realHeight = 0
+  export default defineComponent({
+    name: 'ModalWrapper',
+    components: { ScrollContainer },
+    inheritAttrs: false,
+    props,
+    emits: ['height-change', 'ext-height'],
+    setup(props, { emit }) {
+      const wrapperRef = ref(null);
+      const spinRef = ref(null);
+      const realHeightRef = ref(0);
+      const minRealHeightRef = ref(0);
 
-let stopElResizeFn: Fn = () => {}
+      let realHeight = 0;
 
-useWindowSizeFn(setModalHeight.bind(null, false))
+      let stopElResizeFn: AnyFunction = () => {};
 
-useMutationObserver(
-  spinRef,
-  () => {
-    setModalHeight()
-  },
-  {
-    attributes: true,
-    subtree: true
-  }
-)
+      useWindowSizeFn(setModalHeight.bind(null, false));
 
-createModalContext({
-  redoModalHeight: setModalHeight
-})
+      useMutationObserver(
+        spinRef,
+        () => {
+          setModalHeight();
+        },
+        {
+          attributes: true,
+          subtree: true,
+        },
+      );
 
-const spinStyle = computed((): CSSProperties => {
-  return {
-    minHeight: `${props.minHeight}px`,
-    [props.fullScreen ? 'height' : 'maxHeight']: `${unref(realHeightRef)}px`
-  }
-})
+      createModalContext({
+        redoModalHeight: setModalHeight,
+      });
 
-watchEffect(() => {
-  props.useWrapper && setModalHeight()
-})
+      const spinStyle = computed((): CSSProperties => {
+        return {
+          minHeight: `${props.minHeight}px`,
+          [props.fullScreen ? 'height' : 'maxHeight']: `${unref(realHeightRef)}px`,
+        };
+      });
 
-watch(
-  () => props.fullScreen,
-  (v) => {
-    setModalHeight()
-    if (!v) {
-      realHeightRef.value = minRealHeightRef.value
-    } else {
-      minRealHeightRef.value = realHeightRef.value
-    }
-  }
-)
+      watchEffect(() => {
+        props.useWrapper && setModalHeight();
+      });
 
-onMounted(() => {
-  const { modalHeaderHeight, modalFooterHeight } = props
-  emit('ext-height', modalHeaderHeight + modalFooterHeight)
-})
+      watch(
+        () => props.fullScreen,
+        (v) => {
+          setModalHeight();
+          if (!v) {
+            realHeightRef.value = minRealHeightRef.value;
+          } else {
+            minRealHeightRef.value = realHeightRef.value;
+          }
+        },
+      );
 
-onUnmounted(() => {
-  stopElResizeFn && stopElResizeFn()
-})
+      onMounted(() => {
+        const { modalHeaderHeight, modalFooterHeight } = props;
+        emit('ext-height', modalHeaderHeight + modalFooterHeight);
+      });
 
-async function scrollTop() {
-  nextTick(() => {
-    const wrapperRefDom = unref(wrapperRef)
-    if (!wrapperRefDom) return
-    ;(wrapperRefDom as any)?.scrollTo?.(0)
-  })
-}
+      onUnmounted(() => {
+        stopElResizeFn && stopElResizeFn();
+      });
 
-async function setModalHeight() {
-  // 解决在弹窗关闭的时候监听还存在,导致再次打开弹窗没有高度
-  // 加上这个,就必须在使用的时候传递父级的visible
-  if (!props.visible) return
-  const wrapperRefDom = unref(wrapperRef)
-  if (!wrapperRefDom) return
+      async function scrollTop() {
+        nextTick(() => {
+          const wrapperRefDom = unref(wrapperRef);
+          if (!wrapperRefDom) return;
+          (wrapperRefDom as any)?.scrollTo?.(0);
+        });
+      }
 
-  const bodyDom = wrapperRefDom.$el.parentElement
-  if (!bodyDom) return
-  bodyDom.style.padding = '0'
-  await nextTick()
+      async function setModalHeight() {
+        // 解决在弹窗关闭的时候监听还存在,导致再次打开弹窗没有高度
+        // 加上这个,就必须在使用的时候传递父级的visible
+        if (!props.visible) return;
+        const wrapperRefDom = unref(wrapperRef);
+        if (!wrapperRefDom) return;
 
-  try {
-    const modalDom = bodyDom.parentElement && bodyDom.parentElement.parentElement
-    if (!modalDom) return
+        const bodyDom = (wrapperRefDom as any).$el.parentElement;
+        if (!bodyDom) return;
+        bodyDom.style.padding = '0';
+        await nextTick();
 
-    const modalRect = getComputedStyle(modalDom as Element).top
-    const modalTop = Number.parseInt(modalRect)
-    let maxHeight = window.innerHeight - modalTop * 2 + (props.footerOffset! || 0) - props.modalFooterHeight - props.modalHeaderHeight
+        try {
+          const modalDom = bodyDom.parentElement && bodyDom.parentElement.parentElement;
+          if (!modalDom) return;
 
-    // 距离顶部过进会出现滚动条
-    if (modalTop < 40) {
-      maxHeight -= 26
-    }
-    await nextTick()
-    const spinEl = unref(spinRef)
+          const modalRect = getComputedStyle(modalDom as Element).top;
+          const modalTop = Number.parseInt(modalRect);
+          let maxHeight =
+            window.innerHeight -
+            modalTop * 2 +
+            (props.footerOffset! || 0) -
+            props.modalFooterHeight -
+            props.modalHeaderHeight;
 
-    if (!spinEl) return
-    await nextTick()
-    // if (!realHeight) {
-    realHeight = spinEl.scrollHeight
-    // }
+          // 距离顶部过进会出现滚动条
+          if (modalTop < 40) {
+            maxHeight -= 26;
+          }
+          await nextTick();
+          const spinEl: any = unref(spinRef);
 
-    if (props.fullScreen) {
-      realHeightRef.value = window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28
-    } else {
-      realHeightRef.value = props.height ? props.height : realHeight > maxHeight ? maxHeight : realHeight
-    }
-    emit('height-change', unref(realHeightRef))
-  } catch (error) {
-    console.log(error)
-  }
-}
+          if (!spinEl) return;
+          await nextTick();
+          // if (!realHeight) {
+          realHeight = spinEl.scrollHeight;
+          // }
 
-defineExpose({ scrollTop })
+          if (props.fullScreen) {
+            realHeightRef.value =
+              window.innerHeight - props.modalFooterHeight - props.modalHeaderHeight - 28;
+          } else {
+            realHeightRef.value = props.height
+              ? props.height
+              : realHeight > maxHeight
+              ? maxHeight
+              : realHeight;
+          }
+          emit('height-change', unref(realHeightRef));
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      return { wrapperRef, spinRef, spinStyle, scrollTop, setModalHeight };
+    },
+  });
 </script>

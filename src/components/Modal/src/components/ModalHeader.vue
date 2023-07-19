@@ -3,13 +3,19 @@
     {{ title }}
   </BasicTitle>
 </template>
-<script lang="ts" setup name="BasicModalHeader">
-import { BasicTitle } from '@/components/Basic'
+<script lang="ts">
+  import type { PropType } from 'vue';
+  import { defineComponent } from 'vue';
+  import { BasicTitle } from '/@/components/Basic';
 
-defineProps({
-  helpMessage: {
-    type: [String, Array] as PropType<string | string[]>
-  },
-  title: { type: String }
-})
+  export default defineComponent({
+    name: 'BasicModalHeader',
+    components: { BasicTitle },
+    props: {
+      helpMessage: {
+        type: [String, Array] as PropType<string | string[]>,
+      },
+      title: { type: String },
+    },
+  });
 </script>

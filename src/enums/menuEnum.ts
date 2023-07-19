@@ -9,7 +9,7 @@ export enum MenuTypeEnum {
   // mixin menu
   MIX = 'mix',
   // top menu
-  TOP_MENU = 'top-menu'
+  TOP_MENU = 'top-menu',
 }
 
 // 折叠触发器位置
@@ -19,32 +19,32 @@ export enum TriggerEnum {
   // 菜单底部
   FOOTER = 'FOOTER',
   // 头部
-  HEADER = 'HEADER'
+  HEADER = 'HEADER',
 }
 
-export type Mode = 'vertical' | 'vertical-right' | 'horizontal' | 'inline'
+export type Mode = 'vertical' | 'vertical-right' | 'horizontal' | 'inline';
 
 // menu mode
 export enum MenuModeEnum {
   VERTICAL = 'vertical',
   HORIZONTAL = 'horizontal',
   VERTICAL_RIGHT = 'vertical-right',
-  INLINE = 'inline'
+  INLINE = 'inline',
 }
 
 export enum MenuSplitTyeEnum {
   NONE,
   TOP,
-  LEFT
+  LEFT,
 }
 
 export enum TopMenuAlignEnum {
   CENTER = 'center',
   START = 'start',
-  END = 'end'
+  END = 'end',
 }
 
 export enum MixSidebarTriggerEnum {
   HOVER = 'hover',
-  CLICK = 'click'
+  CLICK = 'click',
 }

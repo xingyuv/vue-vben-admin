@@ -6,14 +6,22 @@
     <Input />
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TestTab">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { PageWrapper } from '@/components/Page'
-import { Input } from 'ant-design-vue'
+<script lang="ts">
+  import { computed, defineComponent, unref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import { PageWrapper } from '/@/components/Page';
+  import { Input } from 'ant-design-vue';
 
-const route = useRoute()
-const params = computed(() => {
-  return route.params
-})
+  export default defineComponent({
+    name: 'TestTab',
+    components: { PageWrapper, Input },
+    setup() {
+      const { currentRoute } = useRouter();
+      return {
+        params: computed(() => {
+          return unref(currentRoute).params;
+        }),
+      };
+    },
+  });
 </script>

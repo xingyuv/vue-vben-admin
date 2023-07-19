@@ -17,7 +17,7 @@ export default {
     lockScreen: 'Lock screen',
     lockScreenBtn: 'Locking',
 
-    home: 'Home'
+    home: 'Home',
   },
   multipleTab: {
     reload: 'Refresh current',
@@ -25,7 +25,7 @@ export default {
     closeLeft: 'Close Left',
     closeRight: 'Close Right',
     closeOther: 'Close Other',
-    closeAll: 'Close All'
+    closeAll: 'Close All',
   },
   setting: {
     // content mode
@@ -50,7 +50,8 @@ export default {
     minute: 'Minute',
 
     operatingTitle: 'Successful!',
-    operatingContent: 'The copy is successful, please go to src/settings/projectSetting.ts to modify the configuration!',
+    operatingContent:
+      'The copy is successful, please go to src/settings/projectSetting.ts to modify the configuration!',
     resetSuccess: 'Successfully reset!',
 
     copyBtn: 'Copy',
@@ -109,6 +110,6 @@ export default {
     triggerHover: 'Hover',
     triggerClick: 'Click',
 
-    mixSidebarFixed: 'Fixed expanded menu'
-  }
-}
+    mixSidebarFixed: 'Fixed expanded menu',
+  },
+};

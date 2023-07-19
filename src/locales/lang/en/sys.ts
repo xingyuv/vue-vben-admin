@@ -9,7 +9,8 @@ export default {
     apiTimeoutMessage: 'The interface request timed out, please refresh the page and try again!',
     apiRequestFailed: 'The interface request failed, please try again later!',
     networkException: 'network anomaly',
-    networkExceptionMsg: 'Please check if your network connection is normal! The network is abnormal',
+    networkExceptionMsg:
+      'Please check if your network connection is normal! The network is abnormal',
 
     errMsg401: 'The user does not have permission (token, user name, password error)!',
     errMsg403: 'The user is authorized, but access is forbidden!',
@@ -21,12 +22,12 @@ export default {
     errMsg502: 'Network Error!',
     errMsg503: 'The service is unavailable, the server is temporarily overloaded or maintained!',
     errMsg504: 'Network timeout!',
-    errMsg505: 'The http version does not support the request!'
+    errMsg505: 'The http version does not support the request!',
   },
   app: {
     logoutTip: 'Reminder',
     logoutMessage: 'Confirm to exit the system?',
-    menuLoading: 'Menu loading...'
+    menuLoading: 'Menu loading...',
   },
   errorLog: {
     tableTitle: 'Error log list',
@@ -44,7 +45,7 @@ export default {
     fireResourceError: 'Fire resource error',
     fireAjaxError: 'Fire ajax error',
 
-    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.'
+    enableMessage: 'Only effective when useErrorHandle=true in `/src/settings/projectSetting.ts`.',
   },
   exception: {
     backLogin: 'Back Login',
@@ -54,14 +55,15 @@ export default {
     subTitle500: 'Sorry, the server is reporting an error.',
     noDataTitle: 'No data on the current page.',
     networkErrorTitle: 'Network Error',
-    networkErrorSubTitle: 'Sorry，Your network connection has been disconnected, please check your network!'
+    networkErrorSubTitle:
+      'Sorry，Your network connection has been disconnected, please check your network!',
   },
   lock: {
     unlock: 'Click to unlock',
     alert: 'Lock screen password error',
     backToLogin: 'Back to login',
     entry: 'Enter the system',
-    placeholder: 'Please enter the lock screen password or user password'
+    placeholder: 'Please enter the lock screen password or user password',
   },
   login: {
     backSignIn: 'Back sign in',
@@ -99,6 +101,6 @@ export default {
     confirmPassword: 'Confirm Password',
     email: 'Email',
     smsCode: 'SMS code',
-    mobile: 'Mobile'
-  }
-}
+    mobile: 'Mobile',
+  },
+};

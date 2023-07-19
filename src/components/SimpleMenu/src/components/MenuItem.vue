@@ -16,85 +16,92 @@
   </li>
 </template>
 
-<script lang="ts" setup name="MenuItem">
-import { ref, useSlots, computed, unref, getCurrentInstance, watch } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
-import { useMenuItem } from './useMenu'
-import { Tooltip } from 'ant-design-vue'
-import { useSimpleRootMenuContext } from './useSimpleMenuContext'
+<script lang="ts">
+  import { PropType, defineComponent, ref, computed, unref, getCurrentInstance, watch } from 'vue';
+  import { useDesign } from '/@/hooks/web/useDesign';
+  import { propTypes } from '/@/utils/propTypes';
+  import { useMenuItem } from './useMenu';
+  import { Tooltip } from 'ant-design-vue';
+  import { useSimpleRootMenuContext } from './useSimpleMenuContext';
 
-const props = defineProps({
-  name: {
-    type: [String, Number] as PropType<string | number>,
-    required: true
-  },
-  disabled: propTypes.bool
-})
-const slots = useSlots()
+  export default defineComponent({
+    name: 'MenuItem',
+    components: { Tooltip },
+    props: {
+      name: {
+        type: [String, Number] as PropType<string | number>,
+        required: true,
+      },
+      disabled: propTypes.bool,
+    },
+    setup(props, { slots }) {
+      const instance = getCurrentInstance();
 
-const instance = getCurrentInstance()
+      const active = ref(false);
 
-const active = ref(false)
+      const { getItemStyle, getParentList, getParentMenu, getParentRootMenu } =
+        useMenuItem(instance);
 
-const { getItemStyle, getParentList, getParentMenu, getParentRootMenu } = useMenuItem(instance)
+      const { prefixCls } = useDesign('menu');
 
-const { prefixCls } = useDesign('menu')
+      const { rootMenuEmitter, activeName } = useSimpleRootMenuContext();
 
-const { rootMenuEmitter, activeName } = useSimpleRootMenuContext()
+      const getClass = computed(() => {
+        return [
+          `${prefixCls}-item`,
+          {
+            [`${prefixCls}-item-active`]: unref(active),
+            [`${prefixCls}-item-selected`]: unref(active),
+            [`${prefixCls}-item-disabled`]: !!props.disabled,
+          },
+        ];
+      });
 
-const getClass = computed(() => {
-  return [
-    `${prefixCls}-item`,
-    {
-      [`${prefixCls}-item-active`]: unref(active),
-      [`${prefixCls}-item-selected`]: unref(active),
-      [`${prefixCls}-item-disabled`]: !!props.disabled
-    }
-  ]
-})
+      const getCollapse = computed(() => unref(getParentRootMenu)?.props.collapse);
 
-const getCollapse = computed(() => unref(getParentRootMenu)?.props.collapse)
+      const showTooptip = computed(() => {
+        return unref(getParentMenu)?.type.name === 'Menu' && unref(getCollapse) && slots.title;
+      });
 
-const showTooptip = computed(() => {
-  return unref(getParentMenu)?.type.name === 'Menu' && unref(getCollapse) && slots.title
-})
-
-function handleClickItem() {
-  const { disabled } = props
-  if (disabled) {
-    return
-  }
-
-  rootMenuEmitter.emit('on-menu-item-select', props.name)
-  if (unref(getCollapse)) {
-    return
-  }
-  const { uidList } = getParentList()
-
-  rootMenuEmitter.emit('on-update-opened', {
-    opend: false,
-    parent: instance?.parent,
-    uidList: uidList
-  })
-}
-watch(
-  () => activeName.value,
-  (name: string) => {
-    if (name === props.name) {
-      const { list, uidList } = getParentList()
-      active.value = true
-      list.forEach((item) => {
-        if (item.proxy) {
-          ;(item.proxy as any).active = true
+      function handleClickItem() {
+        const { disabled } = props;
+        if (disabled) {
+          return;
         }
-      })
 
-      rootMenuEmitter.emit('on-update-active-name:submenu', uidList)
-    } else {
-      active.value = false
-    }
-  },
-  { immediate: true }
-)
+        rootMenuEmitter.emit('on-menu-item-select', props.name);
+        if (unref(getCollapse)) {
+          return;
+        }
+        const { uidList } = getParentList();
+
+        rootMenuEmitter.emit('on-update-opened', {
+          opend: false,
+          parent: instance?.parent,
+          uidList: uidList,
+        });
+      }
+      watch(
+        () => activeName.value,
+        (name: string) => {
+          if (name === props.name) {
+            const { list, uidList } = getParentList();
+            active.value = true;
+            list.forEach((item) => {
+              if (item.proxy) {
+                (item.proxy as any).active = true;
+              }
+            });
+
+            rootMenuEmitter.emit('on-update-active-name:submenu', uidList);
+          } else {
+            active.value = false;
+          }
+        },
+        { immediate: true },
+      );
+
+      return { getClass, prefixCls, getItemStyle, getCollapse, handleClickItem, showTooptip };
+    },
+  });
 </script>

@@ -2,6 +2,7 @@
   <div class="md:flex">
     <template v-for="(item, index) in growCardList" :key="item.title">
       <Card
+        size="small"
         :loading="loading"
         :title="item.title"
         class="md:w-1/4 w-full !md:mt-0"
@@ -25,14 +26,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { CountTo } from '@/components/CountTo'
-import { Icon } from '@/components/Icon'
-import { Tag, Card } from 'ant-design-vue'
-import { growCardList } from '../data'
+  import { CountTo } from '/@/components/CountTo/index';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { Tag, Card } from 'ant-design-vue';
+  import { growCardList } from '../data';
 
-defineProps({
-  loading: {
-    type: Boolean
-  }
-})
+  defineProps({
+    loading: {
+      type: Boolean,
+    },
+  });
 </script>

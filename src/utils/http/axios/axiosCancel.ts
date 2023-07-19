@@ -1,60 +1,60 @@
-import type { InternalAxiosRequestConfig, Canceler } from 'axios'
-import axios from 'axios'
-import { isFunction } from '@/utils/is'
+import type { AxiosRequestConfig } from 'axios';
 
-// Used to store the identification and cancellation function of each request
-let pendingMap = new Map<string, Canceler>()
+// 用于存储每个请求的标识和取消函数
+const pendingMap = new Map<string, AbortController>();
 
-export const getPendingUrl = (config: InternalAxiosRequestConfig) => [config.method, config.url].join('&')
+const getPendingUrl = (config: AxiosRequestConfig): string => {
+  return [config.method, config.url].join('&');
+};
 
 export class AxiosCanceler {
   /**
-   * Add request
-   * @param {Object} config
+   * 添加请求
+   * @param config 请求配置
    */
-  addPending(config: InternalAxiosRequestConfig) {
-    this.removePending(config)
-    const url = getPendingUrl(config)
-    config.cancelToken =
-      config.cancelToken ||
-      new axios.CancelToken((cancel) => {
-        if (!pendingMap.has(url)) {
-          // If there is no current request in pending, add it
-          pendingMap.set(url, cancel)
-        }
-      })
-  }
-
-  /**
-   * @description: Clear all pending
-   */
-  removeAllPending() {
-    pendingMap.forEach((cancel) => {
-      cancel && isFunction(cancel) && cancel()
-    })
-    pendingMap.clear()
-  }
-
-  /**
-   * Removal request
-   * @param {Object} config
-   */
-  removePending(config: InternalAxiosRequestConfig) {
-    const url = getPendingUrl(config)
-
-    if (pendingMap.has(url)) {
-      // If there is a current request identifier in pending,
-      // the current request needs to be cancelled and removed
-      const cancel = pendingMap.get(url)
-      cancel && cancel(url)
-      pendingMap.delete(url)
+  public addPending(config: AxiosRequestConfig): void {
+    this.removePending(config);
+    const url = getPendingUrl(config);
+    const controller = new AbortController();
+    config.signal = config.signal || controller.signal;
+    if (!pendingMap.has(url)) {
+      // 如果当前请求不在等待中，将其添加到等待中
+      pendingMap.set(url, controller);
     }
   }
 
   /**
-   * @description: reset
+   * 清除所有等待中的请求
    */
-  reset(): void {
-    pendingMap = new Map<string, Canceler>()
+  public removeAllPending(): void {
+    pendingMap.forEach((abortController) => {
+      if (abortController) {
+        abortController.abort();
+      }
+    });
+    this.reset();
+  }
+
+  /**
+   * 移除请求
+   * @param config 请求配置
+   */
+  public removePending(config: AxiosRequestConfig): void {
+    const url = getPendingUrl(config);
+    if (pendingMap.has(url)) {
+      // 如果当前请求在等待中，取消它并将其从等待中移除
+      const abortController = pendingMap.get(url);
+      if (abortController) {
+        abortController.abort(url);
+      }
+      pendingMap.delete(url);
+    }
+  }
+
+  /**
+   * 重置
+   */
+  public reset(): void {
+    pendingMap.clear();
   }
 }

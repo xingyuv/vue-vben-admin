@@ -3,88 +3,99 @@
     <div ref="chartRef" :style="{ width, height }"></div>
   </Card>
 </template>
-<script lang="ts" setup>
-import type { Ref } from 'vue'
+<script lang="ts">
+  import type { Ref } from 'vue';
 
-import { ref, watch } from 'vue'
-import { Card } from 'ant-design-vue'
-import { useECharts } from '@/hooks/web/useECharts'
-import { propTypes } from '@/utils/propTypes'
+  import { defineComponent, ref, watch } from 'vue';
+  import { Card } from 'ant-design-vue';
+  import { useECharts } from '/@/hooks/web/useECharts';
 
-const props = defineProps({
-  loading: Boolean,
-  width: propTypes.string.def('100%'),
-  height: propTypes.string.def('400px')
-})
-const chartRef = ref<HTMLDivElement | null>(null)
-const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
-watch(
-  () => props.loading,
-  () => {
-    if (props.loading) {
-      return
-    }
-    setOptions({
-      legend: {
-        bottom: 0,
-        data: ['Visits', 'Sales']
+  export default defineComponent({
+    components: { Card },
+    props: {
+      loading: Boolean,
+      width: {
+        type: String as PropType<string>,
+        default: '100%',
       },
-      tooltip: {},
-      radar: {
-        radius: '60%',
-        splitNumber: 8,
-        indicator: [
-          {
-            name: '2017'
-          },
-          {
-            name: '2017'
-          },
-          {
-            name: '2018'
-          },
-          {
-            name: '2019'
-          },
-          {
-            name: '2020'
-          },
-          {
-            name: '2021'
+      height: {
+        type: String as PropType<string>,
+        default: '400px',
+      },
+    },
+    setup(props) {
+      const chartRef = ref<HTMLDivElement | null>(null);
+      const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>);
+      watch(
+        () => props.loading,
+        () => {
+          if (props.loading) {
+            return;
           }
-        ]
-      },
-      series: [
-        {
-          type: 'radar',
-          symbolSize: 0,
-          areaStyle: {
-            shadowBlur: 0,
-            shadowColor: 'rgba(0,0,0,.2)',
-            shadowOffsetX: 0,
-            shadowOffsetY: 10,
-            opacity: 1
-          },
-          data: [
-            {
-              value: [90, 50, 86, 40, 50, 20],
-              name: 'Visits',
-              itemStyle: {
-                color: '#9f8ed7'
-              }
+          setOptions({
+            legend: {
+              bottom: 0,
+              data: ['Visits', 'Sales'],
             },
-            {
-              value: [70, 75, 70, 76, 20, 85],
-              name: 'Sales',
-              itemStyle: {
-                color: '#1edec5'
-              }
-            }
-          ]
-        }
-      ]
-    })
-  },
-  { immediate: true }
-)
+            tooltip: {},
+            radar: {
+              radius: '60%',
+              splitNumber: 8,
+              indicator: [
+                {
+                  name: '2017',
+                },
+                {
+                  name: '2017',
+                },
+                {
+                  name: '2018',
+                },
+                {
+                  name: '2019',
+                },
+                {
+                  name: '2020',
+                },
+                {
+                  name: '2021',
+                },
+              ],
+            },
+            series: [
+              {
+                type: 'radar',
+                symbolSize: 0,
+                areaStyle: {
+                  shadowBlur: 0,
+                  shadowColor: 'rgba(0,0,0,.2)',
+                  shadowOffsetX: 0,
+                  shadowOffsetY: 10,
+                  opacity: 1,
+                },
+                data: [
+                  {
+                    value: [90, 50, 86, 40, 50, 20],
+                    name: 'Visits',
+                    itemStyle: {
+                      color: '#9f8ed7',
+                    },
+                  },
+                  {
+                    value: [70, 75, 70, 76, 20, 85],
+                    name: 'Sales',
+                    itemStyle: {
+                      color: '#1edec5',
+                    },
+                  },
+                ],
+              },
+            ],
+          });
+        },
+        { immediate: true },
+      );
+      return { chartRef };
+    },
+  });
 </script>

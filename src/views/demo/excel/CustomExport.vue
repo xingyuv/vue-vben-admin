@@ -9,22 +9,36 @@
   </PageWrapper>
 </template>
 
-<script lang="ts" setup>
-import { BasicTable } from '@/components/Table'
-import { jsonToSheetXlsx, ExpExcelModal, ExportModalResult } from '@/components/Excel'
-import { columns, data } from './data'
-import { useModal } from '@/components/Modal'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  import { BasicTable } from '/@/components/Table';
+  import { jsonToSheetXlsx, ExpExcelModal, ExportModalResult } from '/@/components/Excel';
+  import { columns, data } from './data';
+  import { useModal } from '/@/components/Modal';
+  import { PageWrapper } from '/@/components/Page';
 
-function defaultHeader({ filename, bookType }: ExportModalResult) {
-  // 默认Object.keys(data[0])作为header
-  jsonToSheetXlsx({
-    data,
-    filename,
-    write2excelOpts: {
-      bookType
-    }
-  })
-}
-const [register, { openModal }] = useModal()
+  export default defineComponent({
+    components: { BasicTable, ExpExcelModal, PageWrapper },
+    setup() {
+      function defaultHeader({ filename, bookType }: ExportModalResult) {
+        // 默认Object.keys(data[0])作为header
+        jsonToSheetXlsx({
+          data,
+          filename,
+          write2excelOpts: {
+            bookType,
+          },
+        });
+      }
+      const [register, { openModal }] = useModal();
+
+      return {
+        defaultHeader,
+        columns,
+        data,
+        register,
+        openModal,
+      };
+    },
+  });
 </script>

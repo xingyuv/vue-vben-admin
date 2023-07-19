@@ -1,5 +1,8 @@
-export const GITHUB_URL = 'https://gitee.com/xingyu4j/vue-vben-admin'
+// github repo url
+export const GITHUB_URL = 'https://github.com/anncwb/vue-vben-admin';
 
-export const DOC_URL = 'http://vben.x-surge.com/'
+// vue-vben-admin-next-doc
+export const DOC_URL = 'https://doc.vvbin.cn/';
 
-export const SITE_URL = 'http://vben.x-surge.com/'
+// site url
+export const SITE_URL = 'https://vben.vvbin.cn/';

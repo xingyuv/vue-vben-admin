@@ -1,13 +1,13 @@
 node_modules
 .DS_Store
 dist
-.npmrc
 .cache
+.turbo
 
 tests/server/static
 tests/server/static/upload
 
-*.local
+.local
 # local env files
 .env.local
 .env.*.local
@@ -29,5 +29,6 @@ pnpm-debug.log*
 *.sw?
 
 package-lock.json
+pnpm-lock.yaml
 
 .history
