@@ -17,7 +17,7 @@
   import { MODE } from './typing';
 
   const props = defineProps({
-    value: { type: [Object, String] as PropType<Record<string, any> | string> },
+    value: { type: [Object, String] as PropType<Record<string, any> | string>, default: '' },
     mode: {
       type: String as PropType<MODE>,
       default: MODE.JSON,

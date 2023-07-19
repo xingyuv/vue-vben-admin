@@ -7,7 +7,9 @@
 
   import VueJsonPretty from 'vue-json-pretty';
 
+  import { propTypes } from '@/utils/propTypes';
+
   defineProps({
-    data: Object,
+    data: propTypes.object,
   });
 </script>

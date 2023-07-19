@@ -5,8 +5,9 @@
 </template>
 <script lang="ts" setup>
   import Icon from '@/components/Icon/Icon.vue';
+  import { propTypes } from '@/utils/propTypes';
 
   defineProps({
-    icon: String,
+    icon: propTypes.string,
   });
 </script>

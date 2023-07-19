@@ -8,36 +8,36 @@
     </template>
   </a-input>
 </template>
-<script lang="ts">
-  import { defineComponent, PropType } from 'vue';
+<script lang="ts" setup>
+  import { PropType } from 'vue';
 
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
   import CountButton from './CountButton.vue';
 
-  const props = {
-    value: { type: String },
-    size: { type: String, validator: (v) => ['default', 'large', 'small'].includes(v) },
-    count: { type: Number, default: 60 },
+  defineOptions({
+    name: 'CountDownInput',
+    inheritAttrs: false,
+  });
+
+  const props = defineProps({
+    value: propTypes.string,
+    size: {
+      type: String,
+      validator: (v: string) => ['default', 'large', 'small'].includes(v),
+      default: 'default',
+    },
+    count: propTypes.number.def(60),
     sendCodeApi: {
       type: Function as PropType<() => Promise<boolean>>,
       default: null,
     },
-  };
-
-  export default defineComponent({
-    name: 'CountDownInput',
-    components: { CountButton },
-    inheritAttrs: false,
-    props,
-    setup(props) {
-      const { prefixCls } = useDesign('countdown-input');
-      const [state] = useRuleFormItem(props);
-
-      return { prefixCls, state };
-    },
   });
+
+  const { prefixCls } = useDesign('countdown-input');
+  const [state] = useRuleFormItem(props);
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-countdown-input';

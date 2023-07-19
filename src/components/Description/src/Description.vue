@@ -18,18 +18,19 @@
   import { useDesign } from '@/hooks/web/useDesign';
   import { getSlot } from '@/utils/helper/tsxHelper';
   import { isFunction } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
 
   import type { DescInstance, DescItem, DescriptionProps } from './typing';
 
   const props = {
-    useCollapse: { type: Boolean, default: true },
-    title: { type: String, default: '' },
+    useCollapse: propTypes.bool.def(true),
+    title: propTypes.string.def(''),
     size: {
       type: String,
-      validator: (v) => ['small', 'default', 'middle', undefined].includes(v),
+      validator: (v: string) => ['small', 'default', 'middle', undefined].includes(v),
       default: 'small',
     },
-    bordered: { type: Boolean, default: true },
+    bordered: propTypes.bool.def(true),
     column: {
       type: [Number, Object],
       default: () => {
@@ -44,7 +45,7 @@
       type: Array as PropType<DescItem[]>,
       default: () => [],
     },
-    data: { type: Object },
+    data: propTypes.object,
   };
 
   export default defineComponent({
