@@ -24,8 +24,7 @@
   const themeConfig = reactive<ThemeConfig>({
     algorithm: theme.defaultAlgorithm,
     token: {
-      colorBgContainer: '#fff',
-      colorPrimary: '#00b96b',
+      colorPrimary: '#1890ff',
     },
     components: {},
   });
