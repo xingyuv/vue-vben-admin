@@ -1,4 +1,5 @@
 <script lang="tsx">
+  import { type Recordable } from '@vben/types';
   import { Empty, Spin, Tree } from 'ant-design-vue';
   import { cloneDeep, difference, get, omit } from 'lodash-es';
   import type { CSSProperties } from 'vue';
@@ -139,7 +140,7 @@
         return icon;
       }
 
-      async function handleRightClick({ event, node }: Recordable) {
+      async function handleRightClick({ event, node }: Recordable<any>) {
         const { rightMenuList: menuList = [], beforeRightClick } = props;
         const contextMenuOptions: CreateContextOptions = { event, items: [] };
 

@@ -180,7 +180,6 @@
   const setGlobalConfigState = (formItem: IVFormComponent) => {
     formItem.colProps = formItem.colProps || {};
     formItem.colProps.span = globalConfigState.span;
-    // console.log('setGlobalConfigState', formItem);
   };
 
   /**

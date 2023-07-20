@@ -31,6 +31,7 @@
       },
       record: {
         type: Object as any,
+        default: () => {},
       },
       column: {
         type: Object as PropType<BasicColumn>,

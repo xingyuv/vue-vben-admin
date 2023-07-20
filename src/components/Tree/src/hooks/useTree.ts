@@ -16,7 +16,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
 
     for (let index = 0; index < treeData.length; index++) {
       const node = treeData[index];
-      keys.push(node[keyField]!);
+      keys.push(node[keyField]);
       const children = node[childrenField];
       if (children && children.length) {
         keys.push(...(getAllKeys(children) as string[]));
@@ -34,7 +34,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
 
     for (let index = 0; index < treeData.length; index++) {
       const node = treeData[index];
-      node.disabled !== true && node.selectable !== false && keys.push(node[keyField]!);
+      node.disabled !== true && node.selectable !== false && keys.push(node[keyField]);
       const children = node[childrenField];
       if (children && children.length) {
         keys.push(...(getEnabledKeys(children) as string[]));
@@ -52,7 +52,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
       const node = treeData[index];
       const children = node[childrenField];
       if (nodeKey === node[keyField]) {
-        keys.push(node[keyField]!);
+        keys.push(node[keyField]);
         if (children && children.length) {
           keys.push(...(getAllKeys(children) as string[]));
         }
@@ -186,14 +186,15 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
     const treeData = list || unref(treeDataRef);
     const { key: keyField, children: childrenField } = unref(getFieldNames);
     if (!keyField) return;
+    if (!childrenField) return null;
     treeData.forEach((item) => {
       if (selectedNode?.key || selectedNode?.key === 0) return selectedNode;
       if (item[keyField] === key) {
         selectedNode = item;
         return;
       }
-      if (item[childrenField!] && item[childrenField!].length) {
-        selectedNode = getSelectedNode(key, item[childrenField!], selectedNode);
+      if (item[childrenField] && item[childrenField].length) {
+        selectedNode = getSelectedNode(key, item[childrenField], selectedNode);
       }
     });
     return selectedNode || null;

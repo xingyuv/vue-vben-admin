@@ -135,7 +135,7 @@
       }
 
       const instance = {
-        getVditor: (): Vditor => vditorRef.value!,
+        getVditor: (): Vditor => vditorRef.value,
       };
 
       function destroy() {

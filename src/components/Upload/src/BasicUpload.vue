@@ -54,7 +54,7 @@
     name: 'BasicUpload',
     components: { UploadModal, Space, UploadPreviewModal, Icon, Tooltip },
     props: uploadContainerProps,
-    emits: ['change', 'delete', 'preview-delete', 'update:value'],
+    emits: ['change', 'delete', 'previewDelete', 'update:value'],
 
     setup(props, { emit, attrs }) {
       const { t } = useI18n();
@@ -104,7 +104,7 @@
       }
 
       function handlePreviewDelete(url: string) {
-        emit('preview-delete', url);
+        emit('previewDelete', url);
       }
 
       return {

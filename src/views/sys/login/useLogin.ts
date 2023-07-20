@@ -1,4 +1,4 @@
-import type { FormInstance, ValidationRule } from 'ant-design-vue/lib/form/Form';
+import type { FormInstance, Rule } from 'ant-design-vue/lib/form';
 import type { NamePath, RuleObject } from 'ant-design-vue/lib/form/interface';
 import { computed, Ref, ref, unref } from 'vue';
 
@@ -31,7 +31,7 @@ export function useLoginState() {
   return { setLoginState, getLoginState, handleBackLogin };
 }
 
-export function useFormValid<T extends Object = any>(formRef: Ref<FormInstance>) {
+export function useFormValid<T extends object = any>(formRef: Ref<FormInstance>) {
   const validate = computed(() => {
     const form = unref(formRef);
     return form?.validate ?? ((_nameList?: NamePath) => Promise.resolve());
@@ -71,7 +71,7 @@ export function useFormRules(formData?: Recordable) {
     };
   };
 
-  const getFormRules = computed((): { [k: string]: ValidationRule | ValidationRule[] } => {
+  const getFormRules = computed((): { [k: string]: Rule | Rule[] } => {
     const accountFormRule = unref(getAccountFormRule);
     const passwordFormRule = unref(getPasswordFormRule);
     const smsFormRule = unref(getSmsFormRule);
@@ -123,5 +123,5 @@ function createRule(message: string) {
       message,
       trigger: 'change',
     },
-  ];
+  ] as RuleObject[];
 }

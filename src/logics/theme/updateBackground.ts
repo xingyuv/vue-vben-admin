@@ -30,12 +30,12 @@ export function updateHeaderBgColor(color?: string) {
   setCssVar(HEADER_BG_COLOR_VAR, color);
 
   // hover color
-  const hoverColor = lighten(color!, 6);
+  const hoverColor = lighten(color, 6);
   setCssVar(HEADER_BG_HOVER_COLOR_VAR, hoverColor);
   setCssVar(HEADER_MENU_ACTIVE_BG_COLOR_VAR, hoverColor);
 
   // Determine the depth of the color value and automatically switch the theme
-  const isDark = colorIsDark(color!);
+  const isDark = colorIsDark(color);
 
   appStore.setProjectConfig({
     headerSetting: {
@@ -61,12 +61,12 @@ export function updateSidebarBgColor(color?: string) {
     }
   }
   setCssVar(SIDER_DARK_BG_COLOR, color);
-  setCssVar(SIDER_DARK_DARKEN_BG_COLOR, darken(color!, 6));
-  setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color!, 5));
+  setCssVar(SIDER_DARK_DARKEN_BG_COLOR, darken(color, 6));
+  setCssVar(SIDER_LIGHTEN_BG_COLOR, lighten(color, 5));
 
   // only #ffffff is light
   // Only when the background color is #fff, the theme of the menu will be changed to light
-  const isLight = ['#fff', '#ffffff'].includes(color!.toLowerCase());
+  const isLight = ['#fff', '#ffffff'].includes(color.toLowerCase());
 
   appStore.setProjectConfig({
     menuSetting: {

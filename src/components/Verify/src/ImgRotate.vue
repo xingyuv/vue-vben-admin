@@ -67,7 +67,7 @@
         const { imgWidth, height, maxDegree } = props;
         const { moveX } = data;
         const currentRotate = Math.ceil(
-          (moveX / (imgWidth! - parseInt(height as string))) * maxDegree! * unref(getFactorRef),
+          (moveX / (imgWidth - parseInt(height as string))) * maxDegree * unref(getFactorRef),
         );
         state.currentRotate = currentRotate;
         state.imgStyle = hackCss('transform', `rotateZ(${state.randomRotate - currentRotate}deg)`);
@@ -75,7 +75,7 @@
 
       function handleImgOnLoad() {
         const { minDegree, maxDegree } = props;
-        const ranRotate = Math.floor(minDegree! + Math.random() * (maxDegree! - minDegree!)); // 生成随机角度
+        const ranRotate = Math.floor(minDegree + Math.random() * (maxDegree - minDegree)); // 生成随机角度
         state.randomRotate = ranRotate;
         state.imgStyle = hackCss('transform', `rotateZ(${ranRotate}deg)`);
       }

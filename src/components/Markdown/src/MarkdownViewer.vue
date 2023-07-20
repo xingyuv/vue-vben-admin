@@ -12,8 +12,8 @@
   import { getTheme } from './getTheme';
 
   const props = defineProps({
-    value: { type: String },
-    class: { type: String },
+    value: { type: String, default: null },
+    class: { type: String, default: null },
   });
   const viewerRef = ref(null);
   const vditorPreviewRef = ref(null) as Ref<VditorPreview | null>;

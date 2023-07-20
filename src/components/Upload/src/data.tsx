@@ -80,7 +80,7 @@ export function createTableColumns(): BasicColumn[] {
     },
   ];
 }
-export function createActionColumn(handleRemove: Function): BasicColumn {
+export function createActionColumn(handleRemove: Fn): BasicColumn {
   return {
     width: 120,
     title: t('component.upload.operating'),

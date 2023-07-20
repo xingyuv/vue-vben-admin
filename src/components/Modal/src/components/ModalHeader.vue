@@ -14,6 +14,7 @@
   defineProps({
     helpMessage: {
       type: [String, Array] as PropType<string | string[]>,
+      default: null,
     },
     title: propTypes.string,
   });

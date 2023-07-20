@@ -17,8 +17,8 @@
       <template #item="{ element, index }">
         <li
           class="bs-box text-ellipsis"
-          @dragstart="$emit('add-attrs', list, index)"
-          @click="$emit('handle-list-push', element)"
+          @dragstart="emit('add-attrs', list, index)"
+          @click="emit('handle-list-push', element)"
         >
           <!-- <svg v-if="element.icon.indexOf('icon-') > -1" class="icon" aria-hidden="true">
             <use :xlink:href="`#${element.icon}`" />
@@ -30,8 +30,8 @@
     </draggable>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, reactive } from 'vue';
+<script lang="ts" setup>
+  import type { PropType } from 'vue';
   import draggable from 'vuedraggable';
 
   import Icon from '@/components/Icon/Icon.vue';
@@ -39,37 +39,34 @@
 
   import { IVFormComponent } from '../../../typings/v-form-component';
 
-  export default defineComponent({
-    name: 'CollapseItem',
-    components: { draggable, Icon },
-    props: {
-      list: {
-        type: [Array],
-        default: () => [],
-      },
-      handleListPush: {
-        type: Function,
-        default: null,
-      },
-    },
-    setup(props, { emit }) {
-      const { prefixCls } = useDesign('form-design-collapse-item');
+  defineOptions({ name: 'CollapseItem' });
 
-      const state = reactive({});
-      const handleStart = (e: any, list1: IVFormComponent[]) => {
-        emit('start', list1[e.oldIndex].component);
-      };
-      const handleAdd = (e: any) => {
-        console.log(e);
-      };
-      // https://github.com/SortableJS/vue.draggable.next
-      // https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/custom-clone.vue
-      const cloneItem = (one) => {
-        return props.handleListPush(one);
-      };
-      return { prefixCls, state, handleStart, handleAdd, cloneItem };
+  const props = defineProps({
+    list: {
+      type: Array as PropType<IVFormComponent[]>,
+      default: () => [],
+    },
+    handleListPush: {
+      type: Function,
+      default: null,
     },
   });
+
+  const emit = defineEmits(['start', 'add-attrs', 'handle-list-push']);
+
+  const { prefixCls } = useDesign('form-design-collapse-item');
+
+  const handleStart = (e: any, list1: IVFormComponent[]) => {
+    emit('start', list1[e.oldIndex].component);
+  };
+  const handleAdd = (e: any) => {
+    console.log(e);
+  };
+  // https://github.com/SortableJS/vue.draggable.next
+  // https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/custom-clone.vue
+  const cloneItem = (one) => {
+    return props.handleListPush(one);
+  };
 </script>
 
 <style lang="less" scoped>

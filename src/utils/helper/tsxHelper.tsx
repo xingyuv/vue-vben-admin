@@ -20,8 +20,8 @@ export function getSlot(slots: Slots, slot = 'default', data?: any) {
 
 /**
  * extends slots
- * @param slots
- * @param excludeKeys
+ * @param slots slots
+ * @param excludeKeys excludeKeys
  */
 export function extendSlots(slots: Slots, excludeKeys: string[] = []) {
   const slotKeys = Object.keys(slots);

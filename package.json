@@ -79,7 +79,6 @@
     "@vben/vite-config": "workspace:*",
     "@vue/shared": "^3.3.4",
     "@vueuse/core": "^10.2.1",
-    "@vueuse/shared": "^10.2.1",
     "@zxcvbn-ts/core": "^3.0.3",
     "ant-design-vue": "^4.0.0",
     "axios": "^1.4.0",

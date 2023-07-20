@@ -83,7 +83,7 @@
       isAdvanced: propTypes.bool,
       hideAdvanceBtn: propTypes.bool,
     },
-    emits: ['toggle-advanced'],
+    emits: ['toggleAdvanced'],
     setup(props, { emit }) {
       const { t } = useI18n();
 
@@ -121,7 +121,7 @@
       });
 
       function toggleAdvanced() {
-        emit('toggle-advanced');
+        emit('toggleAdvanced');
       }
 
       return {

@@ -88,7 +88,7 @@ export function useTableScroll(
       !tableEl.classList.contains('hide-scrollbar-x') && tableEl.classList.add('hide-scrollbar-x');
     }
 
-    bodyEl!.style.height = 'unset';
+    bodyEl.style.height = 'unset';
 
     if (!unref(getCanResize) || !unref(tableData) || tableData.length === 0) return;
 
@@ -167,10 +167,10 @@ export function useTableScroll(
       paginationHeight -
       footerHeight -
       headerHeight;
-    height = (height > maxHeight! ? (maxHeight as number) : height) ?? height;
+    height = (!!maxHeight && height > maxHeight ? (maxHeight as number) : height) ?? height;
     setHeight(height);
 
-    bodyEl!.style.height = `${height}px`;
+    bodyEl.style.height = `${height}px`;
   }
   useWindowSizeFn(calcTableHeight, { wait: 280 });
   onMountedOrActivated(() => {

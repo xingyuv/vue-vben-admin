@@ -117,7 +117,7 @@
     components: { ImgUpload },
     inheritAttrs: false,
     props: tinymceProps,
-    emits: ['change', 'update:modelValue', 'inited', 'init-error'],
+    emits: ['change', 'update:modelValue', 'inited', 'initError'],
     setup(props, { emit, attrs }) {
       const editorRef = ref<Editor | null>(null);
       const fullscreen = ref(false);
@@ -217,7 +217,7 @@
 
       function destory() {
         if (tinymce !== null) {
-          tinymce?.remove?.(unref(initOptions).selector!);
+          tinymce?.remove?.(unref(initOptions).selector);
         }
       }
 
@@ -232,7 +232,7 @@
             emit('inited', editor);
           })
           .catch((err) => {
-            emit('init-error', err);
+            emit('initError', err);
           });
       }
 

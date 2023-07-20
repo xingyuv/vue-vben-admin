@@ -5,7 +5,7 @@
   <div class="rule-props-content">
     <Form v-if="formConfig.currentItem && formConfig.currentItem['rules']">
       <div
-        v-for="(item, index) of formConfig.currentItem['rules']"
+        v-for="(item, index) of formConfig.currentItem[`rules`]"
         :key="index"
         class="rule-props-item"
       >

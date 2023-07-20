@@ -145,7 +145,7 @@ export const usePermissionStore = defineStore({
             const currentPath = path.startsWith('/') ? path : parentPath + path;
             if (currentPath === homePath) {
               if (redirect) {
-                homePath = route.redirect! as string;
+                homePath = route.redirect as string;
               } else {
                 route.meta = Object.assign({}, route.meta, { affix: true });
                 throw new Error('end');

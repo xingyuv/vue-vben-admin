@@ -24,11 +24,11 @@
     modalHeaderHeight: { type: Number, default: 57 },
     modalFooterHeight: { type: Number, default: 74 },
     minHeight: { type: Number, default: 200 },
-    height: { type: Number },
+    height: { type: Number, default: null },
     footerOffset: { type: Number, default: 0 },
     open: { type: Boolean },
     fullScreen: { type: Boolean },
-    loadingTip: { type: String },
+    loadingTip: { type: String, default: null },
   });
 
   const emit = defineEmits(['height-change', 'ext-height']);

@@ -13,7 +13,7 @@
 <script lang="ts" setup>
   import 'cropperjs/dist/cropper.css';
 
-  import { useDebounceFn } from '@vueuse/shared';
+  import { useDebounceFn } from '@vueuse/core';
   import Cropper from 'cropperjs';
   import type { CSSProperties } from 'vue';
   import { computed, onMounted, onUnmounted, PropType, ref, unref, useAttrs } from 'vue';
