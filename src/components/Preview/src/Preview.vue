@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls">
-    <PreviewGroup>
+    <Image.PreviewGroup>
       <slot v-if="!imageList || $slots.default"></slot>
       <template v-else>
         <template v-for="item in getImageList" :key="item.src">
@@ -11,13 +11,13 @@
           </Image>
         </template>
       </template>
-    </PreviewGroup>
+    </Image.PreviewGroup>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Image } from 'ant-design-vue';
   import type { PropType } from 'vue';
-  import { computed, defineComponent } from 'vue';
+  import { computed } from 'vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { isString } from '@/utils/is';
@@ -41,42 +41,32 @@
 
   type ImageItem = string | ImageProps;
 
-  export default defineComponent({
-    name: 'ImagePreview',
-    components: {
-      Image,
-      PreviewGroup: Image.PreviewGroup,
-    },
-    props: {
-      functional: propTypes.bool,
-      imageList: {
-        type: Array as PropType<ImageItem[]>,
-      },
-    },
-    setup(props) {
-      const { prefixCls } = useDesign('image-preview');
+  defineOptions({ name: 'ImagePreview' });
 
-      const getImageList = computed((): any[] => {
-        const { imageList } = props;
-        if (!imageList) {
-          return [];
-        }
-        return imageList.map((item) => {
-          if (isString(item)) {
-            return {
-              src: item,
-              placeholder: false,
-            };
-          }
-          return item;
-        });
-      });
-
-      return {
-        prefixCls,
-        getImageList,
-      };
+  const props = defineProps({
+    functional: propTypes.bool,
+    imageList: {
+      type: Array as PropType<ImageItem[]>,
+      default: () => [],
     },
+  });
+
+  const { prefixCls } = useDesign('image-preview');
+
+  const getImageList = computed((): any[] => {
+    const { imageList } = props;
+    if (!imageList) {
+      return [];
+    }
+    return imageList.map((item) => {
+      if (isString(item)) {
+        return {
+          src: item,
+          placeholder: false,
+        };
+      }
+      return item;
+    });
   });
 </script>
 <style lang="less">

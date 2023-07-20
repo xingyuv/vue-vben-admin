@@ -13,9 +13,9 @@
   </Layout>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { Layout } from 'ant-design-vue';
-  import { computed, defineComponent, unref } from 'vue';
+  import { computed, unref } from 'vue';
 
   import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
@@ -29,44 +29,25 @@
   import LayoutMultipleHeader from './header/MultipleHeader.vue';
   import LayoutSideBar from './sider/index.vue';
 
-  export default defineComponent({
-    name: 'DefaultLayout',
-    components: {
-      LayoutFeatures: createAsyncComponent(() => import('@/layouts/default/feature/index.vue')),
-      LayoutFooter: createAsyncComponent(() => import('@/layouts/default/footer/index.vue')),
-      LayoutHeader,
-      LayoutContent,
-      LayoutSideBar,
-      LayoutMultipleHeader,
-      Layout,
-    },
-    setup() {
-      const { prefixCls } = useDesign('default-layout');
-      const { getIsMobile } = useAppInject();
-      const { getShowFullHeaderRef } = useHeaderSetting();
-      const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting();
+  defineOptions({ name: 'DefaultLayout' });
 
-      // Create a lock screen monitor
-      const lockEvents = useLockPage();
+  const LayoutFeatures = createAsyncComponent(() => import('@/layouts/default/feature/index.vue'));
+  const LayoutFooter = createAsyncComponent(() => import('@/layouts/default/footer/index.vue'));
 
-      const layoutClass = computed(() => {
-        const cls: string[] = ['ant-layout'];
-        if (unref(getIsMixSidebar) || unref(getShowMenu)) {
-          cls.push('ant-layout-has-sider');
-        }
-        return cls;
-      });
+  const { prefixCls } = useDesign('default-layout');
+  const { getIsMobile } = useAppInject();
+  const { getShowFullHeaderRef } = useHeaderSetting();
+  const { getShowSidebar, getIsMixSidebar, getShowMenu } = useMenuSetting();
 
-      return {
-        getShowFullHeaderRef,
-        getShowSidebar,
-        prefixCls,
-        getIsMobile,
-        getIsMixSidebar,
-        layoutClass,
-        lockEvents,
-      };
-    },
+  // Create a lock screen monitor
+  const lockEvents = useLockPage();
+
+  const layoutClass = computed(() => {
+    const cls: string[] = ['ant-layout'];
+    if (unref(getIsMixSidebar) || unref(getShowMenu)) {
+      cls.push('ant-layout-has-sider');
+    }
+    return cls;
   });
 </script>
 <style lang="less">

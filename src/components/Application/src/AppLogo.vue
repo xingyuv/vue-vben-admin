@@ -27,7 +27,6 @@
     theme: {
       type: String,
       validator: (v: string) => ['light', 'dark'].includes(v),
-      default: 'light',
     },
     /**
      * Whether to show title

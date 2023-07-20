@@ -8,43 +8,41 @@
     <Spin v-bind="$attrs" :tip="tip" :size="size" :spinning="loading" />
   </section>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Spin } from 'ant-design-vue';
-  import { defineComponent, PropType } from 'vue';
+  import { PropType } from 'vue';
 
   import { SizeEnum } from '@/enums/sizeEnum';
 
-  export default defineComponent({
-    name: 'Loading',
-    components: { Spin },
-    props: {
-      tip: {
-        type: String as PropType<string>,
-        default: '',
+  defineOptions({ name: 'Loading' });
+
+  defineProps({
+    tip: {
+      type: String as PropType<string>,
+      default: '',
+    },
+    size: {
+      type: String as PropType<SizeEnum>,
+      default: SizeEnum.LARGE,
+      validator: (v: SizeEnum): boolean => {
+        return [SizeEnum.DEFAULT, SizeEnum.SMALL, SizeEnum.LARGE].includes(v);
       },
-      size: {
-        type: String as PropType<SizeEnum>,
-        default: SizeEnum.LARGE,
-        validator: (v: SizeEnum): boolean => {
-          return [SizeEnum.DEFAULT, SizeEnum.SMALL, SizeEnum.LARGE].includes(v);
-        },
-      },
-      absolute: {
-        type: Boolean as PropType<boolean>,
-        default: false,
-      },
-      loading: {
-        type: Boolean as PropType<boolean>,
-        default: false,
-      },
-      background: {
-        type: String as PropType<string>,
-        default: '',
-      },
-      theme: {
-        type: String as PropType<'dark' | 'light'>,
-        default: 'light',
-      },
+    },
+    absolute: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    loading: {
+      type: Boolean as PropType<boolean>,
+      default: false,
+    },
+    background: {
+      type: String as PropType<string>,
+      default: '',
+    },
+    theme: {
+      type: String as PropType<'dark' | 'light'>,
+      default: 'light',
     },
   });
 </script>

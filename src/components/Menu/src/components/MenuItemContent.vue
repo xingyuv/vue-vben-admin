@@ -4,8 +4,8 @@
     {{ getI18nName }}
   </span>
 </template>
-<script lang="ts">
-  import { computed, defineComponent } from 'vue';
+<script lang="ts" setup>
+  import { computed } from 'vue';
 
   import Icon from '@/components/Icon/Icon.vue';
   import { useDesign } from '@/hooks/web/useDesign';
@@ -13,24 +13,13 @@
 
   import { contentProps } from '../props';
 
+  defineOptions({ name: 'MenuItemContent' });
+
+  const props = defineProps(contentProps);
+
   const { t } = useI18n();
 
-  export default defineComponent({
-    name: 'MenuItemContent',
-    components: {
-      Icon,
-    },
-    props: contentProps,
-    setup(props) {
-      const { prefixCls } = useDesign('basic-menu-item-content');
-      const getI18nName = computed(() => t(props.item?.name));
-      const getIcon = computed(() => props.item?.icon);
-
-      return {
-        prefixCls,
-        getI18nName,
-        getIcon,
-      };
-    },
-  });
+  const { prefixCls } = useDesign('basic-menu-item-content');
+  const getI18nName = computed(() => t(props.item?.name));
+  const getIcon = computed(() => props.item?.icon);
 </script>

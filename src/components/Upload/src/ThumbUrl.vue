@@ -3,18 +3,14 @@
     <Image v-if="fileUrl" :src="fileUrl" :width="104" />
   </span>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Image } from 'ant-design-vue';
-  import { defineComponent } from 'vue';
 
   import { propTypes } from '@/utils/propTypes';
 
-  export default defineComponent({
-    components: { Image },
-    props: {
-      fileUrl: propTypes.string.def(''),
-      fileName: propTypes.string.def(''),
-    },
+  defineProps({
+    fileUrl: propTypes.string.def(''),
+    fileName: propTypes.string.def(''),
   });
 </script>
 <style lang="less">

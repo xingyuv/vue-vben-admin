@@ -13,14 +13,14 @@
     />
   </BasicModal>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
   import { BasicForm, FormSchema, useForm } from '@/components/Form/index';
   import { BasicModal, useModalInner } from '@/components/Modal';
   import { useI18n } from '@/hooks/web/useI18n';
 
   import type { ExportModalResult } from './typing';
+
+  const emit = defineEmits(['success', 'register']);
 
   const { t } = useI18n();
 
@@ -63,30 +63,17 @@
       },
     },
   ];
-  export default defineComponent({
-    components: { BasicModal, BasicForm },
-    emits: ['success', 'register'],
-    setup(_, { emit }) {
-      const [registerForm, { validateFields }] = useForm();
-      const [registerModal, { closeModal }] = useModalInner();
 
-      async function handleOk() {
-        const res = (await validateFields()) as ExportModalResult;
-        const { filename, bookType } = res;
-        emit('success', {
-          filename: `${filename.split('.').shift()}.${bookType}`,
-          bookType,
-        });
-        closeModal();
-      }
+  const [registerForm, { validateFields }] = useForm();
+  const [registerModal, { closeModal }] = useModalInner();
 
-      return {
-        schemas,
-        handleOk,
-        registerForm,
-        registerModal,
-        t,
-      };
-    },
-  });
+  async function handleOk() {
+    const res = (await validateFields()) as ExportModalResult;
+    const { filename, bookType } = res;
+    emit('success', {
+      filename: `${filename.split('.').shift()}.${bookType}`,
+      bookType,
+    });
+    closeModal();
+  }
 </script>
