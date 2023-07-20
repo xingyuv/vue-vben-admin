@@ -3,7 +3,7 @@
     v-bind="$attrs"
     title="Modal Title"
     @register="register"
-    @visible-change="handleVisibleChange"
+    @open-change="handleOpenChange"
   >
     <div class="pt-3px pr-3px">
       <BasicForm :model="model" @register="registerForm" />
@@ -77,11 +77,11 @@
         // })
       }
 
-      function handleVisibleChange(v) {
+      function handleOpenChange(v) {
         v && props.userData && nextTick(() => onDataReceive(props.userData));
       }
 
-      return { register, schemas, registerForm, model: modelRef, handleVisibleChange };
+      return { register, schemas, registerForm, model: modelRef, handleOpenChange };
     },
   });
 </script>

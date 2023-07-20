@@ -4,7 +4,7 @@
 <template>
   <Modal
     title="JSON数据"
-    :visible="visible"
+    :open="open"
     cancelText="关闭"
     :destroyOnClose="true"
     wrapClassName="v-code-modal"
@@ -56,7 +56,7 @@
       const { createMessage } = useMessage();
 
       const state = reactive({
-        visible: false,
+        open: false,
         json: `{
   "schemas": [
     {
@@ -83,10 +83,10 @@
       });
       const { formDesignMethods } = useFormDesignState();
       const handleCancel = () => {
-        state.visible = false;
+        state.open = false;
       };
       const showModal = () => {
-        state.visible = true;
+        state.open = true;
       };
       const handleImportJson = () => {
         // 导入JSON

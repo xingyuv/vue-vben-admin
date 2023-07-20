@@ -5,7 +5,7 @@
   <Modal
     title="JSON数据"
     :footer="null"
-    :visible="visible"
+    :open="open"
     :destroyOnClose="true"
     wrapClassName="v-code-modal"
     style="top: 20px"
@@ -32,10 +32,10 @@
     emits: ['cancel'],
     setup(_props, { emit }) {
       const state = reactive<{
-        visible: boolean;
+        open: boolean;
         jsonData: IFormConfig;
       }>({
-        visible: false, // 控制json数据弹框显示
+        open: false, // 控制json数据弹框显示
         jsonData: {} as IFormConfig, // json数据
       });
       /**
@@ -45,7 +45,7 @@
       const showModal = (jsonData: IFormConfig) => {
         formatRules(jsonData.schemas);
         state.jsonData = jsonData;
-        state.visible = true;
+        state.open = true;
       };
 
       // 计算json数据
@@ -55,7 +55,7 @@
 
       // 关闭弹框
       const handleCancel = () => {
-        state.visible = false;
+        state.open = false;
         emit('cancel');
       };
 

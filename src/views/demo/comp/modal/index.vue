@@ -25,7 +25,7 @@
       <a-button type="primary" class="my-4" @click="openTargetModal(4)"> 打开弹窗4 </a-button>
     </a-space>
 
-    <component :is="currentModal" v-model:visible="modalVisible" :userData="userData" />
+    <component :is="currentModal" v-model:open="modalOpen" :userData="userData" />
 
     <Modal1 :minHeight="100" @register="register1" />
     <Modal2 @register="register2" />
@@ -54,7 +54,7 @@
       const [register2, { openModal: openModal2 }] = useModal();
       const [register3, { openModal: openModal3 }] = useModal();
       const [register4, { openModal: openModal4 }] = useModal();
-      const modalVisible = ref<boolean>(false);
+      const modalOpen = ref<boolean>(false);
       const userData = ref<any>(null);
 
       function send() {
@@ -91,7 +91,7 @@
           // passing data through `userData` prop
           userData.value = { data: Math.random(), info: 'Info222' };
           // open the target modal
-          modalVisible.value = true;
+          modalOpen.value = true;
         });
       }
 
@@ -104,7 +104,7 @@
         openModal3,
         register4,
         openModal4,
-        modalVisible,
+        modalOpen,
         userData,
         openTargetModal,
         send,

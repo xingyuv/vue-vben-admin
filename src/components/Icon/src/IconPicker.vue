@@ -8,7 +8,7 @@
   >
     <template #addonAfter>
       <a-popover
-        v-model="visible"
+        v-model="open"
         placement="bottomLeft"
         trigger="click"
         :overlayClassName="`${prefixCls}-popover`"
@@ -118,7 +118,7 @@
   const icons = isSvgMode ? getSvgIcons() : getIcons();
 
   const currentSelect = ref('');
-  const visible = ref(false);
+  const open = ref(false);
   const currentList = ref(icons);
 
   const { t } = useI18n();

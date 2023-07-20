@@ -51,9 +51,9 @@
 
   const props = defineProps(basicProps);
 
-  const emit = defineEmits(['visible-change', 'ok', 'close', 'register']);
+  const emit = defineEmits(['openChange', 'ok', 'close', 'register']);
 
-  const visibleRef = ref(false);
+  const openRef = ref(false);
   const attrs = useAttrs();
   const propsRef = ref<Partial<DrawerProps | null>>(null);
 
@@ -62,7 +62,7 @@
 
   const drawerInstance: DrawerInstance = {
     setDrawerProps: setDrawerProps as any,
-    emitVisible: undefined,
+    emitOpen: undefined,
   };
 
   const instance = getCurrentInstance();
@@ -78,7 +78,7 @@
       placement: 'right',
       ...unref(attrs),
       ...unref(getMergeProps),
-      visible: unref(visibleRef),
+      open: unref(openRef),
     };
     opt.title = undefined;
     const { isDetail, width, wrapClassName, getContainer } = opt;
@@ -90,7 +90,6 @@
       opt.class = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
 
       if (!getContainer) {
-        // TODO type error?
         opt.getContainer = `.${prefixVar}-layout-content` as any;
       }
     }
@@ -126,19 +125,19 @@
   });
 
   watch(
-    () => props.visible,
+    () => props.open,
     (newVal, oldVal) => {
-      if (newVal !== oldVal) visibleRef.value = newVal;
+      if (newVal !== oldVal) openRef.value = newVal;
     },
     { deep: true },
   );
 
   watch(
-    () => visibleRef.value,
-    (visible) => {
+    () => openRef.value,
+    (open) => {
       nextTick(() => {
-        emit('visible-change', visible);
-        instance && drawerInstance.emitVisible?.(visible, instance.uid);
+        emit('openChange', open);
+        instance && drawerInstance.emitOpen?.(open, instance.uid);
       });
     },
   );
@@ -149,18 +148,18 @@
     emit('close', e);
     if (closeFunc && isFunction(closeFunc)) {
       const res = await closeFunc();
-      visibleRef.value = !res;
+      openRef.value = !res;
       return;
     }
-    visibleRef.value = false;
+    openRef.value = false;
   }
 
   function setDrawerProps(props: Partial<DrawerProps>): void {
     // Keep the last setDrawerProps
     propsRef.value = deepMerge(unref(propsRef) || ({} as any), props);
 
-    if (Reflect.has(props, 'visible')) {
-      visibleRef.value = !!props.visible;
+    if (Reflect.has(props, 'open')) {
+      openRef.value = !!props.open;
     }
   }
 

@@ -4,7 +4,7 @@
 <template>
   <Modal
     title="预览(不支持布局)"
-    :visible="state.visible"
+    :open="state.open"
     okText="获取数据"
     cancelText="关闭"
     style="top: 20px"
@@ -31,12 +31,12 @@
   const jsonModal = ref<IToolbarMethods | null>(null);
   const state = reactive<{
     formModel: IAnyObject;
-    visible: boolean;
+    open: boolean;
     formConfig: IFormConfig;
   }>({
     formModel: {},
     formConfig: {} as IFormConfig,
-    visible: false,
+    open: false,
   });
 
   const attrs = computed(() => {
@@ -51,14 +51,14 @@
    */
   const showModal = (jsonData: IFormConfig) => {
     state.formConfig = jsonData;
-    state.visible = true;
+    state.open = true;
   };
 
   //表单
   const [registerForm, { validate }] = useForm();
 
   const handleCancel = () => {
-    state.visible = false;
+    state.open = false;
   };
   /**
    * 获取表单数据

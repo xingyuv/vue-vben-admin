@@ -21,9 +21,9 @@
         <template #overlay>
           <Menu @click="handleMenuClick">
             <template v-for="item in toolbarList" :key="item.value">
-              <MenuItem v-bind="{ key: item.value }">
+              <Menu.Item v-bind="{ key: item.value }">
                 {{ item.label }}
-              </MenuItem>
+              </Menu.Item>
               <MenuDivider v-if="item.divider" />
             </template>
           </Menu>
@@ -34,7 +34,7 @@
 </template>
 <script lang="ts" setup>
   import { useDebounceFn } from '@vueuse/core';
-  import { Dropdown, InputSearch, Menu, MenuDivider, MenuItem } from 'ant-design-vue';
+  import { Dropdown, InputSearch, Menu, MenuDivider } from 'ant-design-vue';
   import { computed, type PropType, ref, useSlots, watch } from 'vue';
 
   import { BasicTitle } from '@/components/Basic';

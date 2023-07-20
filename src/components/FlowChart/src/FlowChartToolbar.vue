@@ -1,7 +1,7 @@
 <template>
   <div :class="`${prefixCls}-toolbar`" class="flex items-center px-2 py-1">
     <template v-for="item in toolbarItemList" :key="item.type">
-      <Tooltip placement="bottom" v-bind="item.disabled ? { visible: false } : {}">
+      <Tooltip placement="bottom" v-bind="item.disabled ? { open: false } : {}">
         <template #title>{{ item.tooltip }}</template>
         <span v-if="item.icon" :class="`${prefixCls}-toolbar__icon`" @click="onControl(item)">
           <Icon

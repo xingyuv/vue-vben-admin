@@ -20,10 +20,10 @@
       v-else
       placement="right"
       :overlayClassName="`${prefixCls}-menu-popover`"
-      :visible="getIsOpend"
+      :open="getIsOpend"
       :overlayStyle="getOverlayStyle"
       :align="{ offset: [0, 0] }"
-      @visible-change="handleVisibleChange"
+      @open-change="handleOpenChange"
     >
       <div :class="getSubClass" v-bind="getEvents(false)">
         <div
@@ -291,8 +291,8 @@
     });
   });
 
-  function handleVisibleChange(visible: boolean) {
-    state.opened = visible;
+  function handleOpenChange(open: boolean) {
+    state.opened = open;
   }
 
   // provide

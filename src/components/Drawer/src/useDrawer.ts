@@ -25,7 +25,7 @@ import type {
 
 const dataTransferRef = reactive<any>({});
 
-const visibleData = reactive<{ [key: number]: boolean }>({});
+const openData = reactive<{ [key: number]: boolean }>({});
 
 /**
  * @description: Applicable to separate drawer and call outside
@@ -53,8 +53,8 @@ export function useDrawer(): UseDrawerReturnType {
     drawer.value = drawerInstance;
     loaded.value = true;
 
-    drawerInstance.emitVisible = (visible: boolean, uid: number) => {
-      visibleData[uid] = visible;
+    drawerInstance.emitOpen = (open: boolean, uid: number) => {
+      openData[uid] = open;
     };
   }
 
@@ -71,13 +71,13 @@ export function useDrawer(): UseDrawerReturnType {
       getInstance()?.setDrawerProps(props);
     },
 
-    getVisible: computed((): boolean => {
-      return visibleData[~~unref(uid)];
+    getOpen: computed((): boolean => {
+      return openData[~~unref(uid)];
     }),
 
-    openDrawer: <T = any>(visible = true, data?: T, openOnSet = true): void => {
+    openDrawer: <T = any>(open = true, data?: T, openOnSet = true): void => {
       getInstance()?.setDrawerProps({
-        visible,
+        open,
       });
       if (!data) return;
 
@@ -92,7 +92,7 @@ export function useDrawer(): UseDrawerReturnType {
       }
     },
     closeDrawer: () => {
-      getInstance()?.setDrawerProps({ visible: false });
+      getInstance()?.setDrawerProps({ open: false });
     },
   };
 
@@ -147,12 +147,12 @@ export const useDrawerInner = (callbackFn?: Fn): UseDrawerInnerReturnType => {
       changeOkLoading: (loading = true) => {
         getInstance()?.setDrawerProps({ confirmLoading: loading });
       },
-      getVisible: computed((): boolean => {
-        return visibleData[~~unref(uidRef)];
+      getOpen: computed((): boolean => {
+        return openData[~~unref(uidRef)];
       }),
 
       closeDrawer: () => {
-        getInstance()?.setDrawerProps({ visible: false });
+        getInstance()?.setDrawerProps({ open: false });
       },
 
       setDrawerProps: (props: Partial<DrawerProps>) => {

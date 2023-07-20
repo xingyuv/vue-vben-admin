@@ -5,7 +5,7 @@
     title="Modal Title"
     :helpMessage="['提示1', '提示2']"
     @register="register"
-    @visible-change="handleShow"
+    @open-change="handleShow"
   >
     <template #insertFooter>
       <a-button type="primary" danger :disabled="loading" @click="setLines">点我更新内容</a-button>
@@ -39,8 +39,8 @@
         },
       );
 
-      function handleShow(visible: boolean) {
-        if (visible) {
+      function handleShow(open: boolean) {
+        if (open) {
           loading.value = true;
           setModalProps({ loading: true, confirmLoading: true });
           setTimeout(() => {

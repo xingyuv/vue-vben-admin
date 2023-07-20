@@ -23,10 +23,13 @@
     "dist"
   ],
   "scripts": {
-    "//build": "pnpm unbuild",
-    "//stub": "pnpm unbuild --stub",
+    "build": "pnpm unbuild",
     "clean": "pnpm rimraf .turbo node_modules dist",
-    "lint": "pnpm eslint ."
+    "lint": "pnpm eslint .",
+    "stub": "pnpm unbuild --stub"
+  },
+  "dependencies": {
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@types/codemirror": "^5.60.8",
@@ -37,5 +40,13 @@
     "@types/qs": "^6.9.7",
     "@types/showdown": "^2.0.1",
     "@types/sortablejs": "^1.15.1"
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      }
+    }
   }
 }

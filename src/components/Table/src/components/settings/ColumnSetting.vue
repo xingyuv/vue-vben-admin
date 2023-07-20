@@ -8,7 +8,7 @@
       trigger="click"
       :overlayClassName="`${prefixCls}__cloumn-list`"
       :getPopupContainer="getPopupContainer"
-      @visible-change="handleVisibleChange"
+      @open-change="handleOpenChange"
     >
       <template #title>
         <div :class="`${prefixCls}__popover-title`">
@@ -233,7 +233,7 @@
     // 是否列展示全选
     state.checkAll = checkList.length === columns.length;
     inited = false;
-    handleVisibleChange();
+    handleOpenChange();
   }
 
   // checkAll change
@@ -288,7 +288,7 @@
   }
 
   // Open the pop-up window for drag and drop initialization
-  function handleVisibleChange() {
+  function handleOpenChange() {
     if (inited) return;
     nextTick(() => {
       const columnListEl = unref(columnListRef);

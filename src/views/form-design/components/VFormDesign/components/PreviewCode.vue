@@ -42,7 +42,7 @@
     },
     setup(props) {
       const state = reactive({
-        visible: false,
+        open: false,
       });
 
       const exportData = (data: string, fileName = `file.${props.fileFormat}`) => {

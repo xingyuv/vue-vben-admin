@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <transition name="zoom-fade" mode="out-in">
-      <div v-if="visible" :class="getClass" @click.stop>
+      <div v-if="open" :class="getClass" @click.stop>
         <div v-click-outside="handleClose" :class="`${prefixCls}-content`">
           <div :class="`${prefixCls}-input__wrapper`">
             <a-input
@@ -72,7 +72,7 @@
   import { useMenuSearch } from './useMenuSearch';
 
   const props = defineProps({
-    visible: { type: Boolean },
+    open: { type: Boolean },
   });
 
   const emit = defineEmits(['close']);
@@ -100,9 +100,9 @@
   });
 
   watch(
-    () => props.visible,
-    (visible: boolean) => {
-      visible &&
+    () => props.open,
+    (open: boolean) => {
+      open &&
         nextTick(() => {
           unref(inputRef)?.focus();
         });

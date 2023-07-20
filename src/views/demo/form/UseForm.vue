@@ -2,7 +2,7 @@
   <PageWrapper title="UseForm操作示例">
     <a-button class="mb-4" type="primary" @click="showDrawer"> 更改设置 </a-button>
 
-    <Drawer v-model:visible="visible" title="更改设置" placement="right">
+    <Drawer v-model:open="open" title="更改设置" placement="right">
       <BasicForm ref="settingFormRef" @register="registerSetting" @submit="handleSubmitSetting">
         <template #other>
           <Space>
@@ -426,7 +426,7 @@
       Space,
     },
     setup() {
-      const visible = ref<boolean>(false);
+      const open = ref<boolean>(false);
       const settingFormRef = ref();
       const [registerSetting] = useForm({
         size: 'small',
@@ -444,7 +444,7 @@
       const handleSubmitSetting = async (values: Recordable) => {
         console.log(values);
         await setProps(values);
-        visible.value = false;
+        open.value = false;
       };
       const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
         labelWidth: 120,
@@ -474,17 +474,17 @@
           },
         });
         await setFieldsValue({ field9 });
-        visible.value = false;
+        open.value = false;
       }
       const showDrawer = () => {
-        visible.value = true;
+        open.value = true;
       };
       const onSettings = () => {
         settingFormRef.value?.submit();
       };
       const withClose = (formProps: Partial<FormProps>) => {
         setProps(formProps);
-        visible.value = false;
+        open.value = false;
       };
 
       return {
@@ -495,7 +495,7 @@
         },
         setProps,
         handleLoad,
-        visible,
+        open,
         showDrawer,
         settingFormRef,
         withClose,
