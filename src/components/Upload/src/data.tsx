@@ -1,15 +1,17 @@
-import type { BasicColumn, ActionItem } from '@/components/Table'
-import { FileItem, PreviewFileItem, UploadResultStatus } from './typing'
+import { Progress, Tag } from 'ant-design-vue';
+
+import type { ActionItem, BasicColumn } from '@/components/Table';
+import TableAction from '@/components/Table/src/components/TableAction.vue';
+import { useI18n } from '@/hooks/web/useI18n';
+
 import {
   // checkImgType,
-  isImgTypeByName
-} from './helper'
-import { Progress, Tag } from 'ant-design-vue'
-import TableAction from '@/components/Table/src/components/TableAction.vue'
-import ThumbUrl from './ThumbUrl.vue'
-import { useI18n } from '@/hooks/web/useI18n'
+  isImgTypeByName,
+} from './helper';
+import ThumbUrl from './ThumbUrl.vue';
+import { FileItem, PreviewFileItem, UploadResultStatus } from './typing';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 // 文件上传列表
 export function createTableColumns(): BasicColumn[] {
@@ -19,23 +21,23 @@ export function createTableColumns(): BasicColumn[] {
       title: t('component.upload.legend'),
       width: 100,
       customRender: ({ record }) => {
-        const { thumbUrl } = (record as FileItem) || {}
-        return thumbUrl && <ThumbUrl fileUrl={thumbUrl} />
-      }
+        const { thumbUrl } = (record as FileItem) || {};
+        return thumbUrl && <ThumbUrl fileUrl={thumbUrl} />;
+      },
     },
     {
       dataIndex: 'name',
       title: t('component.upload.fileName'),
       align: 'left',
       customRender: ({ text, record }) => {
-        const { percent, status: uploadStatus } = (record as FileItem) || {}
-        let status: 'normal' | 'exception' | 'active' | 'success' = 'normal'
+        const { percent, status: uploadStatus } = (record as FileItem) || {};
+        let status: 'normal' | 'exception' | 'active' | 'success' = 'normal';
         if (uploadStatus === UploadResultStatus.ERROR) {
-          status = 'exception'
+          status = 'exception';
         } else if (uploadStatus === UploadResultStatus.UPLOADING) {
-          status = 'active'
+          status = 'active';
         } else if (uploadStatus === UploadResultStatus.SUCCESS) {
-          status = 'success'
+          status = 'success';
         }
         return (
           <span>
@@ -44,16 +46,16 @@ export function createTableColumns(): BasicColumn[] {
             </p>
             <Progress percent={percent} size="small" status={status} />
           </span>
-        )
-      }
+        );
+      },
     },
     {
       dataIndex: 'size',
       title: t('component.upload.fileSize'),
       width: 100,
       customRender: ({ text = 0 }) => {
-        return text && (text / 1024).toFixed(2) + 'KB'
-      }
+        return text && (text / 1024).toFixed(2) + 'KB';
+      },
     },
     // {
     //   dataIndex: 'type',
@@ -66,19 +68,19 @@ export function createTableColumns(): BasicColumn[] {
       width: 100,
       customRender: ({ text }) => {
         if (text === UploadResultStatus.SUCCESS) {
-          return <Tag color="green">{() => t('component.upload.uploadSuccess')}</Tag>
+          return <Tag color="green">{() => t('component.upload.uploadSuccess')}</Tag>;
         } else if (text === UploadResultStatus.ERROR) {
-          return <Tag color="red">{() => t('component.upload.uploadError')}</Tag>
+          return <Tag color="red">{() => t('component.upload.uploadError')}</Tag>;
         } else if (text === UploadResultStatus.UPLOADING) {
-          return <Tag color="blue">{() => t('component.upload.uploading')}</Tag>
+          return <Tag color="blue">{() => t('component.upload.uploading')}</Tag>;
         }
 
-        return text
-      }
-    }
-  ]
+        return text;
+      },
+    },
+  ];
 }
-export function createActionColumn(handleRemove: Function): BasicColumn {
+export function createActionColumn(handleRemove: Fn): BasicColumn {
   return {
     width: 120,
     title: t('component.upload.operating'),
@@ -89,18 +91,18 @@ export function createActionColumn(handleRemove: Function): BasicColumn {
         {
           label: t('component.upload.del'),
           color: 'error',
-          onClick: handleRemove.bind(null, record)
-        }
-      ]
+          onClick: handleRemove.bind(null, record),
+        },
+      ];
       // if (checkImgType(record)) {
       //   actions.unshift({
       //     label: t('component.upload.preview'),
       //     onClick: handlePreview.bind(null, record),
       //   });
       // }
-      return <TableAction actions={actions} outside={true} />
-    }
-  }
+      return <TableAction actions={actions} outside={true} />;
+    },
+  };
 }
 // 文件预览列表
 export function createPreviewColumns(): BasicColumn[] {
@@ -110,19 +112,25 @@ export function createPreviewColumns(): BasicColumn[] {
       title: t('component.upload.legend'),
       width: 100,
       customRender: ({ record }) => {
-        const { url } = (record as PreviewFileItem) || {}
-        return isImgTypeByName(url) && <ThumbUrl fileUrl={url} />
-      }
+        const { url } = (record as PreviewFileItem) || {};
+        return isImgTypeByName(url) && <ThumbUrl fileUrl={url} />;
+      },
     },
     {
       dataIndex: 'name',
       title: t('component.upload.fileName'),
-      align: 'left'
-    }
-  ]
+      align: 'left',
+    },
+  ];
 }
 
-export function createPreviewActionColumn({ handleRemove, handleDownload }: { handleRemove: Fn; handleDownload: Fn }): BasicColumn {
+export function createPreviewActionColumn({
+  handleRemove,
+  handleDownload,
+}: {
+  handleRemove: Fn;
+  handleDownload: Fn;
+}): BasicColumn {
   return {
     width: 160,
     title: t('component.upload.operating'),
@@ -133,15 +141,15 @@ export function createPreviewActionColumn({ handleRemove, handleDownload }: { ha
         {
           label: t('component.upload.del'),
           color: 'error',
-          onClick: handleRemove.bind(null, record)
+          onClick: handleRemove.bind(null, record),
         },
         {
           label: t('component.upload.download'),
-          onClick: handleDownload.bind(null, record)
-        }
-      ]
+          onClick: handleDownload.bind(null, record),
+        },
+      ];
 
-      return <TableAction actions={actions} outside={true} />
-    }
-  }
+      return <TableAction actions={actions} outside={true} />;
+    },
+  };
 }

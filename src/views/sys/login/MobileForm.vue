@@ -1,16 +1,26 @@
 <template>
-  <template v-if="getShow">
+  <div v-if="getShow">
     <LoginFormTitle class="enter-x" />
-    <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
+    <Form ref="formRef" class="p-4 enter-x" :model="formData" :rules="getFormRules">
       <FormItem name="mobile" class="enter-x">
-        <Input size="large" v-model:value="formData.mobile" :placeholder="t('sys.login.mobile')" class="fix-auto-fill" />
+        <Input
+          v-model:value="formData.mobile"
+          size="large"
+          :placeholder="t('sys.login.mobile')"
+          class="fix-auto-fill"
+        />
       </FormItem>
       <FormItem name="sms" class="enter-x">
-        <CountdownInput size="large" class="fix-auto-fill" v-model:value="formData.sms" :placeholder="t('sys.login.smsCode')" />
+        <CountdownInput
+          v-model:value="formData.sms"
+          size="large"
+          class="fix-auto-fill"
+          :placeholder="t('sys.login.smsCode')"
+        />
       </FormItem>
 
       <FormItem class="enter-x">
-        <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
+        <Button type="primary" size="large" block :loading="loading" @click="handleLogin">
           {{ t('sys.login.loginButton') }}
         </Button>
         <Button size="large" block class="mt-4" @click="handleBackLogin">
@@ -18,36 +28,38 @@
         </Button>
       </FormItem>
     </Form>
-  </template>
+  </div>
 </template>
 <script lang="ts" setup>
-import { reactive, ref, computed, unref } from 'vue'
-import { Form, Input, Button } from 'ant-design-vue'
-import { CountdownInput } from '@/components/CountDown'
-import LoginFormTitle from './LoginFormTitle.vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin'
+  import { Button, Form, Input } from 'ant-design-vue';
+  import { computed, reactive, ref, unref } from 'vue';
 
-const FormItem = Form.Item
-const { t } = useI18n()
-const { handleBackLogin, getLoginState } = useLoginState()
-const { getFormRules } = useFormRules()
+  import { CountdownInput } from '@/components/CountDown';
+  import { useI18n } from '@/hooks/web/useI18n';
 
-const formRef = ref()
-const loading = ref(false)
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
 
-const formData = reactive({
-  mobile: '',
-  sms: ''
-})
+  const FormItem = Form.Item;
+  const { t } = useI18n();
+  const { handleBackLogin, getLoginState } = useLoginState();
+  const { getFormRules } = useFormRules();
 
-const { validForm } = useFormValid(formRef)
+  const formRef = ref();
+  const loading = ref(false);
 
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE)
+  const formData = reactive({
+    mobile: '',
+    sms: '',
+  });
 
-async function handleLogin() {
-  const data = await validForm()
-  if (!data) return
-  console.log(data)
-}
+  const { validForm } = useFormValid(formRef);
+
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.MOBILE);
+
+  async function handleLogin() {
+    const data = await validForm();
+    if (!data) return;
+    console.log(data);
+  }
 </script>

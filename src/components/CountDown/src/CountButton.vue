@@ -1,52 +1,59 @@
 <template>
-  <Button v-bind="$attrs" :disabled="isStart" @click="handleStart" :loading="loading">
+  <Button v-bind="$attrs" :disabled="isStart" :loading="loading" @click="handleStart">
     {{ getButtonText }}
   </Button>
 </template>
-<script lang="ts" setup name="CountButton">
-import { ref, watchEffect, computed, unref } from 'vue'
-import { Button } from 'ant-design-vue'
-import { useCountdown } from './useCountdown'
-import { isFunction } from '@/utils/is'
-import { useI18n } from '@/hooks/web/useI18n'
+<script lang="ts" setup>
+  import { Button } from 'ant-design-vue';
+  import type { PropType } from 'vue';
+  import { computed, ref, unref, watchEffect } from 'vue';
 
-const props = defineProps({
-  value: { type: [Object, Number, String, Array] },
-  count: { type: Number, default: 60 },
-  beforeStartFunc: {
-    type: Function as PropType<() => Promise<boolean>>,
-    default: null
-  }
-})
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction } from '@/utils/is';
 
-const loading = ref(false)
+  import { useCountdown } from './useCountdown';
 
-const { currentCount, isStart, start, reset } = useCountdown(props.count)
-const { t } = useI18n()
+  defineOptions({ name: 'CountButton' });
 
-const getButtonText = computed(() => {
-  return !unref(isStart) ? t('component.countdown.normalText') : t('component.countdown.sendText', [unref(currentCount)])
-})
+  const props = defineProps({
+    value: { type: [Object, Number, String, Array], default: '' },
+    count: { type: Number, default: 60 },
+    beforeStartFunc: {
+      type: Function as PropType<() => Promise<boolean>>,
+      default: null,
+    },
+  });
 
-watchEffect(() => {
-  props.value === undefined && reset()
-})
+  const loading = ref(false);
 
-/**
- * @description: Judge whether there is an external function before execution, and decide whether to start after execution
- */
-async function handleStart() {
-  const { beforeStartFunc } = props
-  if (beforeStartFunc && isFunction(beforeStartFunc)) {
-    loading.value = true
-    try {
-      const canStart = await beforeStartFunc()
-      canStart && start()
-    } finally {
-      loading.value = false
+  const { currentCount, isStart, start, reset } = useCountdown(props.count);
+  const { t } = useI18n();
+
+  const getButtonText = computed(() => {
+    return !unref(isStart)
+      ? t('component.countdown.normalText')
+      : t('component.countdown.sendText', [unref(currentCount)]);
+  });
+
+  watchEffect(() => {
+    props.value === undefined && reset();
+  });
+
+  /**
+   * @description: Judge whether there is an external function before execution, and decide whether to start after execution
+   */
+  async function handleStart() {
+    const { beforeStartFunc } = props;
+    if (beforeStartFunc && isFunction(beforeStartFunc)) {
+      loading.value = true;
+      try {
+        const canStart = await beforeStartFunc();
+        canStart && start();
+      } finally {
+        loading.value = false;
+      }
+    } else {
+      start();
     }
-  } else {
-    start()
   }
-}
 </script>

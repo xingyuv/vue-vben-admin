@@ -11,45 +11,50 @@
 </template>
 
 <script lang="ts" setup>
-import AppSearchKeyItem from './AppSearchKeyItem.vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { useI18n } from '@/hooks/web/useI18n'
-const { prefixCls } = useDesign('app-search-footer')
-const { t } = useI18n()
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+
+  import AppSearchKeyItem from './AppSearchKeyItem.vue';
+
+  const { prefixCls } = useDesign('app-search-footer');
+  const { t } = useI18n();
 </script>
 <style lang="less" scoped>
-@prefix-cls: ~'@{namespace}-app-search-footer';
+  @prefix-cls: ~'@{namespace}-app-search-footer';
 
-.@{prefix-cls} {
-  position: relative;
-  display: flex;
-  height: 44px;
-  padding: 0 16px;
-  font-size: 12px;
-  color: #666;
-  background-color: @component-background;
-  border-top: 1px solid @border-color-base;
-  border-radius: 0 0 16px 16px;
-  align-items: center;
-  flex-shrink: 0;
-
-  &-item {
+  .@{prefix-cls} {
+    position: relative;
     display: flex;
-    width: 20px;
-    height: 18px;
-    padding-bottom: 2px;
-    margin-right: 0.4em;
-    background-color: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
-    border-radius: 2px;
-    box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff, 0 1px 2px 1px rgb(30 35 90 / 40%);
+    flex-shrink: 0;
     align-items: center;
-    justify-content: center;
+    height: 44px;
+    padding: 0 16px;
+    font-size: 12px;
+    color: #666;
+    background-color: @component-background;
+    border-top: 1px solid @border-color-base;
+    border-radius: 0 0 16px 16px;
 
-    &:nth-child(2),
-    &:nth-child(3),
-    &:nth-child(6) {
-      margin-left: 14px;
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 18px;
+      padding-bottom: 2px;
+      margin-right: 0.4em;
+      background-color: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
+      border-radius: 2px;
+      box-shadow:
+        inset 0 -2px 0 0 #cdcde6,
+        inset 0 0 1px 1px #fff,
+        0 1px 2px 1px rgb(30 35 90 / 40%);
+
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(6) {
+        margin-left: 14px;
+      }
     }
   }
-}
 </style>

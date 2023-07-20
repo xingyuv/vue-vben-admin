@@ -1,27 +1,28 @@
 <template>
-  <template v-if="getShow">
+  <div v-if="getShow">
     <LoginFormTitle class="enter-x" />
     <div class="enter-x min-w-64 min-h-64">
-      <QrCode :value="qrCodeUrl" class="enter-x flex justify-center xl:justify-start" :width="280" />
+      <QRCode :value="qrCodeUrl" class="enter-x flex justify-center xl:justify-start" :size="280" />
       <Divider class="enter-x">{{ t('sys.login.scanSign') }}</Divider>
       <Button size="large" block class="mt-4 enter-x" @click="handleBackLogin">
         {{ t('sys.login.backSignIn') }}
       </Button>
     </div>
-  </template>
+  </div>
 </template>
 <script lang="ts" setup>
-import { computed, unref } from 'vue'
-import LoginFormTitle from './LoginFormTitle.vue'
-import { Button, Divider } from 'ant-design-vue'
-import { QrCode } from '@/components/Qrcode'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useLoginState, LoginStateEnum } from './useLogin'
+  import { Button, Divider, QRCode } from 'ant-design-vue';
+  import { computed, unref } from 'vue';
 
-const qrCodeUrl = 'https://vben.vvbin.cn/login'
+  import { useI18n } from '@/hooks/web/useI18n';
 
-const { t } = useI18n()
-const { handleBackLogin, getLoginState } = useLoginState()
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { LoginStateEnum, useLoginState } from './useLogin';
 
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE)
+  const qrCodeUrl = 'https://vben.vvbin.cn/login';
+
+  const { t } = useI18n();
+  const { handleBackLogin, getLoginState } = useLoginState();
+
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.QR_CODE);
 </script>

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Base",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noImplicitThis": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "useUnknownInCatchVariables": false,
+    "composite": false,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noUnusedParameters": true,
+    "preserveWatchOutput": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": false,
+    "strictNullChecks": true
+  },
+  "exclude": ["**/node_modules/**", "**/dist/**", "**/.turbo/**"]
+}

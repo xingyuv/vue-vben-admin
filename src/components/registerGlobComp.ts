@@ -1,7 +1,8 @@
-import type { App } from 'vue'
-import { Button } from './Button'
-import { Input, Layout } from 'ant-design-vue'
+import { Input, Layout } from 'ant-design-vue';
+import type { App } from 'vue';
 
-export function registerGlobComp(app: App<Element>) {
-  app.use(Input).use(Button).use(Layout)
+import { Button } from './Button';
+
+export function registerGlobComp(app: App) {
+  app.use(Input).use(Button).use(Layout);
 }

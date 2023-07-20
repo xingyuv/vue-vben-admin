@@ -1,6 +1,6 @@
 <template>
   <List item-layout="vertical" :class="prefixCls">
-    <template v-for="item in articleList" :key="item.title">
+    <template v-for="item in list" :key="item.title">
       <ListItem>
         <ListItemMeta>
           <template #description>
@@ -24,7 +24,12 @@
         <div>
           <template v-for="action in actions" :key="action.text">
             <div :class="`${prefixCls}__action`">
-              <Icon v-if="action.icon" :class="`${prefixCls}__action-icon`" :icon="action.icon" :color="action.color" />
+              <Icon
+                v-if="action.icon"
+                :class="`${prefixCls}__action-icon`"
+                :icon="action.icon"
+                :color="action.color"
+              />
               {{ action.text }}
             </div>
           </template>
@@ -34,46 +39,61 @@
     </template>
   </List>
 </template>
-<script lang="ts" setup>
-import { List, Tag } from 'ant-design-vue'
-import Icon from '@/components/Icon'
-import { actions, articleList } from './data'
-import { useDesign } from '@/hooks/web/useDesign'
+<script lang="ts">
+  import { List, Tag } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
 
-const ListItem = List.Item
-const ListItemMeta = List.Item.Meta
-const { prefixCls } = useDesign('account-center-article')
+  import Icon from '@/components/Icon/Icon.vue';
+
+  import { actions, articleList } from './data';
+
+  export default defineComponent({
+    components: {
+      List,
+      ListItem: List.Item,
+      ListItemMeta: List.Item.Meta,
+      Tag,
+      Icon,
+    },
+    setup() {
+      return {
+        prefixCls: 'account-center-article',
+        list: articleList,
+        actions,
+      };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.account-center-article {
-  &__title {
-    margin-bottom: 12px;
-    font-size: 18px;
-  }
-
-  &__content {
-    color: rgb(0 0 0 / 65%);
-  }
-
-  &__action {
-    display: inline-block;
-    padding: 0 16px;
-    color: rgb(0 0 0 / 45%);
-
-    &:nth-child(1),
-    &:nth-child(2) {
-      border-right: 1px solid rgb(206 206 206 / 40%);
+  .account-center-article {
+    &__title {
+      margin-bottom: 12px;
+      font-size: 18px;
     }
 
-    &-icon {
-      margin-right: 3px;
+    &__content {
+      color: rgb(0 0 0 / 65%);
+    }
+
+    &__action {
+      display: inline-block;
+      padding: 0 16px;
+      color: rgb(0 0 0 / 45%);
+
+      &:nth-child(1),
+      &:nth-child(2) {
+        border-right: 1px solid rgb(206 206 206 / 40%);
+      }
+
+      &-icon {
+        margin-right: 3px;
+      }
+    }
+
+    &__time {
+      position: absolute;
+      right: 20px;
+      color: rgb(0 0 0 / 45%);
     }
   }
-
-  &__time {
-    position: absolute;
-    right: 20px;
-    color: rgb(0 0 0 / 45%);
-  }
-}
 </style>

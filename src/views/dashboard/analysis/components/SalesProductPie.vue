@@ -4,56 +4,63 @@
   </Card>
 </template>
 <script lang="ts" setup>
-import { Ref, ref, watch } from 'vue'
-import { Card } from 'ant-design-vue'
-import { useECharts } from '@/hooks/web/useECharts'
-import { propTypes } from '@/utils/propTypes'
+  import { Card } from 'ant-design-vue';
+  import type { PropType } from 'vue';
+  import { Ref, ref, watch } from 'vue';
 
-const props = defineProps({
-  loading: Boolean,
-  width: propTypes.string.def('100%'),
-  height: propTypes.string.def('300px')
-})
+  import { useECharts } from '@/hooks/web/useECharts';
 
-const chartRef = ref<HTMLDivElement | null>(null)
-const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>)
+  const props = defineProps({
+    loading: Boolean,
+    width: {
+      type: String as PropType<string>,
+      default: '100%',
+    },
+    height: {
+      type: String as PropType<string>,
+      default: '300px',
+    },
+  });
 
-watch(
-  () => props.loading,
-  () => {
-    if (props.loading) {
-      return
-    }
-    setOptions({
-      tooltip: {
-        trigger: 'item'
-      },
+  const chartRef = ref<HTMLDivElement | null>(null);
+  const { setOptions } = useECharts(chartRef as Ref<HTMLDivElement>);
 
-      series: [
-        {
-          name: '访问来源',
-          type: 'pie',
-          radius: '80%',
-          center: ['50%', '50%'],
-          color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
-          data: [
-            { value: 500, name: '电子产品' },
-            { value: 310, name: '服装' },
-            { value: 274, name: '化妆品' },
-            { value: 400, name: '家居' }
-          ].sort(function (a, b) {
-            return a.value - b.value
-          }),
-          roseType: 'radius',
-          animationType: 'scale',
-          animationEasing: 'exponentialInOut',
-          animationDelay: function () {
-            return Math.random() * 400
-          }
-        }
-      ]
-    })
-  },
-  { immediate: true }
-)
+  watch(
+    () => props.loading,
+    () => {
+      if (props.loading) {
+        return;
+      }
+      setOptions({
+        tooltip: {
+          trigger: 'item',
+        },
+
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: '80%',
+            center: ['50%', '50%'],
+            color: ['#5ab1ef', '#b6a2de', '#67e0e3', '#2ec7c9'],
+            data: [
+              { value: 500, name: '电子产品' },
+              { value: 310, name: '服装' },
+              { value: 274, name: '化妆品' },
+              { value: 400, name: '家居' },
+            ].sort(function (a, b) {
+              return a.value - b.value;
+            }),
+            roseType: 'radius',
+            animationType: 'scale',
+            animationEasing: 'exponentialInOut',
+            animationDelay() {
+              return Math.random() * 400;
+            },
+          },
+        ],
+      });
+    },
+    { immediate: true },
+  );
 </script>

@@ -11,14 +11,23 @@
   </PageWrapper>
 </template>
 
-<script lang="ts" setup>
-import { StrengthMeter } from '@/components/StrengthMeter'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent } from 'vue';
+
+  import { PageWrapper } from '@/components/Page';
+  import { StrengthMeter } from '@/components/StrengthMeter';
+
+  export default defineComponent({
+    components: {
+      StrengthMeter,
+      PageWrapper,
+    },
+  });
 </script>
 <style lang="less" scoped>
-.demo-wrap {
-  width: 50%;
-  background-color: @component-background;
-  border-radius: 10px;
-}
+  .demo-wrap {
+    width: 50%;
+    background-color: @component-background;
+    border-radius: 10px;
+  }
 </style>

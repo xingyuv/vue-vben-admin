@@ -13,20 +13,31 @@
     </ul>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="TestMenu">
-import { Input } from 'ant-design-vue'
-import { computed, ref, unref } from 'vue'
-import { useRouter } from 'vue-router'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { Input } from 'ant-design-vue';
+  import { computed, defineComponent, ref, unref } from 'vue';
+  import { useRouter } from 'vue-router';
 
-const { currentRoute, replace } = useRouter()
-const value = ref<string>('')
+  import { PageWrapper } from '@/components/Page';
 
-const handleClickGo = () => {
-  const { name } = unref(currentRoute)
-  replace({ name: name!, params: { id: unref(value) } })
-}
-const params = computed(() => {
-  return unref(currentRoute).params
-})
+  export default defineComponent({
+    name: 'TestMenu',
+    components: { PageWrapper, Input },
+    setup() {
+      const { currentRoute, replace } = useRouter();
+      const value = ref<string>('');
+
+      const handleClickGo = () => {
+        const { name } = unref(currentRoute);
+        replace({ name: name!, params: { id: unref(value) } });
+      };
+      return {
+        value,
+        handleClickGo,
+        params: computed(() => {
+          return unref(currentRoute).params;
+        }),
+      };
+    },
+  });
 </script>

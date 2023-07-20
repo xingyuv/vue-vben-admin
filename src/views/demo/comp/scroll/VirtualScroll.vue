@@ -23,35 +23,43 @@
     </div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
-import { VScroll } from '@/components/VirtualScroll'
+<script lang="ts">
+  import { Divider } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
 
-import { Divider } from 'ant-design-vue'
-import { PageWrapper } from '@/components/Page'
-const data: Recordable[] = (() => {
-  const arr: Recordable[] = []
-  for (let index = 1; index < 20000; index++) {
-    arr.push({
-      title: '列表项' + index
-    })
-  }
-  return arr
-})()
+  import { PageWrapper } from '@/components/Page';
+  import { VScroll } from '@/components/VirtualScroll/index';
+
+  const data = (() => {
+    const arr: any[] = [];
+    for (let index = 1; index < 20000; index++) {
+      arr.push({
+        title: '列表项' + index,
+      });
+    }
+    return arr;
+  })();
+  export default defineComponent({
+    components: { VScroll, Divider, PageWrapper },
+    setup() {
+      return { data };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.virtual-scroll-demo {
-  &-wrap {
-    display: flex;
-    margin: 0 30%;
-    background-color: @component-background;
-    justify-content: center;
-  }
+  .virtual-scroll-demo {
+    &-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 0 30%;
+      background-color: @component-background;
+    }
 
-  &__item {
-    height: 40px;
-    padding: 0 20px;
-    line-height: 40px;
-    border-bottom: 1px solid @border-color-base;
+    &__item {
+      height: 40px;
+      padding: 0 20px;
+      line-height: 40px;
+      border-bottom: 1px solid @border-color-base;
+    }
   }
-}
 </style>

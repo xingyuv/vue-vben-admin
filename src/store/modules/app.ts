@@ -1,110 +1,111 @@
-import type { ProjectConfig, HeaderSetting, MenuSetting, TransitionSetting, MultiTabsSetting, AppSizeType } from '@/types/config'
-import type { BeforeMiniState } from '@/types/store'
+import { defineStore } from 'pinia';
 
-import { defineStore } from 'pinia'
-import { store } from '@/store'
-
-import { ThemeEnum } from '@/enums/appEnum'
-import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '@/enums/cacheEnum'
-import { Persistent } from '@/utils/cache/persistent'
-import { darkMode } from '@/settings/designSetting'
-import { resetRouter } from '@/router'
-import { deepMerge } from '@/utils'
+import { ThemeEnum } from '@/enums/appEnum';
+import { APP_DARK_MODE_KEY_, PROJ_CFG_KEY } from '@/enums/cacheEnum';
+import { resetRouter } from '@/router';
+import { darkMode } from '@/settings/designSetting';
+import { store } from '@/store';
+import { deepMerge } from '@/utils';
+import { Persistent } from '@/utils/cache/persistent';
+import type {
+  HeaderSetting,
+  MenuSetting,
+  MultiTabsSetting,
+  ProjectConfig,
+  TransitionSetting,
+} from '#/config';
+import type { BeforeMiniState } from '#/store';
 
 interface AppState {
-  darkMode?: ThemeEnum
+  darkMode?: ThemeEnum;
   // Page loading status
-  pageLoading: boolean
+  pageLoading: boolean;
   // project config
-  projectConfig: ProjectConfig | null
+  projectConfig: ProjectConfig | null;
   // When the window shrinks, remember some states, and restore these states when the window is restored
-  beforeMiniInfo: BeforeMiniState
-  componentSize: 'small' | 'middle' | 'large' | undefined
+  beforeMiniInfo: BeforeMiniState;
 }
-let timeId: TimeoutHandle
-export const useAppStore = defineStore('app', {
+let timeId: TimeoutHandle;
+export const useAppStore = defineStore({
+  id: 'app',
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
     projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
     beforeMiniInfo: {},
-    componentSize: 'middle'
   }),
   getters: {
     getPageLoading(state): boolean {
-      return state.pageLoading
+      return state.pageLoading;
     },
     getDarkMode(state): 'light' | 'dark' | string {
-      return state.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode
+      return state.darkMode || localStorage.getItem(APP_DARK_MODE_KEY_) || darkMode;
     },
 
     getBeforeMiniInfo(state): BeforeMiniState {
-      return state.beforeMiniInfo
+      return state.beforeMiniInfo;
     },
 
     getProjectConfig(state): ProjectConfig {
-      return state.projectConfig || ({} as ProjectConfig)
+      return state.projectConfig || ({} as ProjectConfig);
     },
 
     getHeaderSetting(): HeaderSetting {
-      return this.getProjectConfig.headerSetting
+      return this.getProjectConfig.headerSetting;
     },
     getMenuSetting(): MenuSetting {
-      return this.getProjectConfig.menuSetting
+      return this.getProjectConfig.menuSetting;
     },
     getTransitionSetting(): TransitionSetting {
-      return this.getProjectConfig.transitionSetting
+      return this.getProjectConfig.transitionSetting;
     },
     getMultiTabsSetting(): MultiTabsSetting {
-      return this.getProjectConfig.multiTabsSetting
+      return this.getProjectConfig.multiTabsSetting;
     },
-    getComponentSize(state): AppSizeType | undefined {
-      return state.componentSize
-    }
   },
   actions: {
     setPageLoading(loading: boolean): void {
-      this.pageLoading = loading
+      this.pageLoading = loading;
     },
 
     setDarkMode(mode: ThemeEnum): void {
-      this.darkMode = mode
-      localStorage.setItem(APP_DARK_MODE_KEY_, mode)
+      this.darkMode = mode;
+      localStorage.setItem(APP_DARK_MODE_KEY_, mode);
     },
 
     setBeforeMiniInfo(state: BeforeMiniState): void {
-      this.beforeMiniInfo = state
-    },
-
-    setComponentSize(size: AppSizeType): void {
-      this.componentSize = size
+      this.beforeMiniInfo = state;
     },
 
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
-      this.projectConfig = deepMerge(this.projectConfig || {}, config)
-      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig)
+      this.projectConfig = deepMerge(this.projectConfig || {}, config);
+      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
+    },
+    setMenuSetting(setting: Partial<MenuSetting>): void {
+      this.projectConfig.menuSetting = deepMerge(this.projectConfig.menuSetting, setting);
+      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
 
     async resetAllState() {
-      resetRouter()
-      Persistent.clearAll()
+      resetRouter();
+      Persistent.clearAll();
     },
     async setPageLoadingAction(loading: boolean): Promise<void> {
       if (loading) {
-        clearTimeout(timeId)
+        clearTimeout(timeId);
         // Prevent flicker
         timeId = setTimeout(() => {
-          this.setPageLoading(loading)
-        }, 50)
+          this.setPageLoading(loading);
+        }, 50);
       } else {
-        this.setPageLoading(loading)
-        clearTimeout(timeId)
+        this.setPageLoading(loading);
+        clearTimeout(timeId);
       }
-    }
-  }
-})
+    },
+  },
+});
 
 // Need to be used outside the setup
 export function useAppStoreWithOut() {
-  return useAppStore(store)
+  return useAppStore(store);
 }

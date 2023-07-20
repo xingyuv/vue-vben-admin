@@ -8,25 +8,38 @@
     </BasicTable>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
-import { BasicTable, useTable } from '@/components/Table'
-import { getBasicColumns } from './tableData'
-import { PageWrapper } from '@/components/Page'
+<script lang="ts">
+  import { defineComponent } from 'vue';
 
-import { demoListApi } from '@/api/demo/table'
-const [registerTable, { reload }] = useTable({
-  title: '远程加载示例',
-  api: demoListApi,
-  columns: getBasicColumns(),
-  pagination: { pageSize: 10 }
-})
-function handleReloadCurrent() {
-  reload()
-}
+  import { demoListApi } from '@/api/demo/table';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicTable, useTable } from '@/components/Table';
 
-function handleReload() {
-  reload({
-    page: 1
-  })
-}
+  import { getBasicColumns } from './tableData';
+
+  export default defineComponent({
+    components: { BasicTable, PageWrapper },
+    setup() {
+      const [registerTable, { reload }] = useTable({
+        title: '远程加载示例',
+        api: demoListApi,
+        columns: getBasicColumns(),
+        pagination: { pageSize: 10 },
+      });
+      function handleReloadCurrent() {
+        reload();
+      }
+
+      function handleReload() {
+        reload({
+          page: 1,
+        });
+      }
+      return {
+        registerTable,
+        handleReloadCurrent,
+        handleReload,
+      };
+    },
+  });
 </script>

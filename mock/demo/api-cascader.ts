@@ -1,5 +1,6 @@
-import { MockMethod } from 'vite-plugin-mock'
-import { resultSuccess } from '../_util'
+import { MockMethod } from 'vite-plugin-mock';
+
+import { resultSuccess } from '../_util';
 
 const areaList: any[] = [
   {
@@ -17,7 +18,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 16:33:42',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530825900883980288',
@@ -34,7 +35,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 16:33:42',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530825900951089152',
@@ -51,7 +52,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 16:33:42',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530825901014003712',
@@ -68,7 +69,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 16:33:42',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530825900988837888',
@@ -85,7 +86,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 16:33:42',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530826672489115648',
@@ -102,7 +103,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-12-14 15:26:43',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241171607552',
@@ -119,7 +120,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2021-01-20 14:07:23',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241200967680',
@@ -136,7 +137,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241230327808',
@@ -153,7 +154,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241259687936',
@@ -170,7 +171,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241284853760',
@@ -187,7 +188,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241310019584',
@@ -204,7 +205,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241381322752',
@@ -221,7 +222,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241410682880',
@@ -238,7 +239,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241431654400',
@@ -255,7 +256,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241465208832',
@@ -272,7 +273,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241502957568',
@@ -289,7 +290,7 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
+    usable: true,
   },
   {
     id: '530840241553289216',
@@ -306,20 +307,20 @@ const areaList: any[] = [
     createTime: '2020-11-30 15:47:31',
     updateTime: '2020-11-30 17:30:41',
     customized: false,
-    usable: true
-  }
-]
+    usable: true,
+  },
+];
 export default [
   {
     url: '/basic-api/cascader/getAreaRecord',
     timeout: 1000,
     method: 'post',
     response: ({ body }) => {
-      const { parentCode } = body || {}
+      const { parentCode } = body || {};
       if (!parentCode) {
-        return resultSuccess(areaList.filter((it) => it.code === '430000'))
+        return resultSuccess(areaList.filter((it) => it.code === '430000'));
       }
-      return resultSuccess(areaList.filter((it) => it.parentCode === parentCode))
-    }
-  }
-] as MockMethod[]
+      return resultSuccess(areaList.filter((it) => it.parentCode === parentCode));
+    },
+  },
+] as MockMethod[];

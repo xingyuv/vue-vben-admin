@@ -1,6 +1,6 @@
 <template>
-  <li :class="getClass" @click.stop="handleClickItem" :style="getCollapse ? {} : getItemStyle">
-    <Tooltip placement="right" v-if="showTooptip">
+  <li :class="getClass" :style="getCollapse ? {} : getItemStyle" @click.stop="handleClickItem">
+    <Tooltip v-if="showTooptip" placement="right">
       <template #title>
         <slot name="title"></slot>
       </template>
@@ -16,85 +16,90 @@
   </li>
 </template>
 
-<script lang="ts" setup name="MenuItem">
-import { ref, useSlots, computed, unref, getCurrentInstance, watch } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
-import { useMenuItem } from './useMenu'
-import { Tooltip } from 'ant-design-vue'
-import { useSimpleRootMenuContext } from './useSimpleMenuContext'
+<script lang="ts" setup>
+  import { Tooltip } from 'ant-design-vue';
+  import { computed, getCurrentInstance, PropType, ref, unref, useSlots, watch } from 'vue';
 
-const props = defineProps({
-  name: {
-    type: [String, Number] as PropType<string | number>,
-    required: true
-  },
-  disabled: propTypes.bool
-})
-const slots = useSlots()
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
-const instance = getCurrentInstance()
+  import { useMenuItem } from './useMenu';
+  import { useSimpleRootMenuContext } from './useSimpleMenuContext';
 
-const active = ref(false)
+  defineOptions({ name: 'MenuItem' });
 
-const { getItemStyle, getParentList, getParentMenu, getParentRootMenu } = useMenuItem(instance)
+  const props = defineProps({
+    name: {
+      type: [String, Number] as PropType<string | number>,
+      required: true,
+    },
+    disabled: propTypes.bool,
+  });
 
-const { prefixCls } = useDesign('menu')
+  const slots = useSlots();
 
-const { rootMenuEmitter, activeName } = useSimpleRootMenuContext()
+  const instance = getCurrentInstance();
 
-const getClass = computed(() => {
-  return [
-    `${prefixCls}-item`,
-    {
-      [`${prefixCls}-item-active`]: unref(active),
-      [`${prefixCls}-item-selected`]: unref(active),
-      [`${prefixCls}-item-disabled`]: !!props.disabled
+  const active = ref(false);
+
+  const { getItemStyle, getParentList, getParentMenu, getParentRootMenu } = useMenuItem(instance);
+
+  const { prefixCls } = useDesign('menu');
+
+  const { rootMenuEmitter, activeName } = useSimpleRootMenuContext();
+
+  const getClass = computed(() => {
+    return [
+      `${prefixCls}-item`,
+      {
+        [`${prefixCls}-item-active`]: unref(active),
+        [`${prefixCls}-item-selected`]: unref(active),
+        [`${prefixCls}-item-disabled`]: !!props.disabled,
+      },
+    ];
+  });
+
+  const getCollapse = computed(() => unref(getParentRootMenu)?.props.collapse);
+
+  const showTooptip = computed(() => {
+    return unref(getParentMenu)?.type.name === 'Menu' && unref(getCollapse) && slots.title;
+  });
+
+  function handleClickItem() {
+    const { disabled } = props;
+    if (disabled) {
+      return;
     }
-  ]
-})
 
-const getCollapse = computed(() => unref(getParentRootMenu)?.props.collapse)
-
-const showTooptip = computed(() => {
-  return unref(getParentMenu)?.type.name === 'Menu' && unref(getCollapse) && slots.title
-})
-
-function handleClickItem() {
-  const { disabled } = props
-  if (disabled) {
-    return
-  }
-
-  rootMenuEmitter.emit('on-menu-item-select', props.name)
-  if (unref(getCollapse)) {
-    return
-  }
-  const { uidList } = getParentList()
-
-  rootMenuEmitter.emit('on-update-opened', {
-    opend: false,
-    parent: instance?.parent,
-    uidList: uidList
-  })
-}
-watch(
-  () => activeName.value,
-  (name: string) => {
-    if (name === props.name) {
-      const { list, uidList } = getParentList()
-      active.value = true
-      list.forEach((item) => {
-        if (item.proxy) {
-          ;(item.proxy as any).active = true
-        }
-      })
-
-      rootMenuEmitter.emit('on-update-active-name:submenu', uidList)
-    } else {
-      active.value = false
+    rootMenuEmitter.emit('on-menu-item-select', props.name);
+    if (unref(getCollapse)) {
+      return;
     }
-  },
-  { immediate: true }
-)
+    const { uidList } = getParentList();
+
+    rootMenuEmitter.emit('on-update-opened', {
+      opend: false,
+      parent: instance?.parent,
+      uidList,
+    });
+  }
+  watch(
+    () => activeName.value,
+    (name: string) => {
+      if (name === props.name) {
+        const { list, uidList } = getParentList();
+        active.value = true;
+        list.forEach((item) => {
+          if (item.proxy) {
+            (item.proxy as any).active = true;
+          }
+        });
+
+        rootMenuEmitter.emit('on-update-active-name:submenu', uidList);
+      } else {
+        active.value = false;
+      }
+    },
+    { immediate: true },
+  );
 </script>

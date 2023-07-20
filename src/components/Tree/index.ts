@@ -1,6 +1,7 @@
-import BasicTree from './src/BasicTree.vue'
-import './style'
+import './style';
 
-export { BasicTree }
-export type { ContextMenuItem } from '@/hooks/web/useContextMenu'
-export * from './src/types/tree'
+import BasicTree from './src/BasicTree.vue';
+
+export { BasicTree };
+export * from './src/types/tree';
+export type { ContextMenuItem } from '@/hooks/web/useContextMenu';

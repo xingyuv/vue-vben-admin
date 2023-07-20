@@ -4,9 +4,9 @@
     {{ !$slots.title ? title : '' }}
   </BasicTitle>
 
-  <div :class="[prefixCls, `${prefixCls}--detail`]" v-else>
+  <div v-else :class="[prefixCls, `${prefixCls}--detail`]">
     <span :class="`${prefixCls}__twrap`">
-      <span @click="handleClose" v-if="showDetailBack">
+      <span v-if="showDetailBack" @click="handleClose">
         <ArrowLeftOutlined :class="`${prefixCls}__back`" />
       </span>
       <span v-if="title">{{ title }}</span>
@@ -17,49 +17,53 @@
     </span>
   </div>
 </template>
-<script lang="ts" setup name="BasicDrawerHeader">
-import { BasicTitle } from '@/components/Basic'
-import { ArrowLeftOutlined } from '@ant-design/icons-vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
+<script lang="ts" setup>
+  import { ArrowLeftOutlined } from '@ant-design/icons-vue';
 
-defineProps({
-  isDetail: propTypes.bool,
-  showDetailBack: propTypes.bool,
-  title: propTypes.string
-})
-const emit = defineEmits(['close'])
+  import { BasicTitle } from '@/components/Basic';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
-const { prefixCls } = useDesign('basic-drawer-header')
+  defineOptions({ name: 'BasicDrawerHeader' });
 
-function handleClose() {
-  emit('close')
-}
+  defineProps({
+    isDetail: propTypes.bool,
+    showDetailBack: propTypes.bool,
+    title: propTypes.string,
+  });
+
+  const emit = defineEmits(['close']);
+
+  const { prefixCls } = useDesign('basic-drawer-header');
+
+  function handleClose() {
+    emit('close');
+  }
 </script>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-basic-drawer-header';
-@footer-height: 60px;
-.@{prefix-cls} {
-  display: flex;
-  height: 100%;
-  align-items: center;
+  @prefix-cls: ~'@{namespace}-basic-drawer-header';
+  @footer-height: 60px;
+  .@{prefix-cls} {
+    display: flex;
+    align-items: center;
+    height: 100%;
 
-  &__back {
-    padding: 0 12px;
-    cursor: pointer;
+    &__back {
+      padding: 0 12px;
+      cursor: pointer;
 
-    &:hover {
-      color: @primary-color;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    &__twrap {
+      flex: 1;
+    }
+
+    &__toolbar {
+      padding-right: 50px;
     }
   }
-
-  &__twrap {
-    flex: 1;
-  }
-
-  &__toolbar {
-    padding-right: 50px;
-  }
-}
 </style>

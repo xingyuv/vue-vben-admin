@@ -1,11 +1,28 @@
 <template>
   <LoginFormTitle v-show="getShow" class="enter-x" />
-  <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef" v-show="getShow" @keypress.enter="handleLogin">
+  <Form
+    v-show="getShow"
+    ref="formRef"
+    class="p-4 enter-x"
+    :model="formData"
+    :rules="getFormRules"
+    @keypress.enter="handleLogin"
+  >
     <FormItem name="account" class="enter-x">
-      <Input size="large" v-model:value="formData.account" :placeholder="t('sys.login.userName')" class="fix-auto-fill" />
+      <Input
+        v-model:value="formData.account"
+        size="large"
+        :placeholder="t('sys.login.userName')"
+        class="fix-auto-fill"
+      />
     </FormItem>
     <FormItem name="password" class="enter-x">
-      <InputPassword size="large" visibilityToggle v-model:value="formData.password" :placeholder="t('sys.login.password')" />
+      <InputPassword
+        v-model:value="formData.password"
+        size="large"
+        visibilityToggle
+        :placeholder="t('sys.login.password')"
+      />
     </FormItem>
 
     <ARow class="enter-x">
@@ -28,7 +45,7 @@
     </ARow>
 
     <FormItem class="enter-x">
-      <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
+      <Button type="primary" size="large" block :loading="loading" @click="handleLogin">
         {{ t('sys.login.loginButton') }}
       </Button>
       <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
@@ -65,72 +82,77 @@
   </Form>
 </template>
 <script lang="ts" setup>
-import { reactive, ref, unref, computed } from 'vue'
+  import {
+    AlipayCircleFilled,
+    GithubFilled,
+    GoogleCircleFilled,
+    TwitterCircleFilled,
+    WechatFilled,
+  } from '@ant-design/icons-vue';
+  import { Button, Checkbox, Col, Divider, Form, Input, Row } from 'ant-design-vue';
+  import { computed, reactive, ref, unref } from 'vue';
 
-import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue'
-import { GithubFilled, WechatFilled, AlipayCircleFilled, GoogleCircleFilled, TwitterCircleFilled } from '@ant-design/icons-vue'
-import LoginFormTitle from './LoginFormTitle.vue'
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { useUserStore } from '@/store/modules/user';
 
-import { useI18n } from '@/hooks/web/useI18n'
-import { useMessage } from '@/hooks/web/useMessage'
+  import LoginFormTitle from './LoginFormTitle.vue';
+  import { LoginStateEnum, useFormRules, useFormValid, useLoginState } from './useLogin';
+  //import { onKeyStroke } from '@vueuse/core';
 
-import { useUserStore } from '@/store/modules/user'
-import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin'
-import { useDesign } from '@/hooks/web/useDesign'
-//import { onKeyStroke } from '@vueuse/core';
+  const ACol = Col;
+  const ARow = Row;
+  const FormItem = Form.Item;
+  const InputPassword = Input.Password;
+  const { t } = useI18n();
+  const { notification, createErrorModal } = useMessage();
+  const { prefixCls } = useDesign('login');
+  const userStore = useUserStore();
 
-const ACol = Col
-const ARow = Row
-const FormItem = Form.Item
-const InputPassword = Input.Password
-const { t } = useI18n()
-const { notification, createErrorModal } = useMessage()
-const { prefixCls } = useDesign('login')
-const userStore = useUserStore()
+  const { setLoginState, getLoginState } = useLoginState();
+  const { getFormRules } = useFormRules();
 
-const { setLoginState, getLoginState } = useLoginState()
-const { getFormRules } = useFormRules()
+  const formRef = ref();
+  const loading = ref(false);
+  const rememberMe = ref(false);
 
-const formRef = ref()
-const loading = ref(false)
-const rememberMe = ref(false)
+  const formData = reactive({
+    account: 'vben',
+    password: '123456',
+  });
 
-const formData = reactive({
-  account: 'vben',
-  password: '123456'
-})
+  const { validForm } = useFormValid(formRef);
 
-const { validForm } = useFormValid(formRef)
+  //onKeyStroke('Enter', handleLogin);
 
-//onKeyStroke('Enter', handleLogin);
+  const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
 
-const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
-
-async function handleLogin() {
-  const data = await validForm()
-  if (!data) return
-  try {
-    loading.value = true
-    const userInfo = await userStore.login({
-      password: data.password,
-      username: data.account,
-      mode: 'none' //不要默认的错误提示
-    })
-    if (userInfo) {
-      notification.success({
-        message: t('sys.login.loginSuccessTitle'),
-        description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
-        duration: 3
-      })
+  async function handleLogin() {
+    const data = await validForm();
+    if (!data) return;
+    try {
+      loading.value = true;
+      const userInfo = await userStore.login({
+        password: data.password,
+        username: data.account,
+        mode: 'none', //不要默认的错误提示
+      });
+      if (userInfo) {
+        notification.success({
+          message: t('sys.login.loginSuccessTitle'),
+          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+          duration: 3,
+        });
+      }
+    } catch (error) {
+      createErrorModal({
+        title: t('sys.api.errorTip'),
+        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
+        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+      });
+    } finally {
+      loading.value = false;
     }
-  } catch (error) {
-    createErrorModal({
-      title: t('sys.api.errorTip'),
-      content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-      getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body
-    })
-  } finally {
-    loading.value = false
   }
-}
 </script>

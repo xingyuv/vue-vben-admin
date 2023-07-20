@@ -1,54 +1,64 @@
 <template>
-  <BasicModal v-bind="$attrs" @register="registerModal" :title="getTitle" @ok="handleSubmit">
+  <BasicModal v-bind="$attrs" :title="getTitle" @register="registerModal" @ok="handleSubmit">
     <BasicForm @register="registerForm" />
   </BasicModal>
 </template>
-<script lang="ts" setup name="DeptModal">
-import { ref, computed, unref } from 'vue'
-import { BasicModal, useModalInner } from '@/components/Modal'
-import { BasicForm, useForm } from '@/components/Form'
-import { formSchema } from './dept.data'
+<script lang="ts">
+  import { computed, defineComponent, ref, unref } from 'vue';
 
-import { getDeptList } from '@/api/demo/system'
-const emit = defineEmits(['success', 'register'])
-const isUpdate = ref(true)
+  import { getDeptList } from '@/api/demo/system';
+  import { BasicForm, useForm } from '@/components/Form/index';
+  import { BasicModal, useModalInner } from '@/components/Modal';
 
-const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
-  labelWidth: 100,
-  baseColProps: { span: 24 },
-  schemas: formSchema,
-  showActionButtonGroup: false
-})
+  import { formSchema } from './dept.data';
 
-const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
-  resetFields()
-  setModalProps({ confirmLoading: false })
-  isUpdate.value = !!data?.isUpdate
+  export default defineComponent({
+    name: 'DeptModal',
+    components: { BasicModal, BasicForm },
+    emits: ['success', 'register'],
+    setup(_, { emit }) {
+      const isUpdate = ref(true);
 
-  if (unref(isUpdate)) {
-    setFieldsValue({
-      ...data.record
-    })
-  }
-  const treeData = await getDeptList()
-  updateSchema({
-    field: 'parentDept',
-    componentProps: { treeData }
-  })
-})
+      const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
+        labelWidth: 100,
+        baseColProps: { span: 24 },
+        schemas: formSchema,
+        showActionButtonGroup: false,
+      });
 
-const getTitle = computed(() => (!unref(isUpdate) ? '新增部门' : '编辑部门'))
+      const [registerModal, { setModalProps, closeModal }] = useModalInner(async (data) => {
+        resetFields();
+        setModalProps({ confirmLoading: false });
+        isUpdate.value = !!data?.isUpdate;
 
-async function handleSubmit() {
-  try {
-    const values = await validate()
-    setModalProps({ confirmLoading: true })
-    // TODO custom api
-    console.log(values)
-    closeModal()
-    emit('success')
-  } finally {
-    setModalProps({ confirmLoading: false })
-  }
-}
+        if (unref(isUpdate)) {
+          setFieldsValue({
+            ...data.record,
+          });
+        }
+        const treeData = await getDeptList();
+        updateSchema({
+          field: 'parentDept',
+          componentProps: { treeData },
+        });
+      });
+
+      const getTitle = computed(() => (!unref(isUpdate) ? '新增部门' : '编辑部门'));
+
+      async function handleSubmit() {
+        try {
+          const values = await validate();
+          setModalProps({ confirmLoading: true });
+          // TODO custom api
+          console.log(values);
+          closeModal();
+          emit('success');
+        } finally {
+          setModalProps({ confirmLoading: false });
+        }
+      }
+
+      return { registerModal, registerForm, getTitle, handleSubmit };
+    },
+  });
 </script>

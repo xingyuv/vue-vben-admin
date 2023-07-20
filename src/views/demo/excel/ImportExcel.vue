@@ -1,6 +1,6 @@
 <template>
   <PageWrapper title="excel数据导入示例">
-    <ImpExcel @success="loadDataSuccess" dateFormat="YYYY-MM-DD">
+    <ImpExcel dateFormat="YYYY-MM-DD" @success="loadDataSuccess">
       <a-button class="m-3"> 导入Excel </a-button>
     </ImpExcel>
     <BasicTable
@@ -12,35 +12,46 @@
     />
   </PageWrapper>
 </template>
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script lang="ts">
+  import { defineComponent, ref } from 'vue';
 
-import { ImpExcel, ExcelData } from '@/components/Excel'
-import { BasicTable, BasicColumn } from '@/components/Table'
-import { PageWrapper } from '@/components/Page'
+  import { ExcelData, ImpExcel } from '@/components/Excel';
+  import { PageWrapper } from '@/components/Page';
+  import { BasicColumn, BasicTable } from '@/components/Table';
 
-const tableListRef = ref<
-  {
-    title: string
-    columns?: any[]
-    dataSource?: any[]
-  }[]
->([])
+  export default defineComponent({
+    components: { BasicTable, ImpExcel, PageWrapper },
 
-function loadDataSuccess(excelDataList: ExcelData[]) {
-  tableListRef.value = []
-  console.log(excelDataList)
-  for (const excelData of excelDataList) {
-    const {
-      header,
-      results,
-      meta: { sheetName }
-    } = excelData
-    const columns: BasicColumn[] = []
-    for (const title of header) {
-      columns.push({ title, dataIndex: title })
-    }
-    tableListRef.value.push({ title: sheetName, dataSource: results, columns })
-  }
-}
+    setup() {
+      const tableListRef = ref<
+        {
+          title: string;
+          columns?: any[];
+          dataSource?: any[];
+        }[]
+      >([]);
+
+      function loadDataSuccess(excelDataList: ExcelData[]) {
+        tableListRef.value = [];
+        console.log(excelDataList);
+        for (const excelData of excelDataList) {
+          const {
+            header,
+            results,
+            meta: { sheetName },
+          } = excelData;
+          const columns: BasicColumn[] = [];
+          for (const title of header) {
+            columns.push({ title, dataIndex: title });
+          }
+          tableListRef.value.push({ title: sheetName, dataSource: results, columns });
+        }
+      }
+
+      return {
+        loadDataSuccess,
+        tableListRef,
+      };
+    },
+  });
 </script>

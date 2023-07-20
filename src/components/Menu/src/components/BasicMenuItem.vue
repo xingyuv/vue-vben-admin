@@ -1,14 +1,15 @@
 <template>
-  <MenuItem :key="item.path">
+  <Menu.Item :key="item.path">
     <MenuItemContent v-bind="$props" :item="item" />
-  </MenuItem>
+  </Menu.Item>
 </template>
-<script lang="ts" setup name="BasicMenuItem">
-import { Menu } from 'ant-design-vue'
-import { itemProps } from '../props'
-import MenuItemContent from './MenuItemContent.vue'
+<script lang="ts" setup>
+  import { Menu } from 'ant-design-vue';
 
-const MenuItem = Menu.Item
+  import { itemProps } from '../props';
+  import MenuItemContent from './MenuItemContent.vue';
 
-defineProps(itemProps)
+  defineOptions({ name: 'BasicMenuItem' });
+
+  defineProps(itemProps);
 </script>

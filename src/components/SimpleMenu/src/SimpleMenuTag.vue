@@ -1,57 +1,64 @@
 <template>
-  <span :class="getTagClass" v-if="getShowTag">{{ getContent }}</span>
+  <span v-if="getShowTag" :class="getTagClass">{{ getContent }}</span>
 </template>
-<script lang="ts" setup name="SimpleMenuTag">
-import type { Menu } from '@/router/types'
-import { computed } from 'vue'
-import { useDesign } from '@/hooks/web/useDesign'
-import { propTypes } from '@/utils/propTypes'
+<script lang="ts" setup>
+  import { computed, PropType } from 'vue';
 
-const props = defineProps({
-  item: {
-    type: Object as PropType<Menu>,
-    default: () => ({})
-  },
-  dot: propTypes.bool,
-  collapseParent: propTypes.bool
-})
+  import { useDesign } from '@/hooks/web/useDesign';
+  import type { Menu } from '@/router/types';
+  import { propTypes } from '@/utils/propTypes';
 
-const { prefixCls } = useDesign('simple-menu')
+  defineOptions({ name: 'SimpleMenuTag' });
 
-const getShowTag = computed(() => {
-  const { item } = props
+  const props = defineProps({
+    item: {
+      type: Object as PropType<Menu>,
+      default: () => ({}),
+    },
+    dot: propTypes.bool,
+    collapseParent: propTypes.bool,
+  });
 
-  if (!item) return false
+  const { prefixCls } = useDesign('simple-menu');
 
-  const { tag } = item
-  if (!tag) return false
+  const getShowTag = computed(() => {
+    const { item } = props;
 
-  const { dot, content } = tag
-  if (!dot && !content) return false
-  return true
-})
+    if (!item) return false;
 
-const getContent = computed(() => {
-  if (!getShowTag.value) return ''
-  const { item, collapseParent } = props
-  const { tag } = item
-  const { dot, content } = tag!
-  return dot || collapseParent ? '' : content
-})
+    const { tag } = item;
+    if (!tag) return false;
 
-const getTagClass = computed(() => {
-  const { item, collapseParent } = props
-  const { tag = {} } = item || {}
-  const { dot, type = 'error' } = tag
-  const tagCls = `${prefixCls}-tag`
-  return [
-    tagCls,
+    const { dot, content } = tag;
+    if (!dot && !content) return false;
+    return true;
+  });
 
-    [`${tagCls}--${type}`],
-    {
-      [`${tagCls}--collapse`]: collapseParent,
-      [`${tagCls}--dot`]: dot || props.dot
+  const getContent = computed(() => {
+    if (!getShowTag.value) return '';
+    const { item, collapseParent } = props;
+    const { tag } = item;
+    if (tag) {
+      const { dot, content } = tag;
+      return dot || collapseParent ? '' : content;
+    } else {
+      return '';
     }
-  ]
-})
+  });
+
+  const getTagClass = computed(() => {
+    const { item, collapseParent } = props;
+    const { tag = {} } = item || {};
+    const { dot, type = 'error' } = tag;
+    const tagCls = `${prefixCls}-tag`;
+    return [
+      tagCls,
+
+      [`${tagCls}--${type}`],
+      {
+        [`${tagCls}--collapse`]: collapseParent,
+        [`${tagCls}--dot`]: dot || props.dot,
+      },
+    ];
+  });
 </script>

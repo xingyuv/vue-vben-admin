@@ -1,12 +1,14 @@
-import type { CSSProperties } from 'vue'
-import type { ModalWrapperProps } from './typing'
-import { ButtonProps } from 'ant-design-vue/es/button/buttonTypes'
-import { useI18n } from '@/hooks/web/useI18n'
+import { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
+import type { CSSProperties, PropType } from 'vue';
 
-const { t } = useI18n()
+import { useI18n } from '@/hooks/web/useI18n';
+
+import type { ModalWrapperProps } from './typing';
+
+const { t } = useI18n();
 
 export const modalProps = {
-  visible: { type: Boolean },
+  open: { type: Boolean },
   scrollTop: { type: Boolean, default: true },
   height: { type: Number },
   minHeight: { type: Number },
@@ -16,8 +18,8 @@ export const modalProps = {
   cancelText: { type: String, default: t('common.cancelText') },
   okText: { type: String, default: t('common.okText') },
 
-  closeFunc: Function as PropType<() => Promise<boolean>>
-}
+  closeFunc: Function as PropType<() => Promise<boolean>>,
+};
 
 export const basicProps = Object.assign({}, modalProps, {
   defaultFullscreen: { type: Boolean },
@@ -73,11 +75,11 @@ export const basicProps = Object.assign({}, modalProps, {
 
   title: { type: String },
 
-  visible: { type: Boolean },
+  open: { type: Boolean },
 
   width: [String, Number] as PropType<string | number>,
 
   wrapClassName: { type: String },
 
-  zIndex: { type: Number }
-})
+  zIndex: { type: Number },
+});

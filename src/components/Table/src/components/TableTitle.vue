@@ -1,46 +1,52 @@
 <template>
-  <BasicTitle :class="prefixCls" v-if="getTitle" :helpMessage="helpMessage">
+  <BasicTitle v-if="getTitle" :class="prefixCls" :helpMessage="helpMessage">
     {{ getTitle }}
   </BasicTitle>
 </template>
-<script lang="ts" setup name="BasicTableTitle">
-import { computed } from 'vue'
-import { BasicTitle } from '@/components/Basic'
-import { useDesign } from '@/hooks/web/useDesign'
-import { isFunction } from '@/utils/is'
+<script lang="ts" setup>
+  import { computed, PropType } from 'vue';
 
-const props = defineProps({
-  title: {
-    type: [Function, String] as PropType<string | ((data: Recordable) => string)>
-  },
-  getSelectRows: {
-    type: Function as PropType<() => Recordable[]>
-  },
-  helpMessage: {
-    type: [String, Array] as PropType<string | string[]>
-  }
-})
+  import { BasicTitle } from '@/components/Basic/index';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { isFunction } from '@/utils/is';
 
-const { prefixCls } = useDesign('basic-table-title')
+  defineOptions({ name: 'BasicTableTitle' });
 
-const getTitle = computed(() => {
-  const { title, getSelectRows = () => {} } = props
-  let tit = title
+  const props = defineProps({
+    title: {
+      type: [Function, String] as PropType<string | ((data) => string)>,
+      default: '',
+    },
+    getSelectRows: {
+      type: Function as PropType<() => any[]>,
+      default: () => {},
+    },
+    helpMessage: {
+      type: [String, Array] as PropType<string | string[]>,
+      default: '',
+    },
+  });
 
-  if (isFunction(title)) {
-    tit = title({
-      selectRows: getSelectRows()
-    })
-  }
-  return tit
-})
+  const { prefixCls } = useDesign('basic-table-title');
+
+  const getTitle = computed(() => {
+    const { title, getSelectRows = () => {} } = props;
+    let tit = title;
+
+    if (isFunction(title)) {
+      tit = title({
+        selectRows: getSelectRows(),
+      });
+    }
+    return tit;
+  });
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-basic-table-title';
+  @prefix-cls: ~'@{namespace}-basic-table-title';
 
-.@{prefix-cls} {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .@{prefix-cls} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 </style>

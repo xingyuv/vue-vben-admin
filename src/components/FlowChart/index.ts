@@ -1,4 +1,5 @@
-import { withInstall } from '@/utils'
-import flowChart from './src/FlowChart.vue'
+import { withInstall } from '@/utils';
 
-export const FlowChart = withInstall(flowChart)
+import flowChart from './src/FlowChart.vue';
+
+export const FlowChart = withInstall(flowChart);

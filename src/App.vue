@@ -1,5 +1,5 @@
 <template>
-  <ConfigProvider :locale="getAntdLocale" :component-size="componentSize">
+  <ConfigProvider :locale="getAntdLocale" :theme="themeConfig">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -7,21 +7,28 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import { ConfigProvider } from 'ant-design-vue'
-import { AppProvider } from '@/components/Application'
-import { useTitle } from '@/hooks/web/useTitle'
-import { useLocale } from '@/locales/useLocale'
-import { useAppStore } from '@/store/modules/app'
+  import 'dayjs/locale/zh-cn';
 
-import 'dayjs/locale/zh-cn'
-// support Multi-language
-const { getAntdLocale } = useLocale()
+  import { ConfigProvider } from 'ant-design-vue';
+  import { theme } from 'ant-design-vue/es';
+  import type { ThemeConfig } from 'ant-design-vue/es/config-provider/context';
+  import { reactive } from 'vue';
 
-const appStore = useAppStore()
+  import { AppProvider } from '@/components/Application';
+  import { useTitle } from '@/hooks/web/useTitle';
+  import { useLocale } from '@/locales/useLocale';
 
-const componentSize = computed(() => appStore.getComponentSize)
+  // support Multi-language
+  const { getAntdLocale } = useLocale();
 
-// Listening to page changes and dynamically changing site titles
-useTitle()
+  const themeConfig = reactive<ThemeConfig>({
+    algorithm: theme.defaultAlgorithm,
+    token: {
+      colorPrimary: '#1890ff',
+    },
+    components: {},
+  });
+
+  // Listening to page changes and dynamically changing site titles
+  useTitle();
 </script>

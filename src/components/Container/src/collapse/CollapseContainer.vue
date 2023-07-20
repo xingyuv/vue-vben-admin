@@ -1,118 +1,120 @@
 <script lang="tsx">
-import { ref, unref, defineComponent, type PropType, type ExtractPropTypes } from 'vue'
-import { isNil } from 'lodash-es'
-import { Skeleton } from 'ant-design-vue'
-import { CollapseTransition } from '@/components/Transition'
-import CollapseHeader from './CollapseHeader.vue'
-import { triggerWindowResize } from '@/utils/event'
-import { useTimeoutFn } from '@/hooks/core/useTimeout'
-import { useDesign } from '@/hooks/web/useDesign'
+  import { useTimeoutFn } from '@vben/hooks';
+  import { Skeleton } from 'ant-design-vue';
+  import { isNil } from 'lodash-es';
+  import { defineComponent, type ExtractPropTypes, type PropType, ref, unref } from 'vue';
 
-const collapseContainerProps = {
-  title: { type: String, default: '' },
-  loading: { type: Boolean },
-  /**
-   *  Can it be expanded
-   */
-  canExpan: { type: Boolean, default: true },
-  /**
-   * Warm reminder on the right side of the title
-   */
-  helpMessage: {
-    type: [Array, String] as PropType<string[] | string>,
-    default: ''
-  },
-  /**
-   * Whether to trigger window.resize when expanding and contracting,
-   * Can adapt to tables and forms, when the form shrinks, the form triggers resize to adapt to the height
-   */
-  triggerWindowResize: { type: Boolean },
-  /**
-   * Delayed loading time
-   */
-  lazyTime: { type: Number, default: 0 }
-}
+  import { CollapseTransition } from '@/components/Transition';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { triggerWindowResize } from '@/utils/event';
 
-export type CollapseContainerProps = ExtractPropTypes<typeof collapseContainerProps>
+  import CollapseHeader from './CollapseHeader.vue';
 
-export default defineComponent({
-  name: 'CollapseContainer',
+  const collapseContainerProps = {
+    title: { type: String, default: '' },
+    loading: { type: Boolean },
+    /**
+     *  Can it be expanded
+     */
+    canExpan: { type: Boolean, default: true },
+    /**
+     * Warm reminder on the right side of the title
+     */
+    helpMessage: {
+      type: [Array, String] as PropType<string[] | string>,
+      default: '',
+    },
+    /**
+     * Whether to trigger window.resize when expanding and contracting,
+     * Can adapt to tables and forms, when the form shrinks, the form triggers resize to adapt to the height
+     */
+    triggerWindowResize: { type: Boolean },
+    /**
+     * Delayed loading time
+     */
+    lazyTime: { type: Number, default: 0 },
+  };
 
-  props: collapseContainerProps,
+  export type CollapseContainerProps = ExtractPropTypes<typeof collapseContainerProps>;
 
-  setup(props, { expose, slots }) {
-    const { prefixCls } = useDesign('collapse-container')
+  export default defineComponent({
+    name: 'CollapseContainer',
 
-    const show = ref(true)
+    props: collapseContainerProps,
 
-    const handleExpand = (val: boolean) => {
-      show.value = isNil(val) ? !show.value : val
-      if (props.triggerWindowResize) {
-        // 200 milliseconds here is because the expansion has animation,
-        useTimeoutFn(triggerWindowResize, 200)
-      }
-    }
+    setup(props, { expose, slots }) {
+      const { prefixCls } = useDesign('collapse-container');
 
-    expose({ handleExpand })
+      const show = ref(true);
 
-    return () => (
-      <div class={unref(prefixCls)}>
-        <CollapseHeader
-          {...props}
-          prefixCls={unref(prefixCls)}
-          onExpand={handleExpand}
-          show={show.value}
-          v-slots={{
-            title: slots.title,
-            action: slots.action
-          }}
-        />
+      const handleExpand = (val: boolean) => {
+        show.value = isNil(val) ? !show.value : val;
+        if (props.triggerWindowResize) {
+          // 200 milliseconds here is because the expansion has animation,
+          useTimeoutFn(triggerWindowResize, 200);
+        }
+      };
 
-        <div class="p-2">
-          <CollapseTransition enable={props.canExpan}>
-            {props.loading ? (
-              <Skeleton active={props.loading} />
-            ) : (
-              <div class={`${prefixCls}__body`} v-show={show.value}>
-                {slots.default?.()}
-              </div>
-            )}
-          </CollapseTransition>
+      expose({ handleExpand });
+
+      return () => (
+        <div class={unref(prefixCls)}>
+          <CollapseHeader
+            {...props}
+            prefixCls={unref(prefixCls)}
+            onExpand={handleExpand}
+            show={show.value}
+            v-slots={{
+              title: slots.title,
+              action: slots.action,
+            }}
+          />
+
+          <div class="p-2">
+            <CollapseTransition enable={props.canExpan}>
+              {props.loading ? (
+                <Skeleton active={props.loading} />
+              ) : (
+                <div class={`${prefixCls}__body`} v-show={show.value}>
+                  {slots.default?.()}
+                </div>
+              )}
+            </CollapseTransition>
+          </div>
+
+          {slots.footer && <div class={`${prefixCls}__footer`}>{slots.footer()}</div>}
         </div>
-
-        {slots.footer && <div class={`${prefixCls}__footer`}>{slots.footer()}</div>}
-      </div>
-    )
-  }
-})
+      );
+    },
+  });
 </script>
 
 <style lang="less">
-@prefix-cls: ~'@{namespace}-collapse-container';
+  @prefix-cls: ~'@{namespace}-collapse-container';
 
-.@{prefix-cls} {
-  background-color: @component-background;
-  border-radius: 2px;
-  transition: all 0.3s ease-in-out;
+  .@{prefix-cls} {
+    background-color: @component-background;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
 
-  &__header {
-    display: flex;
-    height: 32px;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid @border-color-light;
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 32px;
+      border-bottom: 1px solid @border-color-light;
+    }
+
+    &__footer {
+      border-top: 1px solid @border-color-light;
+    }
+
+    &__action {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: right;
+    }
   }
-
-  &__footer {
-    border-top: 1px solid @border-color-light;
-  }
-
-  &__action {
-    display: flex;
-    text-align: right;
-    flex: 1;
-    align-items: center;
-    justify-content: flex-end;
-  }
-}
 </style>

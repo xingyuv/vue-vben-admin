@@ -1,4 +1,5 @@
-import { withInstall } from '@/utils'
-import strengthMeter from './src/StrengthMeter.vue'
+import { withInstall } from '@/utils';
 
-export const StrengthMeter = withInstall(strengthMeter)
+import strengthMeter from './src/StrengthMeter.vue';
+
+export const StrengthMeter = withInstall(strengthMeter);

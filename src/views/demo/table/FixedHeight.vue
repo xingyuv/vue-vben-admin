@@ -19,19 +19,31 @@
     </BasicTable>
   </div>
 </template>
-<script lang="ts" setup>
-import { BasicTable, useTable } from '@/components/Table'
-import { getCustomHeaderColumns } from './tableData'
-import { FormOutlined } from '@ant-design/icons-vue'
-import { demoListApi } from '@/api/demo/table'
-import { BasicHelp } from '@/components/Basic'
-import HeaderCell from '@/components/Table/src/components/HeaderCell.vue'
+<script lang="ts">
+  import { FormOutlined } from '@ant-design/icons-vue';
+  import { defineComponent } from 'vue';
 
-const [registerTable] = useTable({
-  title: '定高/头部自定义',
-  api: demoListApi,
-  columns: getCustomHeaderColumns(),
-  canResize: false,
-  scroll: { y: 100 }
-})
+  import { demoListApi } from '@/api/demo/table';
+  import { BasicHelp } from '@/components/Basic';
+  import { BasicTable, useTable } from '@/components/Table';
+  import HeaderCell from '@/components/Table/src/components/HeaderCell.vue';
+
+  import { getCustomHeaderColumns } from './tableData';
+
+  export default defineComponent({
+    components: { BasicTable, FormOutlined, BasicHelp, HeaderCell },
+    setup() {
+      const [registerTable] = useTable({
+        title: '定高/头部自定义',
+        api: demoListApi,
+        columns: getCustomHeaderColumns(),
+        canResize: false,
+        scroll: { y: 100 },
+      });
+
+      return {
+        registerTable,
+      };
+    },
+  });
 </script>

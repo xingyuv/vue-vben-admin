@@ -1,55 +1,55 @@
-import { defHttp } from '@/utils/http/axios'
-import { LoginParams, LoginResultModel, GetUserInfoModel } from './model/userModel'
+import { defHttp } from '@/utils/http/axios';
+import { ErrorMessageMode } from '#/axios';
 
-import { ErrorMessageMode } from '@/types/axios'
+import { GetUserInfoModel, LoginParams, LoginResultModel } from './model/userModel';
 
 enum Api {
   Login = '/login',
   Logout = '/logout',
   GetUserInfo = '/getUserInfo',
   GetPermCode = '/getPermCode',
-  TestRetry = '/testRetry'
+  TestRetry = '/testRetry',
 }
 
 /**
  * @description: user login api
  */
-export const loginApi = (params: LoginParams, mode: ErrorMessageMode = 'modal') => {
+export function loginApi(params: LoginParams, mode: ErrorMessageMode = 'modal') {
   return defHttp.post<LoginResultModel>(
     {
       url: Api.Login,
-      params
+      params,
     },
     {
-      errorMessageMode: mode
-    }
-  )
+      errorMessageMode: mode,
+    },
+  );
 }
 
 /**
  * @description: getUserInfo
  */
-export const getUserInfo = () => {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' })
+export function getUserInfo() {
+  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
 }
 
-export const getPermCode = () => {
-  return defHttp.get<string[]>({ url: Api.GetPermCode })
+export function getPermCode() {
+  return defHttp.get<string[]>({ url: Api.GetPermCode });
 }
 
-export const doLogout = () => {
-  return defHttp.get({ url: Api.Logout })
+export function doLogout() {
+  return defHttp.get({ url: Api.Logout });
 }
 
-export const testRetry = () => {
+export function testRetry() {
   return defHttp.get(
     { url: Api.TestRetry },
     {
       retryRequest: {
         isOpenRetry: true,
         count: 5,
-        waitTime: 1000
-      }
-    }
-  )
+        waitTime: 1000,
+      },
+    },
+  );
 }

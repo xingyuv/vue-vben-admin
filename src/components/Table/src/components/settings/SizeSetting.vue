@@ -7,40 +7,43 @@
     <Dropdown placement="bottom" :trigger="['click']" :getPopupContainer="getPopupContainer">
       <ColumnHeightOutlined />
       <template #overlay>
-        <Menu @click="handleTitleClick" selectable v-model:selectedKeys="selectedKeysRef">
-          <MenuItem key="default">
+        <Menu v-model:selectedKeys="selectedKeysRef" selectable @click="handleTitleClick">
+          <Menu.Item key="default">
             <span>{{ t('component.table.settingDensDefault') }}</span>
-          </MenuItem>
-          <MenuItem key="middle">
+          </Menu.Item>
+          <Menu.Item key="middle">
             <span>{{ t('component.table.settingDensMiddle') }}</span>
-          </MenuItem>
-          <MenuItem key="small">
+          </Menu.Item>
+          <Menu.Item key="small">
             <span>{{ t('component.table.settingDensSmall') }}</span>
-          </MenuItem>
+          </Menu.Item>
         </Menu>
       </template>
     </Dropdown>
   </Tooltip>
 </template>
-<script lang="ts" setup name="SizeSetting">
-import type { SizeType } from '../../types/table'
-import { ref } from 'vue'
-import { Tooltip, Dropdown, Menu } from 'ant-design-vue'
-import { ColumnHeightOutlined } from '@ant-design/icons-vue'
-import { useI18n } from '@/hooks/web/useI18n'
-import { useTableContext } from '../../hooks/useTableContext'
-import { getPopupContainer } from '@/utils'
+<script lang="ts" setup>
+  import { ColumnHeightOutlined } from '@ant-design/icons-vue';
+  import { Dropdown, Menu, Tooltip } from 'ant-design-vue';
+  import { ref } from 'vue';
 
-const MenuItem = Menu.Item
-const table = useTableContext()
-const { t } = useI18n()
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { getPopupContainer } from '@/utils';
 
-const selectedKeysRef = ref<SizeType[]>([table.getSize()])
+  import { useTableContext } from '../../hooks/useTableContext';
+  import type { SizeType } from '../../types/table';
 
-function handleTitleClick({ key }: { key: any }) {
-  selectedKeysRef.value = [key]
-  table.setProps({
-    size: key
-  })
-}
+  defineOptions({ name: 'SizeSetting' });
+
+  const table = useTableContext();
+  const { t } = useI18n();
+
+  const selectedKeysRef = ref<SizeType[]>([table.getSize()]);
+
+  function handleTitleClick({ key }: { key: SizeType }) {
+    selectedKeysRef.value = [key];
+    table.setProps({
+      size: key,
+    });
+  }
 </script>

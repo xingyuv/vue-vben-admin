@@ -4,9 +4,9 @@
   "volar.tsPluginStatus": false,
   "npm.packageManager": "pnpm",
   "editor.tabSize": 2,
-  "prettier.printWidth": 140, // 超过最大值换行
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.eol": "\n",
+  "stylelint.packageManager": "pnpm",
   "search.exclude": {
     "**/node_modules": true,
     "**/*.log": true,
@@ -37,6 +37,7 @@
     "**/.editorconfig": true,
     "**/.eslintcache": true,
     "**/bower_components": true,
+    "**/.turbo": true,
     "**/.idea": true,
     "**/tmp": true,
     "**/.git": true,
@@ -64,16 +65,16 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[less]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -85,7 +86,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
   "[vue]": {
     "editor.codeActionsOnSave": {
@@ -93,7 +95,7 @@
       "source.fixAll.stylelint": true
     }
   },
-  "i18n-ally.localesPaths": ["src/locales/lang"],
+  "i18n-ally.localesPaths": ["${workspaceRoot}/src/locales/lang"],
   "i18n-ally.keystyle": "nested",
   "i18n-ally.sortKeys": true,
   "i18n-ally.namespace": true,
@@ -104,14 +106,11 @@
   "i18n-ally.enabledFrameworks": ["vue", "react"],
   "cSpell.words": [
     "vben",
-    "tailwind",
-    "windicss",
     "browserslist",
     "tailwindcss",
     "esnext",
     "antv",
     "tinymce",
-    "qrcode",
     "sider",
     "pinia",
     "sider",
@@ -133,30 +132,11 @@
     "zxcvbn",
     "lintstagedrc",
     "brotli",
+    "tailwindcss",
     "sider",
     "pnpm",
-    "antd"
-  ],
-  "vetur.format.scriptInitialIndent": true,
-  "vetur.format.styleInitialIndent": true,
-  "vetur.validation.script": false,
-  "MicroPython.executeButton": [
-    {
-      "text": "▶",
-      "tooltip": "运行",
-      "alignment": "left",
-      "command": "extension.executeFile",
-      "priority": 3.5
-    }
-  ],
-  "MicroPython.syncButton": [
-    {
-      "text": "$(sync)",
-      "tooltip": "同步",
-      "alignment": "left",
-      "command": "extension.execute",
-      "priority": 4
-    }
+    "antd",
+    "unref"
   ],
   // 控制相关文件嵌套展示
   "explorer.fileNesting.enabled": true,
@@ -165,7 +145,10 @@
     "*.ts": "$(capture).test.ts, $(capture).test.tsx",
     "*.tsx": "$(capture).test.ts, $(capture).test.tsx",
     "*.env": "$(capture).env.*",
-    "package.json": "pnpm-lock.yaml,yarn.lock,LICENSE,README*,CHANGELOG*,CNAME,.gitattributes,.gitignore,prettier.config.js,stylelint.config.js,commitlint.config.js,.stylelintignore,.prettierignore,.gitpod.yml,.eslintrc.js,.eslintignore"
+    "CHANGELOG.md": "CHANGELOG*",
+    "README.md": "README*",
+    "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,LICENSE,.gitattributes,.gitignore,.gitpod.yml,CNAME,.npmrc,.browserslistrc,.nvmrc",
+    ".eslintrc.cjs": ".eslintignore,.prettierignore,.stylelintignore,.commitlintrc.*,.prettierrc.*,.stylelintrc.*,.lintstagedrc"
   },
   "terminal.integrated.scrollback": 10000
 }

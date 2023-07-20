@@ -1,7 +1,7 @@
 <template>
   <CollapseContainer title="账号绑定" :canExpan="false">
     <List>
-      <template v-for="item in accountBindList" :key="item.key">
+      <template v-for="item in list" :key="item.key">
         <ListItem>
           <ListItemMeta>
             <template #avatar>
@@ -9,7 +9,7 @@
             </template>
             <template #title>
               {{ item.title }}
-              <a-button type="link" size="small" v-if="item.extra" class="extra">
+              <a-button v-if="item.extra" type="link" size="small" class="extra">
                 {{ item.extra }}
               </a-button>
             </template>
@@ -22,25 +22,39 @@
     </List>
   </CollapseContainer>
 </template>
-<script lang="ts" setup>
-import { List } from 'ant-design-vue'
-import { CollapseContainer } from '@/components/Container'
-import Icon from '@/components/Icon'
+<script lang="ts">
+  import { List } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
 
-import { accountBindList } from './data'
+  import { CollapseContainer } from '@/components/Container/index';
+  import Icon from '@/components/Icon/Icon.vue';
 
-const ListItem = List.Item
-const ListItemMeta = List.Item.Meta
+  import { accountBindList } from './data';
+
+  export default defineComponent({
+    components: {
+      CollapseContainer,
+      List,
+      ListItem: List.Item,
+      ListItemMeta: List.Item.Meta,
+      Icon,
+    },
+    setup() {
+      return {
+        list: accountBindList,
+      };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.avatar {
-  font-size: 40px !important;
-}
+  .avatar {
+    font-size: 40px !important;
+  }
 
-.extra {
-  float: right;
-  margin-top: 10px;
-  margin-right: 30px;
-  cursor: pointer;
-}
+  .extra {
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+    cursor: pointer;
+  }
 </style>

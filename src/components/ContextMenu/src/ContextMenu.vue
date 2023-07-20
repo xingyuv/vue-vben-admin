@@ -1,204 +1,213 @@
 <script lang="tsx">
-import type { ContextMenuItem, ItemContentProps, Axis } from './typing'
-import type { FunctionalComponent, CSSProperties } from 'vue'
-import { defineComponent, nextTick, onMounted, computed, ref, unref, onUnmounted } from 'vue'
-import Icon from '@/components/Icon'
-import { Menu, Divider } from 'ant-design-vue'
+  import { Divider, Menu } from 'ant-design-vue';
+  import type { CSSProperties, FunctionalComponent, PropType } from 'vue';
+  import { computed, defineComponent, nextTick, onMounted, onUnmounted, ref, unref } from 'vue';
 
-const prefixCls = 'context-menu'
+  import Icon from '@/components/Icon/Icon.vue';
 
-const props = {
-  width: { type: Number, default: 156 },
-  customEvent: { type: Object as PropType<Event>, default: null },
-  styles: { type: Object as PropType<CSSProperties> },
-  showIcon: { type: Boolean, default: true },
-  axis: {
-    // The position of the right mouse button click
-    type: Object as PropType<Axis>,
-    default() {
-      return { x: 0, y: 0 }
-    }
-  },
-  items: {
-    // The most important list, if not, will not be displayed
-    type: Array as PropType<ContextMenuItem[]>,
-    default() {
-      return []
-    }
-  }
-}
+  import type { Axis, ContextMenuItem, ItemContentProps } from './typing';
 
-const ItemContent: FunctionalComponent<ItemContentProps> = (props) => {
-  const { item } = props
-  return (
-    <span style="display: inline-block; width: 100%; " class="px-4" onClick={props.handler.bind(null, item)}>
-      {props.showIcon && item.icon && <Icon class="mr-2" icon={item.icon} />}
-      <span>{item.label}</span>
-    </span>
-  )
-}
+  const prefixCls = 'context-menu';
 
-export default defineComponent({
-  name: 'ContextMenu',
-  props,
-  setup(props) {
-    const wrapRef = ref(null)
-    const showRef = ref(false)
+  const props = {
+    width: { type: Number, default: 156 },
+    customEvent: { type: Object as PropType<Event>, default: null },
+    styles: { type: Object as PropType<CSSProperties> },
+    showIcon: { type: Boolean, default: true },
+    axis: {
+      // The position of the right mouse button click
+      type: Object as PropType<Axis>,
+      default() {
+        return { x: 0, y: 0 };
+      },
+    },
+    items: {
+      // The most important list, if not, will not be displayed
+      type: Array as PropType<ContextMenuItem[]>,
+      default() {
+        return [];
+      },
+    },
+  };
 
-    const getStyle = computed((): CSSProperties => {
-      const { axis, items, styles, width } = props
-      const { x, y } = axis || { x: 0, y: 0 }
-      const menuHeight = (items || []).length * 40
-      const menuWidth = width
-      const body = document.body
+  const ItemContent: FunctionalComponent<ItemContentProps> = (props) => {
+    const { item } = props;
+    return (
+      <span
+        style="display: inline-block; width: 100%; "
+        class="px-4"
+        onClick={props.handler.bind(null, item)}
+      >
+        {props.showIcon && item.icon && <Icon class="mr-2" icon={item.icon} />}
+        <span>{item.label}</span>
+      </span>
+    );
+  };
 
-      const left = body.clientWidth < x + menuWidth ? x - menuWidth : x
-      const top = body.clientHeight < y + menuHeight ? y - menuHeight : y
-      return {
-        ...styles,
-        position: 'absolute',
-        width: `${width}px`,
-        left: `${left + 1}px`,
-        top: `${top + 1}px`,
-        zIndex: 9999
-      }
-    })
+  export default defineComponent({
+    name: 'ContextMenu',
+    props,
+    setup(props) {
+      const wrapRef = ref(null);
+      const showRef = ref(false);
 
-    onMounted(() => {
-      nextTick(() => (showRef.value = true))
-    })
+      const getStyle = computed((): CSSProperties => {
+        const { axis, items, styles, width } = props;
+        const { x, y } = axis || { x: 0, y: 0 };
+        const menuHeight = (items || []).length * 40;
+        const menuWidth = width;
+        const body = document.body;
 
-    onUnmounted(() => {
-      const el = unref(wrapRef)
-      el && document.body.removeChild(el)
-    })
+        const left = body.clientWidth < x + menuWidth ? x - menuWidth : x;
+        const top = body.clientHeight < y + menuHeight ? y - menuHeight : y;
+        return {
+          ...styles,
+          position: 'absolute',
+          width: `${width}px`,
+          left: `${left + 1}px`,
+          top: `${top + 1}px`,
+          zIndex: 9999,
+        };
+      });
 
-    function handleAction(item: ContextMenuItem, e: MouseEvent) {
-      const { handler, disabled } = item
-      if (disabled) {
-        return
-      }
-      showRef.value = false
-      e?.stopPropagation()
-      e?.preventDefault()
-      handler?.()
-    }
+      onMounted(() => {
+        nextTick(() => (showRef.value = true));
+      });
 
-    function renderMenuItem(items: ContextMenuItem[]) {
-      const visibleItems = items.filter((item) => !item.hidden)
-      return visibleItems.map((item) => {
-        const { disabled, label, children, divider = false } = item
+      onUnmounted(() => {
+        const el = unref(wrapRef);
+        el && document.body.removeChild(el);
+      });
 
-        const contentProps = {
-          item,
-          handler: handleAction,
-          showIcon: props.showIcon
+      function handleAction(item: ContextMenuItem, e: MouseEvent) {
+        const { handler, disabled } = item;
+        if (disabled) {
+          return;
         }
+        showRef.value = false;
+        e?.stopPropagation();
+        e?.preventDefault();
+        handler?.();
+      }
 
-        if (!children || children.length === 0) {
+      function renderMenuItem(items: ContextMenuItem[]) {
+        const visibleItems = items.filter((item) => !item.hidden);
+        return visibleItems.map((item) => {
+          const { disabled, label, children, divider = false } = item;
+
+          const contentProps = {
+            item,
+            handler: handleAction,
+            showIcon: props.showIcon,
+          };
+
+          if (!children || children.length === 0) {
+            return (
+              <>
+                <Menu.Item disabled={disabled} class={`${prefixCls}__item`} key={label}>
+                  <ItemContent {...contentProps} />
+                </Menu.Item>
+                {divider ? <Divider key={`d-${label}`} /> : null}
+              </>
+            );
+          }
+          if (!unref(showRef)) return null;
+
           return (
-            <>
-              <Menu.Item disabled={disabled} class={`${prefixCls}__item`} key={label}>
-                <ItemContent {...contentProps} />
-              </Menu.Item>
-              {divider ? <Divider key={`d-${label}`} /> : null}
-            </>
-          )
-        }
-        if (!unref(showRef)) return null
-
-        return (
-          <Menu.SubMenu key={label} disabled={disabled} popupClassName={`${prefixCls}__popup`}>
-            {{
-              title: () => <ItemContent {...contentProps} />,
-              default: () => renderMenuItem(children)
-            }}
-          </Menu.SubMenu>
-        )
-      })
-    }
-    return () => {
-      if (!unref(showRef)) {
-        return null
+            <Menu.SubMenu key={label} disabled={disabled} popupClassName={`${prefixCls}__popup`}>
+              {{
+                title: () => <ItemContent {...contentProps} />,
+                default: () => renderMenuItem(children),
+              }}
+            </Menu.SubMenu>
+          );
+        });
       }
-      const { items } = props
-      return (
-        <div class={prefixCls}>
-          <Menu inlineIndent={12} mode="vertical" ref={wrapRef} style={unref(getStyle)}>
-            {renderMenuItem(items)}
-          </Menu>
-        </div>
-      )
-    }
-  }
-})
+      return () => {
+        if (!unref(showRef)) {
+          return null;
+        }
+        const { items } = props;
+        return (
+          <div class={prefixCls}>
+            <Menu inlineIndent={12} mode="vertical" ref={wrapRef} style={unref(getStyle)}>
+              {renderMenuItem(items)}
+            </Menu>
+          </div>
+        );
+      };
+    },
+  });
 </script>
 <style lang="less">
-@default-height: 42px !important;
+  @default-height: 42px !important;
 
-@small-height: 36px !important;
+  @small-height: 36px !important;
 
-@large-height: 36px !important;
+  @large-height: 36px !important;
 
-.item-style() {
-  li {
-    display: inline-block;
-    width: 100%;
-    height: @default-height;
-    margin: 0 !important;
-    line-height: @default-height;
-
-    span {
+  .item-style() {
+    li {
+      display: inline-block;
+      width: 100%;
+      height: @default-height;
+      margin: 0 !important;
       line-height: @default-height;
-    }
 
-    > div {
+      span {
+        line-height: @default-height;
+      }
+
+      > div {
+        margin: 0 !important;
+      }
+
+      &:not(.ant-menu-item-disabled):hover {
+        color: @text-color-base;
+        background-color: @item-hover-bg;
+      }
+    }
+  }
+
+  .context-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    display: block;
+    width: 156px;
+    margin: 0;
+    list-style: none;
+    user-select: none;
+    background-color: @component-background;
+    background-clip: padding-box;
+    border: 1px solid rgb(0 0 0 / 8%);
+    border-radius: 0.25rem;
+    box-shadow:
+      0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 3px 1px -2px rgb(0 0 0 / 10%),
+      0 1px 5px 0 rgb(0 0 0 / 6%);
+
+    &__item {
       margin: 0 !important;
     }
+    .item-style();
 
-    &:not(.ant-menu-item-disabled):hover {
-      color: @text-color-base;
-      background-color: @item-hover-bg;
-    }
-  }
-}
-
-.context-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  display: block;
-  width: 156px;
-  margin: 0;
-  list-style: none;
-  background-color: @component-background;
-  border: 1px solid rgb(0 0 0 / 8%);
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 10%), 0 1px 5px 0 rgb(0 0 0 / 6%);
-  background-clip: padding-box;
-  user-select: none;
-
-  &__item {
-    margin: 0 !important;
-  }
-  .item-style();
-
-  .ant-divider {
-    margin: 0;
-  }
-
-  &__popup {
     .ant-divider {
       margin: 0;
     }
 
-    .item-style();
-  }
+    &__popup {
+      .ant-divider {
+        margin: 0;
+      }
 
-  .ant-menu-submenu-title,
-  .ant-menu-item {
-    padding: 0 !important;
+      .item-style();
+    }
+
+    .ant-menu-submenu-title,
+    .ant-menu-item {
+      padding: 0 !important;
+    }
   }
-}
 </style>

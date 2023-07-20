@@ -3,10 +3,13 @@
 </template>
 
 <script lang="ts" setup>
-import VueJsonPretty from 'vue-json-pretty'
-import 'vue-json-pretty/lib/styles.css'
+  import 'vue-json-pretty/lib/styles.css';
 
-defineProps({
-  data: Object
-})
+  import VueJsonPretty from 'vue-json-pretty';
+
+  import { propTypes } from '@/utils/propTypes';
+
+  defineProps({
+    data: propTypes.object,
+  });
 </script>

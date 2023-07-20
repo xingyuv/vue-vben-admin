@@ -4,10 +4,12 @@
   </transition>
 </template>
 <script lang="ts" setup>
-import { computed } from 'vue'
-import LockPage from './LockPage.vue'
-import { useLockStore } from '@/store/modules/lock'
+  import { computed } from 'vue';
 
-const lockStore = useLockStore()
-const getIsLock = computed(() => lockStore?.getLockInfo?.isLock ?? false)
+  import { useLockStore } from '@/store/modules/lock';
+
+  import LockPage from './LockPage.vue';
+
+  const lockStore = useLockStore();
+  const getIsLock = computed(() => lockStore?.getLockInfo?.isLock ?? false);
 </script>

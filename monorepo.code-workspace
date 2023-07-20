@@ -1,0 +1,39 @@
+{
+  "folders": [
+    {
+      "name": "@vben/eslint-config",
+      "path": "internal/eslint-config"
+    },
+    {
+      "name": "@vben/prettier-config",
+      "path": "internal/prettier-config"
+    },
+    {
+      "name": "@vben/stylelint-config",
+      "path": "internal/stylelint-config"
+    },
+    {
+      "name": "@vben/ts-config",
+      "path": "internal/ts-config"
+    },
+    {
+      "name": "@vben/vite-config",
+      "path": "internal/vite-config"
+    },
+    {
+      "name": "@vben/hooks",
+      "path": "packages/hooks"
+    },
+    {
+      "name": "@vben/types",
+      "path": "packages/types"
+    },
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "root\\node_modules\\typescript\\lib"
+  }
+}

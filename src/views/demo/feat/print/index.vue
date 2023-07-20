@@ -7,29 +7,43 @@
     <a-button type="primary" class="mt-5" @click="imagePrint">Image Print</a-button>
   </PageWrapper>
 </template>
-<script lang="ts" setup name="AppLogo">
-import { PageWrapper } from '@/components/Page'
-import { CollapseContainer } from '@/components/Container'
+<script lang="ts">
+  import printJS from 'print-js';
+  import { defineComponent } from 'vue';
 
-import printJS from 'print-js'
+  import { CollapseContainer } from '@/components/Container/index';
+  import { PageWrapper } from '@/components/Page';
 
-function jsonPrint() {
-  printJS({
-    printable: [
-      { name: 'll', email: '123@gmail.com', phone: '123' },
-      { name: 'qq', email: '456@gmail.com', phone: '456' }
-    ],
-    properties: ['name', 'email', 'phone'],
-    type: 'json'
-  })
-}
+  export default defineComponent({
+    name: 'AppLogo',
+    components: { PageWrapper, CollapseContainer },
+    setup() {
+      function jsonPrint() {
+        printJS({
+          printable: [
+            { name: 'll', email: '123@gmail.com', phone: '123' },
+            { name: 'qq', email: '456@gmail.com', phone: '456' },
+          ],
+          properties: ['name', 'email', 'phone'],
+          type: 'json',
+        });
+      }
 
-function imagePrint() {
-  printJS({
-    printable: ['https://anncwb.github.io/anncwb/images/preview1.png', 'https://anncwb.github.io/anncwb/images/preview2.png'],
-    type: 'image',
-    header: 'Multiple Images',
-    imageStyle: 'width:100%;'
-  })
-}
+      function imagePrint() {
+        printJS({
+          printable: [
+            'https://anncwb.github.io/anncwb/images/preview1.png',
+            'https://anncwb.github.io/anncwb/images/preview2.png',
+          ],
+          type: 'image',
+          header: 'Multiple Images',
+          imageStyle: 'width:100%;',
+        });
+      }
+      return {
+        jsonPrint,
+        imagePrint,
+      };
+    },
+  });
 </script>

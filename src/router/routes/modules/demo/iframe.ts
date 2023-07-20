@@ -1,8 +1,8 @@
-import type { AppRouteModule } from '@/router/types'
+import { t } from '@/hooks/web/useI18n';
+import { LAYOUT } from '@/router/constant';
+import type { AppRouteModule } from '@/router/types';
 
-import { LAYOUT } from '@/router/constant'
-const IFrame = () => import('@/views/sys/iframe/FrameBlank.vue')
-import { t } from '@/hooks/web/useI18n'
+const IFrame = () => import('@/views/sys/iframe/FrameBlank.vue');
 
 const iframe: AppRouteModule = {
   path: '/frame',
@@ -12,7 +12,7 @@ const iframe: AppRouteModule = {
   meta: {
     orderNo: 1000,
     icon: 'ion:tv-outline',
-    title: t('routes.demo.iframe.frame')
+    title: t('routes.demo.iframe.frame'),
   },
 
   children: [
@@ -22,8 +22,8 @@ const iframe: AppRouteModule = {
       component: IFrame,
       meta: {
         frameSrc: 'https://doc.vvbin.cn/',
-        title: t('routes.demo.iframe.doc')
-      }
+        title: t('routes.demo.iframe.doc'),
+      },
     },
     {
       path: 'antv',
@@ -31,18 +31,18 @@ const iframe: AppRouteModule = {
       component: IFrame,
       meta: {
         frameSrc: 'https://www.antdv.com/docs/vue/introduce-cn/',
-        title: t('routes.demo.iframe.antv')
-      }
+        title: t('routes.demo.iframe.antv'),
+      },
     },
     {
       path: 'https://doc.vvbin.cn/',
       name: 'DocExternal',
       component: IFrame,
       meta: {
-        title: t('routes.demo.iframe.docExternal')
-      }
-    }
-  ]
-}
+        title: t('routes.demo.iframe.docExternal'),
+      },
+    },
+  ],
+};
 
-export default iframe
+export default iframe;

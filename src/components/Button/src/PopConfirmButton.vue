@@ -1,54 +1,56 @@
 <script lang="ts">
-import { computed, defineComponent, h, unref } from 'vue'
-import BasicButton from './BasicButton.vue'
-import { Popconfirm } from 'ant-design-vue'
-import { extendSlots } from '@/utils/helper/tsxHelper'
-import { omit } from 'lodash-es'
-import { useAttrs } from '@/hooks/core/useAttrs'
-import { useI18n } from '@/hooks/web/useI18n'
+  import { useAttrs } from '@vben/hooks';
+  import { Popconfirm } from 'ant-design-vue';
+  import { omit } from 'lodash-es';
+  import { computed, defineComponent, h, unref } from 'vue';
 
-const props = {
-  /**
-   * Whether to enable the drop-down menu
-   * @default: true
-   */
-  enable: {
-    type: Boolean,
-    default: true
-  }
-}
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { extendSlots } from '@/utils/helper/tsxHelper';
 
-export default defineComponent({
-  name: 'PopButton',
-  inheritAttrs: false,
-  props,
-  setup(props, { slots }) {
-    const { t } = useI18n()
-    const attrs = useAttrs()
+  import BasicButton from './BasicButton.vue';
 
-    // get inherit binding value
-    const getBindValues = computed(() => {
-      return Object.assign(
-        {
-          okText: t('common.okText'),
-          cancelText: t('common.cancelText')
-        },
-        { ...props, ...unref(attrs) }
-      )
-    })
+  const props = {
+    /**
+     * Whether to enable the drop-down menu
+     * @default: true
+     */
+    enable: {
+      type: Boolean,
+      default: true,
+    },
+  };
 
-    return () => {
-      const bindValues = omit(unref(getBindValues), 'icon')
-      const btnBind = omit(bindValues, 'title') as Recordable
-      if (btnBind.disabled) btnBind.color = ''
-      const Button = h(BasicButton, btnBind, extendSlots(slots))
+  export default defineComponent({
+    name: 'PopButton',
+    inheritAttrs: false,
+    props,
+    setup(props, { slots }) {
+      const { t } = useI18n();
+      const attrs = useAttrs();
 
-      // If it is not enabled, it is a normal button
-      if (!props.enable) {
-        return Button
-      }
-      return h(Popconfirm, bindValues, { default: () => Button })
-    }
-  }
-})
+      // get inherit binding value
+      const getBindValues = computed(() => {
+        return Object.assign(
+          {
+            okText: t('common.okText'),
+            cancelText: t('common.cancelText'),
+          },
+          { ...props, ...unref(attrs) },
+        );
+      });
+
+      return () => {
+        const bindValues = omit(unref(getBindValues), 'icon');
+        const btnBind = omit(bindValues, 'title') as any;
+        if (btnBind.disabled) btnBind.color = '';
+        const Button = h(BasicButton, btnBind, extendSlots(slots));
+
+        // If it is not enabled, it is a normal button
+        if (!props.enable) {
+          return Button;
+        }
+        return h(Popconfirm, bindValues, { default: () => Button });
+      };
+    },
+  });
 </script>

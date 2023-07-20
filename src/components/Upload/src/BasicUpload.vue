@@ -1,10 +1,10 @@
 <template>
   <div>
     <Space>
-      <a-button type="primary" @click="openUploadModal" preIcon="carbon:cloud-upload">
+      <a-button type="primary" preIcon="carbon:cloud-upload" @click="openUploadModal">
         {{ t('component.upload.upload') }}
       </a-button>
-      <Tooltip placement="bottom" v-if="showPreview">
+      <Tooltip v-if="showPreview" placement="bottom">
         <template #title>
           {{ t('component.upload.uploaded') }}
           <template v-if="fileList.length">
@@ -35,69 +35,92 @@
     />
   </div>
 </template>
-<script lang="ts" setup name="BasicUpload">
-import { ref, watch, unref, useAttrs, computed } from 'vue'
-import { Icon } from '@/components/Icon'
-import { Tooltip, Space } from 'ant-design-vue'
-import { useModal } from '@/components/Modal'
-import { uploadContainerProps } from './props'
-import { omit } from 'lodash-es'
-import { useI18n } from '@/hooks/web/useI18n'
-import { isArray } from '@/utils/is'
-import UploadModal from './UploadModal.vue'
-import UploadPreviewModal from './UploadPreviewModal.vue'
+<script lang="ts">
+  import { Recordable } from '@vben/types';
+  import { Space, Tooltip } from 'ant-design-vue';
+  import { omit } from 'lodash-es';
+  import { computed, defineComponent, ref, unref, watch } from 'vue';
 
-const props = defineProps(uploadContainerProps)
-const emit = defineEmits(['change', 'delete', 'preview-delete', 'update:value'])
-const attrs = useAttrs()
+  import Icon from '@/components/Icon/Icon.vue';
+  import { useModal } from '@/components/Modal';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isArray } from '@/utils/is';
 
-const { t } = useI18n()
-// 上传modal
-const [registerUploadModal, { openModal: openUploadModal }] = useModal()
+  import { uploadContainerProps } from './props';
+  import UploadModal from './UploadModal.vue';
+  import UploadPreviewModal from './UploadPreviewModal.vue';
 
-//   预览modal
-const [registerPreviewModal, { openModal: openPreviewModal }] = useModal()
+  export default defineComponent({
+    name: 'BasicUpload',
+    components: { UploadModal, Space, UploadPreviewModal, Icon, Tooltip },
+    props: uploadContainerProps,
+    emits: ['change', 'delete', 'previewDelete', 'update:value'],
 
-const fileList = ref<string[]>([])
+    setup(props, { emit, attrs }) {
+      const { t } = useI18n();
+      // 上传modal
+      const [registerUploadModal, { openModal: openUploadModal }] = useModal();
 
-const showPreview = computed(() => {
-  const { emptyHidePreview } = props
-  if (!emptyHidePreview) return true
-  return emptyHidePreview ? fileList.value.length > 0 : true
-})
+      //   预览modal
+      const [registerPreviewModal, { openModal: openPreviewModal }] = useModal();
 
-const bindValue = computed(() => {
-  const value = { ...attrs, ...props }
-  return omit(value, 'onChange')
-})
+      const fileList = ref<string[]>([]);
 
-watch(
-  () => props.value,
-  (value = []) => {
-    fileList.value = isArray(value) ? value : []
-  },
-  { immediate: true }
-)
+      const showPreview = computed(() => {
+        const { emptyHidePreview } = props;
+        if (!emptyHidePreview) return true;
+        return emptyHidePreview ? fileList.value.length > 0 : true;
+      });
 
-// 上传modal保存操作
-function handleChange(urls: string[]) {
-  fileList.value = [...unref(fileList), ...(urls || [])]
-  emit('update:value', fileList.value)
-  emit('change', fileList.value)
-}
+      const bindValue = computed(() => {
+        const value = { ...attrs, ...props };
+        return omit(value, 'onChange');
+      });
 
-// 预览modal保存操作
-function handlePreviewChange(urls: string[]) {
-  fileList.value = [...(urls || [])]
-  emit('update:value', fileList.value)
-  emit('change', fileList.value)
-}
+      watch(
+        () => props.value,
+        (value = []) => {
+          fileList.value = isArray(value) ? value : [];
+        },
+        { immediate: true },
+      );
 
-function handleDelete(record: Recordable) {
-  emit('delete', record)
-}
+      // 上传modal保存操作
+      function handleChange(urls: string[]) {
+        fileList.value = [...unref(fileList), ...(urls || [])];
+        emit('update:value', fileList.value);
+        emit('change', fileList.value);
+      }
 
-function handlePreviewDelete(url: string) {
-  emit('preview-delete', url)
-}
+      // 预览modal保存操作
+      function handlePreviewChange(urls: string[]) {
+        fileList.value = [...(urls || [])];
+        emit('update:value', fileList.value);
+        emit('change', fileList.value);
+      }
+
+      function handleDelete(record: Recordable<any>) {
+        emit('delete', record);
+      }
+
+      function handlePreviewDelete(url: string) {
+        emit('previewDelete', url);
+      }
+
+      return {
+        registerUploadModal,
+        openUploadModal,
+        handleChange,
+        handlePreviewChange,
+        registerPreviewModal,
+        openPreviewModal,
+        fileList,
+        showPreview,
+        bindValue,
+        handleDelete,
+        handlePreviewDelete,
+        t,
+      };
+    },
+  });
 </script>

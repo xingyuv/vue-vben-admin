@@ -1,53 +1,52 @@
-import { getAllRoleList, isAccountExist } from '@/api/demo/system'
-import { BasicColumn } from '@/components/Table'
-import { FormSchema } from '@/components/Table'
+import { getAllRoleList, isAccountExist } from '@/api/demo/system';
+import { BasicColumn, FormSchema } from '@/components/Table';
 
 export const columns: BasicColumn[] = [
   {
     title: '用户名',
     dataIndex: 'account',
-    width: 120
+    width: 120,
   },
   {
     title: '昵称',
     dataIndex: 'nickname',
-    width: 120
+    width: 120,
   },
   {
     title: '邮箱',
     dataIndex: 'email',
-    width: 120
+    width: 120,
   },
   {
     title: '创建时间',
     dataIndex: 'createTime',
-    width: 180
+    width: 180,
   },
   {
     title: '角色',
     dataIndex: 'role',
-    width: 200
+    width: 200,
   },
   {
     title: '备注',
-    dataIndex: 'remark'
-  }
-]
+    dataIndex: 'remark',
+  },
+];
 
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'account',
     label: '用户名',
     component: 'Input',
-    colProps: { span: 8 }
+    colProps: { span: 8 },
   },
   {
     field: 'nickname',
     label: '昵称',
     component: 'Input',
-    colProps: { span: 8 }
-  }
-]
+    colProps: { span: 8 },
+  },
+];
 
 export const accountFormSchema: FormSchema[] = [
   {
@@ -58,7 +57,7 @@ export const accountFormSchema: FormSchema[] = [
     rules: [
       {
         required: true,
-        message: '请输入用户名'
+        message: '请输入用户名',
       },
       {
         validator(_, value) {
@@ -66,19 +65,19 @@ export const accountFormSchema: FormSchema[] = [
             isAccountExist(value)
               .then(() => resolve())
               .catch((err) => {
-                reject(err.message || '验证失败')
-              })
-          })
-        }
-      }
-    ]
+                reject(err.message || '验证失败');
+              });
+          });
+        },
+      },
+    ],
   },
   {
     field: 'pwd',
     label: '密码',
     component: 'InputPassword',
     required: true,
-    ifShow: false
+    ifShow: false,
   },
   {
     label: '角色',
@@ -87,9 +86,9 @@ export const accountFormSchema: FormSchema[] = [
     componentProps: {
       api: getAllRoleList,
       labelField: 'roleName',
-      valueField: 'roleValue'
+      valueField: 'roleValue',
     },
-    required: true
+    required: true,
   },
   {
     field: 'dept',
@@ -99,29 +98,29 @@ export const accountFormSchema: FormSchema[] = [
       fieldNames: {
         label: 'deptName',
         key: 'id',
-        value: 'id'
+        value: 'id',
       },
-      getPopupContainer: () => document.body
+      getPopupContainer: () => document.body,
     },
-    required: true
+    required: true,
   },
   {
     field: 'nickname',
     label: '昵称',
     component: 'Input',
-    required: true
+    required: true,
   },
 
   {
     label: '邮箱',
     field: 'email',
     component: 'Input',
-    required: true
+    required: true,
   },
 
   {
     label: '备注',
     field: 'remark',
-    component: 'InputTextArea'
-  }
-]
+    component: 'InputTextArea',
+  },
+];

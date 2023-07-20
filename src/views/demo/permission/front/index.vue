@@ -15,32 +15,45 @@
     <div class="mt-4">
       权限切换(请先切换权限模式为前端角色权限模式):
       <Space>
-        <a-button @click="changeRole(RoleEnum.SUPER)" :type="isSuper ? 'primary' : 'default'">
+        <a-button :type="isSuper ? 'primary' : 'default'" @click="changeRole(RoleEnum.SUPER)">
           {{ RoleEnum.SUPER }}
         </a-button>
-        <a-button @click="changeRole(RoleEnum.TEST)" :type="isTest ? 'primary' : 'default'">
+        <a-button :type="isTest ? 'primary' : 'default'" @click="changeRole(RoleEnum.TEST)">
           {{ RoleEnum.TEST }}
         </a-button>
       </Space>
     </div>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
-import { computed } from 'vue'
-import { Alert, Space } from 'ant-design-vue'
-import { useUserStore } from '@/store/modules/user'
-import { RoleEnum } from '@/enums/roleEnum'
-import { usePermission } from '@/hooks/web/usePermission'
-import { PageWrapper } from '@/components/Page'
-import CurrentPermissionMode from '../CurrentPermissionMode.vue'
+<script lang="ts">
+  import { Alert, Space } from 'ant-design-vue';
+  import { computed, defineComponent } from 'vue';
 
-const { changeRole } = usePermission()
-const userStore = useUserStore()
-const isSuper = computed(() => userStore.getRoleList.includes(RoleEnum.SUPER))
-const isTest = computed(() => userStore.getRoleList.includes(RoleEnum.TEST))
+  import { PageWrapper } from '@/components/Page';
+  import { RoleEnum } from '@/enums/roleEnum';
+  import { usePermission } from '@/hooks/web/usePermission';
+  import { useUserStore } from '@/store/modules/user';
+
+  import CurrentPermissionMode from '../CurrentPermissionMode.vue';
+
+  export default defineComponent({
+    components: { Space, Alert, CurrentPermissionMode, PageWrapper },
+    setup() {
+      const { changeRole } = usePermission();
+      const userStore = useUserStore();
+
+      return {
+        userStore,
+        RoleEnum,
+        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
+        isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
+        changeRole,
+      };
+    },
+  });
 </script>
 <style lang="less" scoped>
-.demo {
-  background-color: @component-background;
-}
+  .demo {
+    background-color: @component-background;
+  }
 </style>

@@ -1,7 +1,6 @@
-import type { AppRouteModule } from '@/router/types'
-
-import { getParentLayout, LAYOUT } from '@/router/constant'
-import { t } from '@/hooks/web/useI18n'
+import { t } from '@/hooks/web/useI18n';
+import { getParentLayout, LAYOUT } from '@/router/constant';
+import type { AppRouteModule } from '@/router/types';
 
 const charts: AppRouteModule = {
   path: '/charts',
@@ -11,32 +10,32 @@ const charts: AppRouteModule = {
   meta: {
     orderNo: 500,
     icon: 'ion:bar-chart-outline',
-    title: t('routes.demo.charts.charts')
+    title: t('routes.demo.charts.charts'),
   },
   children: [
     {
       path: 'baiduMap',
       name: 'BaiduMap',
       meta: {
-        title: t('routes.demo.charts.baiduMap')
+        title: t('routes.demo.charts.baiduMap'),
       },
-      component: () => import('@/views/demo/charts/map/Baidu.vue')
+      component: () => import('@/views/demo/charts/map/Baidu.vue'),
     },
     {
       path: 'aMap',
       name: 'AMap',
       meta: {
-        title: t('routes.demo.charts.aMap')
+        title: t('routes.demo.charts.aMap'),
       },
-      component: () => import('@/views/demo/charts/map/Gaode.vue')
+      component: () => import('@/views/demo/charts/map/Gaode.vue'),
     },
     {
       path: 'googleMap',
       name: 'GoogleMap',
       meta: {
-        title: t('routes.demo.charts.googleMap')
+        title: t('routes.demo.charts.googleMap'),
       },
-      component: () => import('@/views/demo/charts/map/Google.vue')
+      component: () => import('@/views/demo/charts/map/Google.vue'),
     },
 
     {
@@ -44,7 +43,7 @@ const charts: AppRouteModule = {
       name: 'Echarts',
       component: getParentLayout('Echarts'),
       meta: {
-        title: 'Echarts'
+        title: 'Echarts',
       },
       redirect: '/charts/echarts/map',
       children: [
@@ -53,28 +52,28 @@ const charts: AppRouteModule = {
           name: 'Map',
           component: () => import('@/views/demo/charts/Map.vue'),
           meta: {
-            title: t('routes.demo.charts.map')
-          }
+            title: t('routes.demo.charts.map'),
+          },
         },
         {
           path: 'line',
           name: 'Line',
           component: () => import('@/views/demo/charts/Line.vue'),
           meta: {
-            title: t('routes.demo.charts.line')
-          }
+            title: t('routes.demo.charts.line'),
+          },
         },
         {
           path: 'pie',
           name: 'Pie',
           component: () => import('@/views/demo/charts/Pie.vue'),
           meta: {
-            title: t('routes.demo.charts.pie')
-          }
-        }
-      ]
-    }
-  ]
-}
+            title: t('routes.demo.charts.pie'),
+          },
+        },
+      ],
+    },
+  ],
+};
 
-export default charts
+export default charts;

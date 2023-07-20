@@ -4,58 +4,74 @@
       <slot name="headerTop"></slot>
     </div>
     <div class="flex items-center">
-      <slot name="tableTitle" v-if="$slots.tableTitle"></slot>
-      <TableTitle :helpMessage="titleHelpMessage" :title="title" v-if="!$slots.tableTitle && title" />
+      <slot v-if="$slots.tableTitle" name="tableTitle"></slot>
+      <TableTitle
+        v-if="!$slots.tableTitle && title"
+        :helpMessage="titleHelpMessage"
+        :title="title"
+      />
       <div :class="`${prefixCls}__toolbar`">
         <slot name="toolbar"></slot>
-        <Divider type="vertical" v-if="$slots.toolbar && showTableSetting" />
-        <TableSettingComponent :setting="tableSetting" v-if="showTableSetting" @columns-change="handleColumnChange" />
+        <Divider v-if="$slots.toolbar && showTableSetting" type="vertical" />
+        <TableSettingComponent
+          v-if="showTableSetting"
+          :setting="tableSetting"
+          @columns-change="handleColumnChange"
+        />
       </div>
     </div>
   </div>
 </template>
-<script lang="ts" setup name="BasicTableHeader">
-import type { TableSetting, ColumnChangeParam } from '../types/table'
-import { Divider } from 'ant-design-vue'
-import TableSettingComponent from './settings/index.vue'
-import TableTitle from './TableTitle.vue'
-import { useDesign } from '@/hooks/web/useDesign'
+<script lang="ts" setup>
+  import { Divider } from 'ant-design-vue';
+  import type { PropType } from 'vue';
 
-defineProps({
-  title: {
-    type: [Function, String] as PropType<string | ((data: Recordable) => string)>
-  },
-  tableSetting: {
-    type: Object as PropType<TableSetting>
-  },
-  showTableSetting: {
-    type: Boolean
-  },
-  titleHelpMessage: {
-    type: [String, Array] as PropType<string | string[]>,
-    default: ''
+  import { useDesign } from '@/hooks/web/useDesign';
+
+  import type { ColumnChangeParam, TableSetting } from '../types/table';
+  import TableSettingComponent from './settings/index.vue';
+  import TableTitle from './TableTitle.vue';
+
+  defineOptions({ name: 'BasicTableHeader' });
+
+  defineProps({
+    title: {
+      type: [Function, String] as PropType<string | ((data) => string)>,
+      default: '',
+    },
+    tableSetting: {
+      type: Object as PropType<TableSetting>,
+      default: () => {},
+    },
+    showTableSetting: {
+      type: Boolean,
+    },
+    titleHelpMessage: {
+      type: [String, Array] as PropType<string | string[]>,
+      default: '',
+    },
+  });
+
+  const emit = defineEmits(['columnsChange']);
+
+  const { prefixCls } = useDesign('basic-table-header');
+  function handleColumnChange(data: ColumnChangeParam[]) {
+    emit('columnsChange', data);
   }
-})
-const emit = defineEmits(['columns-change'])
-
-const { prefixCls } = useDesign('basic-table-header')
-function handleColumnChange(data: ColumnChangeParam[]) {
-  emit('columns-change', data)
-}
 </script>
 <style lang="less">
-@prefix-cls: ~'@{namespace}-basic-table-header';
+  @prefix-cls: ~'@{namespace}-basic-table-header';
 
-.@{prefix-cls} {
-  &__toolbar {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  .@{prefix-cls} {
+    &__toolbar {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
 
-    > * {
-      margin-right: 8px;
+      > * {
+        margin-right: 8px;
+      }
     }
   }
-}
 </style>

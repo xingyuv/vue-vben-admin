@@ -50,25 +50,47 @@
     <a-button type="link" @click="toIconify"> Iconify 图标大全 </a-button>
   </PageWrapper>
 </template>
-<script lang="ts" setup>
-import { CollapseContainer } from '@/components/Container'
-import { Alert } from 'ant-design-vue'
-import {
-  QqCircleFilled,
-  GithubFilled,
-  WechatFilled,
-  AlipayCircleFilled,
-  IeCircleFilled,
-  TaobaoCircleFilled,
-  CodepenCircleFilled
-} from '@ant-design/icons-vue'
+<script lang="ts">
+  import {
+    AlipayCircleFilled,
+    CodepenCircleFilled,
+    GithubFilled,
+    IeCircleFilled,
+    QqCircleFilled,
+    TaobaoCircleFilled,
+    WechatFilled,
+  } from '@ant-design/icons-vue';
+  import { Alert } from 'ant-design-vue';
+  import { defineComponent } from 'vue';
 
-import { Icon, IconPicker, SvgIcon } from '@/components/Icon'
+  import { CollapseContainer } from '@/components/Container/index';
+  import Icon from '@/components/Icon/Icon.vue';
+  import { IconPicker, SvgIcon } from '@/components/Icon/index';
+  import { PageWrapper } from '@/components/Page';
+  import { openWindow } from '@/utils';
 
-import { openWindow } from '@/utils'
-import { PageWrapper } from '@/components/Page'
-
-function toIconify() {
-  openWindow('https://iconify.design/')
-}
+  export default defineComponent({
+    components: {
+      PageWrapper,
+      CollapseContainer,
+      GithubFilled,
+      QqCircleFilled,
+      WechatFilled,
+      AlipayCircleFilled,
+      IeCircleFilled,
+      TaobaoCircleFilled,
+      CodepenCircleFilled,
+      Icon,
+      Alert,
+      IconPicker,
+      SvgIcon,
+    },
+    setup() {
+      return {
+        toIconify: () => {
+          openWindow('https://iconify.design/');
+        },
+      };
+    },
+  });
 </script>

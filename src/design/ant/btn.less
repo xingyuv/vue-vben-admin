@@ -17,7 +17,6 @@
     }
   }
 
-  /* stylelint-disable-next-line selector-not-notation */
   &-primary:not(&-background-ghost):not([disabled]) {
     color: @white;
   }
@@ -186,8 +185,8 @@
   }
 
   &-background-ghost {
-    border-width: 1px;
     background-color: transparent !important;
+    border-width: 1px;
 
     &[disabled],
     &[disabled]:hover {
