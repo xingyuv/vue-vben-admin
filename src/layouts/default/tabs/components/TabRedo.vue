@@ -26,3 +26,8 @@
     }, 1200);
   }
 </script>
+<style lang="less" scoped>
+  span.anticon-redo {
+    vertical-align: baseline !important;
+  }
+</style>
