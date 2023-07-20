@@ -16,7 +16,7 @@
   import { useDebounceFn } from '@vueuse/shared';
   import Cropper from 'cropperjs';
   import type { CSSProperties } from 'vue';
-  import { computed, onMounted, onUnmounted, ref, unref, useAttrs } from 'vue';
+  import { computed, onMounted, onUnmounted, PropType, ref, unref, useAttrs } from 'vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { propTypes } from '@/utils/propTypes';

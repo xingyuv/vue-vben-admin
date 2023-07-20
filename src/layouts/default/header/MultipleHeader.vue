@@ -5,8 +5,8 @@
     <MultipleTabs v-if="getShowTabs" />
   </div>
 </template>
-<script lang="ts">
-  import { computed, CSSProperties, defineComponent, unref } from 'vue';
+<script lang="ts" setup>
+  import { computed, CSSProperties, unref } from 'vue';
 
   import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
@@ -22,87 +22,68 @@
   const HEADER_HEIGHT = 48;
 
   const TABS_HEIGHT = 32;
-  export default defineComponent({
-    name: 'LayoutMultipleHeader',
-    components: { LayoutHeader, MultipleTabs },
-    setup() {
-      const { setHeaderHeight } = useLayoutHeight();
-      const { prefixCls } = useDesign('layout-multiple-header');
 
-      const { getCalcContentWidth, getSplit } = useMenuSetting();
-      const { getIsMobile } = useAppInject();
-      const {
-        getFixed,
-        getShowInsetHeaderRef,
-        getShowFullHeaderRef,
-        getHeaderTheme,
-        getShowHeader,
-      } = useHeaderSetting();
+  defineOptions({ name: 'LayoutMultipleHeader' });
 
-      const { getFullContent } = useFullContent();
+  const { setHeaderHeight } = useLayoutHeight();
+  const { prefixCls } = useDesign('layout-multiple-header');
 
-      const { getShowMultipleTab } = useMultipleTabSetting();
+  const { getCalcContentWidth, getSplit } = useMenuSetting();
+  const { getIsMobile } = useAppInject();
+  const { getFixed, getShowInsetHeaderRef, getShowFullHeaderRef, getHeaderTheme, getShowHeader } =
+    useHeaderSetting();
 
-      const getShowTabs = computed(() => {
-        return unref(getShowMultipleTab) && !unref(getFullContent);
-      });
+  const { getFullContent } = useFullContent();
 
-      const getIsShowPlaceholderDom = computed(() => {
-        return unref(getFixed) || unref(getShowFullHeaderRef);
-      });
+  const { getShowMultipleTab } = useMultipleTabSetting();
 
-      const getWrapStyle = computed((): CSSProperties => {
-        const style: CSSProperties = {};
-        if (unref(getFixed)) {
-          style.width = unref(getIsMobile) ? '100%' : unref(getCalcContentWidth);
-        }
-        if (unref(getShowFullHeaderRef)) {
-          style.top = `${HEADER_HEIGHT}px`;
-        }
-        return style;
-      });
+  const getShowTabs = computed(() => {
+    return unref(getShowMultipleTab) && !unref(getFullContent);
+  });
 
-      const getIsFixed = computed(() => {
-        return unref(getFixed) || unref(getShowFullHeaderRef);
-      });
+  const getIsShowPlaceholderDom = computed(() => {
+    return unref(getFixed) || unref(getShowFullHeaderRef);
+  });
 
-      const getPlaceholderDomStyle = computed((): CSSProperties => {
-        let height = 0;
-        if (
-          (unref(getShowFullHeaderRef) || !unref(getSplit)) &&
-          unref(getShowHeader) &&
-          !unref(getFullContent)
-        ) {
-          height += HEADER_HEIGHT;
-        }
-        if (unref(getShowMultipleTab) && !unref(getFullContent)) {
-          height += TABS_HEIGHT;
-        }
-        setHeaderHeight(height);
-        return {
-          height: `${height}px`,
-        };
-      });
+  const getWrapStyle = computed((): CSSProperties => {
+    const style: CSSProperties = {};
+    if (unref(getFixed)) {
+      style.width = unref(getIsMobile) ? '100%' : unref(getCalcContentWidth);
+    }
+    if (unref(getShowFullHeaderRef)) {
+      style.top = `${HEADER_HEIGHT}px`;
+    }
+    return style;
+  });
 
-      const getClass = computed(() => {
-        return [
-          prefixCls,
-          `${prefixCls}--${unref(getHeaderTheme)}`,
-          { [`${prefixCls}--fixed`]: unref(getIsFixed) },
-        ];
-      });
+  const getIsFixed = computed(() => {
+    return unref(getFixed) || unref(getShowFullHeaderRef);
+  });
 
-      return {
-        getClass,
-        prefixCls,
-        getPlaceholderDomStyle,
-        getIsFixed,
-        getWrapStyle,
-        getIsShowPlaceholderDom,
-        getShowTabs,
-        getShowInsetHeaderRef,
-      };
-    },
+  const getPlaceholderDomStyle = computed((): CSSProperties => {
+    let height = 0;
+    if (
+      (unref(getShowFullHeaderRef) || !unref(getSplit)) &&
+      unref(getShowHeader) &&
+      !unref(getFullContent)
+    ) {
+      height += HEADER_HEIGHT;
+    }
+    if (unref(getShowMultipleTab) && !unref(getFullContent)) {
+      height += TABS_HEIGHT;
+    }
+    setHeaderHeight(height);
+    return {
+      height: `${height}px`,
+    };
+  });
+
+  const getClass = computed(() => {
+    return [
+      prefixCls,
+      `${prefixCls}--${unref(getHeaderTheme)}`,
+      { [`${prefixCls}--fixed`]: unref(getIsFixed) },
+    ];
   });
 </script>
 <style lang="less" scoped>

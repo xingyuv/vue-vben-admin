@@ -5,6 +5,7 @@
 </template>
 <script lang="ts" setup>
   import { Button } from 'ant-design-vue';
+  import type { PropType } from 'vue';
   import { computed, ref, unref, watchEffect } from 'vue';
 
   import { useI18n } from '@/hooks/web/useI18n';

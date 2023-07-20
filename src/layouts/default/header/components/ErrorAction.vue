@@ -10,9 +10,9 @@
     </Badge>
   </Tooltip>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Badge, Tooltip } from 'ant-design-vue';
-  import { computed, defineComponent } from 'vue';
+  import { computed } from 'vue';
   import { useRouter } from 'vue-router';
 
   import Icon from '@/components/Icon/Icon.vue';
@@ -20,28 +20,17 @@
   import { useI18n } from '@/hooks/web/useI18n';
   import { useErrorLogStore } from '@/store/modules/errorLog';
 
-  export default defineComponent({
-    name: 'ErrorAction',
-    components: { Icon, Tooltip, Badge },
+  defineOptions({ name: 'ErrorAction' });
 
-    setup() {
-      const { t } = useI18n();
-      const { push } = useRouter();
-      const errorLogStore = useErrorLogStore();
+  const { t } = useI18n();
+  const { push } = useRouter();
+  const errorLogStore = useErrorLogStore();
 
-      const getCount = computed(() => errorLogStore.getErrorLogListCount);
+  const getCount = computed(() => errorLogStore.getErrorLogListCount);
 
-      function handleToErrorList() {
-        push(PageEnum.ERROR_LOG_PAGE).then(() => {
-          errorLogStore.setErrorLogListCount(0);
-        });
-      }
-
-      return {
-        t,
-        getCount,
-        handleToErrorList,
-      };
-    },
-  });
+  function handleToErrorList() {
+    push(PageEnum.ERROR_LOG_PAGE).then(() => {
+      errorLogStore.setErrorLogListCount(0);
+    });
+  }
 </script>

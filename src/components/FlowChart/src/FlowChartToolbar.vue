@@ -27,10 +27,13 @@
   defineOptions({ name: 'FlowChartToolbar' });
 
   defineProps({
-    prefixCls: String,
+    prefixCls: {
+      type: String,
+      default: '',
+    },
   });
 
-  const emit = defineEmits(['view-data']);
+  const emit = defineEmits(['viewData']);
 
   const toolbarItemList = ref<ToolbarConfig[]>([
     {
@@ -113,7 +116,7 @@
         lf.getSnapshot();
         break;
       case ToolbarTypeEnum.VIEW_DATA:
-        emit('view-data');
+        emit('viewData');
         break;
     }
   };

@@ -13,9 +13,8 @@
   <MixSider v-else-if="getIsMixSidebar" />
   <Sider v-else />
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Drawer } from 'ant-design-vue';
-  import { defineComponent } from 'vue';
 
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
   import { useAppInject } from '@/hooks/web/useAppInject';
@@ -24,23 +23,17 @@
   import Sider from './LayoutSider.vue';
   import MixSider from './MixSider.vue';
 
-  export default defineComponent({
-    name: 'SiderWrapper',
-    components: { Sider, Drawer, MixSider },
-    setup() {
-      const { prefixCls } = useDesign('layout-sider-wrapper');
-      const { getIsMobile } = useAppInject();
-      const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
+  defineOptions({ name: 'SiderWrapper' });
 
-      function handleClose() {
-        setMenuSetting({
-          collapsed: true,
-        });
-      }
+  const { prefixCls } = useDesign('layout-sider-wrapper');
+  const { getIsMobile } = useAppInject();
+  const { setMenuSetting, getCollapsed, getMenuWidth, getIsMixSidebar } = useMenuSetting();
 
-      return { prefixCls, getIsMobile, getCollapsed, handleClose, getMenuWidth, getIsMixSidebar };
-    },
-  });
+  function handleClose() {
+    setMenuSetting({
+      collapsed: true,
+    });
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-layout-sider-wrapper';

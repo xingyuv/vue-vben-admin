@@ -1,6 +1,6 @@
 <template>
   <div :class="prefixCls" class="relative">
-    <InputPassword
+    <Input.Password
       v-if="showInput"
       v-bind="$attrs"
       allowClear
@@ -11,66 +11,57 @@
       <template v-for="item in Object.keys($slots)" #[item]="data">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-    </InputPassword>
+    </Input.Password>
     <div :class="`${prefixCls}-bar`">
       <div :class="`${prefixCls}-bar--fill`" :data-score="getPasswordStrength"></div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import { zxcvbn } from '@zxcvbn-ts/core';
   import { Input } from 'ant-design-vue';
-  import { computed, defineComponent, ref, unref, watch, watchEffect } from 'vue';
+  import { computed, ref, unref, watch, watchEffect } from 'vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { propTypes } from '@/utils/propTypes';
 
-  export default defineComponent({
-    name: 'StrengthMeter',
-    components: { InputPassword: Input.Password },
-    props: {
-      value: propTypes.string,
-      showInput: propTypes.bool.def(true),
-      disabled: propTypes.bool,
-    },
-    emits: ['score-change', 'change'],
-    setup(props, { emit }) {
-      const innerValueRef = ref('');
-      const { prefixCls } = useDesign('strength-meter');
+  defineOptions({ name: 'StrengthMeter' });
 
-      const getPasswordStrength = computed(() => {
-        const { disabled } = props;
-        if (disabled) return -1;
-        const innerValue = unref(innerValueRef);
-        const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1;
-        emit('score-change', score);
-        return score;
-      });
-
-      function handleChange(e) {
-        innerValueRef.value = e.target.value;
-      }
-
-      watchEffect(() => {
-        innerValueRef.value = props.value || '';
-      });
-
-      watch(
-        () => unref(innerValueRef),
-        (val) => {
-          emit('change', val);
-        },
-      );
-
-      return {
-        getPasswordStrength,
-        handleChange,
-        prefixCls,
-        innerValueRef,
-      };
-    },
+  const props = defineProps({
+    value: propTypes.string,
+    showInput: propTypes.bool.def(true),
+    disabled: propTypes.bool,
   });
+
+  const emit = defineEmits(['score-change', 'change']);
+
+  const innerValueRef = ref('');
+  const { prefixCls } = useDesign('strength-meter');
+
+  const getPasswordStrength = computed(() => {
+    const { disabled } = props;
+    if (disabled) return -1;
+    const innerValue = unref(innerValueRef);
+    const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1;
+    emit('score-change', score);
+    return score;
+  });
+
+  function handleChange(e) {
+    innerValueRef.value = e.target.value;
+  }
+
+  watchEffect(() => {
+    innerValueRef.value = props.value || '';
+  });
+
+  watch(
+    () => unref(innerValueRef),
+    (val) => {
+      emit('change', val);
+    },
+  );
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-strength-meter';

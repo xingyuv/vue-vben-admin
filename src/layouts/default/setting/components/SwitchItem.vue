@@ -10,9 +10,9 @@
     />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Switch } from 'ant-design-vue';
-  import { computed, defineComponent, PropType } from 'vue';
+  import { computed, type PropType } from 'vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
   import { useI18n } from '@/hooks/web/useI18n';
@@ -20,41 +20,34 @@
   import { HandlerEnum } from '../enum';
   import { baseHandler } from '../handler';
 
-  export default defineComponent({
-    name: 'SwitchItem',
-    components: { Switch },
-    props: {
-      event: {
-        type: Number as PropType<HandlerEnum>,
-      },
-      disabled: {
-        type: Boolean,
-      },
-      title: {
-        type: String,
-      },
-      def: {
-        type: Boolean,
-      },
-    },
-    setup(props) {
-      const { prefixCls } = useDesign('setting-switch-item');
-      const { t } = useI18n();
+  defineOptions({ name: 'SwitchItem' });
 
-      const getBindValue = computed(() => {
-        return props.def ? { checked: props.def } : {};
-      });
-      function handleChange(e: ChangeEvent) {
-        props.event && baseHandler(props.event, e);
-      }
-      return {
-        prefixCls,
-        t,
-        handleChange,
-        getBindValue,
-      };
+  const props = defineProps({
+    event: {
+      type: Number as PropType<HandlerEnum>,
+      default: null,
+    },
+    disabled: {
+      type: Boolean,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    def: {
+      type: Boolean,
     },
   });
+
+  const { prefixCls } = useDesign('setting-switch-item');
+  const { t } = useI18n();
+
+  const getBindValue = computed(() => {
+    return props.def ? { checked: props.def } : {};
+  });
+  function handleChange(e: ChangeEvent) {
+    props.event && baseHandler(props.event, e);
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-switch-item';

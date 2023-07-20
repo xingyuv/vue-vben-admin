@@ -11,55 +11,51 @@
     />
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Select } from 'ant-design-vue';
-  import { computed, defineComponent, PropType } from 'vue';
+  import { computed, PropType } from 'vue';
 
   import { useDesign } from '@/hooks/web/useDesign';
 
   import { HandlerEnum } from '../enum';
   import { baseHandler } from '../handler';
 
-  export default defineComponent({
-    name: 'SelectItem',
-    components: { Select },
-    props: {
-      event: {
-        type: Number as PropType<HandlerEnum>,
-      },
-      disabled: {
-        type: Boolean,
-      },
-      title: {
-        type: String,
-      },
-      def: {
-        type: [String, Number] as PropType<string | number>,
-      },
-      initValue: {
-        type: [String, Number] as PropType<string | number>,
-      },
-      options: {
-        type: Array as PropType<LabelValueOptions>,
-        default: () => [],
-      },
-    },
-    setup(props) {
-      const { prefixCls } = useDesign('setting-select-item');
-      const getBindValue = computed(() => {
-        return props.def ? { value: props.def, defaultValue: props.initValue || props.def } : {};
-      });
+  defineOptions({ name: 'SelectItem' });
 
-      function handleChange(e: ChangeEvent) {
-        props.event && baseHandler(props.event, e);
-      }
-      return {
-        prefixCls,
-        handleChange,
-        getBindValue,
-      };
+  const props = defineProps({
+    event: {
+      type: Number as PropType<HandlerEnum>,
+      default: null,
+    },
+    disabled: {
+      type: Boolean,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    def: {
+      type: [String, Number] as PropType<string | number>,
+      default: null,
+    },
+    initValue: {
+      type: [String, Number] as PropType<string | number>,
+      default: null,
+    },
+    options: {
+      type: Array as PropType<LabelValueOptions>,
+      default: () => [],
     },
   });
+
+  const { prefixCls } = useDesign('setting-select-item');
+  const getBindValue = computed(() => {
+    return props.def ? { value: props.def, defaultValue: props.initValue || props.def } : {};
+  });
+
+  function handleChange(e: ChangeEvent) {
+    props.event && baseHandler(props.event, e);
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-select-item';

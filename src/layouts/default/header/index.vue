@@ -1,5 +1,5 @@
 <template>
-  <Header :class="getHeaderClass">
+  <Layout.Header :class="getHeaderClass">
     <!-- left start -->
     <div :class="`${prefixCls}-left`">
       <!-- logo -->
@@ -52,11 +52,11 @@
 
       <SettingDrawer v-if="getShowSetting" :class="`${prefixCls}-action__item`" />
     </div>
-  </Header>
+  </Layout.Header>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { Layout } from 'ant-design-vue';
-  import { computed, defineComponent, unref } from 'vue';
+  import { computed, unref } from 'vue';
 
   import { AppLocalePicker, AppLogo, AppSearch } from '@/components/Application';
   import { SettingButtonPositionEnum } from '@/enums/appEnum';
@@ -74,119 +74,78 @@
   import LayoutTrigger from '../trigger/index.vue';
   import { ErrorAction, FullScreen, LayoutBreadcrumb, Notify, UserDropDown } from './components';
 
-  export default defineComponent({
-    name: 'LayoutHeader',
-    components: {
-      Header: Layout.Header,
-      AppLogo,
-      LayoutTrigger,
-      LayoutBreadcrumb,
-      LayoutMenu,
-      UserDropDown,
-      AppLocalePicker,
-      FullScreen,
-      Notify,
-      AppSearch,
-      ErrorAction,
-      SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
-        loading: true,
-      }),
-    },
-    props: {
-      fixed: propTypes.bool,
-    },
-    setup(props) {
-      const { prefixCls } = useDesign('layout-header');
-      const {
-        getShowTopMenu,
-        getShowHeaderTrigger,
-        getSplit,
-        getIsMixMode,
-        getMenuWidth,
-        getIsMixSidebar,
-      } = useMenuSetting();
-      const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } =
-        useRootSetting();
+  const SettingDrawer = createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
+    loading: true,
+  });
+  defineOptions({ name: 'LayoutHeader' });
 
-      const {
-        getHeaderTheme,
-        getShowFullScreen,
-        getShowNotice,
-        getShowContent,
-        getShowBread,
-        getShowHeaderLogo,
-        getShowHeader,
-        getShowSearch,
-      } = useHeaderSetting();
+  const props = defineProps({
+    fixed: propTypes.bool,
+  });
+  const { prefixCls } = useDesign('layout-header');
+  const {
+    getShowTopMenu,
+    getShowHeaderTrigger,
+    getSplit,
+    getIsMixMode,
+    getMenuWidth,
+    getIsMixSidebar,
+  } = useMenuSetting();
+  const { getUseErrorHandle, getShowSettingButton, getSettingButtonPosition } = useRootSetting();
 
-      const { getShowLocalePicker } = useLocale();
+  const {
+    getHeaderTheme,
+    getShowFullScreen,
+    getShowNotice,
+    getShowContent,
+    getShowBread,
+    getShowHeaderLogo,
+    getShowHeader,
+    getShowSearch,
+  } = useHeaderSetting();
 
-      const { getIsMobile } = useAppInject();
+  const { getShowLocalePicker } = useLocale();
 
-      const getHeaderClass = computed(() => {
-        const theme = unref(getHeaderTheme);
-        return [
-          prefixCls,
-          {
-            [`${prefixCls}--fixed`]: props.fixed,
-            [`${prefixCls}--mobile`]: unref(getIsMobile),
-            [`${prefixCls}--${theme}`]: theme,
-          },
-        ];
-      });
+  const { getIsMobile } = useAppInject();
 
-      const getShowSetting = computed(() => {
-        if (!unref(getShowSettingButton)) {
-          return false;
-        }
-        const settingButtonPosition = unref(getSettingButtonPosition);
+  const getHeaderClass = computed(() => {
+    const theme = unref(getHeaderTheme);
+    return [
+      prefixCls,
+      {
+        [`${prefixCls}--fixed`]: props.fixed,
+        [`${prefixCls}--mobile`]: unref(getIsMobile),
+        [`${prefixCls}--${theme}`]: theme,
+      },
+    ];
+  });
 
-        if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
-          return unref(getShowHeader);
-        }
-        return settingButtonPosition === SettingButtonPositionEnum.HEADER;
-      });
+  const getShowSetting = computed(() => {
+    if (!unref(getShowSettingButton)) {
+      return false;
+    }
+    const settingButtonPosition = unref(getSettingButtonPosition);
 
-      const getLogoWidth = computed(() => {
-        if (!unref(getIsMixMode) || unref(getIsMobile)) {
-          return {};
-        }
-        const width = unref(getMenuWidth) < 180 ? 180 : unref(getMenuWidth);
-        return { width: `${width}px` };
-      });
+    if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+      return unref(getShowHeader);
+    }
+    return settingButtonPosition === SettingButtonPositionEnum.HEADER;
+  });
 
-      const getSplitType = computed(() => {
-        return unref(getSplit) ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE;
-      });
+  const getLogoWidth = computed(() => {
+    if (!unref(getIsMixMode) || unref(getIsMobile)) {
+      return {};
+    }
+    const width = unref(getMenuWidth) < 180 ? 180 : unref(getMenuWidth);
+    return { width: `${width}px` };
+  });
 
-      const getMenuMode = computed(() => {
-        return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null;
-      });
+  const getSplitType = computed(() => {
+    return unref(getSplit) ? MenuSplitTyeEnum.TOP : MenuSplitTyeEnum.NONE;
+  });
 
-      return {
-        prefixCls,
-        getHeaderClass,
-        getShowHeaderLogo,
-        getHeaderTheme,
-        getShowHeaderTrigger,
-        getIsMobile,
-        getShowBread,
-        getShowContent,
-        getSplitType,
-        getSplit,
-        getMenuMode,
-        getShowTopMenu,
-        getShowLocalePicker,
-        getShowFullScreen,
-        getShowNotice,
-        getUseErrorHandle,
-        getLogoWidth,
-        getIsMixSidebar,
-        getShowSettingButton,
-        getShowSetting,
-        getShowSearch,
-      };
-    },
+  const getMenuMode = computed(() => {
+    return unref(getSplit) ? MenuModeEnum.HORIZONTAL : null;
   });
 </script>
 <style lang="less">

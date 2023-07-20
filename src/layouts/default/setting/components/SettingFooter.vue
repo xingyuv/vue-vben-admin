@@ -16,9 +16,9 @@
     </a-button>
   </div>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import { CopyOutlined, RedoOutlined } from '@ant-design/icons-vue';
-  import { defineComponent, unref } from 'vue';
+  import { unref } from 'vue';
 
   import { useCopyToClipboard } from '@/hooks/web/useCopyToClipboard';
   import { useDesign } from '@/hooks/web/useDesign';
@@ -33,58 +33,47 @@
   import { usePermissionStore } from '@/store/modules/permission';
   import { useUserStore } from '@/store/modules/user';
 
-  export default defineComponent({
-    name: 'SettingFooter',
-    components: { CopyOutlined, RedoOutlined },
-    setup() {
-      const permissionStore = usePermissionStore();
-      const { prefixCls } = useDesign('setting-footer');
-      const { t } = useI18n();
-      const { createSuccessModal, createMessage } = useMessage();
-      const tabStore = useMultipleTabStore();
-      const userStore = useUserStore();
-      const appStore = useAppStore();
+  defineOptions({ name: 'SettingFooter' });
 
-      function handleCopy() {
-        const { isSuccessRef } = useCopyToClipboard(
-          JSON.stringify(unref(appStore.getProjectConfig), null, 2),
-        );
-        unref(isSuccessRef) &&
-          createSuccessModal({
-            title: t('layout.setting.operatingTitle'),
-            content: t('layout.setting.operatingContent'),
-          });
-      }
-      function handleResetSetting() {
-        try {
-          appStore.setProjectConfig(defaultSetting);
-          const { colorWeak, grayMode } = defaultSetting;
-          updateSidebarBgColor();
-          updateColorWeak(colorWeak);
-          updateGrayMode(grayMode);
-          createMessage.success(t('layout.setting.resetSuccess'));
-        } catch (error: any) {
-          createMessage.error(error);
-        }
-      }
+  const permissionStore = usePermissionStore();
+  const { prefixCls } = useDesign('setting-footer');
+  const { t } = useI18n();
+  const { createSuccessModal, createMessage } = useMessage();
+  const tabStore = useMultipleTabStore();
+  const userStore = useUserStore();
+  const appStore = useAppStore();
 
-      function handleClearAndRedo() {
-        localStorage.clear();
-        appStore.resetAllState();
-        permissionStore.resetState();
-        tabStore.resetState();
-        userStore.resetState();
-        location.reload();
-      }
-      return {
-        prefixCls,
-        t,
-        handleCopy,
-        handleResetSetting,
-        handleClearAndRedo,
-      };
-    },
-  });
+  function handleCopy() {
+    const { isSuccessRef } = useCopyToClipboard(
+      JSON.stringify(unref(appStore.getProjectConfig), null, 2),
+    );
+    unref(isSuccessRef) &&
+      createSuccessModal({
+        title: t('layout.setting.operatingTitle'),
+        content: t('layout.setting.operatingContent'),
+      });
+  }
+  function handleResetSetting() {
+    try {
+      appStore.setProjectConfig(defaultSetting);
+      const { colorWeak, grayMode } = defaultSetting;
+      updateSidebarBgColor();
+      updateColorWeak(colorWeak);
+      updateGrayMode(grayMode);
+      createMessage.success(t('layout.setting.resetSuccess'));
+    } catch (error: any) {
+      createMessage.error(error);
+    }
+  }
+
+  function handleClearAndRedo() {
+    localStorage.clear();
+    appStore.resetAllState();
+    permissionStore.resetState();
+    tabStore.resetState();
+    userStore.resetState();
+    location.reload();
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-footer';

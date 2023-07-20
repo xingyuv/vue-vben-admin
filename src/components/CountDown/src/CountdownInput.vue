@@ -9,7 +9,7 @@
   </a-input>
 </template>
 <script lang="ts" setup>
-  import { PropType } from 'vue';
+  import type { PropType } from 'vue';
 
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { useDesign } from '@/hooks/web/useDesign';
