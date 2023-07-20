@@ -66,6 +66,7 @@
     content: propTypes.string,
     contentStyle: {
       type: Object as PropType<CSSProperties>,
+      default: () => {},
     },
     contentBackground: propTypes.bool,
     contentFullHeight: propTypes.bool.def(false),

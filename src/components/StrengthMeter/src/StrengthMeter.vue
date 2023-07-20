@@ -34,7 +34,7 @@
     disabled: propTypes.bool,
   });
 
-  const emit = defineEmits(['score-change', 'change']);
+  const emit = defineEmits(['scoreChange', 'change']);
 
   const innerValueRef = ref('');
   const { prefixCls } = useDesign('strength-meter');
@@ -44,7 +44,7 @@
     if (disabled) return -1;
     const innerValue = unref(innerValueRef);
     const score = innerValue ? zxcvbn(unref(innerValueRef)).score : -1;
-    emit('score-change', score);
+    emit('scoreChange', score);
     return score;
   });
 

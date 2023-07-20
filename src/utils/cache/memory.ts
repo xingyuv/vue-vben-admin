@@ -78,7 +78,7 @@ export class Memory<T = any, V = any> {
     const item = this.get(key);
     Reflect.deleteProperty(this.cache, key);
     if (item) {
-      clearTimeout(item.timeoutId!);
+      clearTimeout(item.timeoutId);
       return item.value;
     }
   }

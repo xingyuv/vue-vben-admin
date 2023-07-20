@@ -8,7 +8,7 @@ import { useUserStoreWithOut } from '@/store/modules/user';
 import type { ErrorMessageMode } from '#/axios';
 
 const { createMessage, createErrorModal } = useMessage();
-const error = createMessage.error!;
+const error = createMessage.error;
 const stp = projectSetting.sessionTimeoutProcessing;
 
 export function checkStatus(

@@ -55,7 +55,7 @@
     }
 
     .ant-tabs-tab-active {
-      background-color: @item-active-bg;
+      background-color: @primary-color;
     }
   }
 </style>

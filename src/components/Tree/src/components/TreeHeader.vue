@@ -82,7 +82,7 @@
       default: undefined,
     },
   } as const);
-  const emit = defineEmits(['strictly-change', 'search']);
+  const emit = defineEmits(['strictlyChange', 'search']);
 
   const slots = useSlots();
   const { t } = useI18n();
@@ -140,10 +140,10 @@
         props.expandAll?.(false);
         break;
       case ToolbarEnum.CHECK_STRICTLY:
-        emit('strictly-change', false);
+        emit('strictlyChange', false);
         break;
       case ToolbarEnum.CHECK_UN_STRICTLY:
-        emit('strictly-change', true);
+        emit('strictlyChange', true);
         break;
     }
   }

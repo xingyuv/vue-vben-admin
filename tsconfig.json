@@ -3,7 +3,7 @@
   "extends": "@vben/ts-config/web.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vite/client"],
+    "types": ["vite/client", "types/global.d.ts"],
     "paths": {
       "@/*": ["src/*"],
       "#/*": ["types/*"]

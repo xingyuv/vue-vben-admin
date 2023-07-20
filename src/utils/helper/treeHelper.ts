@@ -37,9 +37,10 @@ export function treeToList<T = any>(tree: any, config: Partial<TreeHelperConfig>
   config = getConfig(config);
   const { children } = config;
   const result: any = [...tree];
+  if (!children) return result;
   for (let i = 0; i < result.length; i++) {
-    if (!result[i][children!]) continue;
-    result.splice(i + 1, 0, ...result[i][children!]);
+    if (!result[i][children]) continue;
+    result.splice(i + 1, 0, ...result[i][children]);
   }
   return result;
 }
@@ -52,9 +53,10 @@ export function findNode<T = any>(
   config = getConfig(config);
   const { children } = config;
   const list = [...tree];
+  if (!children) return null;
   for (const node of list) {
     if (func(node)) return node;
-    node[children!] && list.push(...node[children!]);
+    node[children] && list.push(...node[children]);
   }
   return null;
 }
@@ -68,9 +70,10 @@ export function findNodeAll<T = any>(
   const { children } = config;
   const list = [...tree];
   const result: T[] = [];
+  if (!children) return result;
   for (const node of list) {
     func(node) && result.push(node);
-    node[children!] && list.push(...node[children!]);
+    node[children] && list.push(...node[children]);
   }
   return result;
 }
@@ -85,6 +88,7 @@ export function findPath<T = any>(
   const list = [...tree];
   const visitedSet = new Set();
   const { children } = config;
+  if (!children) return null;
   while (list.length) {
     const node = list[0];
     if (visitedSet.has(node)) {
@@ -92,7 +96,7 @@ export function findPath<T = any>(
       list.shift();
     } else {
       visitedSet.add(node);
-      node[children!] && list.unshift(...node[children!]);
+      node[children] && list.unshift(...node[children]);
       path.push(node);
       if (func(node)) {
         return path;
@@ -107,8 +111,9 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
   const path: any[] = [];
   const list = [...tree];
   const result: any[] = [];
-  const visitedSet = new Set(),
-    { children } = config;
+  const visitedSet = new Set();
+  const { children } = config;
+  if (!children) return result;
   while (list.length) {
     const node = list[0];
     if (visitedSet.has(node)) {
@@ -116,7 +121,7 @@ export function findPathAll(tree: any, func: Fn, config: Partial<TreeHelperConfi
       list.shift();
     } else {
       visitedSet.add(node);
-      node[children!] && list.unshift(...node[children!]);
+      node[children] && list.unshift(...node[children]);
       path.push(node);
       func(node) && result.push([...path]);
     }

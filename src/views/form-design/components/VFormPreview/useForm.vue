@@ -18,6 +18,7 @@
   </Modal>
 </template>
 <script lang="ts" setup>
+  import { type Recordable } from '@vben/types';
   import { Modal } from 'ant-design-vue';
   import { computed, reactive, ref } from 'vue';
 
@@ -42,7 +43,7 @@
   const attrs = computed(() => {
     return {
       ...state.formConfig,
-    } as Recordable;
+    } as Recordable<any>;
   });
 
   /**
