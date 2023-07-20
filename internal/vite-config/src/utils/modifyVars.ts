@@ -1,8 +1,6 @@
 import { resolve } from 'node:path';
 
 import { generate } from '@ant-design/colors';
-// @ts-ignore: typo
-import { getThemeVariables } from 'ant-design-vue/dist/theme';
 
 const primaryColor = '#0960bd';
 
@@ -25,11 +23,8 @@ export function generateModifyVars() {
     primaryColorObj[`primary-${index + 1}`] = palettes[index];
   }
 
-  const modifyVars = getThemeVariables();
   return {
-    ...modifyVars,
-    // reference:  Avoid repeated references
-    hack: `${modifyVars.hack} @import (reference) "${resolve('src/design/config.less')}";`,
+    hack: `true; @import (reference) "${resolve('src/design/config.less')}";`,
     'primary-color': primary,
     ...primaryColorObj,
     'info-color': primary,

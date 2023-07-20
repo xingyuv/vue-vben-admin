@@ -1,6 +1,6 @@
 import 'uno.css';
-import '@/design/index.less';
-import 'ant-design-vue/dist/antd.less';
+import 'ant-design-vue/dist/reset.css';
+import './design/index.less';
 // Register icon sprite
 import 'virtual:svg-icons-register';
 

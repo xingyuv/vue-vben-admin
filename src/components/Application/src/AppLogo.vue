@@ -1,9 +1,5 @@
-<!--
- * @Author: Vben
- * @Description: logo component
--->
 <template>
-  <div class="anticon" :class="getAppLogoClass" @click="goHome">
+  <div style="font-size: 16px" :class="getAppLogoClass" @click="goHome">
     <img src="@/assets/images/logo.png" />
     <div v-show="showTitle" class="ml-2 truncate md:opacity-100" :class="getTitleClass">
       {{ title }}
@@ -27,6 +23,7 @@
     theme: {
       type: String,
       validator: (v: string) => ['light', 'dark'].includes(v),
+      default: null,
     },
     /**
      * Whether to show title
