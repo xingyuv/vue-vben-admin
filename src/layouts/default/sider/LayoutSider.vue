@@ -118,7 +118,7 @@
 
     &--mix {
       top: @header-height;
-      height: calc(100% - @header-height);
+      // height: calc(100% - @header-height);
     }
 
     &.ant-layout-sider-dark {
