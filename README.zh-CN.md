@@ -1,7 +1,5 @@
 <div align="center"> <a href="https://github.com/xingyu4j/vue-vben-admin"> <img alt="VbenAdmin Logo" width="200" height="200" src="https://anncwb.github.io/anncwb/images/logo.png"> </a> <br> <br>
 
-[![license](https://img.shields.io/github/license/xingyu4j/vue-vben-admin.svg)](LICENSE)
-
 <h1>v2.0.0</h1>
 
 ## 预览地址
@@ -17,7 +15,7 @@
 ## 简介
 
 - Vue Vben Admin 是一个免费开源的中后台模版。
-- 本项目基于 vben2.10 版本，升级最新版vue、vite、antdv4等依赖，重构部分组件，重构代码样式，重构 setup 语法糖。
+- 本项目基于 vben2.10 版本，升级最新版`vue`、`vite`、`antdv4`等依赖，重构部分组件，重构代码样式，重构 setup 语法糖。
 - 使用了最新的`Vue3`,`Vite4`,`Antdv4`,`TypeScript5`,`Pinia`等主流技术开发，开箱即用的中后台前端解决方案。
 
 ## 框架
@@ -32,7 +30,7 @@
 | [vueuse](https://vueuse.org/) | 常用工具集 | 10.2.1 |
 | [vue-i18n](https://kazupon.github.io/vue-i18n/zh/introduction.html/) | 国际化 | 9.2.2 |
 | [vue-router](https://router.vuejs.org/) | Vue 路由 | 4.2.4 |
-| [unocss](https://cn.windicss.org/) | 原子 css | 0.53.5 |
+| [unocss](https://uno.antfu.me/) | 原子 css | 0.53.5 |
 | [iconify](https://icon-sets.iconify.design/) | 在线图标库 | 3.1.1 |
 
 ## 特性
