@@ -35,7 +35,6 @@
     "@types/lodash-es": "^4.17.8",
     "@types/mockjs": "^1.0.7",
     "@types/nprogress": "^0.2.0",
-    "@types/qrcode": "^1.5.1",
     "@types/qs": "^6.9.7",
     "@types/showdown": "^2.0.1",
     "@types/sortablejs": "^1.15.1"

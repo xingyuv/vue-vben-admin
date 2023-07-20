@@ -33,7 +33,6 @@ export default {
     verifyDrag: 'Drag ',
     verifyRotate: 'Picture Restore',
 
-    qrcode: 'QR code',
     strength: 'Password strength',
     upload: 'Upload',
 
