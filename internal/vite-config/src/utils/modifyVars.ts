@@ -2,7 +2,7 @@ import { resolve } from 'node:path';
 
 import { generate } from '@ant-design/colors';
 
-const primaryColor = '#0960bd';
+const primaryColor = '#1677ff';
 
 function generateAntColors(color: string, theme: 'default' | 'dark' = 'default') {
   return generate(color, {

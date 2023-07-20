@@ -150,36 +150,6 @@ importers:
       '@purge-icons/generated':
         specifier: ^0.9.0
         version: 0.9.0
-      '@types/codemirror':
-        specifier: ^5.60.8
-        version: 5.60.8
-      '@types/crypto-js':
-        specifier: ^4.1.1
-        version: 4.1.1
-      '@types/intro.js':
-        specifier: ^5.1.1
-        version: 5.1.1
-      '@types/lodash-es':
-        specifier: ^4.17.8
-        version: 4.17.8
-      '@types/mockjs':
-        specifier: ^1.0.7
-        version: 1.0.7
-      '@types/nprogress':
-        specifier: ^0.2.0
-        version: 0.2.0
-      '@types/qrcode':
-        specifier: ^1.5.1
-        version: 1.5.1
-      '@types/qs':
-        specifier: ^6.9.7
-        version: 6.9.7
-      '@types/showdown':
-        specifier: ^2.0.1
-        version: 2.0.1
-      '@types/sortablejs':
-        specifier: ^1.15.1
-        version: 1.15.1
       '@vben/types':
         specifier: workspace:*
         version: link:packages/types
@@ -491,7 +461,38 @@ importers:
         specifier: workspace:*
         version: link:../types
 
-  packages/types: {}
+  packages/types:
+    devDependencies:
+      '@types/codemirror':
+        specifier: ^5.60.8
+        version: 5.60.8
+      '@types/crypto-js':
+        specifier: ^4.1.1
+        version: 4.1.1
+      '@types/intro.js':
+        specifier: ^5.1.1
+        version: 5.1.1
+      '@types/lodash-es':
+        specifier: ^4.17.8
+        version: 4.17.8
+      '@types/mockjs':
+        specifier: ^1.0.7
+        version: 1.0.7
+      '@types/nprogress':
+        specifier: ^0.2.0
+        version: 0.2.0
+      '@types/qrcode':
+        specifier: ^1.5.1
+        version: 1.5.1
+      '@types/qs':
+        specifier: ^6.9.7
+        version: 6.9.7
+      '@types/showdown':
+        specifier: ^2.0.1
+        version: 2.0.1
+      '@types/sortablejs':
+        specifier: ^1.15.1
+        version: 1.15.1
 
 packages:
 
