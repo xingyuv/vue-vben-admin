@@ -9,6 +9,16 @@
       "#/*": ["types/*"]
     }
   },
-  "include": ["tests", "src", "types", "mock", "vite.config.ts"],
+  "include": [
+    "tests",
+    "src",
+    "types/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "mock",
+    "vite.config.ts"
+  ],
   "exclude": ["node_modules", "tests/server/**/*.ts", "dist", "**/*.js"]
 }

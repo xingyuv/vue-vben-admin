@@ -1,9 +1,9 @@
 <template>
-  <div
+  <!-- <div
     v-if="getMenuFixed && !getIsMobile"
     v-show="showClassSideBarRef"
     :style="getHiddenDomStyle"
-  ></div>
+  ></div> -->
   <Layout.Sider
     v-show="showClassSideBarRef"
     ref="sideRef"
@@ -113,7 +113,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      height: 100%;
+      // height: 100%;
     }
 
     &--mix {

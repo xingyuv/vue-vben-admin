@@ -4,7 +4,7 @@
     placement="left"
     :class="prefixCls"
     :width="getMenuWidth"
-    :getContainer="null"
+    :getContainer="false"
     :open="!getCollapsed"
     @close="handleClose"
   >
