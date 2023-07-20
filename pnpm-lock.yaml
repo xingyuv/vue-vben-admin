@@ -74,9 +74,6 @@ importers:
       exceljs:
         specifier: ^4.3.0
         version: 4.3.0
-      intro.js:
-        specifier: ^7.0.1
-        version: 7.0.1
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -466,9 +463,6 @@ importers:
       '@types/crypto-js':
         specifier: ^4.1.1
         version: 4.1.1
-      '@types/intro.js':
-        specifier: ^5.1.1
-        version: 5.1.1
       '@types/lodash-es':
         specifier: ^4.17.8
         version: 4.17.8
@@ -2503,10 +2497,6 @@ packages:
 
   /@types/http-errors@2.0.1:
     resolution: {integrity: sha512-/K3ds8TRAfBvi5vfjuz8y6+GiAYBZ0x4tXv1Av6CWBWn0IlADc+ZX9pMq7oU0fNQPnBwIZl3rmeLp6SBApbxSQ==}
-
-  /@types/intro.js@5.1.1:
-    resolution: {integrity: sha512-gxrfhzwHeCZI8PoucIVRCe5cX0j29YYB1YLIfPb87HN1HiAhrl0CGMFuYPzo6Gvn5diAPCHF6XW2SR+Lqxexlg==}
-    dev: true
 
   /@types/istanbul-lib-coverage@2.0.4:
     resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
@@ -6488,10 +6478,6 @@ packages:
       has: 1.0.3
       side-channel: 1.0.4
     dev: true
-
-  /intro.js@7.0.1:
-    resolution: {integrity: sha512-1oqz6aOz9cGQ3CrtVYhCSo6AkjnXUn302kcIWLaZ3TI4kKssRXDwDSz4VRoGcfC1jN+WfaSJXRBrITz+QVEBzg==}
-    dev: false
 
   /ip@1.1.8:
     resolution: {integrity: sha512-PuExPYUiu6qMBQb4l06ecm6T6ujzhmh+MeJcW9wa89PoAz5pvd4zPgN5WJV104mb6S2T1AwNIAaB70JNrLQWhg==}

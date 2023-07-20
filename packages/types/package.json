@@ -31,7 +31,6 @@
   "devDependencies": {
     "@types/codemirror": "^5.60.8",
     "@types/crypto-js": "^4.1.1",
-    "@types/intro.js": "^5.1.1",
     "@types/lodash-es": "^4.17.8",
     "@types/mockjs": "^1.0.7",
     "@types/nprogress": "^0.2.0",

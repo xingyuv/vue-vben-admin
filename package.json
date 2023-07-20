@@ -89,7 +89,6 @@
     "dayjs": "^1.11.9",
     "echarts": "^5.4.3",
     "exceljs": "^4.3.0",
-    "intro.js": "^7.0.1",
     "lodash-es": "^4.17.21",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
