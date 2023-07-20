@@ -86,6 +86,7 @@
   import { ScrollContainer } from '@/components/Container';
   import Icon from '@/components/Icon/Icon.vue';
   import { SimpleMenu, SimpleMenuTag } from '@/components/SimpleMenu';
+  import vClickOutside from '@/directives/clickOutside';
   import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '@/enums/appEnum';
   import { useGlobSetting } from '@/hooks/setting';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
@@ -141,11 +142,11 @@
 
   const getIsFixed = computed(() => {
     /* eslint-disable-next-line */
-        mixSideHasChildren.value = unref(childrenMenus).length > 0;
+    mixSideHasChildren.value = unref(childrenMenus).length > 0;
     const isFixed = unref(getMixSideFixed) && unref(mixSideHasChildren);
     if (isFixed) {
       /* eslint-disable-next-line */
-          openMenu.value = true;
+      openMenu.value = true;
     }
     return isFixed;
   });
