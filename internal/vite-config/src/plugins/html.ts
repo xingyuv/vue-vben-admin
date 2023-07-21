@@ -3,7 +3,7 @@
  * https://github.com/anncwb/vite-plugin-html
  */
 import type { PluginOption } from 'vite';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import { createHtmlPlugin } from 'vite-vue-plugin-html';
 
 export function configHtmlPlugin({ isBuild }: { isBuild: boolean }) {
   const htmlPlugin: PluginOption[] = createHtmlPlugin({
