@@ -1,4 +1,5 @@
 import { useTimeoutFn } from '@vben/hooks';
+import { Key } from 'ant-design-vue/es/_util/type';
 import { uniq } from 'lodash-es';
 import { computed, Ref, toRaw, unref } from 'vue';
 
@@ -55,7 +56,7 @@ export function useOpenKeys(
     menuState.openKeys = [];
   }
 
-  function handleOpenChange(openKeys: string[]) {
+  function handleOpenChange(openKeys: Key[]) {
     if (unref(mode) === MenuModeEnum.HORIZONTAL || !unref(accordion) || unref(getIsMixSidebar)) {
       menuState.openKeys = openKeys;
     } else {

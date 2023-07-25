@@ -1,9 +1,9 @@
 <template>
-  <!-- <div
+  <div
     v-if="getMenuFixed && !getIsMobile"
     v-show="showClassSideBarRef"
     :style="getHiddenDomStyle"
-  ></div> -->
+  ></div>
   <Layout.Sider
     v-show="showClassSideBarRef"
     ref="sideRef"
@@ -110,15 +110,15 @@
     z-index: @layout-sider-fixed-z-index;
 
     &--fixed {
-      position: fixed;
+      position: fixed !important;
       top: 0;
       left: 0;
-      // height: 100%;
+      height: 100%;
     }
 
     &--mix {
       top: @header-height;
-      // height: calc(100% - @header-height);
+      height: calc(100% - @header-height);
     }
 
     &.ant-layout-sider-dark {

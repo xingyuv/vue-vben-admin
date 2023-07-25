@@ -1,10 +1,10 @@
 <template>
   <Menu
     v-bind="getBindValues"
-    :activeName="menuState.activeName"
+    :activeName="activeName"
     :openNames="getOpenKeys"
     :class="prefixCls"
-    :activeSubMenuNames="menuState.activeSubMenuNames"
+    :activeSubMenuNames="activeSubMenuNames"
     @select="handleSelect"
   >
     <template v-for="item in items" :key="item.path">
@@ -17,8 +17,8 @@
     </template>
   </Menu>
 </template>
-<script lang="ts" setup>
-  import { computed, PropType, reactive, ref, toRefs, unref, useAttrs, watch } from 'vue';
+<script lang="ts">
+  import { computed, defineComponent, PropType, reactive, ref, toRefs, unref, watch } from 'vue';
   import type { RouteLocationNormalizedLoaded } from 'vue-router';
   import { useRouter } from 'vue-router';
 
@@ -35,115 +35,127 @@
   import type { MenuState } from './types';
   import { useOpenKeys } from './useOpenKeys';
 
-  defineOptions({ name: 'SimpleMenu', inheritAttrs: false });
-
-  const props = defineProps({
-    items: {
-      type: Array as PropType<MenuType[]>,
-      default: () => [],
+  export default defineComponent({
+    name: 'SimpleMenu',
+    components: {
+      Menu,
+      SimpleSubMenu,
     },
-    collapse: propTypes.bool,
-    mixSider: propTypes.bool,
-    theme: propTypes.string,
-    accordion: propTypes.bool.def(true),
-    collapsedShowTitle: propTypes.bool,
-    beforeClickFn: {
-      type: Function as PropType<(key: string) => Promise<boolean>>,
-      default: () => {},
+    inheritAttrs: false,
+    props: {
+      items: {
+        type: Array as PropType<MenuType[]>,
+        default: () => [],
+      },
+      collapse: propTypes.bool,
+      mixSider: propTypes.bool,
+      theme: propTypes.string,
+      accordion: propTypes.bool.def(true),
+      collapsedShowTitle: propTypes.bool,
+      beforeClickFn: {
+        type: Function as PropType<(key: string) => Promise<boolean>>,
+      },
+      isSplitMenu: propTypes.bool,
     },
-    isSplitMenu: propTypes.bool,
-  });
+    emits: ['menuClick'],
+    setup(props, { attrs, emit }) {
+      const currentActiveMenu = ref('');
+      const isClickGo = ref(false);
 
-  const emit = defineEmits(['menuClick']);
+      const menuState = reactive<MenuState>({
+        activeName: '',
+        openNames: [],
+        activeSubMenuNames: [],
+      });
 
-  const attrs = useAttrs();
-  const currentActiveMenu = ref('');
-  const isClickGo = ref(false);
+      const { currentRoute } = useRouter();
+      const { prefixCls } = useDesign('simple-menu');
+      const { items, accordion, mixSider, collapse } = toRefs(props);
 
-  const menuState = reactive<MenuState>({
-    activeName: '',
-    openNames: [],
-    activeSubMenuNames: [],
-  });
+      const { setOpenKeys, getOpenKeys } = useOpenKeys(
+        menuState,
+        items,
+        accordion,
+        mixSider as any,
+        collapse as any,
+      );
 
-  const { currentRoute } = useRouter();
-  const { prefixCls } = useDesign('simple-menu');
-  const { items, accordion, mixSider, collapse } = toRefs(props);
+      const getBindValues = computed(() => ({ ...attrs, ...props }));
 
-  const { setOpenKeys, getOpenKeys } = useOpenKeys(
-    menuState,
-    items,
-    accordion,
-    mixSider as any,
-    collapse as any,
-  );
+      watch(
+        () => props.collapse,
+        (collapse) => {
+          if (collapse) {
+            menuState.openNames = [];
+          } else {
+            setOpenKeys(currentRoute.value.path);
+          }
+        },
+        { immediate: true },
+      );
 
-  const getBindValues = computed(() => ({ ...attrs, ...props }));
+      watch(
+        () => props.items,
+        () => {
+          if (!props.isSplitMenu) {
+            return;
+          }
+          setOpenKeys(currentRoute.value.path);
+        },
+        { flush: 'post' },
+      );
 
-  watch(
-    () => props.collapse,
-    (collapse) => {
-      if (collapse) {
-        menuState.openNames = [];
-      } else {
-        setOpenKeys(currentRoute.value.path);
+      listenerRouteChange((route) => {
+        if (route.name === REDIRECT_NAME) return;
+
+        currentActiveMenu.value = route.meta?.currentActiveMenu as string;
+        handleMenuChange(route);
+
+        if (unref(currentActiveMenu)) {
+          menuState.activeName = unref(currentActiveMenu);
+          setOpenKeys(unref(currentActiveMenu));
+        }
+      });
+
+      async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
+        if (unref(isClickGo)) {
+          isClickGo.value = false;
+          return;
+        }
+        const path = (route || unref(currentRoute)).path;
+
+        menuState.activeName = path;
+
+        setOpenKeys(path);
       }
-    },
-    { immediate: true },
-  );
 
-  watch(
-    () => props.items,
-    () => {
-      if (!props.isSplitMenu) {
-        return;
+      async function handleSelect(key: string) {
+        if (isUrl(key)) {
+          openWindow(key);
+          return;
+        }
+        const { beforeClickFn } = props;
+        if (beforeClickFn && isFunction(beforeClickFn)) {
+          const flag = await beforeClickFn(key);
+          if (!flag) return;
+        }
+
+        emit('menuClick', key);
+
+        isClickGo.value = true;
+        setOpenKeys(key);
+        menuState.activeName = key;
       }
-      setOpenKeys(currentRoute.value.path);
+
+      return {
+        prefixCls,
+        getBindValues,
+        handleSelect,
+        getOpenKeys,
+        ...toRefs(menuState),
+      };
     },
-    { flush: 'post' },
-  );
-
-  listenerRouteChange((route) => {
-    if (route.name === REDIRECT_NAME) return;
-
-    currentActiveMenu.value = route.meta?.currentActiveMenu as string;
-    handleMenuChange(route);
-
-    if (unref(currentActiveMenu)) {
-      menuState.activeName = unref(currentActiveMenu);
-      setOpenKeys(unref(currentActiveMenu));
-    }
   });
-
-  async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
-    if (unref(isClickGo)) {
-      isClickGo.value = false;
-      return;
-    }
-    const path = (route || unref(currentRoute)).path;
-
-    menuState.activeName = path;
-
-    setOpenKeys(path);
-  }
-
-  async function handleSelect(key: string) {
-    if (isUrl(key)) {
-      openWindow(key);
-      return;
-    }
-    const { beforeClickFn } = props;
-    if (beforeClickFn && isFunction(beforeClickFn)) {
-      const flag = await beforeClickFn(key);
-      if (!flag) return;
-    }
-
-    emit('menuClick', key);
-
-    isClickGo.value = true;
-    setOpenKeys(key);
-    menuState.activeName = key;
-  }
 </script>
 <style lang="less">
   @import url('./index.less');

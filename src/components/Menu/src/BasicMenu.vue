@@ -1,7 +1,7 @@
 <template>
   <Menu
-    :selectedKeys="selectedKeys"
-    :defaultSelectedKeys="defaultSelectedKeys"
+    :selectedKeys="menuState.selectedKeys"
+    :defaultSelectedKeys="menuState.defaultSelectedKeys"
     :mode="mode"
     :openKeys="getOpenKeys"
     :inlineIndent="inlineIndent"
@@ -19,6 +19,7 @@
 </template>
 <script lang="ts" setup>
   import { Menu } from 'ant-design-vue';
+  import { MenuInfo } from 'ant-design-vue/es/menu/src/interface';
   import { computed, reactive, ref, toRefs, unref, watch } from 'vue';
   import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
 
@@ -116,16 +117,16 @@
       },
     );
 
-  async function handleMenuClick({ key }: { key: string; keyPath: string[] }) {
+  async function handleMenuClick(menuInfo: MenuInfo) {
     const { beforeClickFn } = props;
     if (beforeClickFn && isFunction(beforeClickFn)) {
-      const flag = await beforeClickFn(key);
+      const flag = await beforeClickFn(menuInfo.key as string);
       if (!flag) return;
     }
-    emit('menuClick', key);
+    emit('menuClick', menuInfo.key);
 
     isClickGo.value = true;
-    menuState.selectedKeys = [key];
+    menuState.selectedKeys = [menuInfo.key as string];
   }
 
   async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
