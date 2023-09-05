@@ -4,7 +4,7 @@
 
 ## 预览地址
 
-[预览地址](http://vben.x-surge.com)
+[预览地址](http://vben.x-surge.com) [文档地址](http://vben-doc.x-surge.com)
 
 ## 实际开发项目
 
